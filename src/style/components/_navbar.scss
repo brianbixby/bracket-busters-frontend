@@ -3,7 +3,7 @@
   position: fixed;
   top: 0;
   left: 0;
-  height: 38px;
+  height: 44px;
   width: 100%;
   z-index: 101;
   border: none;
@@ -12,7 +12,7 @@
   .logo {
     position: absolute;
     left: 16px;
-    top: 9px;
+    top: 12px;
     height: auto;
     z-index: 103;
 
@@ -26,7 +26,6 @@
         font-weight: 600;
         padding-right: 8px;
       }
-
       span:nth-child(2) {
         font-weight: 300;
       }
@@ -39,7 +38,7 @@
     z-index: 105;
     list-style-type: none;
     margin: 0;
-    padding: 9px 0 0 0;
+    padding: 12px 0 0 0;
 
     .social {
       float: left;
@@ -59,7 +58,6 @@
       font-size: 16px;
       line-height: 20px;
       font-weight: 900;
-      margin-right: 8px;
       width: auto;
 
       .avatarDiv {
@@ -68,11 +66,16 @@
         transition: all 0.35s cubic-bezier(0.77, 0, 0.175, 1);
         margin-right: 10px;
 
+        .avatar img {
+          border-radius: 50%;
+          overflow: hidden;
+          height: 36px;
+          margin-top: -8px;
+        }
         i {
           font-size: 20px;
           padding-top: 0;
         }
-        
         .fa-caret-down {
           position: absolute;
           left: -15px;
@@ -82,8 +85,10 @@
       .dropdownDiv {
         position: fixed;
         right: 0;
-        top: 38px;
-        padding: 5PX 30PX 15PX 30px;
+        top: 44px;
+        padding: 5px 30px 15px 30px;
+        border-bottom-left-radius: .5vw;
+        border-bottom-right-radius: .5vw;
         text-transform: uppercase;
         background: #000;
 
@@ -107,7 +112,6 @@
   .logo-text, .social-icons, .colorChangeHover, .dropdownDiv .link {
     color: #FFF;
   }
-
   .logo-text:hover, .social:hover .social-icons, .avatarDiv:hover .colorChangeHover, .dropdownDiv .link:hover {
     color: rgba(255,255,255, 0.8);
   }
@@ -118,8 +122,87 @@
   .logo-text, .social-icons {
     color: #9B9B9B;
   }
-
   .logo-text:hover, .social:hover .social-icons {
     color: #ECECEC;
+  }
+}
+
+@media (min-width: 371px) {
+  .navbar {
+    .logo {
+      top: 9px;
+      .logo-text {
+        font-size: 26px;
+      }
+    }
+
+    .socials {
+      padding: 9px 0 0 0;
+
+      .dropdown {
+        margin-right: 8px;
+
+        .dropdownDiv {
+          padding: 5px 40px 15px 40px;
+        }
+
+        .avatarDiv {
+          .fa-caret-down {
+            left: -20px;
+          }
+          i {
+            font-size: 26px;
+          }
+          .avatar img {
+            margin-top: -5px;
+          }
+        }
+      }
+
+      .social .fa-github, .social .fa-linkedin {
+        font-size: 26px;
+      }
+    }
+  }
+}
+
+@media (min-width: 481px) {
+  .navbar {
+    height: 62px;
+
+    .logo {
+      top: 16px;
+      .logo-text {
+        font-size: 30px;
+      }
+    }
+
+    .socials {
+      padding: 16px 0 0 0;
+
+      .dropdown {
+        .dropdownDiv {
+          top: 62px;
+          padding: 5px 50px 15px 50px;
+        }
+
+        .avatarDiv {
+          .fa-caret-down {
+            left: -25px;
+          }
+          i {
+            font-size: 30px;
+          }
+          .avatar img {
+            height: 40px;
+            margin-top: -6px;
+          }
+        }
+      }
+
+      .social .fa-github, .social .fa-linkedin {
+        font-size: 30px;
+      }
+    }
   }
 }
