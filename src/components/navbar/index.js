@@ -10,7 +10,7 @@ import {  signOut  } from '../../actions/userAuth-actions.js';
 class Navbar extends React.Component {
   constructor(props){
     super(props);
-    this.state={hidden: true, intro: false};
+    this.state={ visible: false, intro: false};
   }
 
 
@@ -52,14 +52,14 @@ class Navbar extends React.Component {
             <li className='social dropdown'>
               {util.renderIf(this.props.userAuth,
                 <div>
-                  <div className='avatarDiv' onClick={() => this.setState({ hidden: !this.state.hidden })} >
+                  <div className='avatarDiv' onClick={() => this.setState({ visible: !this.state.visible })} >
                     <i className={this.props.userProfile && this.props.userProfile.image ? 'fa fa-caret-down colorChangeHover noTop' : 'fa fa-caret-down colorChangeHover' }></i>
                     {profileImage}
                   </div>
-                  <div className={ this.state.hidden ? 'hidden dropdownDiv' : 'dropdownDiv' }>
-                    <Link to={profileLink} className='link' onClick={() => this.setState({ hidden: !this.state.hidden })}>profile</Link>
-                    <Link to='/leagues' className='link' onClick={() => this.setState({ hidden: !this.state.hidden })}>leagues</Link>
-                    <Link to='/groups' className='link' onClick={() => this.setState({ hidden: !this.state.hidden })}>groups</Link>
+                  <div className={ this.state.visible ? 'slideIn dropdownDiv' : 'slideOut dropdownDiv' }>
+                    <Link to={profileLink} className='link' onClick={() => this.setState({ visible: !this.state.visible })}>profile</Link>
+                    <Link to='/leagues' className='link' onClick={() => this.setState({ visible: !this.state.visible })}>leagues</Link>
+                    <Link to='/groups' className='link' onClick={() => this.setState({ visible: !this.state.visible })}>groups</Link>
                     <p className='logout link' onClick={this.handleSignOut}>logout</p>
                   </div>
                 </div>
