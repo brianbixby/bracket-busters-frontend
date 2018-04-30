@@ -104,5 +104,5 @@ Information about the backend of Bracket Busters can be found here: [CF Madness]
 
 ## License
 
-MIT © [Brian Bixby](https://github.com/brianbixby), [Bessie Arino](https://github.com/bishang), & [Ken Unterseher](https://github.com/kennieU)
+MIT © [Brian Bixby](https://github.com/brianbixby),
 <!-- join and create league/group get a messageboard; also when you click on group, also logic if you sign into the page with a token; or logic to make token redirect to homepage -->
