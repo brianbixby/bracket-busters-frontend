@@ -20,8 +20,7 @@
   background: rgba(0,0,0,.7);
 }
 .container {
-  max-width: 800px;
-  margin: 20px auto;
+  margin: 16px;
 }
 @media screen and (max-width: 750px) {
   .muscles, .holla {
@@ -100,7 +99,7 @@
   padding: 8px 16px;
   display: inline-block;
 }
-@media (min-width: 500px) {
+@media only screen and (min-width: 500px) {
   .myL-headers {
     font-size: 15px;
   }
@@ -157,7 +156,7 @@
   border-left: 1px solid #d8d8d8;
   border-top: 1px solid #d8d8d8;
 }
-@media (max-width: 750px) {
+@media only screen and (max-width: 750px) {
   .create-button a { 
     font-size: 20px;
   }
@@ -276,7 +275,7 @@
   float: right;
   font-size: 20px;
 }
-@media (min-width: 481px) {
+@media only screen and (min-width: 481px) {
   .landing-page .intro {
     margin-top: -18px;
   }

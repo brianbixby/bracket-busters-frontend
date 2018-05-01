@@ -1,0 +1,35 @@
+.contentOuter {
+  background: #fff;
+  border-radius: 10px;
+  margin-bottom: 10px;
+  overflow: hidden;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.24);
+}
+@media only screen and (min-width: 768px) {
+  .contentOuter {
+      box-shadow: none;
+  }
+}
+.contentInner {
+  border-radius: 10px;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.16);
+  margin: 0 16px 16px;
+}
+.pad-16 {
+  padding-right: 16px;
+  padding-left: 16px;
+}
+.mar-16 {
+  margin-right: 16px;
+  margin-left: 16px;
+}
+.contentHeaderOuter {
+  margin-top: 20px;
+}
+.contentHeader {
+  font-weight: 900;
+  text-transform: uppercase;
+  color: #4A4A4A;
+  font-size: 30px;
+  text-align: center;
+}

@@ -48,7 +48,7 @@ input[type='text'], input[type='password'] {
 }
 
 h2.title, h2 {
-  margin-bottom: $margin;
+  margin-bottom: 10px;
   margin-left: $margin;
 }
 button, a, .modal-close, form input {
@@ -61,6 +61,11 @@ button:focus, a:focus, {
 }
 button a {
   cursor: pointer !important;
+}
+@media only screen and (min-width: 371px) {
+  .title {
+    margin-bottom: $margin;
+  }
 }
 // .hidden {
 //   display: none;
