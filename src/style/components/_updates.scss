@@ -6,19 +6,6 @@
   text-align: center;
   margin-top: 20px;
 }
-
-.create-button, .create-button a {
-  justify-content: center;
-  height: 50px;
-  letter-spacing: 1px;
-  padding: 10px;
-  background: #000;
-  font-size: 20px;
-  line-height: 1;
-}
-.create-button:hover {
-  background: rgba(0,0,0,.7);
-}
 .container {
   margin: 16px;
 }
@@ -45,13 +32,7 @@
     font-weight: 400;
     margin-top: 100px !important;
   }
-  .container .create-button, .container .create-button a {
-    font-size: 30px !important;
-    position: inherit !important;
-    width: 100%;
-    height: auto;
-    padding: 10px;
-  }  
+
 }
 .usersLeagueAndGroupsHeader {
   margin: 20px 12px 20px 12px;
@@ -67,16 +48,6 @@
   margin: 20px auto 0;
 }
 
-.container .create-button a {
-  background: transparent;
-  color: #FFF !important;
-  -webkit-transform: translate(-50%, -50%);
-  -ms-transform: translate(-50%, -50%);
-  transform: translate(-50%, -50%);
-  position: absolute;
-  // font-size: 16px;
-  font-weight: 900;
-}
 .container .join-text {
   font-size: 30px;
   color: #4A4A4A;
@@ -155,11 +126,6 @@
   border-right: 1px solid #d8d8d8;
   border-left: 1px solid #d8d8d8;
   border-top: 1px solid #d8d8d8;
-}
-@media only screen and (max-width: 750px) {
-  .create-button a { 
-    font-size: 20px;
-  }
 }
 .labelDesc {
   font-weight: 700;

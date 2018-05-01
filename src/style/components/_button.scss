@@ -27,6 +27,37 @@
   color: #FFF;
   margin-top: 1rem;
   width:100%;
+  display: block;
+  text-align: center;
+  display: block;
+  text-align: center;
+  justify-content: center;
+  height: 50px;
+  letter-spacing: 1px;
+  padding: 10px;
+  background: #000;
+  font-size: 20px;
+  line-height: 1;
+}
+a.create-button {
+  font-size: 22px;
+  line-height: 30px;
+  font-weight: 700;
+}
+.create-button:hover {
+  background: rgba(0,0,0,.7);
+}
+@media screen and (min-width: 751px) {
+  .create-button {
+    font-size: 30px !important;
+    position: inherit !important;
+    width: 100%;
+    height: auto;
+    padding: 10px;
+  }
+  a.create-button {
+    font-size: 32px !important;
+  }  
 }
 
 .join-button {

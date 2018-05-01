@@ -95,21 +95,20 @@ class LandingContainer extends React.Component {
             <CreateSection formType={formTypeLeague} handleCreate={() => this.setState({ leagueFormDisplay: true })}/>
 
             {util.renderIf(this.props.leagues,
-              <div className='container join-container'>
-                <p className='header usersLeagueAndGroupsHeader myLeaguesList'>my leagues</p>
+              <div >
                 {util.renderIf(this.props.leagues.length > 0,
+                <div>
+                  <p className='header usersLeagueAndGroupsHeader myLeaguesList'>my leagues</p>
                 <div className='myleaguesHeader'>
                   <p className='l-name myL-headers'> LEAGUE NAME </p>
                   <p className='l-creator myL-headers'> CREATOR </p>
                   <p className='l-players myL-headers'> PLAYERS </p>
                   <p className='l-scoring myL-headers'> SCORING </p>
                 </div>
+                </div>
                 )}
                 {util.renderIf(this.props.leagues.length < 1,
-                  <div className='usersLeagueAndGroups'>
-                    <img className='russ' src={russ} />
-                    <JoinSection joinType={formTypeLeague}/>
-                  </div>
+                  <JoinSection joinType={formTypeLeague}/>
                 )}
                 {this.props.leagues.map(league => {
                   let boundLeagueClick = this.onLeagueClick.bind(this, league);
@@ -143,21 +142,21 @@ class LandingContainer extends React.Component {
             <CreateSection formType={formTypeGroup} handleCreate={() => this.setState({ groupFormDisplay: true })}/>
             {util.renderIf(this.props.groups,
 
-              <div className='container'>
-                <p className='header usersLeagueAndGroupsHeader'>my groups</p>
+              <div >
+                
                 {util.renderIf(this.props.groups.length > 0,
+                <div>
+                <p className='header usersLeagueAndGroupsHeader'>my groups</p>
                 <div className='myleaguesHeader'>
                   <p className='l-name myL-headers'> LEAGUE NAME </p>
                   <p className='l-creator myL-headers'> CREATOR </p>
                   <p className='l-players myL-headers'> SIZE </p>
                   <p className='l-scoring myL-headers'> PRIVACY </p>
                 </div>
+                </div>
                 )}
                 {util.renderIf(this.props.groups.length < 1,
-                  <div className='usersLeagueAndGroups'>
-                    <img className='kd' src={kd} />
-                    <JoinSection joinType={formTypeGroup}/>
-                  </div>
+                  <JoinSection joinType={formTypeGroup}/>
                 )}
                 {this.props.groups.map(group => {
                   let boundGroupClick = this.onGroupClick.bind(this, group);
