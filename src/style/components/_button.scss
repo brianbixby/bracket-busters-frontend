@@ -9,20 +9,9 @@
   border-width: 0px;
   box-shadow: 0 1px 1px 0 rgba(0,0,0,0.3);
 }
-
 .button:hover {
   background-color: $color-primary-hover;
 }
-
-#start-button {
-  width: 15vw;
-}
-
-.form-button {
-  width: 15vw;
-  margin: $margin;
-}
-
 .create-button {
   color: #FFF;
   margin-top: 1rem;
@@ -59,22 +48,6 @@ a.create-button {
     font-size: 32px !important;
   }  
 }
-
-.join-button {
-  margin-top: 1rem;
-  width:100%;
-}
-
-.join-button a {
-  color: #FFF;
-}
-
-@media only screen and (min-width: 500px) {
-  .join-button {
-    width: auto;
-    margin-left: 10vw;
-  }
-}
 .b-button {
   line-height: 1;
   padding: 13px 0;
@@ -107,7 +80,6 @@ a.create-button {
   background: #FFF;
   font-weight: 900;
   border-width: 2px;
-
 }
 .dark-button:hover {
   background: #4A4A4A;

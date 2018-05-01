@@ -1,39 +1,36 @@
 @import './../lib/vars'; 
 
 .comment-form {
-  margin-bottom: 55px;
-  margin-left: 4vw;
+  margin-bottom: 24px;
 
   .photo-div {
-    display: inline-block;
-    width: 10vw;
-    box-sizing: border-box;
-    border: 1px solid #d3d6db;
-    border-right: 0;
-    height: 11vw;
-
+    float: left;
 
     img {
-      width: 6vw;
-      border-radius: 50%;
-      margin-left: 2vw;
-      margin-top: 2vw;
+      width: 48px;
+      height: 48px;
+      margin-right: 8px;
     }
   }
 
   .commentInput-div {
+    width: calc((100% - 56px));
     display: inline-block;
-    width: 70vw;
-    border: 1px solid #d3d6db;
-    padding: 3px;
     box-sizing: border-box;
-    height: 11vw;
-    vertical-align: top;
+    cursor: text;
+    font-size: 11px;
+    padding: 3px;
+    border: 1px solid #d3d6db;
+    word-wrap: break-word;
+    line-height: 1.358;
+    word-break: break-word;
+    background: #F9F9F9;
 
     .commentInputWrapper {
-      padding: 20px;
-
       input {
+        margin: 0;
+        padding: 12px 8px;
+        min-height: 40px;
         font-size: 16px;
 
           ::placeholder {
@@ -52,10 +49,11 @@
   .commentFormButtonDiv {
     border: 1px solid #d3d6db;
     border-top: 0;
-    width: 80vw;
-    position: absolute;
-    // left: 4vw;
-    box-sizing: border-box;
+    width: calc((100% - 56px));
+    margin-left: 56px;
+    width: calc((100% - 56px));
+    padding: 3px;
+    background: #F9F9F9;
 
     .ButtonDiv {
       background: #f6f7f9;

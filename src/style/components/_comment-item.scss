@@ -1,25 +1,22 @@
+@import './../lib/vars'; 
+
 .comment-item {
   margin-top: 12px;
-  width: 100%;
 
   .comment-photo-div {
-    display: inline-block;
-    margin-right: 8px;
-    padding: $pad;
-    width: 10vw;
+    float: left;
 
     img {
       width: 48px;
-      margin-left: 4vw;
+      height: 48px;
+      margin-right: 8px;
      }
-
   }
     
   .comment-text-div {
-    display: inline-block; 
-    margin: 0;
-    vertical-align: top;
-    width: 70vw;
+    width: calc((100% - 56px));
+    display: inline-block;
+    box-sizing: border-box;
     
     .comment-commenter {
       color: $color-primary;

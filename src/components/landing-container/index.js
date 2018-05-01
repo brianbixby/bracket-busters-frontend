@@ -95,7 +95,7 @@ class LandingContainer extends React.Component {
             <CreateSection formType={formTypeLeague} handleCreate={() => this.setState({ leagueFormDisplay: true })}/>
 
             {util.renderIf(this.props.leagues,
-              <div >
+              <div className='container'>
                 {util.renderIf(this.props.leagues.length > 0,
                 <div>
                   <p className='header usersLeagueAndGroupsHeader myLeaguesList'>my leagues</p>
@@ -142,7 +142,7 @@ class LandingContainer extends React.Component {
             <CreateSection formType={formTypeGroup} handleCreate={() => this.setState({ groupFormDisplay: true })}/>
             {util.renderIf(this.props.groups,
 
-              <div >
+              <div className='container'>
                 
                 {util.renderIf(this.props.groups.length > 0,
                 <div>
