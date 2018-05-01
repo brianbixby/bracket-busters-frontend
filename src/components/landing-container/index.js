@@ -8,6 +8,7 @@ import GroupForm from '../group-form';
 import ProfileForm from '../profile-form';
 import Modal from '../helpers/modal';
 import CreateSection from '../helpers/createSection';
+import NewCreateSection from '../helpers/newCreate';
 import JoinSection from '../helpers/joinSection';
 import NewJoinSection from '../helpers/newJoin';
 import { tokenSignInRequest } from '../../actions/userAuth-actions.js';
@@ -93,6 +94,7 @@ class LandingContainer extends React.Component {
       <div className='grid-container'>
         {util.renderIf(this.props.userAuth,
           <div>
+            <NewCreateSection joinType={formTypeLeague} formType={formTypeLeague} handleCreate={() => this.setState({ leagueFormDisplay: true })}/>
             <div className='col-lg-7'>
               <CreateSection formType={formTypeLeague} handleCreate={() => this.setState({ leagueFormDisplay: true })}/>
             </div>

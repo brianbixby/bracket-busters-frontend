@@ -49,12 +49,12 @@
 .grid-container {
   margin-right: auto;
   margin-left: auto;
-  padding-left: 15px;
-  padding-right: 15px;
 }
 @media (min-width: 768px) {
   .grid-container {
     width: 750px;
+    padding-left: 15px;
+    padding-right: 15px;
   }
 }
 @media (min-width: 992px) {
