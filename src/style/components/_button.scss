@@ -9,49 +9,44 @@
   border-width: 0px;
   box-shadow: 0 1px 1px 0 rgba(0,0,0,0.3);
 }
-
 .button:hover {
   background-color: $color-primary-hover;
 }
-
-#start-button {
-  width: 15vw;
-}
-
-.form-button {
-  width: 15vw;
-  margin: $margin;
-}
-
 .create-button {
   color: #FFF;
   margin-top: 1rem;
   width:100%;
+  display: block;
+  text-align: center;
+  display: block;
+  text-align: center;
+  justify-content: center;
+  height: 50px;
+  letter-spacing: 1px;
+  padding: 10px;
+  background: #000;
+  font-size: 20px;
+  line-height: 1;
 }
-
-@media only screen and (min-width: 768px) {
+a.create-button {
+  font-size: 22px;
+  line-height: 30px;
+  font-weight: 700;
+}
+.create-button:hover {
+  background: rgba(0,0,0,.7);
+}
+@media screen and (min-width: 751px) {
   .create-button {
-    bottom: 1vw;
-    position: absolute;
-    right: 1rem;
-    width: auto;
+    font-size: 30px !important;
+    position: inherit !important;
+    width: 100%;
+    height: auto;
+    padding: 10px;
   }
-}
-
-.join-button {
-  margin-top: 1rem;
-  width:100%;
-}
-
-.join-button a {
-  color: #FFF;
-}
-
-@media only screen and (min-width: 500px) {
-  .join-button {
-    width: auto;
-    margin-left: 10vw;
-  }
+  a.create-button {
+    font-size: 32px !important;
+  }  
 }
 .b-button {
   line-height: 1;
@@ -85,7 +80,6 @@
   background: #FFF;
   font-weight: 900;
   border-width: 2px;
-
 }
 .dark-button:hover {
   background: #4A4A4A;

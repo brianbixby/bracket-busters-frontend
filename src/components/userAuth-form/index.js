@@ -140,7 +140,7 @@ class UserAuthForm extends React.Component {
 
         {util.renderIf(this.props.authFormAction === 'Sign Up',
           <div>
-            <h2 className='title'>signup.</h2>
+            <h2 className='title'>sign up.</h2>
             <input
               className={util.classToggler({error: emailError})}
               type='text'
@@ -155,8 +155,10 @@ class UserAuthForm extends React.Component {
           </div>
         )}
 
-        {util.renderIf(!this.props.authFormAction === 'Sign In',
-            <h2 className='title'>signin.</h2>
+        {util.renderIf(this.props.authFormAction !== 'Sign Up',
+          <div>
+            <h2 className='title'>sign in.</h2>
+          </div>
         )}
 
         <input
