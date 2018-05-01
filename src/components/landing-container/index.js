@@ -9,6 +9,7 @@ import ProfileForm from '../profile-form';
 import Modal from '../helpers/modal';
 import CreateSection from '../helpers/createSection';
 import JoinSection from '../helpers/joinSection';
+import NewJoinSection from '../helpers/newJoin';
 import { tokenSignInRequest } from '../../actions/userAuth-actions.js';
 import { userProfileFetchRequest, userProfileUpdateRequest } from '../../actions/userProfile-actions.js';
 import { leaguesFetchRequest, leagueCreateRequest, leagueFetch } from '../../actions/league-actions.js';
@@ -97,37 +98,34 @@ class LandingContainer extends React.Component {
             </div>
 
             {util.renderIf(this.props.leagues,
-            <div className='col-lg-5'>
-              <div className='container'>
-                {util.renderIf(this.props.leagues.length > 0,
-                <div>
-                  <p className='header usersLeagueAndGroupsHeader myLeaguesList'>my leagues</p>
-                <div className='myleaguesHeader'>
-                  <p className='l-name myL-headers'> LEAGUE NAME </p>
-                  <p className='l-creator myL-headers'> CREATOR </p>
-                  <p className='l-players myL-headers'> PLAYERS </p>
-                  <p className='l-scoring myL-headers'> SCORING </p>
-                </div>
-                </div>
-                )}
-                {/* {util.renderIf(this.props.leagues.length < 1,
-                  <JoinSection joinType={formTypeLeague}/>
-                )} */}
-                {this.props.leagues.map(league => {
-                  let boundLeagueClick = this.onLeagueClick.bind(this, league);
-                  return <div key={league._id} className='rowColors'>
-                    <div className='span-row' onClick={boundLeagueClick}>
-                      <p className='span-name'>{league.leagueName} </p>
-                      <p className='span-owner'>{league.ownerName} </p>
-                      <p className='span-size'>{league.size} </p>
-                      <p className='span-scoring'>{league.scoring} </p>
+              <div className='col-lg-5'>
+                <div className='container'>
+                  {util.renderIf(this.props.leagues.length > 0,
+                  <div>
+                    <p className='header usersLeagueAndGroupsHeader myLeaguesList'>my leagues</p>
+                    <div className='myleaguesHeader'>
+                      <p className='l-name myL-headers'> LEAGUE NAME </p>
+                      <p className='l-creator myL-headers'> CREATOR </p>
+                      <p className='l-players myL-headers'> PLAYERS </p>
+                      <p className='l-scoring myL-headers'> SCORING </p>
                     </div>
                   </div>
-                })}
-                {util.renderIf(this.props.leagues.length > 0,
-                  <div className='spacerRow'> </div>
-                )}
-              </div>
+                  )}
+                  {this.props.leagues.map(league => {
+                    let boundLeagueClick = this.onLeagueClick.bind(this, league);
+                    return <div key={league._id} className='rowColors'>
+                      <div className='span-row' onClick={boundLeagueClick}>
+                        <p className='span-name'>{league.leagueName} </p>
+                        <p className='span-owner'>{league.ownerName} </p>
+                        <p className='span-size'>{league.size} </p>
+                        <p className='span-scoring'>{league.scoring} </p>
+                      </div>
+                    </div>
+                  })}
+                  {util.renderIf(this.props.leagues.length > 0,
+                    <div className='spacerRow'> </div>
+                  )}
+                </div>
               </div>
             )}
 
@@ -138,6 +136,8 @@ class LandingContainer extends React.Component {
             {util.renderIf(this.props.leagues.length > 0,
               <JoinSection joinType={formTypeLeague} alreadyJoined={this.props.leagues.length}/>
             )}
+
+            <NewJoinSection joinType={formTypeLeague}/>
             
             {util.renderIf(this.state.leagueFormDisplay,
               <Modal heading='Create League' close={() => this.setState({ leagueFormDisplay: false })}>
@@ -147,45 +147,54 @@ class LandingContainer extends React.Component {
               </Modal>
             )}
 
-            <CreateSection formType={formTypeGroup} handleCreate={() => this.setState({ groupFormDisplay: true })}/>
-            {util.renderIf(this.props.groups,
+            <div className='col-lg-7'>
+              <CreateSection formType={formTypeGroup} handleCreate={() => this.setState({ groupFormDisplay: true })}/>
+            </div>
 
-              <div className='container'>
-                
-                {util.renderIf(this.props.groups.length > 0,
-                <div>
-                <p className='header usersLeagueAndGroupsHeader'>my groups</p>
-                <div className='myleaguesHeader'>
-                  <p className='l-name myL-headers'> LEAGUE NAME </p>
-                  <p className='l-creator myL-headers'> CREATOR </p>
-                  <p className='l-players myL-headers'> SIZE </p>
-                  <p className='l-scoring myL-headers'> PRIVACY </p>
-                </div>
-                </div>
-                )}
-                {util.renderIf(this.props.groups.length < 1,
-                  <JoinSection joinType={formTypeGroup}/>
-                )}
-                {this.props.groups.map(group => {
-                  let boundGroupClick = this.onGroupClick.bind(this, group);
-                  return <div className='rowColors' key={group._id}>
-                    <p onClick={boundGroupClick} className='span-row'>
-                      <span className='span-name'>{group.groupName} </span>
-                      <span className='span-owner'>{group.ownerName} </span>
-                      <span className='span-size'>{group.size} </span>
-                      <span className='span-privacy'>{group.privacy} </span>
-                    </p>
+            {util.renderIf(this.props.groups,
+              <div className='col-lg-5'>
+                <div className='container'>
+                  {util.renderIf(this.props.groups.length > 0,
+                  <div>
+                    <p className='header usersLeagueAndGroupsHeader'>my groups</p>
+                    <div className='myleaguesHeader'>
+                      <p className='l-name myL-headers'> LEAGUE NAME </p>
+                      <p className='l-creator myL-headers'> CREATOR </p>
+                      <p className='l-players myL-headers'> SIZE </p>
+                      <p className='l-scoring myL-headers'> PRIVACY </p>
+                    </div>
                   </div>
-                })}
-                {util.renderIf(this.props.groups.length > 0,
-                <div className='spacerRow'> </div>
-                )}
+                  )}
+                {/* {util.renderIf(this.props.groups.length < 1,
+                  <JoinSection joinType={formTypeGroup}/>
+                )} */}
+                  {this.props.groups.map(group => {
+                    let boundGroupClick = this.onGroupClick.bind(this, group);
+                    return <div className='rowColors' key={group._id}>
+                      <p onClick={boundGroupClick} className='span-row'>
+                        <span className='span-name'>{group.groupName} </span>
+                        <span className='span-owner'>{group.ownerName} </span>
+                        <span className='span-size'>{group.size} </span>
+                        <span className='span-privacy'>{group.privacy} </span>
+                      </p>
+                    </div>
+                  })}
+                  {util.renderIf(this.props.groups.length > 0,
+                    <div className='spacerRow'> </div>
+                  )}
+                </div>
               </div>
+            )}
+
+            {util.renderIf(this.props.groups.length < 1,
+              <JoinSection joinType={formTypeGroup}/>
             )}
 
             {util.renderIf(this.props.groups.length > 0,
               <JoinSection joinType={formTypeGroup} joinedAlready={this.props.groups.length}/>
             )}
+
+            <NewJoinSection joinType={formTypeGroup}/>
 
             {util.renderIf(this.state.groupFormDisplay,
               <Modal heading='Create Group' close={() => this.setState({ groupFormDisplay: false })}>
