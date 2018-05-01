@@ -167,7 +167,7 @@
   margin-bottom: 10px;
 }
 .landing-page .intro {
-  margin-top: -18px;
+  margin-top: -36px;
 }
 .league-all-private-form {
   margin-top: 30px;
@@ -275,4 +275,9 @@
   color: #FF001F;
   float: right;
   font-size: 20px;
+}
+@media (min-width: 481px) {
+  .landing-page .intro {
+    margin-top: -18px;
+  }
 }
