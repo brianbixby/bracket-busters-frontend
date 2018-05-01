@@ -11,6 +11,7 @@ import CreateSection from '../helpers/createSection';
 import NewCreateSection from '../helpers/newCreate';
 import JoinSection from '../helpers/joinSection';
 import NewJoinSection from '../helpers/newJoin';
+import Slider from '../helpers/slider';
 import { tokenSignInRequest } from '../../actions/userAuth-actions.js';
 import { userProfileFetchRequest, userProfileUpdateRequest } from '../../actions/userProfile-actions.js';
 import { leaguesFetchRequest, leagueCreateRequest, leagueFetch } from '../../actions/league-actions.js';
@@ -100,6 +101,41 @@ class LandingContainer extends React.Component {
             </div>
 
             {util.renderIf(this.props.leagues,
+              // <div className='col-lg-5'>
+                <div className='container'>
+                  {/* {util.renderIf(this.props.leagues.length > 0,
+                  <div>
+                    <p className='header usersLeagueAndGroupsHeader myLeaguesList'>my leagues</p>
+                    <div className='myleaguesHeader'>
+                      <p className='l-name myL-headers'> LEAGUE NAME </p>
+                      <p className='l-creator myL-headers'> CREATOR </p>
+                      <p className='l-players myL-headers'> PLAYERS </p>
+                      <p className='l-scoring myL-headers'> SCORING </p>
+                    </div>
+                  </div>
+                  )} */}
+                  <div className='sliderOuter'>
+                    <div className='sliderOuterWrapper'>
+                      {this.props.leagues.map(league => <Slider key={league._id} league={league} /> )}
+                    </div>
+                  </div>
+                    {/* // let boundLeagueClick = this.onLeagueClick.bind(this, league);
+                    // return <div key={league._id} className='rowColors'>
+                    //   <div className='span-row' onClick={boundLeagueClick}>
+                    //     <p className='span-name'>{league.leagueName} </p>
+                    //     <p className='span-owner'>{league.ownerName} </p>
+                    //     <p className='span-size'>{league.size} </p>
+                    //     <p className='span-scoring'>{league.scoring} </p>
+                    //   </div>
+                    // </div> */}
+                  {util.renderIf(this.props.leagues.length > 0,
+                    <div className='spacerRow'> </div>
+                  )}
+                </div>
+              // </div>
+            )}
+
+                        {/* {util.renderIf(this.props.leagues,
               <div className='col-lg-5'>
                 <div className='container'>
                   {util.renderIf(this.props.leagues.length > 0,
@@ -129,7 +165,7 @@ class LandingContainer extends React.Component {
                   )}
                 </div>
               </div>
-            )}
+            )} */}
 
             {util.renderIf(this.props.leagues && this.props.leagues.length < 1,
               <JoinSection joinType={formTypeLeague}/>

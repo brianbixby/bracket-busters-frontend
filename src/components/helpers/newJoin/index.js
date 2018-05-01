@@ -1,5 +1,4 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 import * as util from './../../../lib/util.js';
 
 class NewJoinSection extends React.Component {
