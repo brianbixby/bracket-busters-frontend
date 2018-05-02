@@ -74,10 +74,9 @@ class LandingContainer extends React.Component {
       .then(messageBoard => {
         this.props.commentsFetch(messageBoard.comments);
       })
-      .then( () =>  this.props.history.push(`/group/${group._id}`))
+      .then(() =>  this.props.history.push(`/group/${group._id}`))
       .catch(util.logError);
   }
-
   render() {
     let { params } = this.props.match;
     let handleComplete = params.userAuth === 'signin' ? this.handleSignin : this.handleSignup;
@@ -95,45 +94,28 @@ class LandingContainer extends React.Component {
       <div className='grid-container'>
         {util.renderIf(this.props.userAuth,
           <div>
-            <NewCreateSection joinType={formTypeLeague} formType={formTypeLeague} handleCreate={() => this.setState({ leagueFormDisplay: true })}/>
+            <NewCreateSection joinType={formTypeLeague} formType={formTypeLeague} leagues={this.props.leagues} handleLeagueClick={this.onLeagueClick}  handleCreate={() => this.setState({ leagueFormDisplay: true })}/>
             <div className='col-lg-7'>
               <CreateSection formType={formTypeLeague} handleCreate={() => this.setState({ leagueFormDisplay: true })}/>
             </div>
 
-            {util.renderIf(this.props.leagues,
-              // <div className='col-lg-5'>
-                <div className='container'>
-                  {/* {util.renderIf(this.props.leagues.length > 0,
-                  <div>
-                    <p className='header usersLeagueAndGroupsHeader myLeaguesList'>my leagues</p>
-                    <div className='myleaguesHeader'>
-                      <p className='l-name myL-headers'> LEAGUE NAME </p>
-                      <p className='l-creator myL-headers'> CREATOR </p>
-                      <p className='l-players myL-headers'> PLAYERS </p>
-                      <p className='l-scoring myL-headers'> SCORING </p>
-                    </div>
+            {/* {util.renderIf(this.props.leagues,
+              <div className='container'>
+                <div className='sliderOuter'>
+                  <div className='sliderOuterWrapper'>
+                    {this.props.leagues.map(league => {
+                      let boundLeagueClick = this.onLeagueClick.bind(this, league);
+                      return <div className='sliderInnerWrapper' onClick={boundLeagueClick}>
+                        <Slider key={league._id} league={league} />
+                      </div>
+                    })}
                   </div>
-                  )} */}
-                  <div className='sliderOuter'>
-                    <div className='sliderOuterWrapper'>
-                      {this.props.leagues.map(league => <Slider key={league._id} league={league} /> )}
-                    </div>
-                  </div>
-                    {/* // let boundLeagueClick = this.onLeagueClick.bind(this, league);
-                    // return <div key={league._id} className='rowColors'>
-                    //   <div className='span-row' onClick={boundLeagueClick}>
-                    //     <p className='span-name'>{league.leagueName} </p>
-                    //     <p className='span-owner'>{league.ownerName} </p>
-                    //     <p className='span-size'>{league.size} </p>
-                    //     <p className='span-scoring'>{league.scoring} </p>
-                    //   </div>
-                    // </div> */}
-                  {util.renderIf(this.props.leagues.length > 0,
-                    <div className='spacerRow'> </div>
-                  )}
                 </div>
-              // </div>
-            )}
+                {util.renderIf(this.props.leagues.length > 0,
+                  <div className='spacerRow'> </div>
+                )}
+              </div>
+            )} */}
 
                         {/* {util.renderIf(this.props.leagues,
               <div className='col-lg-5'>
@@ -241,7 +223,6 @@ class LandingContainer extends React.Component {
                 />
               </Modal>
             )}
-
             {util.renderIf(this.state.profileFormDisplay && this.props.userProfile && this.props.userProfile.lastLogin === this.props.userProfile.createdOn,
               <Modal heading='Fill Out Your Profile'
                 close={() => {
