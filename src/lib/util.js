@@ -16,7 +16,6 @@ export const userValidation = props => {
             .catch(() => logError);
         })
         .then(sportingEvent => {
-          console.log('sportingEvent: ', sportingEvent);
           return props.userProfileFetch()
             .then(profile => {
               return {sportingEventID: sportingEvent._id, leagues: profile.body.leagues, groups: profile.body.groups};
@@ -24,21 +23,18 @@ export const userValidation = props => {
             .catch(() => logError);
         })
         .then(returnObj => {
-          console.log('returnObj: ', returnObj);
           if(returnObj.leagues.length)
             props.leaguesFetch(returnObj.leagues)
               .catch(() => logError);
           return returnObj;
         })
         .then(returnObj => {
-          console.log('returnObj: ', returnObj);
           if(returnObj.groups.length)
             props.groupsFetch(returnObj.groups)
               .catch(() => logError);
           return returnObj;
         })
         .then(returnObj => {
-          console.log('returnObj: ', returnObj);
           if(!returnObj.leagues) 
             returnObj.leagues = [];
           return props.topPublicLeaguesFetch(returnObj.sportingEventID, returnObj.leagues)
@@ -46,13 +42,11 @@ export const userValidation = props => {
             .catch(() => logError);
         })
         .then(returnObj => {
-          console.log('returnObj: ', returnObj);
           return props.topScoresFetch(returnObj.sportingEventID)
             .then(() => returnObj)
             .catch(() => logError);
         })
         .then(returnObj => {
-          console.log('returnObj: ', returnObj);
           if(!returnObj.groups) 
             returnObj.groups = [];
           props.topPublicGroupsFetch(returnObj.groups)
@@ -70,10 +64,6 @@ export const userValidation = props => {
   }
   return;
 };
-
-// export const fetchTops = props => {
-//   props.topPublicLeaguesFetch(props.)
-// };
 
 export const privacyCheck = props => {
 

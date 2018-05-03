@@ -3,10 +3,12 @@ import { connect } from 'react-redux';
 
 import { tokenSignInRequest } from '../../actions/userAuth-actions.js';
 import { userProfileFetchRequest } from '../../actions/userProfile-actions.js';
-import { leaguesFetchRequest } from '../../actions/league-actions.js';
-import { groupsFetchRequest, allPublicGroupsFetchRequest, groupJoinRequest, privateGroupJoinRequest, groupFetch } from '../../actions/group-actions.js';
+import { leaguesFetchRequest, topPublicLeaguesFetchRequest } from '../../actions/league-actions.js';
+import { groupsFetchRequest, allPublicGroupsFetchRequest, groupJoinRequest, privateGroupJoinRequest, groupFetch, topPublicGroupsFetchRequest } from '../../actions/group-actions.js';
 import { messageBoardGroupFetchRequest } from '../../actions/messageBoard-actions.js';
 import { commentsFetchRequest } from '../../actions/comment-actions.js';
+import { topScoresFetchRequest } from '../../actions/scoreboard-actions.js';
+import { sportingEventsFetchRequest } from '../../actions/sportingEvent-actions.js';
 import GroupAllPrivateForm from '../group-all-private-form';
 import * as util from './../../lib/util.js';
 
@@ -73,6 +75,10 @@ let mapStateToProps = state => ({
   userProfile: state.userProfile,
   leagues: state.leagues,
   groups: state.groups,
+  sportingEvent: state.sportingEvent,
+  topPublicLeagues: state.topPublicLeagues,
+  topScores: state.topScores,
+  topPublicGroups: state.topPublicGroups,
   publicGroups: state.publicGroups,
 });
 
@@ -82,6 +88,10 @@ let mapDispatchToProps = dispatch => {
     userProfileFetch: () => dispatch(userProfileFetchRequest()),
     leaguesFetch: leagueArr => dispatch(leaguesFetchRequest(leagueArr)),
     groupsFetch: groupArr => dispatch(groupsFetchRequest(groupArr)),
+    sportingEventsFetch: () => dispatch(sportingEventsFetchRequest()),
+    topPublicLeaguesFetch: (sportingEventID, leaguesIDArr) => dispatch(topPublicLeaguesFetchRequest(sportingEventID, leaguesIDArr)),
+    topScoresFetch: sportingeventID => dispatch(topScoresFetchRequest(sportingeventID)),
+    topPublicGroupsFetch: groupsIDArr => dispatch(topPublicGroupsFetchRequest(groupsIDArr)),
     allPublicGroupsFetch: () => dispatch(allPublicGroupsFetchRequest()),
     groupJoin: groupID => dispatch(groupJoinRequest(groupID)),
     privateGroupJoin: credentials => dispatch(privateGroupJoinRequest(credentials)),

@@ -4,8 +4,10 @@ import { connect } from 'react-redux';
 import ProfileForm from '../profile-form';
 import { tokenSignInRequest } from '../../actions/userAuth-actions.js';
 import { userProfileFetchRequest, userProfileUpdateRequest } from '../../actions/userProfile-actions.js';
-import { leaguesFetchRequest } from '../../actions/league-actions.js';
-import { groupsFetchRequest } from '../../actions/group-actions.js';
+import { leaguesFetchRequest, topPublicLeaguesFetchRequest } from '../../actions/league-actions.js';
+import { groupsFetchRequest, topPublicGroupsFetchRequest } from '../../actions/group-actions.js';
+import { topScoresFetchRequest } from '../../actions/scoreboard-actions.js';
+import { sportingEventsFetchRequest } from '../../actions/sportingEvent-actions.js';
 import * as util from './../../lib/util.js';
 
 class ProfileContainer extends React.Component {
@@ -48,6 +50,10 @@ let mapStateToProps = (state) => ({
   userProfile: state.userProfile,
   leagues: state.leagues,
   groups: state.groups,
+  sportingEvent: state.sportingEvent,
+  topPublicLeagues: state.topPublicLeagues,
+  topScores: state.topScores,
+  topPublicGroups: state.topPublicGroups,
 })
 
 let mapDispatchToProps = (dispatch) => ({
@@ -55,6 +61,10 @@ let mapDispatchToProps = (dispatch) => ({
   userProfileFetch: () => dispatch(userProfileFetchRequest()),
   leaguesFetch: leagueArr => dispatch(leaguesFetchRequest(leagueArr)),
   groupsFetch: groupArr => dispatch(groupsFetchRequest(groupArr)),
+  sportingEventsFetch: () => dispatch(sportingEventsFetchRequest()),
+  topPublicLeaguesFetch: (sportingEventID, leaguesIDArr) => dispatch(topPublicLeaguesFetchRequest(sportingEventID, leaguesIDArr)),
+  topScoresFetch: sportingeventID => dispatch(topScoresFetchRequest(sportingeventID)),
+  topPublicGroupsFetch: groupsIDArr => dispatch(topPublicGroupsFetchRequest(groupsIDArr)),
   userProfileUpdate: profile => dispatch(userProfileUpdateRequest(profile)),
 })
 
