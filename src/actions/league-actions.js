@@ -30,6 +30,11 @@ export const allPublicLeaguesFetch = leagues => ({
   payload: leagues,
 });
 
+export const topPublicLeaguesFetch = leagues => ({
+  type: 'TOP_PUBLIC_LEAGUES_FETCH',
+  payload: leagues,
+});
+
 export const leagueJoin = league => ({
   type: 'LEAGUE_JOIN',
   payload: league,
@@ -95,6 +100,17 @@ export const allPublicLeaguesFetchRequest = () => (dispatch, getState) => {
     .then(res => {
       dispatch(allPublicLeaguesFetch(res.body));
       return res;
+    });
+};
+
+export const topPublicLeaguesFetchRequest = (sportingEventID, leaguesIDArr) => (dispatch, getState) => {
+  let { userAuth } = getState();
+  return superagent.post(`${__API_URL__}/api/leagues/top/${sportingEventID}`)
+    .set('Authorization', `Bearer ${userAuth}`)
+    .send(leaguesIDArr)
+    .then(res => {
+      dispatch(topPublicLeaguesFetch(res.body));
+      return res.body;
     });
 };
 

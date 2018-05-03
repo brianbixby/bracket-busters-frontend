@@ -11,24 +11,69 @@ export const userValidation = props => {
     process.env.NODE_ENV === 'production' ? token = readCookie('Bracket-Busters-Token') : token = localStorage.token;  
     if(token) {
       props.tokenSignIn(token)
-        .then(() => props.userProfileFetch())
-        .then(profile => {
-          if(profile.body.leagues.length) props.leaguesFetch(profile.body.leagues);
-          return profile;
+        .then(() => {
+          return props.sportingEventsFetch()
+            .catch(() => logError);
         })
-        .then(profile => {
-          return props.groupsFetch(profile.body.groups);
+        .then(sportingEvent => {
+          console.log('sportingEvent: ', sportingEvent);
+          return props.userProfileFetch()
+            .then(profile => {
+              return {sportingEventID: sportingEvent._id, leagues: profile.body.leagues, groups: profile.body.groups};
+            })
+            .catch(() => logError);
         })
-        .catch( () => {
+        .then(returnObj => {
+          console.log('returnObj: ', returnObj);
+          if(returnObj.leagues.length)
+            props.leaguesFetch(returnObj.leagues)
+              .catch(() => logError);
+          return returnObj;
+        })
+        .then(returnObj => {
+          console.log('returnObj: ', returnObj);
+          if(returnObj.groups.length)
+            props.groupsFetch(returnObj.groups)
+              .catch(() => logError);
+          return returnObj;
+        })
+        .then(returnObj => {
+          console.log('returnObj: ', returnObj);
+          if(!returnObj.leagues) 
+            returnObj.leagues = [];
+          return props.topPublicLeaguesFetch(returnObj.sportingEventID, returnObj.leagues)
+            .then(() => returnObj)
+            .catch(() => logError);
+        })
+        .then(returnObj => {
+          console.log('returnObj: ', returnObj);
+          return props.topScoresFetch(returnObj.sportingEventID)
+            .then(() => returnObj)
+            .catch(() => logError);
+        })
+        .then(returnObj => {
+          console.log('returnObj: ', returnObj);
+          if(!returnObj.groups) 
+            returnObj.groups = [];
+          props.topPublicGroupsFetch(returnObj.groups)
+            .catch(() => logError);
+        })
+        .catch(() => {
           logError;
-          if(props.location.pathname !== '/') return history.replace('/');
+          if(props.location.pathname !== '/')
+            return history.replace('/');
         });
     } else {
-      if(props.location.pathname !== '/') return history.replace('/');
+      if(props.location.pathname !== '/')
+        return history.replace('/');
     }
   }
   return;
 };
+
+// export const fetchTops = props => {
+//   props.topPublicLeaguesFetch(props.)
+// };
 
 export const privacyCheck = props => {
 

@@ -4,28 +4,9 @@ import { Link } from 'react-router-dom';
 
 import NewJoinSection from './../newJoin';
 import Slider from './../slider';
-// import { leagueFetch } from './../../../actions/league-actions.js';
-// import { messageBoardLeagueFetchRequest } from './../../../actions/messageBoard-actions.js';
-// import { commentsFetchRequest } from './../../../actions/comment-actions.js';
 import * as util from './../../../lib/util.js';
 
 class NewCreateSection extends React.Component {
-  // constructor(props){
-  //   super(props);
-  // }
-
-  // onLeagueClick = (league, e) => {
-  //   let { history } = this.props;
-  //   this.props.leagueFetchRequest(league);
-  //   return this.props.messageBoardLeagueFetch(league._id)
-  //     .then(messageBoard => {
-  //       this.props.commentsFetch(messageBoard.comments);
-  //     })
-  //     // .then(() =>  window.location = `/league/${league._id}`)
-  //     .then(() =>  history.push(`/league/${league._id}`))
-  //     .catch(util.logError);
-  // }
-
   render() {
     let muscles = require('./../assets/muscles.png');
     let holla = require('./../assets/holla.png');
@@ -35,10 +16,20 @@ class NewCreateSection extends React.Component {
         <div className='createOuterInner' onClick={this.props.handleCreate}>
           <div className='createHeader'>
             <div className='eventDetails'>
-              <p className='eventNote'>2018 NBA PLAYOFFS</p>
+              {util.renderIf(this.props.formType === 'league',
+                <p className='eventNote'>2018 NBA PLAYOFFS</p>
+              )}
+              {util.renderIf(this.props.formType === 'group',
+                <p className='eventNote'>GROUP eventNote</p>
+              )}
             </div>
             <div className='createHeadline'>
-              <p className='contentHeader'>ANOTHER HISTORIC SERIES</p>
+              {util.renderIf(this.props.formType === 'league',
+                <p className='contentHeader'>ANOTHER HISTORIC SERIES</p>
+              )}
+              {util.renderIf(this.props.formType === 'GROUP',
+                <p className='contentHeader'>GROUP contentHeader</p>
+              )}
             </div>
           </div>
           <div className='createMain'>
@@ -66,16 +57,18 @@ class NewCreateSection extends React.Component {
             </div>
           </div>
         </div>
+
         <NewJoinSection joinType={this.props.joinType}/>
-        {util.renderIf(this.props.leagues,
+
+        {util.renderIf(this.props.joinedItems.length > 0,
           <div className='container'>
             <div className='sliderOuter'>
               <div className='sliderOuterWrapper'>
-                {this.props.leagues.map(league => {
-                  let boundLeagueClick = this.props.handleLeagueClick.bind(this, league);
-                  return <div className='sliderInnerWrapper' key={league._id}>
-                    <div className='cardOuter' onClick={boundLeagueClick}>
-                      <Slider league={league} />
+                {this.props.joinedItems.map(joinedItem => {
+                  let boundJoinedItemClick = this.props.handlejoinedItemClick.bind(this, joinedItem);
+                  return <div className='sliderInnerWrapper' key={joinedItem._id}>
+                    <div className='cardOuter' onClick={boundJoinedItemClick}>
+                      <Slider joinedItem={joinedItem} formType={this.props.formType} />
                     </div>
                   </div>;
                 })}
@@ -83,24 +76,26 @@ class NewCreateSection extends React.Component {
             </div>
           </div>
         )}
+
+        {/* {util.renderIf(this.props.formType === 'group' && this.props.joinedItems.length > 0,
+          <div className='container'>
+            <div className='sliderOuter'>
+              <div className='sliderOuterWrapper'>
+                {this.props.joinedItems.map(group => {
+                  let boundGroupClick = this.props.hhandlejoinedItemClick.bind(this, group);
+                  return <div className='sliderInnerWrapper' key={group._id}>
+                    <div className='cardOuter' onClick={boundGroupClick}>
+                      <Slider group={group} />
+                    </div>
+                  </div>;
+                })}
+              </div>
+            </div>
+          </div>
+        )} */}
       </div>
     );
   }
 }
-
-// let mapStateToProps = state => ({
-//   userAuth: state.userAuth,
-//   userProfile: state.userProfile,
-//   leagues: state.leagues,
-//   groups: state.groups,
-// });
-
-// let mapDispatchToProps = dispatch => ({
-//   leagueFetchRequest: league => dispatch(leagueFetch(league)),
-//   messageBoardLeagueFetch: leagueID => dispatch(messageBoardLeagueFetchRequest(leagueID)),
-//   commentsFetch: commentArr => dispatch(commentsFetchRequest(commentArr)),
-// });
-
-// export default connect(mapStateToProps, mapDispatchToProps)(NewCreateSection);
 
 export default NewCreateSection;

@@ -5,12 +5,27 @@ export const scoreBoardsFetch = scoreBoards => ({
   payload: scoreBoards,
 });
 
+export const topScoresFetch = scores => ({
+  type: 'TOP_SCORES_FETCH',
+  payload: scores,
+});
+
 export const scoreBoardsFetchRequest = leagueID => (dispatch, getState) => {
   let { userAuth } = getState();
   return superagent.get(`${__API_URL__}/api/scoreboards/${leagueID}`)
     .set('Authorization', `Bearer ${userAuth}`)
     .then(res => {
       dispatch(scoreBoardsFetch(res.body));
+      return res.body;
+    });
+};
+
+export const topScoresFetchRequest = sportingeventID => (dispatch, getState) => {
+  let { userAuth } = getState();
+  return superagent.get(`${__API_URL__}/api/scoreboards/sportingevent/${sportingeventID}`)
+    .set('Authorization', `Bearer ${userAuth}`)
+    .then(res => {
+      dispatch(topScoresFetch(res.body));
       return res.body;
     });
 };

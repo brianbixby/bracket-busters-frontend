@@ -20,7 +20,8 @@ class Intro extends React.Component {
     return this.props.signIn(user)
       .then(() => this.props.userProfileFetch())
       .then(profile => {
-        if(profile.body.leagues.length) this.props.leaguesFetch(profile.body.leagues);
+        if(profile.body.leagues.length)
+          this.props.leaguesFetch(profile.body.leagues);
         return profile;
       })
       .then(profile => {

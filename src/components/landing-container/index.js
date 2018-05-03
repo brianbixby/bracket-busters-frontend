@@ -14,10 +14,12 @@ import NewJoinSection from '../helpers/newJoin';
 import Slider from '../helpers/slider';
 import { tokenSignInRequest } from '../../actions/userAuth-actions.js';
 import { userProfileFetchRequest, userProfileUpdateRequest } from '../../actions/userProfile-actions.js';
-import { leaguesFetchRequest, leagueCreateRequest, leagueFetch } from '../../actions/league-actions.js';
-import { groupsFetchRequest, groupCreateRequest, groupFetch } from '../../actions/group-actions.js';
+import { leaguesFetchRequest, leagueCreateRequest, leagueFetch, topPublicLeaguesFetchRequest } from '../../actions/league-actions.js';
+import { groupsFetchRequest, groupCreateRequest, groupFetch, topPublicGroupsFetchRequest } from '../../actions/group-actions.js';
 import { messageBoardLeagueFetchRequest, messageBoardGroupFetchRequest } from '../../actions/messageBoard-actions.js';
 import { commentsFetchRequest } from '../../actions/comment-actions.js';
+import { topScoresFetchRequest } from '../../actions/scoreboard-actions.js';
+import { sportingEventsFetchRequest } from '../../actions/sportingEvent-actions.js';
 import * as util from './../../lib/util.js';
 
 class LandingContainer extends React.Component {
@@ -28,6 +30,10 @@ class LandingContainer extends React.Component {
 
   componentWillMount() {
     util.userValidation(this.props);
+  }
+  componentDidMount() {
+    this.props.sportingEventsFetch()
+      .catch(err => util.logError(err));
   }
 
   handleLeagueCreate = league => {
@@ -94,7 +100,11 @@ class LandingContainer extends React.Component {
       <div className='grid-container'>
         {util.renderIf(this.props.userAuth,
           <div>
-            <NewCreateSection joinType={formTypeLeague} formType={formTypeLeague} leagues={this.props.leagues} handleLeagueClick={this.onLeagueClick}  handleCreate={() => this.setState({ leagueFormDisplay: true })}/>
+            <NewCreateSection joinType={formTypeLeague} formType={formTypeLeague} joinedItems={this.props.leagues} handlejoinedItemClick={this.onLeagueClick}  handleCreate={() => this.setState({ leagueFormDisplay: true })}/>
+
+            <NewCreateSection joinType={formTypeGroup} formType={formTypeGroup} joinedItems={this.props.groups} handlejoinedItemClick={this.onGroupClick}  handleCreate={() => this.setState({ groupFormDisplay: true })}/>
+
+
             <div className='col-lg-7'>
               <CreateSection formType={formTypeLeague} handleCreate={() => this.setState({ leagueFormDisplay: true })}/>
             </div>
@@ -253,6 +263,10 @@ let mapStateToProps = state => ({
   userProfile: state.userProfile,
   leagues: state.leagues,
   groups: state.groups,
+  sportingEvent: state.sportingEvent,
+  topPublicLeagues: state.topPublicLeagues,
+  topScores: state.topScores,
+  topPublicGroups: state.topPublicGroups,
 });
 
 let mapDispatchToProps = dispatch => ({
@@ -261,6 +275,10 @@ let mapDispatchToProps = dispatch => ({
   leaguesFetch: leagueArr => dispatch(leaguesFetchRequest(leagueArr)),
   groupsFetch: groupArr => dispatch(groupsFetchRequest(groupArr)),
   userProfileUpdate: profile => dispatch(userProfileUpdateRequest(profile)),
+  sportingEventsFetch: () => dispatch(sportingEventsFetchRequest()),
+  topPublicLeaguesFetch: (sportingEventID, leaguesIDArr) => dispatch(topPublicLeaguesFetchRequest(sportingEventID, leaguesIDArr)),
+  topScoresFetch: sportingeventID => dispatch(topScoresFetchRequest(sportingeventID)),
+  topPublicGroupsFetch: groupsIDArr => dispatch(topPublicGroupsFetchRequest(groupsIDArr)),
   leagueCreate: league => dispatch(leagueCreateRequest(league)),
   groupCreate: group => dispatch(groupCreateRequest(group)),
   leagueFetchRequest: league => dispatch(leagueFetch(league)),
