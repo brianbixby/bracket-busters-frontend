@@ -15,8 +15,9 @@ import currentGroup from './currentGroup-reducers.js';
 import currentMessageBoard from './currentMessageBoard-reducers.js';
 import publicLeagues from './allPublicLeagues-reducers.js';
 import publicGroups from './allPublicGroups-reducers.js';
-
-
+import topPublicLeagues from './topLeagues-reducers';
+import topPublicGroups from './topGroups-reducers';
+import topScores from './topScores-reducers';
 
 export default combineReducers({
   userAuth,
@@ -35,4 +36,7 @@ export default combineReducers({
   currentMessageBoard,
   publicLeagues,
   publicGroups,
+  topPublicLeagues,
+  topPublicGroups,
+  topScores,
 });

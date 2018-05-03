@@ -25,6 +25,11 @@ export const allPublicGroupsFetch = groups => ({
   payload: groups,
 });
 
+export const topPublicGroupsFetch = groups => ({
+  type: 'TOP_PUBLIC_GROUPS_FETCH',
+  payload: groups,
+});
+
 export const groupJoin = group => ({
   type: 'GROUP_JOIN',
   payload: group,
@@ -77,6 +82,16 @@ export const allPublicGroupsFetchRequest = () => (dispatch, getState) => {
     });
 };
 
+export const topPublicGroupsFetchRequest = groupsIDArr => (dispatch, getState) => {
+  let { userAuth } = getState();
+  return superagent.post(`${__API_URL__}/api/groups/top`)
+    .set('Authorization', `Bearer ${userAuth}`)
+    .send(groupsIDArr)
+    .then(res => {
+      dispatch(topPublicGroupsFetch(res.body));
+      return res.body;
+    });
+};
 
 export const groupDeleteRequest = group => (dispatch, getState) => {
   let { userAuth } = getState();

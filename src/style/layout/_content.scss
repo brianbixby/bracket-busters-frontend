@@ -1,4 +1,5 @@
-@import './../lib/vars'; 
+@import './../lib/vars';
+
 .link {
   cursor: pointer;
 }
@@ -9,7 +10,6 @@
   background: #fff;
   border-radius: 10px;
   margin-bottom: 16px;
-  overflow: hidden;
 }
 .page-outer-div {
   min-height: 80vh;
@@ -18,7 +18,6 @@
   margin-right: auto;
   background: #EDEEF0;
 }
-
 .text {
   padding: $pad;
 }
@@ -49,12 +48,12 @@
 .grid-container {
   margin-right: auto;
   margin-left: auto;
-  padding-left: 15px;
-  padding-right: 15px;
 }
 @media (min-width: 768px) {
   .grid-container {
     width: 750px;
+    padding-left: 15px;
+    padding-right: 15px;
   }
 }
 @media (min-width: 992px) {

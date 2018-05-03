@@ -8,13 +8,18 @@ import GroupForm from '../group-form';
 import ProfileForm from '../profile-form';
 import Modal from '../helpers/modal';
 import CreateSection from '../helpers/createSection';
+import NewCreateSection from '../helpers/newCreate';
 import JoinSection from '../helpers/joinSection';
+import NewJoinSection from '../helpers/newJoin';
+import Slider from '../helpers/slider';
 import { tokenSignInRequest } from '../../actions/userAuth-actions.js';
 import { userProfileFetchRequest, userProfileUpdateRequest } from '../../actions/userProfile-actions.js';
-import { leaguesFetchRequest, leagueCreateRequest, leagueFetch } from '../../actions/league-actions.js';
-import { groupsFetchRequest, groupCreateRequest, groupFetch } from '../../actions/group-actions.js';
+import { leaguesFetchRequest, leagueCreateRequest, leagueFetch, topPublicLeaguesFetchRequest } from '../../actions/league-actions.js';
+import { groupsFetchRequest, groupCreateRequest, groupFetch, topPublicGroupsFetchRequest } from '../../actions/group-actions.js';
 import { messageBoardLeagueFetchRequest, messageBoardGroupFetchRequest } from '../../actions/messageBoard-actions.js';
 import { commentsFetchRequest } from '../../actions/comment-actions.js';
+import { topScoresFetchRequest } from '../../actions/scoreboard-actions.js';
+import { sportingEventsFetchRequest } from '../../actions/sportingEvent-actions.js';
 import * as util from './../../lib/util.js';
 
 class LandingContainer extends React.Component {
@@ -25,6 +30,10 @@ class LandingContainer extends React.Component {
 
   componentWillMount() {
     util.userValidation(this.props);
+  }
+  componentDidMount() {
+    this.props.sportingEventsFetch()
+      .catch(err => util.logError(err));
   }
 
   handleLeagueCreate = league => {
@@ -71,10 +80,9 @@ class LandingContainer extends React.Component {
       .then(messageBoard => {
         this.props.commentsFetch(messageBoard.comments);
       })
-      .then( () =>  this.props.history.push(`/group/${group._id}`))
+      .then(() =>  this.props.history.push(`/group/${group._id}`))
       .catch(util.logError);
   }
-
   render() {
     let { params } = this.props.match;
     let handleComplete = params.userAuth === 'signin' ? this.handleSignin : this.handleSignup;
@@ -92,44 +100,74 @@ class LandingContainer extends React.Component {
       <div className='grid-container'>
         {util.renderIf(this.props.userAuth,
           <div>
-            <CreateSection formType={formTypeLeague} handleCreate={() => this.setState({ leagueFormDisplay: true })}/>
+            <NewCreateSection joinType={formTypeLeague} formType={formTypeLeague} joinedItems={this.props.leagues} handlejoinedItemClick={this.onLeagueClick}  handleCreate={() => this.setState({ leagueFormDisplay: true })}/>
 
-            {util.renderIf(this.props.leagues,
+            <NewCreateSection joinType={formTypeGroup} formType={formTypeGroup} joinedItems={this.props.groups} handlejoinedItemClick={this.onGroupClick}  handleCreate={() => this.setState({ groupFormDisplay: true })}/>
+
+
+            <div className='col-lg-7'>
+              <CreateSection formType={formTypeLeague} handleCreate={() => this.setState({ leagueFormDisplay: true })}/>
+            </div>
+
+            {/* {util.renderIf(this.props.leagues,
               <div className='container'>
-                {util.renderIf(this.props.leagues.length > 0,
-                <div>
-                  <p className='header usersLeagueAndGroupsHeader myLeaguesList'>my leagues</p>
-                <div className='myleaguesHeader'>
-                  <p className='l-name myL-headers'> LEAGUE NAME </p>
-                  <p className='l-creator myL-headers'> CREATOR </p>
-                  <p className='l-players myL-headers'> PLAYERS </p>
-                  <p className='l-scoring myL-headers'> SCORING </p>
-                </div>
-                </div>
-                )}
-                {util.renderIf(this.props.leagues.length < 1,
-                  <JoinSection joinType={formTypeLeague}/>
-                )}
-                {this.props.leagues.map(league => {
-                  let boundLeagueClick = this.onLeagueClick.bind(this, league);
-                  return <div key={league._id} className='rowColors'>
-                    <div className='span-row' onClick={boundLeagueClick}>
-                      <p className='span-name'>{league.leagueName} </p>
-                      <p className='span-owner'>{league.ownerName} </p>
-                      <p className='span-size'>{league.size} </p>
-                      <p className='span-scoring'>{league.scoring} </p>
-                    </div>
+                <div className='sliderOuter'>
+                  <div className='sliderOuterWrapper'>
+                    {this.props.leagues.map(league => {
+                      let boundLeagueClick = this.onLeagueClick.bind(this, league);
+                      return <div className='sliderInnerWrapper' onClick={boundLeagueClick}>
+                        <Slider key={league._id} league={league} />
+                      </div>
+                    })}
                   </div>
-                })}
+                </div>
                 {util.renderIf(this.props.leagues.length > 0,
                   <div className='spacerRow'> </div>
                 )}
               </div>
+            )} */}
+
+                        {/* {util.renderIf(this.props.leagues,
+              <div className='col-lg-5'>
+                <div className='container'>
+                  {util.renderIf(this.props.leagues.length > 0,
+                  <div>
+                    <p className='header usersLeagueAndGroupsHeader myLeaguesList'>my leagues</p>
+                    <div className='myleaguesHeader'>
+                      <p className='l-name myL-headers'> LEAGUE NAME </p>
+                      <p className='l-creator myL-headers'> CREATOR </p>
+                      <p className='l-players myL-headers'> PLAYERS </p>
+                      <p className='l-scoring myL-headers'> SCORING </p>
+                    </div>
+                  </div>
+                  )}
+                  {this.props.leagues.map(league => {
+                    let boundLeagueClick = this.onLeagueClick.bind(this, league);
+                    return <div key={league._id} className='rowColors'>
+                      <div className='span-row' onClick={boundLeagueClick}>
+                        <p className='span-name'>{league.leagueName} </p>
+                        <p className='span-owner'>{league.ownerName} </p>
+                        <p className='span-size'>{league.size} </p>
+                        <p className='span-scoring'>{league.scoring} </p>
+                      </div>
+                    </div>
+                  })}
+                  {util.renderIf(this.props.leagues.length > 0,
+                    <div className='spacerRow'> </div>
+                  )}
+                </div>
+              </div>
+            )} */}
+
+            {util.renderIf(this.props.leagues && this.props.leagues.length < 1,
+              <JoinSection joinType={formTypeLeague}/>
             )}
             
             {util.renderIf(this.props.leagues.length > 0,
               <JoinSection joinType={formTypeLeague} alreadyJoined={this.props.leagues.length}/>
             )}
+
+            <NewJoinSection joinType={formTypeLeague}/>
             
             {util.renderIf(this.state.leagueFormDisplay,
               <Modal heading='Create League' close={() => this.setState({ leagueFormDisplay: false })}>
@@ -139,45 +177,54 @@ class LandingContainer extends React.Component {
               </Modal>
             )}
 
-            <CreateSection formType={formTypeGroup} handleCreate={() => this.setState({ groupFormDisplay: true })}/>
-            {util.renderIf(this.props.groups,
+            <div className='col-lg-7'>
+              <CreateSection formType={formTypeGroup} handleCreate={() => this.setState({ groupFormDisplay: true })}/>
+            </div>
 
-              <div className='container'>
-                
-                {util.renderIf(this.props.groups.length > 0,
-                <div>
-                <p className='header usersLeagueAndGroupsHeader'>my groups</p>
-                <div className='myleaguesHeader'>
-                  <p className='l-name myL-headers'> LEAGUE NAME </p>
-                  <p className='l-creator myL-headers'> CREATOR </p>
-                  <p className='l-players myL-headers'> SIZE </p>
-                  <p className='l-scoring myL-headers'> PRIVACY </p>
-                </div>
-                </div>
-                )}
-                {util.renderIf(this.props.groups.length < 1,
-                  <JoinSection joinType={formTypeGroup}/>
-                )}
-                {this.props.groups.map(group => {
-                  let boundGroupClick = this.onGroupClick.bind(this, group);
-                  return <div className='rowColors' key={group._id}>
-                    <p onClick={boundGroupClick} className='span-row'>
-                      <span className='span-name'>{group.groupName} </span>
-                      <span className='span-owner'>{group.ownerName} </span>
-                      <span className='span-size'>{group.size} </span>
-                      <span className='span-privacy'>{group.privacy} </span>
-                    </p>
+            {util.renderIf(this.props.groups,
+              <div className='col-lg-5'>
+                <div className='container'>
+                  {util.renderIf(this.props.groups.length > 0,
+                  <div>
+                    <p className='header usersLeagueAndGroupsHeader'>my groups</p>
+                    <div className='myleaguesHeader'>
+                      <p className='l-name myL-headers'> LEAGUE NAME </p>
+                      <p className='l-creator myL-headers'> CREATOR </p>
+                      <p className='l-players myL-headers'> SIZE </p>
+                      <p className='l-scoring myL-headers'> PRIVACY </p>
+                    </div>
                   </div>
-                })}
-                {util.renderIf(this.props.groups.length > 0,
-                <div className='spacerRow'> </div>
-                )}
+                  )}
+                {/* {util.renderIf(this.props.groups.length < 1,
+                  <JoinSection joinType={formTypeGroup}/>
+                )} */}
+                  {this.props.groups.map(group => {
+                    let boundGroupClick = this.onGroupClick.bind(this, group);
+                    return <div className='rowColors' key={group._id}>
+                      <p onClick={boundGroupClick} className='span-row'>
+                        <span className='span-name'>{group.groupName} </span>
+                        <span className='span-owner'>{group.ownerName} </span>
+                        <span className='span-size'>{group.size} </span>
+                        <span className='span-privacy'>{group.privacy} </span>
+                      </p>
+                    </div>
+                  })}
+                  {util.renderIf(this.props.groups.length > 0,
+                    <div className='spacerRow'> </div>
+                  )}
+                </div>
               </div>
+            )}
+
+            {util.renderIf(this.props.groups.length < 1,
+              <JoinSection joinType={formTypeGroup}/>
             )}
 
             {util.renderIf(this.props.groups.length > 0,
               <JoinSection joinType={formTypeGroup} joinedAlready={this.props.groups.length}/>
             )}
+
+            <NewJoinSection joinType={formTypeGroup}/>
 
             {util.renderIf(this.state.groupFormDisplay,
               <Modal heading='Create Group' close={() => this.setState({ groupFormDisplay: false })}>
@@ -186,7 +233,6 @@ class LandingContainer extends React.Component {
                 />
               </Modal>
             )}
-
             {util.renderIf(this.state.profileFormDisplay && this.props.userProfile && this.props.userProfile.lastLogin === this.props.userProfile.createdOn,
               <Modal heading='Fill Out Your Profile'
                 close={() => {
@@ -217,6 +263,10 @@ let mapStateToProps = state => ({
   userProfile: state.userProfile,
   leagues: state.leagues,
   groups: state.groups,
+  sportingEvent: state.sportingEvent,
+  topPublicLeagues: state.topPublicLeagues,
+  topScores: state.topScores,
+  topPublicGroups: state.topPublicGroups,
 });
 
 let mapDispatchToProps = dispatch => ({
@@ -225,6 +275,10 @@ let mapDispatchToProps = dispatch => ({
   leaguesFetch: leagueArr => dispatch(leaguesFetchRequest(leagueArr)),
   groupsFetch: groupArr => dispatch(groupsFetchRequest(groupArr)),
   userProfileUpdate: profile => dispatch(userProfileUpdateRequest(profile)),
+  sportingEventsFetch: () => dispatch(sportingEventsFetchRequest()),
+  topPublicLeaguesFetch: (sportingEventID, leaguesIDArr) => dispatch(topPublicLeaguesFetchRequest(sportingEventID, leaguesIDArr)),
+  topScoresFetch: sportingeventID => dispatch(topScoresFetchRequest(sportingeventID)),
+  topPublicGroupsFetch: groupsIDArr => dispatch(topPublicGroupsFetchRequest(groupsIDArr)),
   leagueCreate: league => dispatch(leagueCreateRequest(league)),
   groupCreate: group => dispatch(groupCreateRequest(group)),
   leagueFetchRequest: league => dispatch(leagueFetch(league)),

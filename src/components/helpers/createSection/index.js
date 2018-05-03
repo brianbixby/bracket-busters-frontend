@@ -8,7 +8,7 @@ class CreateSection extends React.Component {
     return (
       <div className={`contentOuter component-container${this.props.formType}`}>
         <div className='contentHeaderOuter'>
-          <p className='contentHeader'> Create Your Own {this.props.formType}!</p>
+          <p className='contentHeader'> CREATE A {this.props.formType}!</p>
         </div>
         <div className='contentInner'>
           <div className='row'>
@@ -21,7 +21,12 @@ class CreateSection extends React.Component {
               )}  
             </div>
             <div className='col-sm-6'>
-              <p>Create a {this.props.formType} of your own, and invite your friends!</p>
+              {util.renderIf(this.props.formType === 'league',
+                <p>You&#39;re the League Manager here. Set up a private or public league to play with your family and friends!</p>
+              )}
+              {util.renderIf(this.props.formType === 'group',
+                <p>You&#39;re the leader of the group. Set up a private or public group to cheer on your favorite team with your family and friends!</p>
+              )}
             </div>
           </div>
         </div>

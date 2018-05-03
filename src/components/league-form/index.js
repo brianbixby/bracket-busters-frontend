@@ -8,7 +8,7 @@ import * as util from '../../lib/util';
 class LeagueForm extends React.Component {
   constructor(props){
     super(props);
-    this.state = props.league ? this.props.league : { leagueName: '', scoring: 'regular', poolSize: '', privacy: 'public', password: '',   leagueNameError: null, poolSizeError: null, leagueNameAvailable: true, passwordError: null, error: null, focused: null, submitted: false, };
+    this.state = props.league ? this.props.league : { leagueName: '', scoring: 'regular', poolSize: '', privacy: 'public', password: '', image: '', motto: '',   leagueNameError: null, poolSizeError: null, leagueNameAvailable: true, passwordError: null, error: null, focused: null, submitted: false, };
   }
 
   componentWillUnmount() {
@@ -138,6 +138,26 @@ class LeagueForm extends React.Component {
           name='poolSize'
           placeholder='pool size'
           value={this.state.poolSize}
+          onChange={this.handleChange}
+          onFocus={this.handleFocus}
+          onBlur={this.handleBlur}
+        />
+
+        <input
+          type='text'
+          name='image'
+          placeholder='image url'
+          value={this.state.image}
+          onChange={this.handleChange}
+          onFocus={this.handleFocus}
+          onBlur={this.handleBlur}
+        />
+
+        <input
+          type='text'
+          name='motto'
+          placeholder='brief description'
+          value={this.state.motto}
           onChange={this.handleChange}
           onFocus={this.handleFocus}
           onBlur={this.handleBlur}
