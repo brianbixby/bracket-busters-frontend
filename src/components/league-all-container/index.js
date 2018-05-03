@@ -3,10 +3,12 @@ import { connect } from 'react-redux';
 
 import { tokenSignInRequest } from '../../actions/userAuth-actions.js';
 import { userProfileFetchRequest } from '../../actions/userProfile-actions.js';
-import { leaguesFetchRequest, allPublicLeaguesFetchRequest, leagueJoinRequest, privateLeagueJoinRequest, leagueFetch } from '../../actions/league-actions.js';
-import { groupsFetchRequest } from '../../actions/group-actions.js';
+import { leaguesFetchRequest, allPublicLeaguesFetchRequest, leagueJoinRequest, privateLeagueJoinRequest, leagueFetch, topPublicLeaguesFetchRequest } from '../../actions/league-actions.js';
+import { groupsFetchRequest, topPublicGroupsFetchRequest } from '../../actions/group-actions.js';
 import { messageBoardLeagueFetchRequest } from '../../actions/messageBoard-actions.js';
 import { commentsFetchRequest } from '../../actions/comment-actions.js';
+import { topScoresFetchRequest } from '../../actions/scoreboard-actions.js';
+import { sportingEventsFetchRequest } from '../../actions/sportingEvent-actions.js';
 import LeagueAllPrivateForm from '../league-all-private-form';
 import * as util from '../../lib/util.js';
 
@@ -87,6 +89,10 @@ let mapStateToProps = state => ({
   leagues: state.leagues,
   groups: state.groups,
   publicLeagues: state.publicLeagues,
+  sportingEvent: state.sportingEvent,
+  topPublicLeagues: state.topPublicLeagues,
+  topScores: state.topScores,
+  topPublicGroups: state.topPublicGroups,
 });
 
 let mapDispatchToProps = dispatch => ({
@@ -94,6 +100,10 @@ let mapDispatchToProps = dispatch => ({
   userProfileFetch: () => dispatch(userProfileFetchRequest()),
   leaguesFetch: leagueArr => dispatch(leaguesFetchRequest(leagueArr)),
   groupsFetch: groupArr => dispatch(groupsFetchRequest(groupArr)),
+  sportingEventsFetch: () => dispatch(sportingEventsFetchRequest()),
+  topPublicLeaguesFetch: (sportingEventID, leaguesIDArr) => dispatch(topPublicLeaguesFetchRequest(sportingEventID, leaguesIDArr)),
+  topScoresFetch: sportingeventID => dispatch(topScoresFetchRequest(sportingeventID)),
+  topPublicGroupsFetch: groupsIDArr => dispatch(topPublicGroupsFetchRequest(groupsIDArr)),
   allPublicLeaguesFetch: () => dispatch(allPublicLeaguesFetchRequest()),
   leagueJoin: leagueID => dispatch(leagueJoinRequest(leagueID)),
   privateLeagueJoin: credentials => dispatch(privateLeagueJoinRequest(credentials)),

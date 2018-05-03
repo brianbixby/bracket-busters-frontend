@@ -6,8 +6,10 @@ import Modal from '../helpers/modal';
 import UserAuthForm from '../userAuth-form';
 import { signUpRequest, signInRequest } from '../../actions/userAuth-actions.js';
 import { userProfileFetchRequest } from '../../actions/userProfile-actions.js';
-import { leaguesFetchRequest } from '../../actions/league-actions.js';
-import { groupsFetchRequest } from '../../actions/group-actions.js';
+import { leaguesFetchRequest, topPublicLeaguesFetchRequest } from '../../actions/league-actions.js';
+import { groupsFetchRequest, topPublicGroupsFetchRequest } from '../../actions/group-actions.js';
+import { topScoresFetchRequest } from '../../actions/scoreboard-actions.js';
+import { sportingEventsFetchRequest } from '../../actions/sportingEvent-actions.js';
 import * as util from './../../lib/util.js';
 
 class Intro extends React.Component {
@@ -18,14 +20,55 @@ class Intro extends React.Component {
 
   handleSignin = (user, errCB) => {
     return this.props.signIn(user)
-      .then(() => this.props.userProfileFetch())
-      .then(profile => {
-        if(profile.body.leagues.length)
-          this.props.leaguesFetch(profile.body.leagues);
-        return profile;
+      // .then(() => this.props.userProfileFetch())
+      // .then(profile => {
+      //   if(profile.body.leagues.length)
+      //     this.props.leaguesFetch(profile.body.leagues);
+      //   return profile;
+      // })
+      // .then(profile => {
+      //   return this.props.groupsFetch(profile.body.groups);
+      // })
+      .then(() => {
+        return this.props.sportingEventsFetch()
+          .catch(() => logError);
       })
-      .then(profile => {
-        return this.props.groupsFetch(profile.body.groups);
+      .then(sportingEvent => {
+        return this.props.userProfileFetch()
+          .then(profile => {
+            return {sportingEventID: sportingEvent._id, leagues: profile.body.leagues, groups: profile.body.groups};
+          })
+          .catch(() => logError);
+      })
+      .then(returnObj => {
+        if(returnObj.leagues.length)
+          this.props.leaguesFetch(returnObj.leagues)
+            .catch(() => logError);
+        return returnObj;
+      })
+      .then(returnObj => {
+        if(returnObj.groups.length)
+          this.props.groupsFetch(returnObj.groups)
+            .catch(() => logError);
+        return returnObj;
+      })
+      .then(returnObj => {
+        if(!returnObj.leagues) 
+          returnObj.leagues = [];
+        return this.props.topPublicLeaguesFetch(returnObj.sportingEventID, returnObj.leagues)
+          .then(() => returnObj)
+          .catch(() => logError);
+      })
+      .then(returnObj => {
+        return this.props.topScoresFetch(returnObj.sportingEventID)
+          .then(() => returnObj)
+          .catch(() => logError);
+      })
+      .then(returnObj => {
+        if(!returnObj.groups) 
+          returnObj.groups = [];
+        this.props.topPublicGroupsFetch(returnObj.groups)
+          .catch(() => logError);
       })
       .catch(err => {
         util.logError(err);
@@ -35,7 +78,48 @@ class Intro extends React.Component {
 
   handleSignup = (user, errCB) => {
     return this.props.signUp(user)
-      .then(() => this.props.userProfileFetch())
+      // .then(() => this.props.userProfileFetch())
+      .then(() => {
+        return this.props.sportingEventsFetch()
+          .catch(() => logError);
+      })
+      .then(sportingEvent => {
+        return this.props.userProfileFetch()
+          .then(profile => {
+            return {sportingEventID: sportingEvent._id, leagues: profile.body.leagues, groups: profile.body.groups};
+          })
+          .catch(() => logError);
+      })
+      .then(returnObj => {
+        if(returnObj.leagues.length)
+          this.props.leaguesFetch(returnObj.leagues)
+            .catch(() => logError);
+        return returnObj;
+      })
+      .then(returnObj => {
+        if(returnObj.groups.length)
+          this.props.groupsFetch(returnObj.groups)
+            .catch(() => logError);
+        return returnObj;
+      })
+      .then(returnObj => {
+        if(!returnObj.leagues) 
+          returnObj.leagues = [];
+        return this.props.topPublicLeaguesFetch(returnObj.sportingEventID, returnObj.leagues)
+          .then(() => returnObj)
+          .catch(() => logError);
+      })
+      .then(returnObj => {
+        return this.props.topScoresFetch(returnObj.sportingEventID)
+          .then(() => returnObj)
+          .catch(() => logError);
+      })
+      .then(returnObj => {
+        if(!returnObj.groups) 
+          returnObj.groups = [];
+        this.props.topPublicGroupsFetch(returnObj.groups)
+          .catch(() => logError);
+      })
       .catch(err => {
         util.logError(err);
         errCB(err);
@@ -102,6 +186,10 @@ let mapStateToProps = state => ({
   userProfile: state.userProfile,
   leagues: state.leagues,
   groups: state.groups,
+  sportingEvent: state.sportingEvent,
+  topPublicLeagues: state.topPublicLeagues,
+  topScores: state.topScores,
+  topPublicGroups: state.topPublicGroups,
 });
 
 let mapDispatchToProps = dispatch => {
@@ -111,6 +199,10 @@ let mapDispatchToProps = dispatch => {
     userProfileFetch: () => dispatch(userProfileFetchRequest()),
     leaguesFetch: leagueArr => dispatch(leaguesFetchRequest(leagueArr)),
     groupsFetch: groupArr => dispatch(groupsFetchRequest(groupArr)),
+    sportingEventsFetch: () => dispatch(sportingEventsFetchRequest()),
+    topPublicLeaguesFetch: (sportingEventID, leaguesIDArr) => dispatch(topPublicLeaguesFetchRequest(sportingEventID, leaguesIDArr)),
+    topScoresFetch: sportingeventID => dispatch(topScoresFetchRequest(sportingeventID)),
+    topPublicGroupsFetch: groupsIDArr => dispatch(topPublicGroupsFetchRequest(groupsIDArr)),
   };
 };
 

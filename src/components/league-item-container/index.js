@@ -2,9 +2,10 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { tokenSignInRequest } from '../../actions/userAuth-actions.js';
 import { userProfileFetchRequest } from '../../actions/userProfile-actions.js';
-import { leaguesFetchRequest, leagueFetchRequest, leagueDeleteRequest, leagueUpdateRequest } from '../../actions/league-actions.js';
-import { groupsFetchRequest } from '../../actions/group-actions.js';
-import { scoreBoardsFetchRequest } from '../../actions/scoreboard-actions.js';
+import { leaguesFetchRequest, leagueFetchRequest, leagueDeleteRequest, leagueUpdateRequest, topPublicLeaguesFetchRequest } from '../../actions/league-actions.js';
+import { groupsFetchRequest, topPublicGroupsFetchRequest } from '../../actions/group-actions.js';
+import { scoreBoardsFetchRequest, topScoresFetchRequest } from '../../actions/scoreboard-actions.js';
+import { sportingEventsFetchRequest } from '../../actions/sportingEvent-actions.js';
 import UserPickContainer from '../user-pick-container';
 import MessageBoardContainer from '../message-board-container';
 import LeagueItemScoreBoard from '../league-item-scoreboard';
@@ -52,6 +53,10 @@ let mapStateToProps = state => ({
   currentLeague: state.currentLeague,
   currentMessageBoard: state.currentMessageBoard,
   scoreBoards: state.scoreBoards,
+  sportingEvent: state.sportingEvent,
+  topPublicLeagues: state.topPublicLeagues,
+  topScores: state.topScores,
+  topPublicGroups: state.topPublicGroups,
 });
 
 let mapDispatchToProps = dispatch => ({
@@ -59,6 +64,10 @@ let mapDispatchToProps = dispatch => ({
   userProfileFetch: () => dispatch(userProfileFetchRequest()),
   leaguesFetch: leagueArr => dispatch(leaguesFetchRequest(leagueArr)),
   groupsFetch: groupArr => dispatch(groupsFetchRequest(groupArr)),
+  sportingEventsFetch: () => dispatch(sportingEventsFetchRequest()),
+  topPublicLeaguesFetch: (sportingEventID, leaguesIDArr) => dispatch(topPublicLeaguesFetchRequest(sportingEventID, leaguesIDArr)),
+  topScoresFetch: sportingeventID => dispatch(topScoresFetchRequest(sportingeventID)),
+  topPublicGroupsFetch: groupsIDArr => dispatch(topPublicGroupsFetchRequest(groupsIDArr)),
   leagueFetch: league => dispatch(leagueFetchRequest(league)),
   leagueUpdate: league => dispatch(leagueUpdateRequest(league)),
   scoreBoardsFetch: leagueID => dispatch(scoreBoardsFetchRequest(leagueID)),

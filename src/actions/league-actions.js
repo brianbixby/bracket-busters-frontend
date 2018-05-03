@@ -119,6 +119,7 @@ export const leagueJoinRequest = leagueID => (dispatch, getState) => {
   return superagent.put(`${__API_URL__}/api/league/${leagueID}/adduser`)
     .set('Authorization', `Bearer ${userAuth}`)
     .then(res => {
+      console.log('res.body: ', res.body);
       dispatch(leagueJoin(res.body));
       return res.body;
     });

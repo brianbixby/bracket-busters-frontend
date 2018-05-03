@@ -1,27 +1,28 @@
 import React from 'react';
-import { BootstrapTable, TableHeaderColumn } from 'react-bootstrap-table';
- 
+import * as util from './../../../lib/util.js';
+
 class Table extends React.Component {
-  constructor(props){
-    super(props);
-  }
   render() {
+    let { item, type } = this.props;
+    let itemName = type === 'league' ? item.leagueName : item.groupName;
     return (
-      <div>
-        <BootstrapTable data={this.props.data}>
-          <TableHeaderColumn isKey dataField='id'>
-            ID
-          </TableHeaderColumn>
-          <TableHeaderColumn dataField='name'>
-            Name
-          </TableHeaderColumn>
-          <TableHeaderColumn dataField='value'>
-            Value
-          </TableHeaderColumn>
-        </BootstrapTable>
+      <div className='tableRow'>
+        {util.renderIf(type !== 'scores',
+          <p>
+            <span className='columnNameData'>{itemName} </span>
+            <span className='columnCreatorData'>{item.ownerName} </span>
+            <span className='columnSizeData'>{item.size} </span>
+          </p>
+        )}
+        {util.renderIf(type === 'scores',
+          <p>
+            <span className='columnScoreData'>{item.score} </span>
+            <span className='columnUserIDData'>{item.userID} </span>
+          </p>
+        )}
       </div>
     );
   }
 }
- 
+
 export default Table;
