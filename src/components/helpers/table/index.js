@@ -5,19 +5,20 @@ class Table extends React.Component {
   render() {
     let { item, type } = this.props;
     let itemName = type === 'league' ? item.leagueName : item.groupName;
+    let username = type === 'scores' ? item.userID.username : null;
     return (
       <div className='tableRow'>
         {util.renderIf(type !== 'scores',
           <p>
-            <span className='columnNameData'>{itemName} </span>
-            <span className='columnCreatorData'>{item.ownerName} </span>
-            <span className='columnSizeData'>{item.size} </span>
+            <span className='columnNameData columnData'>{itemName} </span>
+            <span className='columnCreatorData columnData'>{item.ownerName} </span>
+            <span className='columnSizeData columnData'>{item.size} </span>
           </p>
         )}
         {util.renderIf(type === 'scores',
           <p>
-            <span className='columnScoreData'>{item.score} </span>
-            <span className='columnUserIDData'>{item.userID} </span>
+            <span className='columnUserData columnData'>{username} </span>
+            <span className='columnScoreData columnData'>{item.score} </span>
           </p>
         )}
       </div>
