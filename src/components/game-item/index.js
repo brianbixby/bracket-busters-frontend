@@ -17,37 +17,54 @@ class GameItem extends React.Component {
   
   render() {
     let { game } = this.props;
-    let homeTeamContentStyle = {
-      backgroundColor: game.homeTeam.color,
-    };
-    let awayTeamContentStyle = {
-      backgroundColor: game.awayTeam.color,
-    };
+    // let homeTeamContentStyle = {
+    //   backgroundColor: game.homeTeam.color,
+    // };
+    // let awayTeamContentStyle = {
+    //   backgroundColor: game.awayTeam.color,
+    // };
+    let gameDetailsStyle = {
+      background: `linear-gradient(to right, ${game.homeTeam.color}, ${game.awayTeam.color})`,
+    }
     return (
       <div className='container'>
-        <div className='eventDetails'>
-          <p className='gameNote'>
-            <span className='homeCity'>{game.homeTeam.teamCity} </span>
-            <span className='vs'>vs</span>
-            <span className='awayCity'>{game.awayTeam.teamCity}</span>
+        <div className='eventDetails gameDetails' style={gameDetailsStyle}>
+          <p className='eventNote'> 
+            {game.homeTeam.teamCity} vs {game.awayTeam.teamCity}
           </p>
         </div>
         <div className='gameContent'>
-          <div className='homeTeamContent' onClick={this.homeTeamPick} style={homeTeamContentStyle}>
-            <div className='teamInfo'>
-              <p className='homeTeamName'>{game.homeTeam.teamName}</p>
-              <p className='homeTeamRecord'>{game.homeTeam.wins} - {game.homeTeam.losses}</p>
+          <div className='homeTeamContent' onClick={this.homeTeamPick}>
+            <div className='teamContainer'>
+              <div className='teamContentWrapper'>
+                <div className='teamInfo'>
+                  <div className='teamInfoWrapper'>
+                    <p className='homeTeamName'>{game.homeTeam.teamName}</p>
+                    <p className='homeTeamRecord'><span>{game.homeTeam.wins} - {game.homeTeam.losses}</span></p>
+                  </div>
+                </div>
+                <div className='gameLogoWrapper'>
+                  <img className='homeTeamLogo gameLogo' src={game.homeTeam.image} />
+                </div>
+              </div>
             </div>
-            <img className='homeTeamLogo gameLogo' src={game.homeTeam.image} />
           </div>
           <div className='gameDate'>
             <p className='gameDateP'>{new Date(game.dateTime).toDateString()}</p>
           </div>
-          <div className='awayTeamContent' onClick={this.awayTeamPick} style={awayTeamContentStyle}>
-            <img className='awayTeamLogo gameLogo' src={game.awayTeam.image} />
-            <div className='teamInfo'>
-              <p className='awayTeamName'>{game.awayTeam.teamName}</p>
-              <p className='awayTeamRecord'>{game.awayTeam.wins} - {game.awayTeam.losses}</p>
+          <div className='awayTeamContent' onClick={this.awayTeamPick}>
+            <div className='teamContainer'>
+              <div className='teamContentWrapper'>
+                <div className='gameLogoWrapper'>
+                  <img className='awayTeamLogo gameLogo' src={game.awayTeam.image} />
+                </div>
+                <div className='teamInfo'>
+                  <div className='teamInfoWrapper'>
+                    <p className='awayTeamName'>{game.awayTeam.teamName}</p>
+                    <p className='awayTeamRecord'><span>{game.awayTeam.wins} - {game.awayTeam.losses}</span></p>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         </div>

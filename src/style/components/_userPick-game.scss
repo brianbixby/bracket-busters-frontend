@@ -5,28 +5,87 @@
   .container {
     overflow: hidden;
     box-shadow: 0 1px 4px rgba(0, 0, 0, 0.24);
-
-    .gameContent {
-      position: relative;
-
-      .homeTeamContent, .awayTeamContent {
-        display: inline-block;
-        width: 50%;
-        cursor: pointer;
-
-        .teamInfo {
-          display: inline-block;
-        }
-      }
-      .gameDate {
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        -webkit-transform: translate(-50%, -50%);
-        -ms-transform: translate(-50%, -50%);
-        transform: translate(-50%, -50%);
-      }
-    }
   }
 } 
-
+.gameContent {
+  position: relative;
+  height: 67px;
+}
+.homeTeamContent, .awayTeamContent {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -moz-flex;
+  display: -ms-flexbox;
+  display: flex;
+  height: 67px;
+  position: relative;
+  overflow: hidden;
+  width: 50%;
+  float: left;
+  cursor: pointer;
+}
+.teamContentWrapper {
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  -webkit-align-items: center;
+  -moz-align-items: center;
+  align-items: center;
+  height: auto;
+  width: 100%;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -moz-flex;
+  display: -ms-flexbox;
+  display: flex;
+}
+.gameDate {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  -webkit-transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+  z-index: 2;
+}
+.teamContainer {
+  width: 100%;
+}
+.teamContentWrapper {
+  height: 67px;
+  padding: 12px 20px;
+}
+.homeTeamName, .awayTeamName {
+  color: #1d1e1f;
+  font-weight: 600;
+  line-height: 1.3;
+  font-size: 16px;
+  text-align: right;
+}
+.homeTeamRecord, .awayTeamRecord {
+  text-align: right;
+  color: #cbccce;
+  font-size: 10px;
+  padding-top: 2px;
+}
+.gameLogoWrapper {
+  padding: 0 6px;
+  text-align: center;
+}
+.gameDateP{
+  color: #48494a;
+  font-size: 12px;
+  line-height: 1;
+  padding: 2px 0;
+  font-weight: 600;
+}
+.teamInfo {
+  width: 80px;
+}
+.awayTeamContent {
+  .teamContentWrapper {
+    justify-content: flex-end;
+  }
+}
+.awayTeamName, .awayTeamRecord {
+  text-align: left;
+}

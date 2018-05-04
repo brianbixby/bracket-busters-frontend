@@ -1,53 +1,5 @@
 @import './../lib/vars'; 
 
-.button {
-  cursor: pointer;
-  padding: $pad;
-  border-radius: $border-radius;
-  background-color: $color-primary;
-  color: #FFF;
-  border-width: 0px;
-  box-shadow: 0 1px 1px 0 rgba(0,0,0,0.3);
-}
-.button:hover {
-  background-color: $color-primary-hover;
-}
-.create-button {
-  color: #FFF;
-  margin-top: 1rem;
-  width:100%;
-  display: block;
-  text-align: center;
-  display: block;
-  text-align: center;
-  justify-content: center;
-  height: 50px;
-  letter-spacing: 1px;
-  padding: 10px;
-  background: #000;
-  font-size: 20px;
-  line-height: 1;
-}
-a.create-button {
-  font-size: 22px;
-  line-height: 30px;
-  font-weight: 700;
-}
-.create-button:hover {
-  background: rgba(0,0,0,.7);
-}
-@media only screen and (min-width: 751px) {
-  .create-button {
-    font-size: 30px !important;
-    position: inherit !important;
-    width: 100%;
-    height: auto;
-    padding: 10px;
-  }
-  a.create-button {
-    font-size: 32px !important;
-  }  
-}
 .b-button {
   line-height: 1;
   padding: 13px 0;
@@ -71,9 +23,6 @@ a.create-button {
   border-width: 2px;
   font-weight: 900;
 }
-.ml20 {
-  margin-left: 20px;
-}
 .dark-button {
   color: #4A4A4A;
   border-color: #4A4A4A;
@@ -85,6 +34,9 @@ a.create-button {
   background: #4A4A4A;
   color: #FFF;
   font-weight: 500;
+}
+.ml20 {
+  margin-left: 20px;
 }
 .textRight {
   text-align: right;
