@@ -8,7 +8,7 @@ import { scoreBoardsFetchRequest, topScoresFetchRequest } from '../../actions/sc
 import { sportingEventsFetchRequest } from '../../actions/sportingEvent-actions.js';
 import UserPickContainer from '../user-pick-container';
 import MessageBoardContainer from '../message-board-container';
-import LeagueItemScoreBoard from '../league-item-scoreboard';
+import Table from '../helpers/table';
 import * as util from '../../lib/util.js';
 
 class LeagueContainer extends React.Component {
@@ -28,19 +28,27 @@ class LeagueContainer extends React.Component {
   }
 
   render(){
+    let scoreBoards = 'scores';
     return (
       <div className='leagueItem-container page-outer-div'>
-      <div className='grid-container'>
-        <UserPickContainer sportingEventID={this.props.currentLeague.sportingEventID} leagueID={this.props.currentLeague._id} />
-        <MessageBoardContainer mBoardId={this.props.currentMessageBoard._id}/>
-        <div className='scoreBoardOuter'>
-          <p> ScoreBoard</p>
-          {this.props.scoreBoards.map(scoreBoard =>
-            <div key={scoreBoard._id}>
-              <LeagueItemScoreBoard  scoreBoard={scoreBoard} />
+        <div className='grid-container'>
+          <UserPickContainer sportingEventID={this.props.currentLeague.sportingEventID} leagueID={this.props.currentLeague._id} />
+          <MessageBoardContainer mBoardId={this.props.currentMessageBoard._id}/>
+          <div className='container'>
+            <div>
+              <p className='tableHeadline'>LEADERBOARD</p>
+              <div className='tableColumnDiv'>
+                <p className='tableColumn columnUser'> USER NAME </p>
+                <p className='tableColumn columnScore'> SCORE </p>
+              </div>
             </div>
-          )}
-        </div>
+            {this.props.scoreBoards.map(scoreBoard => {
+              return <div className='rowColors' key={scoreBoard._id}>
+                <Table item={scoreBoard} type={scoreBoards} />
+              </div>
+            })}
+            <div className='spacerRow'> </div>
+          </div>
         </div>
       </div>
     );

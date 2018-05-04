@@ -25,6 +25,7 @@ export const topScoresFetchRequest = sportingeventID => (dispatch, getState) => 
   return superagent.get(`${__API_URL__}/api/scoreboards/sportingevent/${sportingeventID}`)
     .set('Authorization', `Bearer ${userAuth}`)
     .then(res => {
+      console.log('res.body: ', res.body);
       dispatch(topScoresFetch(res.body));
       return res.body;
     });

@@ -1,4 +1,3 @@
-import './_user-pick-container.scss';
 import React from 'react';
 import { connect } from 'react-redux';
 import UserPickItem from '../user-pick-item';
@@ -36,7 +35,7 @@ class UserPickContainer extends React.Component {
 
   render(){
     return (
-      <div className='userPick-container'>
+      <div className='userPick-game-container'>
         <div className='userPicksDiv'>
           <p> My Picks</p>
           {this.props.userPicks.map((userPick, idx) =>

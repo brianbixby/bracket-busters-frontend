@@ -1,0 +1,45 @@
+// keep
+@import './../lib/vars'; 
+
+.tableHeadline {
+  font-weight: 900;
+  text-transform: uppercase;
+  color: #4A4A4A;
+  font-size: 30px;
+  text-align: center;
+  margin: 0 12px 20px;
+  padding: 20px 0 12px;
+}
+.tableColumn {
+  color: #9B9B9B;
+  font-weight: 500;
+  display: inline-block;
+  text-transform: uppercase;
+  text-align: center;
+  padding: 8px 0;
+  font-size: 15px;
+}
+.columnUser, .columnUserData {
+  width: 70%;
+}
+.columnScore, .columnScoreData {
+  width: 30%;
+}
+.columnName, .columnNameData, .columnCreator, .columnCreatorData {
+  width: 35%;
+}
+.columnSize, .columnSizeData {
+  width: 30%;
+}
+.columnData {
+  text-align: center;
+  padding-top: 20px;
+  padding-bottom: 20px;
+  text-transform: uppercase;
+  display: inline-block;
+  box-sizing: border-box;
+  text-align: center;
+}
+.cursor {
+  cursor: pointer;
+}
