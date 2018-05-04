@@ -17,16 +17,39 @@ class GameItem extends React.Component {
   
   render() {
     let { game } = this.props;
+    let homeTeamContentStyle = {
+      backgroundColor: game.homeTeam.color,
+    };
+    let awayTeamContentStyle = {
+      backgroundColor: game.awayTeam.color,
+    };
     return (
-      <div className='gameItem'>
-        <div className='awayTeamDiv'>
-          <button className='teamName teamNameButton' onClick={this.awayTeamPick}>{game.awayTeam.teamName}</button>
-          <p className='teamRecord'>{game.awayTeam.wins} - {game.awayTeam.losses}</p>
+      <div className='container'>
+        <div className='eventDetails'>
+          <p className='gameNote'>
+            <span className='homeCity'>{game.homeTeam.teamCity} </span>
+            <span className='vs'>vs</span>
+            <span className='awayCity'>{game.awayTeam.teamCity}</span>
+          </p>
         </div>
-        <span className='game-dateTime'>{new Date(game.dateTime).toDateString()}</span> 
-        <div className='homeTeamDiv' >
-          <button className='teamName teamNameButton' onClick={this.homeTeamPick}>{game.homeTeam.teamName}</button>
-          <p className='teamRecord'>{game.homeTeam.wins} - {game.homeTeam.losses}</p>
+        <div className='gameContent'>
+          <div className='homeTeamContent' onClick={this.homeTeamPick} style={homeTeamContentStyle}>
+            <div className='teamInfo'>
+              <p className='homeTeamName'>{game.homeTeam.teamName}</p>
+              <p className='homeTeamRecord'>{game.homeTeam.wins} - {game.homeTeam.losses}</p>
+            </div>
+            <img className='homeTeamLogo gameLogo' src={game.homeTeam.image} />
+          </div>
+          <div className='gameDate'>
+            <p className='gameDateP'>{new Date(game.dateTime).toDateString()}</p>
+          </div>
+          <div className='awayTeamContent' onClick={this.awayTeamPick} style={awayTeamContentStyle}>
+            <img className='awayTeamLogo gameLogo' src={game.awayTeam.image} />
+            <div className='teamInfo'>
+              <p className='awayTeamName'>{game.awayTeam.teamName}</p>
+              <p className='awayTeamRecord'>{game.awayTeam.wins} - {game.awayTeam.losses}</p>
+            </div>
+          </div>
         </div>
       </div>
     );

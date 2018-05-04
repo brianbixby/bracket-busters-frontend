@@ -61,7 +61,7 @@ class UserPickItem extends React.Component {
           )}
           <p className='teamRecord'>{this.state.homeTeamWins} - {this.state.homeTeamLosses}</p>
 
-          <p className='editingButton' onClick={this.handleEdit}><i class="fa fa-edit"></i></p>
+          <p className='editingButton' onClick={this.handleEdit}><i className="fa fa-edit"></i></p>
         </div>
       </div>
     );

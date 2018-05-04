@@ -1,3 +1,6 @@
+// keep
+@import './../lib/vars'; 
+
 .tableHeadline {
   font-weight: 900;
   text-transform: uppercase;
@@ -36,4 +39,7 @@
   display: inline-block;
   box-sizing: border-box;
   text-align: center;
+}
+.cursor {
+  cursor: pointer;
 }

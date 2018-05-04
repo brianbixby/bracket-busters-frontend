@@ -58,7 +58,7 @@ class NewCreateSection extends React.Component {
           </div>
         </div>
 
-        <NewJoinSection joinType={this.props.joinType}/>
+        <NewJoinSection joinType={this.props.joinType} handleRedirect={this.props.handleRedirect}/>
 
         {util.renderIf(this.props.joinedItems.length > 0,
           <div className='container'>

@@ -6,9 +6,7 @@ class NewJoinSection extends React.Component {
     super(props);
   }
 
-  handleRedirect = () => {
-    window.location = `/${this.props.joinType}s`;
-  };
+  redirect = () => this.props.handleRedirect(`/${this.props.joinType}s`);
 
   render() {
     let russ = require('./../assets/russ.png');
@@ -16,7 +14,7 @@ class NewJoinSection extends React.Component {
 
     return (
       <div className='joinOuter'>
-        <div className='joinWrapper' onClick={this.handleRedirect}>
+        <div className='joinWrapper' onClick={this.redirect}>
           <div className='joinTextDiv'>
             <div>
               <p className='joinTextTitle'>

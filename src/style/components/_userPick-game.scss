@@ -1,0 +1,32 @@
+// keep
+@import './../lib/vars'; 
+
+.userPick-game-container {
+  .container {
+    overflow: hidden;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.24);
+
+    .gameContent {
+      position: relative;
+
+      .homeTeamContent, .awayTeamContent {
+        display: inline-block;
+        width: 50%;
+        cursor: pointer;
+
+        .teamInfo {
+          display: inline-block;
+        }
+      }
+      .gameDate {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        -webkit-transform: translate(-50%, -50%);
+        -ms-transform: translate(-50%, -50%);
+        transform: translate(-50%, -50%);
+      }
+    }
+  }
+} 
+
