@@ -17,12 +17,6 @@ class GameItem extends React.Component {
   
   render() {
     let { game } = this.props;
-    // let homeTeamContentStyle = {
-    //   backgroundColor: game.homeTeam.color,
-    // };
-    // let awayTeamContentStyle = {
-    //   backgroundColor: game.awayTeam.color,
-    // };
     let gameDetailsStyle = {
       background: `linear-gradient(to right, ${game.homeTeam.color}, ${game.awayTeam.color})`,
     }
@@ -62,6 +56,46 @@ class GameItem extends React.Component {
                   <div className='teamInfoWrapper'>
                     <p className='awayTeamName'>{game.awayTeam.teamName}</p>
                     <p className='awayTeamRecord'><span>{game.awayTeam.wins} - {game.awayTeam.losses}</span></p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div className='createMain'>
+          <div className='createMainWrapper playerDiv'>
+            <div className='createImgDiv'>
+              <div className='starPlayerImageDiv homeStarPlayerImageDiv'>
+                <div className='starPlayerImageDivWrapper'>
+                  <div className='starPlayerImageDivInnerWrapper'>
+                    <div className='playerCardOuter'>
+                      <div className='playerCardImageWrapper'>
+                        <img className='starPlayerImages' src={game.homeTeam.starPlayerImage}/>
+                      </div>
+                      <div className='playerCardContentBorderTop'></div>
+                      <div className='playerCardNameWrapper'>
+                        <p className='starPlayerName'>{game.homeTeam.starPlayer}</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div className='vsDiv'>
+                <p className='vs'>vs</p>
+              </div>
+              <div className='starPlayerImageDiv awayStarPlayerImageDiv'>
+                <div className='starPlayerImageDivWrapper'>
+                  <div className='starPlayerImageDivInnerWrapper'>
+                    <div className='playerCardOuter'>
+                      <div className='playerCardImageWrapper'>
+                        <img className='starPlayerImages' src={game.awayTeam.starPlayerImage}/>
+                      </div>
+                      <div className='playerCardContentBorderTop'></div>
+                      <div className='playerCardNameWrapper'>
+                        <p className='starPlayerName'>{game.awayTeam.starPlayer}</p>
+                      </div>
+                    </div>
                   </div>
                 </div>
               </div>

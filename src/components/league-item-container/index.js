@@ -32,8 +32,10 @@ class LeagueContainer extends React.Component {
     return (
       <div className='leagueItem-container page-outer-div'>
         <div className='grid-container'>
-          <UserPickContainer sportingEventID={this.props.currentLeague.sportingEventID} leagueID={this.props.currentLeague._id} />
-          <MessageBoardContainer mBoardId={this.props.currentMessageBoard._id}/>
+          <div className='col-lg-8'>
+            <UserPickContainer sportingEventID={this.props.currentLeague.sportingEventID} leagueID={this.props.currentLeague._id} />
+            <MessageBoardContainer mBoardId={this.props.currentMessageBoard._id}/>
+          </div>
           <div className='container'>
             <div>
               <p className='tableHeadline'>LEADERBOARD</p>
