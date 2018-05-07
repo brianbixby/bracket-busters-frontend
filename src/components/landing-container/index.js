@@ -8,9 +8,7 @@ import GroupForm from '../group-form';
 import ProfileForm from '../profile-form';
 import Modal from '../helpers/modal';
 import CreateSection from '../helpers/createSection';
-import NewCreateSection from '../helpers/newCreate';
 import JoinSection from '../helpers/joinSection';
-import NewJoinSection from '../helpers/newJoin';
 import Slider from '../helpers/slider';
 import Table from '../helpers/table';
 import { tokenSignInRequest } from '../../actions/userAuth-actions.js';
@@ -123,7 +121,7 @@ class LandingContainer extends React.Component {
             <div>
               <div className='row'>
                 <div className='col-lg-7'>
-                  <NewCreateSection joinType={formTypeLeague} formType={formTypeLeague} joinedItems={this.props.leagues} handleRedirect={this.handleRedirect} handlejoinedItemClick={this.onLeagueClick}  handleCreate={() => this.setState({ leagueFormDisplay: true })}/>
+                  <CreateSection joinType={formTypeLeague} formType={formTypeLeague} joinedItems={this.props.leagues} handleRedirect={this.handleRedirect} handlejoinedItemClick={this.onLeagueClick}  handleCreate={() => this.setState({ leagueFormDisplay: true })}/>
                 </div>
                 <div className='col-lg-5'>
                   {util.renderIf(this.props.topPublicLeagues.length > 0,
@@ -166,7 +164,7 @@ class LandingContainer extends React.Component {
               </div>
               <div className='row'>
                 <div className='col-lg-7'>
-                  <NewCreateSection joinType={formTypeGroup} formType={formTypeGroup} joinedItems={this.props.groups} handleRedirect={this.handleRedirect} handlejoinedItemClick={this.onGroupClick}  handleCreate={() => this.setState({ groupFormDisplay: true })}/>
+                  <CreateSection joinType={formTypeGroup} formType={formTypeGroup} joinedItems={this.props.groups} handleRedirect={this.handleRedirect} handlejoinedItemClick={this.onGroupClick}  handleCreate={() => this.setState({ groupFormDisplay: true })}/>
                 </div>
                 {util.renderIf(this.props.topPublicGroups.length > 0,
                   <div className='col-lg-5'>
