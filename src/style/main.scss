@@ -1,5 +1,5 @@
 @import url('https://fonts.googleapis.com/css?family=Lato:100,200,300,400,500,700|Roboto:200,300,400,700|Oswald:400,700');
-@import "../../node_modules/font-awesome/scss/font-awesome.scss";
+@import '../../node_modules/font-awesome/scss/font-awesome.scss';
 
 @import './lib/mixins'; 
 @import './lib/vars';
@@ -25,3 +25,4 @@
 @import './components/create';
 @import './components/join';
 @import './components/userPick-game';
+@import './components/checkmark';

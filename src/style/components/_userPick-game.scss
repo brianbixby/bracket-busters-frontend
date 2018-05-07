@@ -108,27 +108,18 @@
 .playerDiv {
   padding: 15px 0;
 }
-.playerCardItem {
-  height: auto;
-}
-.playerCardContentWrapper {
-  padding: 0;
-}
 .playerCardContentBorderTop {
   background-image: linear-gradient(to right, rgba(252, 255, 200, 0) 0%, rgba(252, 255, 200, 0.48) 50%, rgba(252, 255, 200, 0) 100%);
   height: 3px;
-  // -webkit-box-direction: normal;
   background-color: #06143F;
 }
-
-
-// 
 .playerCardOuter {
   border-radius: 10px;
   box-shadow: 0 1px 4px rgba(0, 0, 0, 0.16);
   display: inline-block;
   overflow: hidden;
   width: 35vw;
+  cursor: pointer;
 }
 .playerCardImageWrapper {
   background: #e1e1e1;
@@ -143,7 +134,7 @@
   font-family: 'Roboto';
   margin: 15px 0;
 }
-.gamesDiv .createMainWrapper {
+.gamesDiv .createMainWrapper, .userPicksDiv .createMainWrapper{
   box-shadow: none;
 }
 @media only screen and (max-width: 413px) {
@@ -167,4 +158,25 @@
   .playerCardOuter {
     width: 273px;
   }
+}
+.gamePick {
+  vertical-align: super;
+  color: #1d1e1f;
+  font-weight: 600;
+  font-size: 16px;
+  margin-right: 10px;
+}
+.userPick-game-container .fadeout {
+  -webkit-animation: fadeOut 1s forwards;
+  animation: fadeOut 1s forwards;
+  -webkit-animation-delay: 1.5s;
+  animation-delay: 1.5s;
+}
+@-webkit-keyframes fadeOut {
+  from {opacity: 1;}
+  to {opacity: 0;}
+}
+@keyframes fadeOut {
+  from {opacity: 1;}
+  to {opacity: 0;}
 }
