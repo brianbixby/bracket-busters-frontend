@@ -1,6 +1,11 @@
 // keep
 @import './../lib/vars'; 
 
+.checkmarkDiv {
+  text-align: right;
+  margin: 0 20px 12px 0;
+  position: relative;
+}
 .checkmark__circle {
   stroke-dasharray: 166;
   stroke-dashoffset: 166;
@@ -19,7 +24,8 @@
   stroke-miterlimit: 10;
   box-shadow: inset 0px 0px 0px #FF001F;
   animation: fill .4s ease-in-out .4s forwards, scale .3s ease-in-out .9s both;
-  display: inline-block;
+  position: absolute;
+  right: 20px;
 }
 .checkmark__check {
   transform-origin: 50% 50%;
@@ -44,8 +50,4 @@
   100% {
     box-shadow: inset 0px 0px 0px 30px #FF001F;
   }
-}
-.checkmarkDiv {
-  text-align: right;
-  margin: 0 20px 12px 0;
 }

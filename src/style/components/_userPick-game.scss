@@ -1,6 +1,7 @@
 // keep
 @import './../lib/vars'; 
 
+// games
 .userPick-game-container {
   .container {
     overflow: hidden;
@@ -137,6 +138,56 @@
 .gamesDiv .createMainWrapper, .userPicksDiv .createMainWrapper{
   box-shadow: none;
 }
+.gamePick {
+  vertical-align: super;
+  color: #1d1e1f;
+  font-weight: 600;
+  font-size: 16px;
+  margin-right: 60px;
+  display: inline-block;
+  line-height: 30px;
+}
+.userPick-game-container .fadeout {
+  -webkit-animation: fadeOut 1s forwards;
+  animation: fadeOut 1s forwards;
+  -webkit-animation-delay: 1.5s;
+  animation-delay: 1.5s;
+}
+@-webkit-keyframes fadeOut {
+  from {opacity: 1;}
+  to {opacity: 0;}
+}
+@keyframes fadeOut {
+  from {opacity: 1;}
+  to {opacity: 0;}
+}
+// picks
+.userPicksDiv .fa-edit {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  -webkit-transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+  margin-left: 1px;
+  margin-top: 1px;
+  color: #FFF;
+}
+.circle {
+  display: inline-block;
+  background: #FF001F;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  position: relative;
+  margin-right: 10px;
+}
+.circle:hover {
+  background: rgba(255,0,31,.7);
+}
+.userPicksDiv .gamePick {
+  margin-right: 10px;
+}
 @media only screen and (max-width: 413px) {
   .createMain .playerDiv {
     margin: 0;
@@ -158,25 +209,4 @@
   .playerCardOuter {
     width: 273px;
   }
-}
-.gamePick {
-  vertical-align: super;
-  color: #1d1e1f;
-  font-weight: 600;
-  font-size: 16px;
-  margin-right: 10px;
-}
-.userPick-game-container .fadeout {
-  -webkit-animation: fadeOut 1s forwards;
-  animation: fadeOut 1s forwards;
-  -webkit-animation-delay: 1.5s;
-  animation-delay: 1.5s;
-}
-@-webkit-keyframes fadeOut {
-  from {opacity: 1;}
-  to {opacity: 0;}
-}
-@keyframes fadeOut {
-  from {opacity: 1;}
-  to {opacity: 0;}
 }

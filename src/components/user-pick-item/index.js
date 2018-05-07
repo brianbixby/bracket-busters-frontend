@@ -169,8 +169,13 @@ class UserPickItem extends React.Component {
         </div>
       </div>
     </div>
-    <p className='editingButton' onClick={this.handleEdit}><i className="fa fa-edit"></i></p>
-    <p className='currentPick'>current pick {currentPick}</p>
+  </div>
+  <div className='checkmarkDiv'>
+    <p className='gamePick'>current pick: {currentPick}</p>
+    <p className='circle' onClick={this.handleEdit}><i className="fa fa-edit"></i></p>
+    {/* {util.renderIf(this.state.pick,
+      <svg className="checkmark" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 52 52"><circle className="checkmark__circle" cx="26" cy="26" r="25" fill="none"/><path className="checkmark__check" fill="none" d="M14.1 27.2l7.1 7.2 16.7-16.8"/></svg>
+    )} */}
   </div>
 </div>
     );
