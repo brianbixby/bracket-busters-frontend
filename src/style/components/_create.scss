@@ -161,6 +161,11 @@
   text-align: center;
   margin: auto;
 }
+.landing-page .createOuter{
+  max-width: 660px;
+  margin-right: auto;
+  margin-left: auto;
+}
 @media only screen and (min-width: 768px) {
   .createOuter{
     box-shadow: none;

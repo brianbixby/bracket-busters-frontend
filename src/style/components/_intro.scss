@@ -6,7 +6,7 @@
   color: #4A4A4A;
   font-size: 48px;
   line-height: 1;
-  padding: 0 0 10px;
+  padding: 20px 0 0;
 }
 .banner-image {
   position: relative;
@@ -76,11 +76,11 @@
 .intro {
   background: #FFF !important;
 }
-@media only screen and (min-width: 768px) {
-  .headline {
-    padding: 30px 0 20px;
-  }
-}
+// @media only screen and (min-width: 768px) {
+//   .headline {
+//     padding: 30px 0 20px;
+//   }
+// }
 .introFooter {
   display: none;
 }

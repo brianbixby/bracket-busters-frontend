@@ -59,7 +59,7 @@ button, a, .modal-close, form input {
 button:focus, a:focus, {
   outline: none;
 }
-button a {
+button, a {
   cursor: pointer !important;
 }
 @media only screen and (min-width: 371px) {

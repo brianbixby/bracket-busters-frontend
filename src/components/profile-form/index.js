@@ -27,6 +27,7 @@ class ProfileForm extends React.Component {
   }
 
   render() {
+    let dateClass = !this.state.birthdate ? 'grayDate' : '';
     return (
       <section className='profile-form'>
         <form className='form' onSubmit={this.handleSubmit}>
@@ -47,10 +48,6 @@ class ProfileForm extends React.Component {
             placeholder="img url"
             value={this.state.image || ''}
             name="image"
-            onChange={this.handleChange}/>
-          <input 
-            type="date"
-            name="birthdate"
             onChange={this.handleChange}/>
           <p className='textRight'><button className='red-button b-button' type="submit">Submit</button></p>
         </form>  
