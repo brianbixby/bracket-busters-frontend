@@ -25,7 +25,7 @@
   box-shadow: inset 0px 0px 0px #FF001F;
   animation: fill .4s ease-in-out .4s forwards, scale .3s ease-in-out .9s both;
   position: absolute;
-  right: 20px;
+  right: 10px;
 }
 .checkmark__check {
   transform-origin: 50% 50%;
@@ -49,5 +49,14 @@
 @keyframes fill {
   100% {
     box-shadow: inset 0px 0px 0px 30px #FF001F;
+  }
+}
+@media only screen and (max-width: 450px) {
+  .checkmarkDiv{
+    margin-right: 0;
+  }
+  .checkmark {
+    right: 10px;
+    top: -5px;
   }
 }
