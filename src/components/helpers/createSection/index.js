@@ -8,15 +8,22 @@ import Table from './../table';
 import * as util from './../../../lib/util.js';
 
 class CreateSection extends React.Component {
+  constructor(props){
+    super(props);
+  }
+
+  redirect = () => this.props.handleRedirect(`/${this.props.formType}s`);
+
   render() {
     let createleague = require('./../assets/createleague.jpeg');
     let creategroup = require('./../assets/creategroup.jpeg');
+    let nbalogo = require('./../assets/nba-logo.png');
 
     return (
       // <div className='createOuter'>
       <div>
-        <div className='createOuterInner' onClick={this.props.handleCreate}>
-          <div className='createHeader'>
+        <div className='createOuterInner'>
+          {/* <div className='createHeader'>
             <div className='eventDetails'>
               {util.renderIf(this.props.formType === 'league',
                 <p className='eventNote'>2018 NBA PLAYOFFS</p>
@@ -33,9 +40,31 @@ class CreateSection extends React.Component {
                 <p className='contentHeader'>GROUP contentHeader</p>
               )}
             </div>
-          </div>
+          </div> */}
+          {util.renderIf(this.props.formType === 'league',
+            <div className='outer'>
+              <div className='outerLeft'>
+                <img src={nbalogo} />
+                <p className='headerText'>2018 NBA PLAYOFFS </p>
+              </div>
+              <div className='outerRight'>
+                <p className='seeAll' onClick={this.redirect}>all {this.props.formType}s</p>
+              </div>
+            </div>
+          )}
+          {util.renderIf(this.props.formType === 'group',
+            <div className='outer'>
+              <div className='outerLeft'>
+                <i className="fa fa-users"></i>
+                <p className='headerText'>GROUPS </p>
+              </div>
+              <div className='outerRight'>
+                <p className='seeAll' onClick={this.redirect}>all {this.props.formType}s</p>
+              </div>
+            </div>
+          )}
           <div className='createMain'>
-            <div className='createMainWrapper'>
+            <div className='createMainWrapper' onClick={this.redirect}>
               <div className='createMainContent'>
                 <div className='createMainBorder'></div>
                 <div>

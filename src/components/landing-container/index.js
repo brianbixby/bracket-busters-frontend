@@ -127,7 +127,7 @@ class LandingContainer extends React.Component {
                   <div className='leagueBoardsContainer'>
                   <div className='leaguesContainerHeader'>
                     <img className='leaguesBoardIcon' src={basketball} />
-                    <p className='leaguesBoardHeader'>NBA LEAGUES</p>
+                    <p className='leaguesBoardHeader'>LEAGUES</p>
                   </div>
                   <div className='tablesContainer'>
                   {util.renderIf(this.props.topPublicLeagues.length > 0,
@@ -177,7 +177,7 @@ class LandingContainer extends React.Component {
                 <div className={this.props.leagues.length > 0 ? 'marginTopL57 col-md-4 col-lg-5' : 'col-md-4 col-lg-5'}>
                 <div className='leagueBoardsContainer'>
                   <div className='leaguesContainerHeader'>
-                    <img className='leaguesBoardIcon' src={basketball} />
+                    <i className="fa fa-users"></i>
                     <p className='leaguesBoardHeader'>FEATURED GROUPS</p>
                   </div>
                   {util.renderIf(this.props.topPublicGroups.length > 0,
