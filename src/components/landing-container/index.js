@@ -184,7 +184,7 @@ class LandingContainer extends React.Component {
                     <div className='container tableContainer'>
                       <div>
                         <p className='tableHeadline hideMed'>FEATURED GROUPS</p>
-                        <div className='tableColumnDiv'>
+                        <div className='tableColumnDiv groupTableColumnDiv'>
                           <p className='tableColumn columnName'> GROUP NAME </p>
                           <p className='tableColumn columnCreator'> CREATOR </p>
                           <p className='tableColumn columnSize'> SIZE </p>
@@ -192,7 +192,7 @@ class LandingContainer extends React.Component {
                       </div>
                       {this.props.topPublicGroups.map(topPublicGroup => {
                         let boundTopPublicGroupClick = this.handleBoundTopPublicGroupClick.bind(this, topPublicGroup);
-                        return <div className='rowColors cursor' key={topPublicGroup._id} onClick={boundTopPublicGroupClick}>
+                        return <div className='rowColors cursor groupsTableContainer' key={topPublicGroup._id} onClick={boundTopPublicGroupClick}>
                           <Table item={topPublicGroup} type={formTypeGroup} />
                         </div>
                       })}
