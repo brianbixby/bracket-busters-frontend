@@ -171,7 +171,7 @@ class GroupForm extends React.Component {
 
           </div>
 
-          <div>
+          <div className="radioPri">
             <input 
               type="radio"
               name="privacy" 

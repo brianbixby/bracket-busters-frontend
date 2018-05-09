@@ -31,6 +31,7 @@ class ProfileForm extends React.Component {
     return (
       <section className='profile-form'>
         <form className='form' onSubmit={this.handleSubmit}>
+          <h2 className='title'>create your profile.</h2>
           <input 
             type="text" 
             placeholder="State" 

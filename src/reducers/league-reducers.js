@@ -1,8 +1,8 @@
 import { checkAndAdd } from '../lib/util.js';
 
 let validateLeague = league => {
-  if(!league._id || !league.leagueName || !league.sportingEventID || !league.owner || !league.scoring || !league.poolSize || !league.privacy) {
-    throw new Error('VALIDATION ERROR: league requires a id, name, sportingeventid, owner, scoring, poolsize and privacy.');
+  if(!league._id || !league.leagueName || !league.sportingEventID || !league.owner || !league.privacy) {
+    throw new Error('VALIDATION ERROR: league requires a id, name, sportingeventid, owner and privacy.');
   }
 };
 

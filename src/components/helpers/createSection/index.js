@@ -64,7 +64,7 @@ class CreateSection extends React.Component {
             </div>
           )}
           <div className='createMain'>
-            <div className='createMainWrapper' onClick={this.redirect}>
+            <div className='createMainWrapper' onClick={this.props.handleCreate}>
               <div className='createMainContent'>
                 <div className='createMainBorder'></div>
                 <div>

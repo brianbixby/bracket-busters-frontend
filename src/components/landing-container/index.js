@@ -215,7 +215,7 @@ class LandingContainer extends React.Component {
                 </Modal>
               )}
               {util.renderIf(this.state.profileFormDisplay && this.props.userProfile && this.props.userProfile.lastLogin === this.props.userProfile.createdOn,
-                <Modal heading='Fill Out Your Profile' close={() => { this.setState({ profileFormDisplay: false }); this.handleProfileUpdate(this.props.userProfile); }}>
+                <Modal heading='Create Profile' close={() => { this.setState({ profileFormDisplay: false }); this.handleProfileUpdate(this.props.userProfile); }}>
                   <ProfileForm userProfile={this.props.userProfile} onComplete={this.handleProfileUpdate} />
                 </Modal>
               )}
