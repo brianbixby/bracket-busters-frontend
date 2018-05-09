@@ -8,6 +8,7 @@
   z-index: 101;
   border: none;
   background: #2b2c2d;
+  box-shadow: 0 4px 2px -2px rgba(0,0,0,0.3);
 
   .avatar{
     display: inline-block;
@@ -139,6 +140,7 @@
 }
 .introNavbar {
   background: #FFF;
+  box-shadow: none;
 
   .logo-text, .social-icons {
     color: #9B9B9B;

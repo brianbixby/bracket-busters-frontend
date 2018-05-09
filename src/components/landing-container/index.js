@@ -106,25 +106,32 @@ class LandingContainer extends React.Component {
     let handleComplete = params.userAuth === 'signin' ? this.handleSignin : this.handleSignup;
     let formTypeLeague = 'league';
     let formTypeGroup = 'group';
-    let topScores = 'scores'
+    let topScores = 'scores';
+    let basketball = require('./../helpers/assets/basketball.png');
     return (
       <section className='landing-page page-outer-div'>
-        
         {util.renderIf(!this.props.userAuth,
           <Intro />
         )}
-
-        <div className='grid-container'>
-          {util.renderIf(this.props.userAuth,
+        
+        {util.renderIf(this.props.userAuth,
+          <div className='grid-container'>
             <div>
               <div className='row'>
                 <div className='col-md-8 col-lg-7'>
-                  <CreateSection joinType={formTypeLeague} formType={formTypeLeague} joinedItems={this.props.leagues} handleRedirect={this.handleRedirect} handlejoinedItemClick={this.onLeagueClick}  handleCreate={() => this.setState({ leagueFormDisplay: true })}/>
-                  <CreateSection joinType={formTypeGroup} formType={formTypeGroup} joinedItems={this.props.groups} handleRedirect={this.handleRedirect} handlejoinedItemClick={this.onGroupClick}  handleCreate={() => this.setState({ groupFormDisplay: true })}/>
-                </div>
-                <div className='col-md-4 col-lg-5'>
+                  <div className='createOuter'>
+                    <CreateSection formType={formTypeLeague} joinedItems={this.props.leagues} handleRedirect={this.handleRedirect} handlejoinedItemClick={this.onLeagueClick}  handleCreate={() => this.setState({ leagueFormDisplay: true })}/>
+                  </div>
+                  </div>
+                  <div className='col-md-4 col-lg-5'>
+                  <div className='leagueBoardsContainer'>
+                  <div className='leaguesContainerHeader'>
+                    <img className='leaguesBoardIcon' src={basketball} />
+                    <p className='leaguesBoardHeader'>NBA LEAGUES</p>
+                  </div>
+                  <div className='tablesContainer'>
                   {util.renderIf(this.props.topPublicLeagues.length > 0,
-                    <div className='container tableContainer'>
+                    <div className='container tableContainer leagueBoards'>
                       <div>
                         <p className='tableHeadline'>FEATURED LEAGUES</p>
                         <div className='tableColumnDiv'>
@@ -143,7 +150,7 @@ class LandingContainer extends React.Component {
                     </div>
                   )}
                   {util.renderIf(this.props.topScores.length > 0,
-                    <div className='container tableContainer'>
+                    <div className='container tableContainer leagueBoards'>
                       <div>
                         <p className='tableHeadline'>LEADERBOARD</p>
                         <div className='tableColumnDiv'>
@@ -159,10 +166,24 @@ class LandingContainer extends React.Component {
                       <div className='spacerRow'> </div>
                     </div>
                   )}
+                  </div>
+                  </div>
+                  </div>
+                  <div className={this.props.leagues.length < 1 ? 'marginTopLarge col-md-8 col-lg-7' : 'col-md-8 col-lg-7'}>
+                  <div className='createOuter'>
+                    <CreateSection formType={formTypeGroup} joinedItems={this.props.groups} handleRedirect={this.handleRedirect} handlejoinedItemClick={this.onGroupClick}  handleCreate={() => this.setState({ groupFormDisplay: true })}/>
+                  </div>
+                </div>
+                <div className={this.props.leagues.length > 0 ? 'marginTopL57 col-md-4 col-lg-5' : 'col-md-4 col-lg-5'}>
+                <div className='leagueBoardsContainer'>
+                  <div className='leaguesContainerHeader'>
+                    <img className='leaguesBoardIcon' src={basketball} />
+                    <p className='leaguesBoardHeader'>FEATURED GROUPS</p>
+                  </div>
                   {util.renderIf(this.props.topPublicGroups.length > 0,
                     <div className='container tableContainer'>
                       <div>
-                        <p className='tableHeadline'>FEATURED GROUPS</p>
+                        <p className='tableHeadline hideMed'>FEATURED GROUPS</p>
                         <div className='tableColumnDiv'>
                           <p className='tableColumn columnName'> GROUP NAME </p>
                           <p className='tableColumn columnCreator'> CREATOR </p>
@@ -178,6 +199,7 @@ class LandingContainer extends React.Component {
                       <div className='spacerRow'></div>
                     </div>
                   )}
+                  </div>
                 </div>
               </div>
               {util.renderIf(this.state.leagueFormDisplay,
@@ -198,11 +220,12 @@ class LandingContainer extends React.Component {
                 </Modal>
               )}
             </div>
-          )}
-          {util.renderIf(this.props.groups.length > 0,
-            <div className='spacer'></div>
-          )}
-        </div>
+          
+            {util.renderIf(this.props.groups.length > 0,
+              <div className='spacer'></div>
+            )}
+          </div>
+        )}
       </section>
     );
   }

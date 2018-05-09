@@ -30,7 +30,7 @@ class JoinSection extends React.Component {
           </div>
           <div className='joinImgDiv'>
             {util.renderIf(this.props.joinType === 'league',
-              <img className='joingImg' src={steph} />
+              <img className='joingImg stephJoinImg' src={steph} />
             )}
             {util.renderIf(this.props.joinType === 'group',
               <img className='joingImg' src={russell} />

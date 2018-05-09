@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 
 import JoinSection from './../joinSection';
 import Slider from './../slider';
+import Table from './../table';
 import * as util from './../../../lib/util.js';
 
 class CreateSection extends React.Component {
@@ -12,7 +13,8 @@ class CreateSection extends React.Component {
     let creategroup = require('./../assets/creategroup.jpeg');
 
     return (
-      <div className='createOuter'>
+      // <div className='createOuter'>
+      <div>
         <div className='createOuterInner' onClick={this.props.handleCreate}>
           <div className='createHeader'>
             <div className='eventDetails'>
@@ -58,7 +60,7 @@ class CreateSection extends React.Component {
           </div>
         </div>
 
-        <JoinSection joinType={this.props.joinType} handleRedirect={this.props.handleRedirect}/>
+        <JoinSection joinType={this.props.formType} handleRedirect={this.props.handleRedirect}/>
 
         {util.renderIf(this.props.joinedItems.length > 0,
           <div className='container'>
