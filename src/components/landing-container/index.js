@@ -107,8 +107,6 @@ class LandingContainer extends React.Component {
     let formTypeLeague = 'league';
     let formTypeGroup = 'group';
     let topScores = 'scores'
-    let russ = require('./../helpers/assets/russ.png');
-    let kd = require('./../helpers/assets/kd.png');
     return (
       <section className='landing-page page-outer-div'>
         
@@ -120,12 +118,13 @@ class LandingContainer extends React.Component {
           {util.renderIf(this.props.userAuth,
             <div>
               <div className='row'>
-                <div className='col-lg-7'>
+                <div className='col-md-8 col-lg-7'>
                   <CreateSection joinType={formTypeLeague} formType={formTypeLeague} joinedItems={this.props.leagues} handleRedirect={this.handleRedirect} handlejoinedItemClick={this.onLeagueClick}  handleCreate={() => this.setState({ leagueFormDisplay: true })}/>
+                  <CreateSection joinType={formTypeGroup} formType={formTypeGroup} joinedItems={this.props.groups} handleRedirect={this.handleRedirect} handlejoinedItemClick={this.onGroupClick}  handleCreate={() => this.setState({ groupFormDisplay: true })}/>
                 </div>
-                <div className='col-lg-5'>
+                <div className='col-md-4 col-lg-5'>
                   {util.renderIf(this.props.topPublicLeagues.length > 0,
-                    <div className='container'>
+                    <div className='container tableContainer'>
                       <div>
                         <p className='tableHeadline'>FEATURED LEAGUES</p>
                         <div className='tableColumnDiv'>
@@ -144,7 +143,7 @@ class LandingContainer extends React.Component {
                     </div>
                   )}
                   {util.renderIf(this.props.topScores.length > 0,
-                    <div className='container'>
+                    <div className='container tableContainer'>
                       <div>
                         <p className='tableHeadline'>LEADERBOARD</p>
                         <div className='tableColumnDiv'>
@@ -160,15 +159,8 @@ class LandingContainer extends React.Component {
                       <div className='spacerRow'> </div>
                     </div>
                   )}
-                </div>
-              </div>
-              <div className='row'>
-                <div className='col-lg-7'>
-                  <CreateSection joinType={formTypeGroup} formType={formTypeGroup} joinedItems={this.props.groups} handleRedirect={this.handleRedirect} handlejoinedItemClick={this.onGroupClick}  handleCreate={() => this.setState({ groupFormDisplay: true })}/>
-                </div>
-                {util.renderIf(this.props.topPublicGroups.length > 0,
-                  <div className='col-lg-5'>
-                    <div className='container'>
+                  {util.renderIf(this.props.topPublicGroups.length > 0,
+                    <div className='container tableContainer'>
                       <div>
                         <p className='tableHeadline'>FEATURED GROUPS</p>
                         <div className='tableColumnDiv'>
@@ -185,8 +177,8 @@ class LandingContainer extends React.Component {
                       })}
                       <div className='spacerRow'></div>
                     </div>
-                  </div>
-                )}
+                  )}
+                </div>
               </div>
               {util.renderIf(this.state.leagueFormDisplay,
                 <Modal heading='Create League' close={() => this.setState({ leagueFormDisplay: false })}>

@@ -8,8 +8,8 @@ import * as util from './../../../lib/util.js';
 
 class CreateSection extends React.Component {
   render() {
-    let muscles = require('./../assets/muscles.png');
-    let holla = require('./../assets/holla.png');
+    let createleague = require('./../assets/createleague.jpeg');
+    let creategroup = require('./../assets/creategroup.jpeg');
 
     return (
       <div className='createOuter'>
@@ -37,7 +37,7 @@ class CreateSection extends React.Component {
               <div className='createMainContent'>
                 <div className='createMainBorder'></div>
                 <div>
-                  <p className='createMainTitle'> Create a {this.props.formType}, and beat your friends! </p>
+                  <p className='createMainTitle'> Create a {this.props.formType}, and bring your friends! </p>
                   {util.renderIf(this.props.formType === 'league',
                     <p className='createMainSubtitle'>You&#39;re the League Manager here. Set up a private or public league and play with your family and friends!</p>
                   )}
@@ -48,10 +48,10 @@ class CreateSection extends React.Component {
               </div>
               <div className='createImgDiv'>
                 {util.renderIf(this.props.formType === 'league',
-                  <img className="createImg" src={muscles} />
+                  <img className="createImg" src={createleague} />
                 )}
                 {util.renderIf(this.props.formType === 'group',
-                  <img className="createImg" src={holla} />
+                  <img className="createImg" src={creategroup} />
                 )}  
               </div>
             </div>

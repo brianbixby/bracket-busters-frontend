@@ -104,9 +104,10 @@
   text-align: center;
   margin: auto;
 }
-.joinOuter:hover .joinTextTitle {
-  color: #FF001F;
+.joinOuter:hover .joinTextTitle, .createOuterInner:hover .createMainTitle {
+  color: #06c;;
 }
+
 @media only screen and (min-width: 550px) {
   .joinTextSubtitle {
     -webkit-line-clamp: unset;
@@ -124,11 +125,11 @@
     max-height: 134px;
   }
   .joinTextTitle {
-    margin-top: 10px;
+    margin-bottom: 10px;
   }
-  .joinTextSubtitle {
-    margin-top: 14px;
-  }
+  // .joinTextSubtitle {
+  //   margin-top: 14px;
+  // }
   .joinImgDiv {
     height: 134px;
     width: 238px;

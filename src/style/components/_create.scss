@@ -157,17 +157,11 @@
   display: block;
   height: 100%;
   object-fit: cover;
-  object-position: 50% 50%;
-  text-align: center;
-  margin: auto;
+  object-position: 50% 0;
+  width: 100%;
 }
 .landing-page .createOuter{
   max-width: 660px;
   margin-right: auto;
   margin-left: auto;
-}
-@media only screen and (min-width: 768px) {
-  .createOuter{
-    box-shadow: none;
-  }
 }

@@ -2,22 +2,28 @@
 @import './../lib/vars'; 
 
 .tableHeadline {
-  font-weight: 900;
-  text-transform: uppercase;
-  color: #4A4A4A;
-  font-size: 30px;
+  line-height: 1;
+  font-weight: 600;
+  color: #1d1e1f;
+  font-size: 14px;
+  font-weight: 700;
+  padding: 15px 12px 0;
+  letter-spacing: 1px;
   text-align: center;
-  margin: 0 12px 20px;
-  padding: 20px 0 12px;
+}
+.tableColumnDiv {
+  border-bottom: #edeef0 1px solid;
+  padding: 7.5px 0 0;
 }
 .tableColumn {
-  color: #9B9B9B;
-  font-weight: 500;
+  font-weight: 900;
   display: inline-block;
   text-transform: uppercase;
   text-align: center;
   padding: 8px 0;
-  font-size: 15px;
+  font-size: 11px;
+  color: #1d1e1f;
+  letter-spacing: .5px;
 }
 .columnUser, .columnUserData {
   width: 70%;
@@ -32,14 +38,22 @@
   width: 30%;
 }
 .columnData {
+  color: #1d1e1f;
   text-align: center;
-  padding-top: 20px;
-  padding-bottom: 20px;
+  padding-top: 7px;
+  padding-bottom: 7px;
   text-transform: uppercase;
   display: inline-block;
   box-sizing: border-box;
-  text-align: center;
+  font-size: 12px;
+  font-weight: 400;
 }
 .cursor {
   cursor: pointer;
+}
+.cursor:hover .columnData{
+  color: #06c;
+}
+.tableContainer {
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.24);
 }
