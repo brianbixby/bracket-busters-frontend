@@ -118,12 +118,12 @@ class LandingContainer extends React.Component {
           <div className='grid-container'>
             <div>
               <div className='row'>
-                <div className='col-md-8 col-lg-7'>
+                <div className='col-md-8'>
                   <div className='createOuter'>
                     <CreateSection formType={formTypeLeague} joinedItems={this.props.leagues} handleRedirect={this.handleRedirect} handlejoinedItemClick={this.onLeagueClick}  handleCreate={() => this.setState({ leagueFormDisplay: true })}/>
                   </div>
                   </div>
-                  <div className='col-md-4 col-lg-5'>
+                  <div className='col-md-4'>
                   <div className='leagueBoardsContainer'>
                   <div className='leaguesContainerHeader'>
                     <img className='leaguesBoardIcon' src={basketball} />
@@ -169,12 +169,12 @@ class LandingContainer extends React.Component {
                   </div>
                   </div>
                   </div>
-                  <div className={this.props.leagues.length < 1 ? 'marginTopLarge col-md-8 col-lg-7' : 'col-md-8 col-lg-7'}>
+                  <div className={this.props.leagues.length < 1 ? 'marginTopLarge col-md-8' : 'col-md-8'}>
                   <div className='createOuter'>
                     <CreateSection formType={formTypeGroup} joinedItems={this.props.groups} handleRedirect={this.handleRedirect} handlejoinedItemClick={this.onGroupClick}  handleCreate={() => this.setState({ groupFormDisplay: true })}/>
                   </div>
                 </div>
-                <div className={this.props.leagues.length > 0 ? 'marginTopL57 col-md-4 col-lg-5' : 'col-md-4 col-lg-5'}>
+                <div className={this.props.leagues.length > 0 ? 'marginTopL57 col-md-4' : 'col-md-4'}>
                 <div className='leagueBoardsContainer'>
                   <div className='leaguesContainerHeader'>
                     <i className="fa fa-users"></i>
