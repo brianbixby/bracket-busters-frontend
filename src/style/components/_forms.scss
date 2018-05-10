@@ -10,7 +10,7 @@
     box-sizing: border-box;
     padding: 15px;
     border-radius: 3px;
-    margin-bottom: 30px;
+    margin-bottom: 10px;
   }
   input[type='radio'] {
     width: 2vw;
@@ -33,9 +33,12 @@
     margin-left: $margin;
   }
 }
-
 .userauth-form {
   margin-right: 3vw;
+
+  input {
+    margin-bottom: 30px;
+  }
 }
 .page-form {
   width: 50%;
@@ -43,4 +46,37 @@
 }
 .userauth-buttons {
   text-align: right;
+}
+.leagueName-availability {
+  margin-left: .7vw;
+}
+.form label {
+  margin-left: 4px;
+  text-transform: capitalize;
+}
+@media (max-width: 710px) {
+  .radio-div div {
+    height: 38px;
+  }
+  .radio-div .radioPri {
+    height: 48px;
+  }
+  .modal-close {
+    font-size: 20px;
+  }
+  .radio-div div span {
+    display: block;
+    width: 68%;
+    float: right;
+  }
+}
+@media (max-width: 550px) {
+  .modal-wrapper{
+    width: 90vw;
+  }
+}
+@media (max-width: 350px) {
+  .radio-div .radioPri {
+    height: 58px;
+  }
 }

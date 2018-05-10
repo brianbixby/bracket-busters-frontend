@@ -7,11 +7,19 @@
   width: 100%;
   z-index: 101;
   border: none;
-  background: #000;
+  background: #2b2c2d;
+  box-shadow: 0 4px 2px -2px rgba(0,0,0,0.3);
 
+  .avatar{
+    display: inline-block;
+
+    img {
+      margin-left: 15px;
+    }
+  }
   .logo {
     position: absolute;
-    left: 16px;
+    left: 6px;
     top: 12px;
     height: auto;
     z-index: 103;
@@ -38,7 +46,7 @@
     list-style-type: none;
     margin: 0;
     padding: 12px 0 0 0;
-    background: #000;
+    background: #2b2c2d;
 
     .social {
       float: left;
@@ -64,7 +72,8 @@
         cursor: pointer;
         transition-delay: 0.5s;
         transition: all 0.35s cubic-bezier(0.77, 0, 0.175, 1);
-        margin-right: 10px;
+        position: relative;
+        padding-right: 5px;
 
         .avatar img {
           border-radius: 50%;
@@ -78,6 +87,11 @@
         }
         .fa-caret-down {
           padding-right: 5px;
+          position: absolute;
+          left: 0;
+        }
+        .fa-user{
+          padding-left: 21px;
         }
       }
 
@@ -89,7 +103,7 @@
         border-bottom-left-radius: .5vw;
         border-bottom-right-radius: .5vw;
         text-transform: uppercase;
-        background: #000;
+        background: #2b2c2d;
         z-index: -1;
         transform: translateY(-100px);
         transition: transform .4s ease-in;
@@ -126,6 +140,7 @@
 }
 .introNavbar {
   background: #FFF;
+  box-shadow: none;
 
   .logo-text, .social-icons {
     color: #9B9B9B;
@@ -138,10 +153,12 @@
   }
 }
 
-@media only screen and (min-width: 371px) {
+@media only screen and (min-width: 411px) {
   .navbar {
     .logo {
       top: 9px;
+      left: 16px;
+
       .logo-text {
         font-size: 26px;
       }
@@ -166,6 +183,7 @@
           }
           .avatar img {
             margin-top: -5px;
+            margin-left: 20px;
           }
         }
       }
@@ -177,40 +195,40 @@
   }
 }
 
-@media only screen and (min-width: 481px) {
-  .navbar {
-    height: 62px;
+// @media only screen and (min-width: 481px) {
+//   .navbar {
+//     height: 62px;
 
-    .logo {
-      top: 16px;
-      .logo-text {
-        font-size: 30px;
-      }
-    }
+//     .logo {
+//       top: 16px;
+//       .logo-text {
+//         font-size: 30px;
+//       }
+//     }
 
-    .socials {
-      padding: 16px 0 0 0;
+//     .socials {
+//       padding: 16px 0 0 0;
 
-      .dropdown {
-        .dropdownDiv {
-          top: 62px;
-          padding: 5px 50px 15px 50px;
-        }
+//       .dropdown {
+//         .dropdownDiv {
+//           top: 62px;
+//           padding: 5px 50px 15px 50px;
+//         }
 
-        .avatarDiv {
-          i {
-            font-size: 30px;
-          }
-          .avatar img {
-            height: 40px;
-            margin-top: -6px;
-          }
-        }
-      }
+//         .avatarDiv {
+//           i {
+//             font-size: 30px;
+//           }
+//           .avatar img {
+//             height: 40px;
+//             margin-top: -6px;
+//           }
+//         }
+//       }
 
-      .social .fa-github, .social .fa-linkedin {
-        font-size: 30px;
-      }
-    }
-  }
-}
+//       .social .fa-github, .social .fa-linkedin {
+//         font-size: 30px;
+//       }
+//     }
+//   }
+// }

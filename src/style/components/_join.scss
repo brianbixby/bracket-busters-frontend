@@ -58,7 +58,7 @@
   max-height: calc((24px * 2) + 2px);
   overflow: hidden;
   text-overflow: ellipsis;
-  color: #4A4A4A;
+  color: #1d1e1f;
   font-size: 19px;
   line-height: 21px;
   font-weight: 600;
@@ -71,10 +71,10 @@
   overflow: hidden;
   text-overflow: ellipsis;
   // display: none;
-  color: #4A4A4A;
+  color: #48494a;
+  font-weight: 400;
   font-size: 16px;
   line-height: 19px;
-  font-weight: 300;
 }
 .joinImgDiv {
   margin-top: 0;
@@ -104,10 +104,15 @@
   text-align: center;
   margin: auto;
 }
-.joinOuter:hover .joinTextTitle {
-  color: #FF001F;
+.joinOuter:hover .joinTextTitle, .createMainWrapper:hover .createMainTitle {
+  color: #06c;;
 }
-@media only screen and (min-width: 550px) {
+@media only screen and (max-width: 767px) {
+  .stephJoinImg {
+    margin-left: -50%;
+  }
+}
+@media only screen and (min-width: 570px) {
   .joinTextSubtitle {
     -webkit-line-clamp: unset;
     max-height: none;
@@ -124,11 +129,11 @@
     max-height: 134px;
   }
   .joinTextTitle {
-    margin-top: 10px;
+    margin-bottom: 10px;
   }
-  .joinTextSubtitle {
-    margin-top: 14px;
-  }
+  // .joinTextSubtitle {
+  //   margin-top: 14px;
+  // }
   .joinImgDiv {
     height: 134px;
     width: 238px;

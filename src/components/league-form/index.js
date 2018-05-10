@@ -8,11 +8,11 @@ import * as util from '../../lib/util';
 class LeagueForm extends React.Component {
   constructor(props){
     super(props);
-    this.state = props.league ? this.props.league : { leagueName: '', scoring: 'regular', poolSize: '', privacy: 'public', password: '', image: '', motto: '',   leagueNameError: null, poolSizeError: null, leagueNameAvailable: true, passwordError: null, error: null, focused: null, submitted: false, };
+    this.state = props.league ? this.props.league : { leagueName: '', privacy: 'public', password: '', image: '', motto: '',   leagueNameError: null, poolSizeError: null, leagueNameAvailable: true, passwordError: null, error: null, focused: null, submitted: false, };
   }
 
   componentWillUnmount() {
-    this.setState({ leagueName: '', scoring: 'regular', poolSize: '', privacy: 'public', password: '' });
+    this.setState({ leagueName: '', privacy: 'public', password: '' });
   }
 
   validateInput = e => {
@@ -133,7 +133,7 @@ class LeagueForm extends React.Component {
           </div>
         )}
 
-        <input
+        {/* <input
           type='text'
           name='poolSize'
           placeholder='pool size'
@@ -141,7 +141,7 @@ class LeagueForm extends React.Component {
           onChange={this.handleChange}
           onFocus={this.handleFocus}
           onBlur={this.handleBlur}
-        />
+        /> */}
 
         <input
           type='text'
@@ -163,7 +163,7 @@ class LeagueForm extends React.Component {
           onBlur={this.handleBlur}
         />
 
-        <div className='radio-div'>
+        {/* <div className='radio-div'>
           <p className='labelDesc'>Scoring:</p>
           <div>
             <input 
@@ -191,7 +191,7 @@ class LeagueForm extends React.Component {
             <label>Under Dog</label>
             <span>If win, you get 20 points.</span>
           </div>
-        </div>
+        </div> */}
 
         <div className='radio-div'>
           <p className='labelDesc'>Privacy:</p>
@@ -211,7 +211,7 @@ class LeagueForm extends React.Component {
 
           </div>
 
-          <div>
+          <div className="radioPri">
             <input 
               type="radio"
               name="privacy" 

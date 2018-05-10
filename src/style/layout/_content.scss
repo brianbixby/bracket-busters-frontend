@@ -27,11 +27,11 @@
 .spacer {
   height: 20px;
 }
-@media only screen and (min-width: 481px) {
-  .page-outer-div {
-    padding-top: 80px;
-  }
-}  
+// @media only screen and (min-width: 481px) {
+//   .page-outer-div {
+//     padding-top: 80px;
+//   }
+// }  
 
 // bootstrap modified grid
 * {
@@ -48,6 +48,7 @@
 .grid-container {
   margin-right: auto;
   margin-left: auto;
+  margin-top: 20px;
 }
 @media (min-width: 768px) {
   .grid-container {
@@ -64,6 +65,9 @@
 @media (min-width: 1200px) {
   .grid-container {
     width: 1170px;
+  }
+  .landing-page .grid-container {
+    padding-right: 30px;
   }
 }
 .grid-container-fluid {
