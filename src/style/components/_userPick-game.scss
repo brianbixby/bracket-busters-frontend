@@ -316,3 +316,60 @@
     width: 273px;
   }
 }
+
+.playerCardImageWrapper {
+  -webkit-transition: background-color .5s ease-in-out;
+  -moz-transition: background-color .5s ease-in-out;
+  -o-transition: background-color .5s ease-in-out;
+  transition: background-color .5s ease-in-out;
+  height: 75%;
+  width: 100%;
+  padding: 0;
+  position: relative;
+}
+.playerCardImageWrapper img {
+  height: 100%;
+  z-index: 1;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  -webkit-transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+}
+.headerOverlay {
+  background: transparent url(http://a.espncdn.com/prod/assets/playercards/2010/bg_gradient_over.png) repeat-x 0 0;
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: -10px;
+  left: 0;
+}
+.logoBackground {
+  background: url(http://a.espncdn.com/combiner/i?img=/i/teamlogos/nba/500/cle.png&w=110&h=110&transparent=true);
+  height: 40%;
+  width: 25%;
+  background-repeat: no-repeat;
+  position: absolute;
+  top: 15%;
+  left: 15%;
+  background-size: cover;
+}
+.shadow {
+  background: transparent url(http://a.espncdn.com/prod/assets/playercards/2010/pc-header-shadow-left.png) no-repeat 0 0;
+  width: 100%;
+  height: 32%;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  background-position-y: bottom;
+  z-index: 2;
+}
+.court {
+  background: url(http://a.espncdn.com/prod/assets/playercards/2010/nba/court.png);
+  position: absolute;
+  height: 40%;
+  width: 100%;
+  top: 40%;
+  background-repeat: no-repeat;
+}

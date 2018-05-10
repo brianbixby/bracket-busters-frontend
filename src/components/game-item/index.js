@@ -88,6 +88,10 @@ class GameItem extends React.Component {
                     <div className={this.state.isHovered ? 'hovTransform playerCardOuter' : 'playerCardOuter'} onClick={this.homeTeamPick} onMouseEnter={this.handleHover} onMouseLeave={this.handleHover}>
                       <div className={this.state.isHovered ? 'hovBackground playerCardImageWrapper' : 'playerCardImageWrapper'}>
                         <img className='starPlayerImages' src={game.homeTeam.starPlayerImage}/>
+                        <div className='headerOverlay'></div>
+                        <div className='logoBackground'></div>
+                        <div className='shadow'></div>
+                        <div className='court'></div>
                       </div>
                       <div className='playerCardContentBorderTop' style={homeBorderStyle}></div>
                       <div className='playerCardNameWrapper'>
