@@ -35,6 +35,12 @@ class GameItem extends React.Component {
     let awayBorderStyle = {
       background: `${game.awayTeam.color}`,
     };
+    let homeLogoStyle = {
+      background: `url(${game.homeTeam.image})`,
+    };
+    let awayLogoStyle = {
+      background: `url(${game.awayTeam.image})`,
+    };
     let currPick = this.state.pickName ? this.state.pickName : 'Not Picked';
     return (
       <div className={ this.state.pickName ? 'container fadeout' : 'container' }>
@@ -87,10 +93,9 @@ class GameItem extends React.Component {
                   <div className='starPlayerImageDivInnerWrapper'>
                     <div className={this.state.isHovered ? 'hovTransform playerCardOuter' : 'playerCardOuter'} onClick={this.homeTeamPick} onMouseEnter={this.handleHover} onMouseLeave={this.handleHover}>
                       <div className={this.state.isHovered ? 'hovBackground playerCardImageWrapper' : 'playerCardImageWrapper'}>
+                        <div className='playerImageBackground'></div>
                         <img className='starPlayerImages' src={game.homeTeam.starPlayerImage}/>
-                        <div className='headerOverlay'></div>
-                        <div className='logoBackground'></div>
-                        <div className='shadow'></div>
+                        <div className='logoBackground' style={homeLogoStyle}></div>
                         <div className='court'></div>
                       </div>
                       <div className='playerCardContentBorderTop' style={homeBorderStyle}></div>
@@ -109,7 +114,10 @@ class GameItem extends React.Component {
                   <div className='starPlayerImageDivInnerWrapper'>
                     <div className={this.state.isHovered2 ? 'hovTransform playerCardOuter' : 'playerCardOuter'} onClick={this.awayTeamPick} onMouseEnter={this.handleHover2} onMouseLeave={this.handleHover2}>
                       <div className={this.state.isHovered2 ? 'hovBackground playerCardImageWrapper' : 'playerCardImageWrapper'}>
+                        <div className='playerImageBackground'></div>
                         <img className='starPlayerImages' src={game.awayTeam.starPlayerImage}/>
+                        <div className='logoBackground' style={awayLogoStyle}></div>
+                        <div className='court'></div>
                       </div>
                       <div className='playerCardContentBorderTop' style={awayBorderStyle}></div>
                       <div className='playerCardNameWrapper'>
