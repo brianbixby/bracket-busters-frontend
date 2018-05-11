@@ -87,7 +87,6 @@ class LeagueContainer extends React.Component {
                 </div>
               </div>
               <div className='gamesDiv'>
-                <p> games that need picks </p>
                 {this.props.games.map(game =>
                   <div key={game._id} className='margin16'>
                     <GameItem  game={game} onComplete={this.handleCreate}/>
@@ -117,7 +116,7 @@ class LeagueContainer extends React.Component {
               </div>
             </div>
 
-            <div className={this.state.maxHeight ? 'wideSectionWrapper maxHeight' : 'wideSectionWrapper'}>
+            {/* <div className={this.state.maxHeight ? 'wideSectionWrapper maxHeight' : 'wideSectionWrapper'}>
               <div className='outer messageboardHeader'>
                 <div className='outerLeft'>
                   <i className="fa fa-comments"></i>
@@ -128,7 +127,7 @@ class LeagueContainer extends React.Component {
                 </div>
               </div>
               <MessageBoardContainer mBoardId={this.props.currentMessageBoard._id}/>
-            </div>
+            </div> */}
           </div>
           <div className='col-md-4'>
             <div className='leagueBoardsContainer'>
@@ -153,6 +152,20 @@ class LeagueContainer extends React.Component {
               </div>
             </div>
           </div>
+        </div>
+        <div className='col-md-8'>
+          <div className={this.state.maxHeight ? 'wideSectionWrapper maxHeight' : 'wideSectionWrapper'}>
+              <div className='outer messageboardHeader'>
+                <div className='outerLeft'>
+                  <i className="fa fa-comments"></i>
+                  <p className='headerText'>MESSAGE BOARD </p>
+                </div>
+                <div className='outerRight'>
+                  <p className='seeAll' onClick={this.handleMaxHeight}>See All</p>
+                </div>
+              </div>
+              <MessageBoardContainer mBoardId={this.props.currentMessageBoard._id}/>
+            </div>
         </div>
       </div>
       </div>
