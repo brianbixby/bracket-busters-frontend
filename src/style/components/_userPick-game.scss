@@ -189,7 +189,7 @@
   display: inline-block;
   line-height: 30px;
 }
-.userPick-game-container .fadeout {
+.gamesDiv .fadeout {
   -webkit-animation: fadeOut 1s forwards;
   animation: fadeOut 1s forwards;
   -webkit-animation-delay: 1.5s;
@@ -234,12 +234,12 @@
 .mr50 {
   margin-right: 50px;
 }
-.hovTransform {
-   -webkit-transform: scale(1.08);
-      -moz-transform: scale(1.08);
-       -ms-transform: scale(1.08);
-        -o-transform: scale(1.08);
-           transform: scale(1.08);
+.pickHover:hover{
+  -webkit-transform: scale(1.08);
+    -moz-transform: scale(1.08);
+      -ms-transform: scale(1.08);
+      -o-transform: scale(1.08);
+        transform: scale(1.08);
 }
 .hovBackground{
   background-color: #e1e1e1;
@@ -310,12 +310,12 @@
       font-weight: 600;
     }
   }
-  .hovTransform {
+  .pickHover:hover{
     -webkit-transform: scale(1.05);
-     -moz-transform: scale(1.05);
-      -ms-transform: scale(1.05);
-       -o-transform: scale(1.05);
-          transform: scale(1.05);
+    -moz-transform: scale(1.05);
+    -ms-transform: scale(1.05);
+    -o-transform: scale(1.05);
+    transform: scale(1.05);
   }
 }
 @media only screen and (min-width: 651px) {

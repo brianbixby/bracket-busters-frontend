@@ -24,8 +24,6 @@ class UserPickItem extends React.Component {
       homeTeamImage: props.userPick.gameID.homeTeam.image,
       homeTeamColor: props.userPick.gameID.homeTeam.color,
       editing: false,
-      isHovered: false, 
-      isHovered2: false,
     }
   }
 
@@ -51,9 +49,6 @@ class UserPickItem extends React.Component {
   handleEdit = () => {
     !this.state.editing ? this.setState({editing: true}) : this.setState({editing: false});
   };
-
-  handleHover = () => this.setState({isHovered: !this.state.isHovered});
-  handleHover2 = () => this.setState({isHovered2: !this.state.isHovered2});
   
   render() {
     let { userPick } = this.props;
@@ -83,7 +78,7 @@ class UserPickItem extends React.Component {
     </p>
   </div>
   <div className='gameContent'>
-    <div className={this.state.isHovered && this.state.editing ? 'hovTransform homeTeamContent' : 'homeTeamContent'}  onClick={this.homeTeamPickUpdate} onMouseEnter={this.handleHover} onMouseLeave={this.handleHover}>
+    <div className={this.state.editing ? 'pickHover homeTeamContent' : 'homeTeamContent'}  onClick={this.homeTeamPickUpdate}>
       <div className='teamContainer'>
         <div className='teamContentWrapper'>
           <div className='teamInfo'>
@@ -101,7 +96,7 @@ class UserPickItem extends React.Component {
     <div className='gameDate'>
       <p className='gameDateP'>{new Date(userPick.gameTime).toDateString()}</p>
     </div>
-    <div className={this.state.isHovered2 && this.state.editing ? 'hovTransform awayTeamContent' : 'awayTeamContent'}  onClick={this.awayTeamPickUpdate} onMouseEnter={this.handleHover} onMouseLeave={this.handleHover}>
+    <div className={this.state.editing ? 'pickHover awayTeamContent' : 'awayTeamContent'}  onClick={this.awayTeamPickUpdate}>
       <div className='teamContainer'>
         <div className='teamContentWrapper'>
           <div className='gameLogoWrapper'>
@@ -124,8 +119,8 @@ class UserPickItem extends React.Component {
         <div className='starPlayerImageDiv homeStarPlayerImageDiv'>
           <div className='starPlayerImageDivWrapper'>
             <div className='starPlayerImageDivInnerWrapper'>
-              <div className={this.state.isHovered && this.state.editing ? 'hovTransform playerCardOuter' : 'playerCardOuter'} onClick={this.homeTeamPickUpdate} onMouseEnter={this.handleHover} onMouseLeave={this.handleHover}>
-                <div className={this.state.isHovered && this.state.editing ? 'hovBackground playerCardImageWrapper' : 'playerCardImageWrapper'}>
+              <div className={this.state.editing ? 'pickHover playerCardOuter' : 'playerCardOuter'} onClick={this.homeTeamPickUpdate}>
+                <div className='playerCardImageWrapper'>
                   <div className='playerImageBackground'></div>
                   <img className='starPlayerImages' src={this.state.homeTeamStarPlayerImage}/>
                   <div className='logoBackground' style={homeLogoStyle}></div>
@@ -145,8 +140,8 @@ class UserPickItem extends React.Component {
         <div className='starPlayerImageDiv awayStarPlayerImageDiv'>
           <div className='starPlayerImageDivWrapper'>
             <div className='starPlayerImageDivInnerWrapper'>
-              <div className={this.state.isHovered2 && this.state.editing ? 'hovTransform playerCardOuter' : 'playerCardOuter'} onClick={this.awayTeamPickUpdate} onMouseEnter={this.handleHover2} onMouseLeave={this.handleHover2}>
-                <div className={this.state.isHovered2 && this.state.editing ? 'hovBackground playerCardImageWrapper' : 'playerCardImageWrapper'}>
+              <div className={this.state.editing ? 'pickHover playerCardOuter' : 'playerCardOuter'} onClick={this.awayTeamPickUpdate}>
+                <div className='playerCardImageWrapper'>
                   <div className='playerImageBackground'></div>
                   <img className='starPlayerImages' src={this.state.awayTeamStarPlayerImage}/>
                   <div className='logoBackground' style={awayLogoStyle}></div>
