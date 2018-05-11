@@ -37,9 +37,8 @@ class UserPickContainer extends React.Component {
     return (
       <div className='userPick-game-container'>
         <div className='userPicksDiv'>
-          <p> My Picks</p>
           {this.props.userPicks.map((userPick, idx) =>
-            <div key={idx}>
+            <div key={idx} className='margin16'>
               <UserPickItem  userPick={userPick} onUpdate={this.handleUpdate}/>
             </div>
           )}
@@ -48,7 +47,7 @@ class UserPickContainer extends React.Component {
         <div className='gamesDiv'>
           <p> games that need picks </p>
           {this.props.games.map(game =>
-            <div key={game._id}>
+            <div key={game._id} className='margin16'>
               <GameItem  game={game} onComplete={this.handleCreate}/>
             </div>
           )}

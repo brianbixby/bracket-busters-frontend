@@ -257,7 +257,7 @@
 }
 @media only screen and (max-width: 450px) {
   .playerCardOuter {
-    height: auto;
+    // height: auto;
     width: calc((100vw - 60px)/2);
     
     .playerCardImageWrapper{

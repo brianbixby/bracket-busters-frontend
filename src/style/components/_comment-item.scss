@@ -1,7 +1,8 @@
 @import './../lib/vars'; 
 
-.comment-item {
+.comentOuterDiv{
   margin-top: 12px;
+  min-height: 50px;
 
   .comment-photo-div {
     float: left;
@@ -19,13 +20,13 @@
     box-sizing: border-box;
     
     .comment-commenter {
-      color: $color-primary;
-      font-weight: bold;
-      padding: $pad;
+      color: #90949c;
+      font-size: 14px;
+      text-transform: uppercase;
     }
     .comment-content {
-      color: $color-black;
-      padding: $pad;
+      color: #1d1e1f;
+      padding: 4px 0;
     }
    }
- }
+}

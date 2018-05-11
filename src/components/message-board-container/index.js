@@ -30,7 +30,7 @@ class MessageBoardContainer extends React.Component {
         </div>
       
         {this.props.comments.map(comment =>
-          <div key={comment._id}>
+          <div key={comment._id} className='comentOuterDiv'>
             <CommentItem  comment={comment} image={profileImage} />
           </div>
         )}
