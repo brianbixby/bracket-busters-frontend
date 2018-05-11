@@ -6,7 +6,11 @@ import { leaguesFetchRequest, leagueFetchRequest, leagueDeleteRequest, leagueUpd
 import { groupsFetchRequest, topPublicGroupsFetchRequest } from '../../actions/group-actions.js';
 import { scoreBoardsFetchRequest, topScoresFetchRequest } from '../../actions/scoreboard-actions.js';
 import { sportingEventsFetchRequest } from '../../actions/sportingEvent-actions.js';
+import { gamesFetchRequest, gameUpdateRequest } from '../../actions/game-actions.js';
+import { userPicksFetchRequest, userPickUpdateRequest, userPickCreateRequest, userPickFetchRequest, } from '../../actions/userPick-actions.js';
 import UserPickContainer from '../user-pick-container';
+import GameItem from '../game-item';
+import UserPickItem from '../user-pick-item';
 import MessageBoardContainer from '../message-board-container';
 import Table from '../helpers/table';
 import * as util from '../../lib/util.js';
@@ -19,7 +23,26 @@ class LeagueContainer extends React.Component {
 
   componentWillMount() {
     util.userValidation(this.props);
-    this.props.scoreBoardsFetch(this.props.currentLeague._id);
+    this.props.scoreBoardsFetch(this.props.currentLeague._id)
+      .then(() => {
+        this.props.userPicksFetch(this.props.currentLeague._id)
+        .then(picks => {
+          let gameIDArr = [];
+          gameIDArr.push(picks.map(userPick => userPick.gameID._id));
+          return this.props.gamesFetch(this.props.currentLeague.sportingEventID, gameIDArr)
+        })
+        .catch(util.logError);
+      })
+  }
+
+  componentDidMount(){
+    // this.props.userPicksFetch(this.props.currentLeague._id)
+    //   .then(picks => {
+    //     let gameIDArr = [];
+    //     gameIDArr.push(picks.map(userPick => userPick.gameID._id));
+    //     return this.props.gamesFetch(this.props.currentLeague.sportingEventID, gameIDArr)
+    //   })
+    //   .catch(util.logError);
   }
 
   handleComplete = league => {
@@ -27,6 +50,18 @@ class LeagueContainer extends React.Component {
       .then(() => this.props.history.push(`/league/${this.props.league._id}`))
       .catch(util.logError);
   }
+
+  handleUpdate = userPick => {
+    return this.props.userPickUpdate(userPick)
+      .catch(console.error);
+  };
+
+  handleCreate = userPick => {
+    userPick.leagueID= this.props.currentLeague._id;
+    return this.props.userPickCreate(userPick)
+      .then(userPick => this.props.userPickFetch(userPick._id))
+      .catch(console.error);
+  };
 
   handleMaxHeight = () => this.setState({ maxHeight:!this.state.maxHeight });
 
@@ -72,7 +107,14 @@ class LeagueContainer extends React.Component {
                   <p className='seeAll'>See All</p>
                 </div>
               </div>
-              <UserPickContainer sportingEventID={this.props.currentLeague.sportingEventID} leagueID={this.props.currentLeague._id} />
+              {/* <UserPickContainer sportingEventID={this.props.currentLeague.sportingEventID} leagueID={this.props.currentLeague._id} /> */}
+              <div className='userPicksDiv'>
+                {this.props.userPicks.map((userPick, idx) =>
+                  <div key={idx} className='margin16'>
+                    <UserPickItem  userPick={userPick} onUpdate={this.handleUpdate}/>
+                  </div>
+                )}
+              </div>
             </div>
 
             <div className={this.state.maxHeight ? 'wideSectionWrapper maxHeight' : 'wideSectionWrapper'}>
@@ -129,6 +171,7 @@ let mapStateToProps = state => ({
   topScores: state.topScores,
   topPublicGroups: state.topPublicGroups,
   games: state.games,
+  userPicks: state.userPicks,
 });
 
 let mapDispatchToProps = dispatch => ({
@@ -143,6 +186,12 @@ let mapDispatchToProps = dispatch => ({
   leagueFetch: league => dispatch(leagueFetchRequest(league)),
   leagueUpdate: league => dispatch(leagueUpdateRequest(league)),
   scoreBoardsFetch: leagueID => dispatch(scoreBoardsFetchRequest(leagueID)),
+  userPicksFetch: leagueID => dispatch(userPicksFetchRequest(leagueID)),
+  userPickUpdate: userPick => dispatch(userPickUpdateRequest(userPick)),
+  userPickCreate: userPick => dispatch(userPickCreateRequest(userPick)),
+  userPickFetch: userPick => dispatch(userPickFetchRequest(userPick)),
+  gamesFetch: (sportingEventID, gameIDArr) => dispatch(gamesFetchRequest(sportingEventID, gameIDArr)),
+  gameUpdate: game => dispatch(gameUpdateRequest(game)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(LeagueContainer);
