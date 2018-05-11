@@ -30,7 +30,7 @@ class CreateSection extends React.Component {
                 <p className='headerText'>2018 NBA PLAYOFFS </p>
               </div>
               <div className='outerRight'>
-                <p className='seeAll' onClick={this.redirect}>all {this.props.formType}s</p>
+                <p className='seeAll' onClick={this.redirect}>See All</p>
               </div>
             </div>
           )}
@@ -41,7 +41,7 @@ class CreateSection extends React.Component {
                 <p className='headerText'>GROUPS </p>
               </div>
               <div className='outerRight'>
-                <p className='seeAll' onClick={this.redirect}>all {this.props.formType}s</p>
+                <p className='seeAll' onClick={this.redirect}>See All</p>
               </div>
             </div>
           )}

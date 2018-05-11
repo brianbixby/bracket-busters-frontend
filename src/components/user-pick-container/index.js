@@ -44,14 +44,14 @@ class UserPickContainer extends React.Component {
           )}
         </div>
 
-        <div className='gamesDiv'>
+        {/* <div className='gamesDiv'>
           <p> games that need picks </p>
           {this.props.games.map(game =>
             <div key={game._id} className='margin16'>
               <GameItem  game={game} onComplete={this.handleCreate}/>
             </div>
           )}
-        </div>
+        </div> */}
       </div>
     );
   }
@@ -61,7 +61,7 @@ let mapStateToProps = (state) => ({
   userAuth: state.userAuth,
   userProfile: state.userProfile,
   userPicks: state.userPicks,
-  games: state.games,
+  // games: state.games,
 });
 
 let mapDispatchToProps = (dispatch) => ({

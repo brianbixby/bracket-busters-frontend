@@ -33,12 +33,13 @@ class LeagueContainer extends React.Component {
   render(){
     let scoreBoards = 'scores';
     let nbalogo = require('./../helpers/assets/nba-logo.png');
-    let maxHeight = this.state.isHovered ? 'hovTransform homeTeamContent' : 'homeTeamContent'
+    let maxHeight = this.state.isHovered ? 'hovTransform homeTeamContent' : 'homeTeamContent';
     return (
-      <div className='page-outer-div'>
+      <div className='page-outer-div leagueContainer'>
         <div className='grid-container'>
           <div className='row'>
           <div className='col-md-8'>
+
             <div className='wideSectionWrapper'>
               <div className='outer'>
                 <div className='outerLeft'>
@@ -47,39 +48,67 @@ class LeagueContainer extends React.Component {
                   <p className='subheaderText'> </p>
                 </div>
                 <div className='outerRight'>
-                  <p className='seeAll'>all games</p>
+                  <p className='seeAll'>See All</p>
+                </div>
+              </div>
+              <div className='gamesDiv'>
+                <p> games that need picks </p>
+                {this.props.games.map(game =>
+                  <div key={game._id} className='margin16'>
+                    <GameItem  game={game} onComplete={this.handleCreate}/>
+                  </div>
+                )}
+              </div>
+            </div>
+
+            <div className='wideSectionWrapper'>
+              <div className='outer'>
+                <div className='outerLeft'>
+                  <img src={nbalogo} />
+                  <p className='headerText'>PICKS </p>
+                  <p className='subheaderText'> </p>
+                </div>
+                <div className='outerRight'>
+                  <p className='seeAll'>See All</p>
                 </div>
               </div>
               <UserPickContainer sportingEventID={this.props.currentLeague.sportingEventID} leagueID={this.props.currentLeague._id} />
             </div>
+
             <div className={this.state.maxHeight ? 'wideSectionWrapper maxHeight' : 'wideSectionWrapper'}>
               <div className='outer messageboardHeader'>
                 <div className='outerLeft'>
+                  <i className="fa fa-comments"></i>
                   <p className='headerText'>MESSAGE BOARD </p>
-                  <p className='subheaderText'> </p>
                 </div>
                 <div className='outerRight'>
-                  <p className='seeAll' onClick={this.handleMaxHeight}>all messages</p>
+                  <p className='seeAll' onClick={this.handleMaxHeight}>See All</p>
                 </div>
               </div>
               <MessageBoardContainer mBoardId={this.props.currentMessageBoard._id}/>
             </div>
           </div>
           <div className='col-md-4'>
-            <div className='container'>
-              <div>
-                <p className='tableHeadline'>LEADERBOARD</p>
-                <div className='tableColumnDiv'>
-                  <p className='tableColumn columnUser'> USER NAME </p>
-                  <p className='tableColumn columnScore'> SCORE </p>
-                </div>
+            <div className='leagueBoardsContainer'>
+              <div className='leaguesContainerHeader'>
+                <i className="fa fa-users"></i>
+                <p className='leaguesBoardHeader'>LEADERBOARD</p>
               </div>
-              {this.props.scoreBoards.map(scoreBoard => {
-                return <div className='rowColors' key={scoreBoard._id}>
-                  <Table item={scoreBoard} type={scoreBoards} />
+              <div className='container tableContainer'>
+                <div>
+                  <p className='tableHeadline hideMed'>LEADERBOARD</p>
+                  <div className='tableColumnDiv'>
+                    <p className='tableColumn columnUser'> USER NAME </p>
+                    <p className='tableColumn columnScore'> SCORE </p>
+                  </div>
                 </div>
-              })}
-              <div className='spacerRow'> </div>
+                {this.props.scoreBoards.map(scoreBoard => {
+                  return <div className='rowColors' key={scoreBoard._id}>
+                    <Table item={scoreBoard} type={scoreBoards} />
+                  </div>
+                })}
+                <div className='spacerRow'> </div>
+              </div>
             </div>
           </div>
         </div>
@@ -99,6 +128,7 @@ let mapStateToProps = state => ({
   topPublicLeagues: state.topPublicLeagues,
   topScores: state.topScores,
   topPublicGroups: state.topPublicGroups,
+  games: state.games,
 });
 
 let mapDispatchToProps = dispatch => ({
