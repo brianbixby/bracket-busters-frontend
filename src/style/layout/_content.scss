@@ -66,8 +66,8 @@
   .grid-container {
     width: 1170px;
   }
-  .landing-page .grid-container {
-    padding-right: 30px;
+  .landing-page .grid-container, .leagueContainer .grid-container {
+    padding-left: 35px;
   }
 }
 .grid-container-fluid {

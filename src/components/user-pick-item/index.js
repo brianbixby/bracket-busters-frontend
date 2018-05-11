@@ -69,32 +69,13 @@ class UserPickItem extends React.Component {
     let awayBorderStyle = {
       background: `${this.state.awayTeamColor}`,
     };
+    let homeLogoStyle = {
+      background: `url(${this.state.homeTeamImage})`,
+    };
+    let awayLogoStyle = {
+      background: `url(${this.state.awayTeamImage})`,
+    };
     return (
-      // <div className='userPickItem'>
-      //   <div className='gawayTeamDiv'>
-      //     {util.renderIf(editing, 
-      //       <button className='teamName teamNameButton' onClick={this.awayTeamPickUpdate}>{this.state.awayTeamName}</button>
-      //     )}
-      //     {util.renderIf(!editing, 
-      //       <span className='teamName teamNameButton'>{this.state.awayTeamName}</span>
-      //     )}
-      //     <p className='teamRecord'>{this.state.awayTeamWins} - {this.state.awayTeamLosses}</p>
-      //   </div>
-      //   <span className='game-dateTime'>{new Date(userPick.gameTime).toDateString()}</span>
-      //   <span className='currentPick'>current pick {currentPick}</span>
-      //   <div className='homeTeamDiv'>
-      //     {util.renderIf(editing, 
-      //       <button className='teamName teamNameButton' onClick={this.homeTeamPickUpdate}>{this.state.homeTeamName}</button>
-      //     )}
-      //     {util.renderIf(!editing, 
-      //       <span className='teamName teamNameButton'>{this.state.homeTeamName}</span>
-      //     )}
-      //     <p className='teamRecord'>{this.state.homeTeamWins} - {this.state.homeTeamLosses}</p>
-
-      //     <p className='editingButton' onClick={this.handleEdit}><i className="fa fa-edit"></i></p>
-      //   </div>
-      // </div>
-
 <div className='container'>
   <div className='eventDetails gameDetails' style={gameDetailsStyle}>
     <p className='eventNote'> 
@@ -145,7 +126,10 @@ class UserPickItem extends React.Component {
             <div className='starPlayerImageDivInnerWrapper'>
               <div className={this.state.isHovered && this.state.editing ? 'hovTransform playerCardOuter' : 'playerCardOuter'} onClick={this.homeTeamPickUpdate} onMouseEnter={this.handleHover} onMouseLeave={this.handleHover}>
                 <div className={this.state.isHovered && this.state.editing ? 'hovBackground playerCardImageWrapper' : 'playerCardImageWrapper'}>
+                  <div className='playerImageBackground'></div>
                   <img className='starPlayerImages' src={this.state.homeTeamStarPlayerImage}/>
+                  <div className='logoBackground' style={homeLogoStyle}></div>
+                  <div className='court'></div>
                 </div>
                 <div className='playerCardContentBorderTop' style={homeBorderStyle}></div>
                 <div className='playerCardNameWrapper'>
@@ -163,7 +147,10 @@ class UserPickItem extends React.Component {
             <div className='starPlayerImageDivInnerWrapper'>
               <div className={this.state.isHovered2 && this.state.editing ? 'hovTransform playerCardOuter' : 'playerCardOuter'} onClick={this.awayTeamPickUpdate} onMouseEnter={this.handleHover2} onMouseLeave={this.handleHover2}>
                 <div className={this.state.isHovered2 && this.state.editing ? 'hovBackground playerCardImageWrapper' : 'playerCardImageWrapper'}>
+                  <div className='playerImageBackground'></div>
                   <img className='starPlayerImages' src={this.state.awayTeamStarPlayerImage}/>
+                  <div className='logoBackground' style={awayLogoStyle}></div>
+                  <div className='court'></div>
                 </div>
                 <div className='playerCardContentBorderTop' style={awayBorderStyle}></div>
                 <div className='playerCardNameWrapper'>

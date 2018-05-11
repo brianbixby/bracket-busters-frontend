@@ -7,14 +7,16 @@ import * as util from '../../lib/util';
 class CommentForm extends React.Component {
   constructor(props) {
     super(props);
+    this.textAreaHeight = React.createRef();
     this.state = {
       content: '',
       focused: null,
+      textAreaHeight: 40,
     };
   }
 
   componentWillUnmount() {
-    this.setState({ content: '' });
+    this.setState({ content: '', textAreaHeight: 40 });
   }
 
   handleFocus = e => this.setState({ focused: e.target.name});
@@ -27,6 +29,10 @@ class CommentForm extends React.Component {
   };
 
   handleChange = e => {
+    let currHeight = this.textAreaHeight.current.scrollHeight;
+    if(currHeight > this.state.textAreaHeight) 
+      this.setState({ textAreaHeight: currHeight });
+
     let { name, value } = e.target;
 
     this.setState({
@@ -36,13 +42,18 @@ class CommentForm extends React.Component {
 
   handleSubmit = e => {
     e.preventDefault();
-    if(this.state.content) 
-      return this.props.onComplete({content: this.state.content })
+    if(this.state.content) {
+      this.props.onComplete({content: this.state.content })
         .catch(err => console.error(err));
+    }
+    this.setState({ content: '', textAreaHeight: 40 });
   };
 
   render() {
     let { focused, content} = this.state;
+    let textAreaStyle = {
+      height: `${this.state.textAreaHeight}px`,
+    };
     return (
       <form onSubmit={this.handleSubmit} className='form comment-form'>
         <div className='photo-div'>
@@ -50,7 +61,7 @@ class CommentForm extends React.Component {
         </div>
         <div className='commentInput-div'>
           <div className='commentInputWrapper'>
-            <input
+            <textarea
               className='commentInput'
               type='content'
               name='content'
@@ -59,7 +70,9 @@ class CommentForm extends React.Component {
               onChange={this.handleChange}
               onFocus={this.handleFocus}
               onBlur={this.handleBlur}
-            />
+              ref={this.textAreaHeight}
+              style={textAreaStyle}
+            ></textarea>
           </div>
         </div>
         

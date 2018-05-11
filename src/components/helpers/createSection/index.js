@@ -23,24 +23,6 @@ class CreateSection extends React.Component {
       // <div className='createOuter'>
       <div>
         <div className='createOuterInner'>
-          {/* <div className='createHeader'>
-            <div className='eventDetails'>
-              {util.renderIf(this.props.formType === 'league',
-                <p className='eventNote'>2018 NBA PLAYOFFS</p>
-              )}
-              {util.renderIf(this.props.formType === 'group',
-                <p className='eventNote'>GROUP eventNote</p>
-              )}
-            </div>
-            <div className='createHeadline'>
-              {util.renderIf(this.props.formType === 'league',
-                <p className='contentHeader'>ANOTHER HISTORIC SERIES</p>
-              )}
-              {util.renderIf(this.props.formType === 'GROUP',
-                <p className='contentHeader'>GROUP contentHeader</p>
-              )}
-            </div>
-          </div> */}
           {util.renderIf(this.props.formType === 'league',
             <div className='outer'>
               <div className='outerLeft'>
@@ -48,7 +30,7 @@ class CreateSection extends React.Component {
                 <p className='headerText'>2018 NBA PLAYOFFS </p>
               </div>
               <div className='outerRight'>
-                <p className='seeAll' onClick={this.redirect}>all {this.props.formType}s</p>
+                <p className='seeAll' onClick={this.redirect}>See All</p>
               </div>
             </div>
           )}
@@ -59,7 +41,7 @@ class CreateSection extends React.Component {
                 <p className='headerText'>GROUPS </p>
               </div>
               <div className='outerRight'>
-                <p className='seeAll' onClick={this.redirect}>all {this.props.formType}s</p>
+                <p className='seeAll' onClick={this.redirect}>See All</p>
               </div>
             </div>
           )}
