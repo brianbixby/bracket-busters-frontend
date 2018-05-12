@@ -6,8 +6,8 @@ class Modal extends React.Component {
       <div className='modal'>
         <div className='modal-overlay' onClick={this.props.close}></div>
         <div className='modal-wrapper'>
+          <div className='modal-close' onClick={this.props.close}></div>
           <div className='modal-header'>
-            <span className='modal-close' onClick={this.props.close}>X</span>
             <h2 className='modal-heading'>{this.props.heading}</h2>
           </div>
           

@@ -5,6 +5,10 @@ body {
   // background: #EDEEF0;
   background: #FFF;
 }
+textarea {
+  resize: none;
+  overflow: hidden;
+}
 .font-sm {
   font-size: 14px;
 }
