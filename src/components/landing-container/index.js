@@ -11,6 +11,7 @@ import CreateSection from '../helpers/createSection';
 import JoinSection from '../helpers/joinSection';
 import Slider from '../helpers/slider';
 import Table from '../helpers/table';
+import BannerAd from '../helpers/bannerAd';
 import { tokenSignInRequest } from '../../actions/userAuth-actions.js';
 import { userProfileFetchRequest, userProfileUpdateRequest } from '../../actions/userProfile-actions.js';
 import { leaguesFetchRequest, leagueCreateRequest, leagueFetch, leagueJoinRequest, topPublicLeaguesFetchRequest } from '../../actions/league-actions.js';
@@ -116,6 +117,7 @@ class LandingContainer extends React.Component {
         
         {util.renderIf(this.props.userAuth,
           <div className='grid-container'>
+           <BannerAd/>
             <div>
               <div className='row'>
                 <div className='col-md-8'>

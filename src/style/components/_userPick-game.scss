@@ -2,7 +2,7 @@
 @import './../lib/vars'; 
 
 // games
-.userPick-game-container {
+.userPicksDiv, .gamesDiv {
   .container {
     overflow: hidden;
     box-shadow: 0 1px 4px rgba(0, 0, 0, 0.24);
@@ -189,7 +189,7 @@
   display: inline-block;
   line-height: 30px;
 }
-.userPick-game-container .fadeout {
+.gamesDiv .fadeout {
   -webkit-animation: fadeOut 1s forwards;
   animation: fadeOut 1s forwards;
   -webkit-animation-delay: 1.5s;
@@ -234,12 +234,12 @@
 .mr50 {
   margin-right: 50px;
 }
-.hovTransform {
-   -webkit-transform: scale(1.08);
-      -moz-transform: scale(1.08);
-       -ms-transform: scale(1.08);
-        -o-transform: scale(1.08);
-           transform: scale(1.08);
+.pickHover:hover{
+  -webkit-transform: scale(1.08);
+    -moz-transform: scale(1.08);
+      -ms-transform: scale(1.08);
+      -o-transform: scale(1.08);
+        transform: scale(1.08);
 }
 .hovBackground{
   background-color: #e1e1e1;
@@ -255,13 +255,31 @@
     padding: 12px 20px 12px 0;
   }
 }
+// to make horizontal on mobile again uncomment out commented code and comment existing code for that class and comment out .gamesDiv .CREATEiMGdIV DISPLAY BLOCK
 @media only screen and (max-width: 450px) {
+  .gamesDiv .createImgDiv, .userPicksDiv .createImgDiv {
+    display: block;
+  }
   .playerCardOuter {
     // height: auto;
-    width: calc((100vw - 60px)/2);
-    
+    // width: calc((100vw - 60px)/2);
+    width: 237px;
+    height: 230px;
+    margin-bottom: 10px;
+
+    .logoBackground {
+      // height: 40%;
+      // width: 40%;
+      // top: 0;
+      // left: 0;
+      width: 70px;
+      height: 70px;
+      top: 15%;
+      left: 5%;
+    }
     .playerCardImageWrapper{
-      height: auto;
+      // height: calc((100vw - 60px)/2.77);
+      height: 75%;
     }
     .playerCardImageWrapper img {
       max-width: 100% !important;
@@ -272,13 +290,14 @@
       height: 3px;
     }
     .playerCardNameWrapper {
-      height: 50px;
+      // height: 50px;
+      height: 23.2%;
     }
     .starPlayerName {
       font-size: 18px;
     }
   }
-  .userPick-game-container{
+  .userPicksDiv, .gamesDiv{
     .createMain{
       padding-top: 16px;
       padding-bottom: 0;
@@ -303,17 +322,22 @@
       font-weight: 600;
     }
   }
-  .hovTransform {
+  .pickHover:hover{
     -webkit-transform: scale(1.05);
-     -moz-transform: scale(1.05);
-      -ms-transform: scale(1.05);
-       -o-transform: scale(1.05);
-          transform: scale(1.05);
+    -moz-transform: scale(1.05);
+    -ms-transform: scale(1.05);
+    -o-transform: scale(1.05);
+    transform: scale(1.05);
   }
 }
 @media only screen and (min-width: 651px) {
   .playerCardOuter {
     width: 273px;
+  }
+}
+@media only screen and (min-width: 651px) {
+  .playerCardOuter {
+    width: 237px;
   }
 }
 
@@ -336,15 +360,16 @@
   -webkit-transform: translate(-50%, -50%);
   -ms-transform: translate(-50%, -50%);
   transform: translate(-50%, -50%);
+  z-index: 3;
 }
 .logoBackground {
-  height: 40%;
-  width: 25%;
-  background-repeat: no-repeat;
+  height: 70px;
+  width: 70px;
+  background-repeat: no-repeat !important;
   position: absolute;
   top: 15%;
-  left: 10%;
-  background-size: cover !important;
+  left: 5%;
+  background-size: contain !important;
   z-index: 2;
 }
 .court{

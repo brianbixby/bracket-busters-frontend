@@ -219,7 +219,10 @@
   }
 }
 @media (min-width: 1200px) {
-  .tableContainer {
+  .tableContainer, .maxWidth294Big {
     width: 294px;
+  }
+  .maxWidth294Big {
+    margin-left: 0 !important;
   }
 }

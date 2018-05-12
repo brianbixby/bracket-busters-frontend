@@ -1,0 +1,27 @@
+.bannerAd{
+  margin-top: -16px;
+  margin-bottom: 10px;
+  height: 70px;
+  background: red;
+  height: 50px;
+  width: 100%;
+}
+
+@media (min-width: 768px) {
+  .bannerAd {
+    height: 70px;
+    width: 728px;
+  }
+}
+@media (min-width: 992px) {
+  .bannerAd {
+    width: 100%;
+    height: 90px;
+  }
+}
+@media (min-width: 1200px) {
+  .bannerAd {
+    margin-right: 20px;
+    width: calc((100% - 20px));
+  }
+}

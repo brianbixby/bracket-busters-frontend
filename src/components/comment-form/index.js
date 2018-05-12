@@ -11,12 +11,12 @@ class CommentForm extends React.Component {
     this.state = {
       content: '',
       focused: null,
-      textAreaHeight: 40,
+      textAreaHeight: 37,
     };
   }
 
   componentWillUnmount() {
-    this.setState({ content: '', textAreaHeight: 40 });
+    this.setState({ content: '', textAreaHeight: 37 });
   }
 
   handleFocus = e => this.setState({ focused: e.target.name});
@@ -46,7 +46,7 @@ class CommentForm extends React.Component {
       this.props.onComplete({content: this.state.content })
         .catch(err => console.error(err));
     }
-    this.setState({ content: '', textAreaHeight: 40 });
+    this.setState({ content: '', textAreaHeight: 37 });
   };
 
   render() {

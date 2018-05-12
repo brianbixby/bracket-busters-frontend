@@ -4,7 +4,7 @@ import * as util from './../../lib/util.js';
 class GameItem extends React.Component {
   constructor(props){
     super(props);
-    this.state = {gameID: props.game._id, gameTime: props.game.dateTime, pick: '', pickName: '', awayTeam: props.game.awayTeam._id, homeTeam: props.game.homeTeam._id, isHovered: false, isHovered2: false, };
+    this.state = {gameID: props.game._id, gameTime: props.game.dateTime, pick: '', pickName: '', awayTeam: props.game.awayTeam._id, homeTeam: props.game.homeTeam._id };
   }
 
   awayTeamPick = team => {
@@ -20,9 +20,6 @@ class GameItem extends React.Component {
       this.props.onComplete({gameID: this.state.gameID, gameTime: this.state.gameTime, pick: this.state.homeTeam})
     }, 2500);
   };
-
-  handleHover = () => this.setState({isHovered: !this.state.isHovered});
-  handleHover2 = () => this.setState({isHovered2: !this.state.isHovered2});
   
   render() {
     let { game } = this.props;
@@ -50,7 +47,7 @@ class GameItem extends React.Component {
           </p>
         </div>
         <div className='gameContent'>
-          <div className={this.state.isHovered ? 'hovTransform homeTeamContent' : 'homeTeamContent'} onClick={this.homeTeamPick} onMouseEnter={this.handleHover} onMouseLeave={this.handleHover}>
+          <div className='homeTeamContent pickHover' onClick={this.homeTeamPick}>
             <div className='teamContainer'>
               <div className='teamContentWrapper'>
                 <div className='teamInfo'>
@@ -68,7 +65,7 @@ class GameItem extends React.Component {
           <div className='gameDate'>
             <p className='gameDateP'>{new Date(game.dateTime).toDateString()}</p>
           </div>
-          <div className={this.state.isHovered2 ? 'hovTransform awayTeamContent' : 'awayTeamContent'} onClick={this.awayTeamPick} onMouseEnter={this.handleHover2} onMouseLeave={this.handleHover2}>
+          <div className='awayTeamContent pickHover' onClick={this.awayTeamPick}>
             <div className='teamContainer'>
               <div className='teamContentWrapper'>
                 <div className='gameLogoWrapper'>
@@ -91,8 +88,8 @@ class GameItem extends React.Component {
               <div className='starPlayerImageDiv homeStarPlayerImageDiv'>
                 <div className='starPlayerImageDivWrapper'>
                   <div className='starPlayerImageDivInnerWrapper'>
-                    <div className={this.state.isHovered ? 'hovTransform playerCardOuter' : 'playerCardOuter'} onClick={this.homeTeamPick} onMouseEnter={this.handleHover} onMouseLeave={this.handleHover}>
-                      <div className={this.state.isHovered ? 'hovBackground playerCardImageWrapper' : 'playerCardImageWrapper'}>
+                    <div className='playerCardOuter pickHover' onClick={this.homeTeamPick}>
+                      <div className='playerCardImageWrapper'>
                         <div className='playerImageBackground'></div>
                         <img className='starPlayerImages' src={game.homeTeam.starPlayerImage}/>
                         <div className='logoBackground' style={homeLogoStyle}></div>
@@ -112,8 +109,8 @@ class GameItem extends React.Component {
               <div className='starPlayerImageDiv awayStarPlayerImageDiv'>
                 <div className='starPlayerImageDivWrapper'>
                   <div className='starPlayerImageDivInnerWrapper'>
-                    <div className={this.state.isHovered2 ? 'hovTransform playerCardOuter' : 'playerCardOuter'} onClick={this.awayTeamPick} onMouseEnter={this.handleHover2} onMouseLeave={this.handleHover2}>
-                      <div className={this.state.isHovered2 ? 'hovBackground playerCardImageWrapper' : 'playerCardImageWrapper'}>
+                    <div className='playerCardOuter pickHover' onClick={this.awayTeamPick}>
+                      <div className='playerCardImageWrapper'>
                         <div className='playerImageBackground'></div>
                         <img className='starPlayerImages' src={game.awayTeam.starPlayerImage}/>
                         <div className='logoBackground' style={awayLogoStyle}></div>
@@ -136,7 +133,7 @@ class GameItem extends React.Component {
           )}
           <p className={ this.state.pick ? 'gamePick mr50' : 'gamePick' }>current pick: {currPick}</p>
         </div>
-      </div>
+      </div> 
     );
   }
 }

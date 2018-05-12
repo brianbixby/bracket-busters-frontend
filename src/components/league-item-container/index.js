@@ -74,61 +74,48 @@ class LeagueContainer extends React.Component {
         <div className='grid-container'>
           <div className='row'>
           <div className='col-md-8'>
-
-            <div className='wideSectionWrapper'>
-              <div className='outer'>
-                <div className='outerLeft'>
-                  <img src={nbalogo} />
-                  <p className='headerText'>UNPICKED GAMES </p>
-                  <p className='subheaderText'> </p>
-                </div>
-                <div className='outerRight'>
-                  <p className='seeAll'>See All</p>
-                </div>
-              </div>
-              <div className='gamesDiv'>
-                <p> games that need picks </p>
-                {this.props.games.map(game =>
-                  <div key={game._id} className='margin16'>
-                    <GameItem  game={game} onComplete={this.handleCreate}/>
+            {util.renderIf(this.props.games.length > 0,
+              <div className='wideSectionWrapper'>
+                <div className='outer'>
+                  <div className='outerLeft'>
+                    <img src={nbalogo} />
+                    <p className='headerText'>UNPICKED GAMES </p>
+                    <p className='subheaderText'> </p>
                   </div>
-                )}
-              </div>
-            </div>
-
-            <div className='wideSectionWrapper'>
-              <div className='outer'>
-                <div className='outerLeft'>
-                  <img src={nbalogo} />
-                  <p className='headerText'>PICKS </p>
-                  <p className='subheaderText'> </p>
-                </div>
-                <div className='outerRight'>
-                  <p className='seeAll'>See All</p>
-                </div>
-              </div>
-              {/* <UserPickContainer sportingEventID={this.props.currentLeague.sportingEventID} leagueID={this.props.currentLeague._id} /> */}
-              <div className='userPicksDiv'>
-                {this.props.userPicks.map((userPick, idx) =>
-                  <div key={idx} className='margin16'>
-                    <UserPickItem  userPick={userPick} onUpdate={this.handleUpdate}/>
+                  <div className='outerRight'>
+                    <p className='seeAll'>See All</p>
                   </div>
-                )}
-              </div>
-            </div>
-
-            <div className={this.state.maxHeight ? 'wideSectionWrapper maxHeight' : 'wideSectionWrapper'}>
-              <div className='outer messageboardHeader'>
-                <div className='outerLeft'>
-                  <i className="fa fa-comments"></i>
-                  <p className='headerText'>MESSAGE BOARD </p>
                 </div>
-                <div className='outerRight'>
-                  <p className='seeAll' onClick={this.handleMaxHeight}>See All</p>
+                <div className='gamesDiv'>
+                  {this.props.games.map(game =>
+                    <div key={game._id} className='margin16'>
+                      <GameItem  game={game} onComplete={this.handleCreate}/>
+                    </div>
+                  )}
                 </div>
               </div>
-              <MessageBoardContainer mBoardId={this.props.currentMessageBoard._id}/>
-            </div>
+            )}
+            {util.renderIf(this.props.userPicks.length > 0,
+              <div className='wideSectionWrapper'>
+                <div className='outer'>
+                  <div className='outerLeft'>
+                    <img src={nbalogo} />
+                    <p className='headerText'>PICKS </p>
+                    <p className='subheaderText'> </p>
+                  </div>
+                  <div className='outerRight'>
+                    <p className='seeAll'>See All</p>
+                  </div>
+                </div>
+                <div className='userPicksDiv'>
+                  {this.props.userPicks.map((userPick, idx) =>
+                    <div key={idx} className='margin16'>
+                      <UserPickItem  userPick={userPick} onUpdate={this.handleUpdate}/>
+                    </div>
+                  )}
+                </div>
+              </div>
+            )}
           </div>
           <div className='col-md-4'>
             <div className='leagueBoardsContainer'>
@@ -152,6 +139,20 @@ class LeagueContainer extends React.Component {
                 <div className='spacerRow'> </div>
               </div>
             </div>
+
+              {/* <div className={this.state.maxHeight ? 'wideSectionWrapper maxHeight maxWidth294Big' : 'wideSectionWrapper maxWidth294Big'}>
+                <div className='outer messageboardHeader'>
+                  <div className='outerLeft'>
+                    <i className="fa fa-comments"></i>
+                    <p className='headerText'>MESSAGE BOARD </p>
+                  </div>
+                  <div className='outerRight'>
+                    <p className='seeAll' onClick={this.handleMaxHeight}>See All</p>
+                  </div>
+                </div> */}
+                <MessageBoardContainer mBoardId={this.props.currentMessageBoard._id} commentsArray={this.props.currentMessageBoard.comments}/>
+              {/* </div> */}
+
           </div>
         </div>
       </div>
