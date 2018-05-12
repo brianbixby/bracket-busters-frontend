@@ -255,19 +255,31 @@
     padding: 12px 20px 12px 0;
   }
 }
+// to make horizontal on mobile again uncomment out commented code and comment existing code for that class and comment out .gamesDiv .CREATEiMGdIV DISPLAY BLOCK
 @media only screen and (max-width: 450px) {
+  .gamesDiv .createImgDiv, .userPicksDiv .createImgDiv {
+    display: block;
+  }
   .playerCardOuter {
-    height: auto;
-    width: calc((100vw - 60px)/2);
+    // height: auto;
+    // width: calc((100vw - 60px)/2);
+    width: 237px;
+    height: 230px;
+    margin-bottom: 10px;
 
     .logoBackground {
-      height: 40%;
-      width: 40%;
-      top: 0;
-      left: 0;
+      // height: 40%;
+      // width: 40%;
+      // top: 0;
+      // left: 0;
+      width: 70px;
+      height: 70px;
+      top: 15%;
+      left: 5%;
     }
     .playerCardImageWrapper{
-      height: calc((100vw - 60px)/2.77);
+      // height: calc((100vw - 60px)/2.77);
+      height: 75%;
     }
     .playerCardImageWrapper img {
       max-width: 100% !important;
@@ -278,13 +290,13 @@
       height: 3px;
     }
     .playerCardNameWrapper {
-      height: 50px;
+      // height: 50px;
+      height: 23.2%;
     }
     .starPlayerName {
       font-size: 18px;
     }
   }
-  // .userPick-game-container{
   .userPicksDiv, .gamesDiv{
     .createMain{
       padding-top: 16px;

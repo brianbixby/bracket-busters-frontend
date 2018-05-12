@@ -10,30 +10,74 @@ import * as util from '../../lib/util.js';
 class MessageBoardContainer extends React.Component {
   constructor(props){
     super(props);
+    this.state = { showComments: 5, commentCount: this.props.comments.length };
+  }
+
+  componentWillMount() {
+    this.props.commentsFetch(this.props.commentsArray)
+      .catch(err => util.logError(err));
+  }
+
+  componentWillReceiveProps(props) {
+    if (props.commentsArray) 
+      this.setState({commentCount: props.commentsArray.length});
   }
 
   handleComplete = comment => {
     comment.username = this.props.userProfile.username;
-    if(this.props.userProfile.image) comment.image = this.props.userProfile.image;
+    if(this.props.userProfile.image)
+      comment.image = this.props.userProfile.image;
     comment.messageBoardID = this.props.mBoardId;
     return this.props.commentCreate(comment)
+      .then(() => {
+        this.setState(prevState => {
+          return {commentCount: prevState.commentCount + 1}
+       })
+        console.log(this.state.commentCount);
+      })
       .catch(console.error);
-  }
+  };
+
+  handleShowMore = () => {
+    console.log(this.state.commentCount);
+    console.log(this.state.showComments);
+    this.setState({ showComments: this.state.showComments <= 5 ? this.state.commentCount : 5 });
+    console.log(this.state.commentCount);
+    console.log(this.state.showComments);
+  };
 
   render(){
+    let comments = this.props.comments.slice(0, this.state.showComments)
     let placeholderImage = require('./../helpers/assets/profilePlaceholder.jpeg');
     let profileImage = this.props.userProfile && this.props.userProfile.image ? this.props.userProfile.image : placeholderImage;
     return (
-      <div className='messageBoard-container'>
-        <div className='messageBoard-wrapper'>
-          <CommentForm onComplete={this.handleComplete} image={profileImage}/>
-        </div>
-      
-        {this.props.comments.map(comment =>
-          <div key={comment._id} className='comentOuterDiv'>
-            <CommentItem  comment={comment} image={profileImage} />
+      <div className='wideSectionWrapper'>
+        <div className='outer messageboardHeader'>
+          <div className='outerLeft'>
+            <i className="fa fa-comments"></i>
+            <p className='headerText'>MESSAGE BOARD </p>
           </div>
-        )}
+          <div className='outerRight'>
+            <p className='seeAll' onClick={this.handleShowMore}>See All</p>
+          </div>
+        </div>
+        <div className='messageBoard-container'>
+          <div className='messageBoard-wrapper'>
+            <CommentForm onComplete={this.handleComplete} image={profileImage}/>
+          </div>
+        
+          {comments.map(comment =>
+            <div key={comment._id} className='comentOuterDiv'>
+              <CommentItem  comment={comment} image={profileImage} />
+            </div>
+          )}
+
+          {/* {this.props.comments.map(comment =>
+            <div key={comment._id} className='comentOuterDiv'>
+              <CommentItem  comment={comment} image={profileImage} />
+            </div>
+          )} */}
+        </div>
       </div>
     );
   }

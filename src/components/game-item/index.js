@@ -133,7 +133,7 @@ class GameItem extends React.Component {
           )}
           <p className={ this.state.pick ? 'gamePick mr50' : 'gamePick' }>current pick: {currPick}</p>
         </div>
-      </div>
+      </div> 
     );
   }
 }

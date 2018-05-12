@@ -95,31 +95,6 @@ class LeagueContainer extends React.Component {
                 </div>
               </div>
             )}
-
-
-            {/* {util.renderIf(this.props.games.length > 0,
-              <div className='wideSectionWrapper'>
-                <div className='outer'>
-                  <div className='outerLeft'>
-                    <img src={nbalogo} />
-                    <p className='headerText'>UNPICKED GAMES </p>
-                    <p className='subheaderText'> </p>
-                  </div>
-                  <div className='outerRight'>
-                    <p className='seeAll'>See All</p>
-                  </div>
-                </div>
-                <div className='gamesDiv'>
-                  {this.props.games.map(game =>
-                    <div key={game._id} className='margin16'>
-                      <GameItem  game={game} onComplete={this.handleCreate}/>
-                    </div>
-                  )}
-                </div>
-              </div>
-            )} */}
-
-
             {util.renderIf(this.props.userPicks.length > 0,
               <div className='wideSectionWrapper'>
                 <div className='outer'>
@@ -165,7 +140,7 @@ class LeagueContainer extends React.Component {
               </div>
             </div>
 
-              <div className={this.state.maxHeight ? 'wideSectionWrapper maxHeight maxWidth294Big' : 'wideSectionWrapper maxWidth294Big'}>
+              {/* <div className={this.state.maxHeight ? 'wideSectionWrapper maxHeight maxWidth294Big' : 'wideSectionWrapper maxWidth294Big'}>
                 <div className='outer messageboardHeader'>
                   <div className='outerLeft'>
                     <i className="fa fa-comments"></i>
@@ -174,9 +149,9 @@ class LeagueContainer extends React.Component {
                   <div className='outerRight'>
                     <p className='seeAll' onClick={this.handleMaxHeight}>See All</p>
                   </div>
-                </div>
-                <MessageBoardContainer mBoardId={this.props.currentMessageBoard._id}/>
-              </div>
+                </div> */}
+                <MessageBoardContainer mBoardId={this.props.currentMessageBoard._id} commentsArray={this.props.currentMessageBoard.comments}/>
+              {/* </div> */}
 
           </div>
         </div>
