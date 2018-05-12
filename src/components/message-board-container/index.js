@@ -38,20 +38,9 @@ class MessageBoardContainer extends React.Component {
         this.setState(prevState => {
           return {commentCount: prevState.commentCount + 1}
        })
-        console.log(this.state.commentCount);
       })
       .catch(console.error);
   };
-
-  // handlelaunchCommentModal = () => this.setState({ launchCommentModal: true });
-
-  // handleShowMore = () => {
-  //   console.log(this.state.commentCount);
-  //   console.log(this.state.showComments);
-  //   this.setState({ showComments: this.state.showComments <= 5 ? this.state.commentCount : 5 });
-  //   console.log(this.state.commentCount);
-  //   console.log(this.state.showComments);
-  // };
 
   render(){
     let comments = this.props.comments.slice(0, 5)
