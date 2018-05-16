@@ -139,20 +139,7 @@ class LeagueContainer extends React.Component {
                 <div className='spacerRow'> </div>
               </div>
             </div>
-
-              {/* <div className={this.state.maxHeight ? 'wideSectionWrapper maxHeight maxWidth294Big' : 'wideSectionWrapper maxWidth294Big'}>
-                <div className='outer messageboardHeader'>
-                  <div className='outerLeft'>
-                    <i className="fa fa-comments"></i>
-                    <p className='headerText'>MESSAGE BOARD </p>
-                  </div>
-                  <div className='outerRight'>
-                    <p className='seeAll' onClick={this.handleMaxHeight}>See All</p>
-                  </div>
-                </div> */}
-                <MessageBoardContainer mBoardId={this.props.currentMessageBoard._id} commentsArray={this.props.currentMessageBoard.comments}/>
-              {/* </div> */}
-
+            <MessageBoardContainer mBoardId={this.props.currentMessageBoard._id} commentsArray={this.props.currentMessageBoard.comments}/>
           </div>
         </div>
       </div>

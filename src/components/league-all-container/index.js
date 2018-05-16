@@ -10,6 +10,7 @@ import { commentsFetchRequest } from '../../actions/comment-actions.js';
 import { topScoresFetchRequest } from '../../actions/scoreboard-actions.js';
 import { sportingEventsFetchRequest } from '../../actions/sportingEvent-actions.js';
 import LeagueAllPrivateForm from '../league-all-private-form';
+import BannerAd from '../helpers/bannerAd';
 import * as util from '../../lib/util.js';
 
 class LeagueAllContainer extends React.Component {
@@ -42,43 +43,110 @@ class LeagueAllContainer extends React.Component {
   };
 
   render(){
+    let basketball = require('./../helpers/assets/basketball.png');
     return (
       <div className='leagues-container page-outer-div'>
-      <div className='grid-container'>
-      <div className='container'>
-        <div className='inner-wrapper'>
-          <p className='header create-header'>Join A Private League! </p>
-          <LeagueAllPrivateForm onComplete={this.handlePrivateLeagueJoin}/>
-        </div>
-      </div>
-      
+        <div className='grid-container'>
+         <BannerAd/>
+          <div>
+            <div className='row'>
+              <div className='col-md-8'>
+                <div className='mainContainer'>
+                  <div className='mainContainer-header'>
+                    <div className='left'>
+                      <img src={basketball} />
+                      <p className='mainContainerHeader'>
+                        LEAGUES
+                      </p>
+                    </div>
+                    <div className='right'>
+                      <p className='seeAll'> See All</p>
+                    </div>
+                  </div>
 
-      <div className='container'>
-          <p className='header usersLeagueAndGroupsHeader'>Public Leagues</p>
-
-          <div className='myleaguesHeader'>
-            <p className='l-name myL-headers'> LEAGUE NAME </p>
-            <p className='l-creator myL-headers'> CREATOR </p>
-            <p className='l-players myL-headers'> PLAYERS </p>
-            <p className='l-scoring myL-headers'> SCORING </p>
-          </div>
-          {this.props.publicLeagues.map(league => {
-            let boundLeagueJoinClick = this.handleLeagueJoin.bind(this, league);
-            return <div key={league._id}>
-              <p className='span-row'>
-                <span className='span-name'>{league.leagueName} </span>
-                <span className='span-owner'>{league.ownerName} </span>
-                <span className='span-size'>{league.size} </span>
-                <span className='span-scoring'>{league.scoring} </span>
-                <span className='span-join'><button className='button' onClick={boundLeagueJoinClick}>join</button></span>
-              </p>
+                  <div className='mainContainerSection'>
+                    <div className='mainContainerSectionWrapper'>
+                      <div className='container hideLarge'>
+                        <div className='inner-wrapper hideLarge'>
+                          <p className='header create-header'>Join A Private League! </p>
+                          <LeagueAllPrivateForm onComplete={this.handlePrivateLeagueJoin}/>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div className='mainContainerSection'>
+                    <div className='mainContainerSectionWrapper'>
+                      <div className='container'>
+                        <p className='header usersLeagueAndGroupsHeader'>Public Leagues</p>
+                        <div className='myleaguesHeader'>
+                          <p className='l-name myL-headers'> LEAGUE NAME </p>
+                          <p className='l-creator myL-headers'> CREATOR </p>
+                          <p className='l-players myL-headers'> PLAYERS </p>
+                          <p className='l-scoring myL-headers'> SCORING </p>
+                        </div>
+                        {this.props.publicLeagues.map(league => {
+                          let boundLeagueJoinClick = this.handleLeagueJoin.bind(this, league);
+                          return <div key={league._id}>
+                            <p className='span-row'>
+                              <span className='span-name'>{league.leagueName} </span>
+                              <span className='span-owner'>{league.ownerName} </span>
+                              <span className='span-size'>{league.size} </span>
+                              <span className='span-scoring'>{league.scoring} </span>
+                              <span className='span-join'><button className='button' onClick={boundLeagueJoinClick}>join</button></span>
+                            </p>
+                          </div>
+                        })}
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div className='col-md-4 hideMedium'>
+                <div className='container'>
+                  <div className='inner-wrapper'>
+                    <p className='header create-header'>Join A Private League! </p>
+                    <LeagueAllPrivateForm onComplete={this.handlePrivateLeagueJoin}/>
+                  </div>
+                </div>
+              </div>
             </div>
-          })}
+          </div>
         </div>
-        
-        
       </div>
-      </div>
+
+
+
+
+      //   <div className='grid-container'>
+      //     <div className='container'>
+      //       <div className='inner-wrapper'>
+      //         <p className='header create-header'>Join A Private League! </p>
+      //         <LeagueAllPrivateForm onComplete={this.handlePrivateLeagueJoin}/>
+      //       </div>
+      //     </div>
+      //   <div className='container'>
+      //       <p className='header usersLeagueAndGroupsHeader'>Public Leagues</p>
+      //       <div className='myleaguesHeader'>
+      //         <p className='l-name myL-headers'> LEAGUE NAME </p>
+      //         <p className='l-creator myL-headers'> CREATOR </p>
+      //         <p className='l-players myL-headers'> PLAYERS </p>
+      //         <p className='l-scoring myL-headers'> SCORING </p>
+      //       </div>
+      //       {this.props.publicLeagues.map(league => {
+      //         let boundLeagueJoinClick = this.handleLeagueJoin.bind(this, league);
+      //         return <div key={league._id}>
+      //           <p className='span-row'>
+      //             <span className='span-name'>{league.leagueName} </span>
+      //             <span className='span-owner'>{league.ownerName} </span>
+      //             <span className='span-size'>{league.size} </span>
+      //             <span className='span-scoring'>{league.scoring} </span>
+      //             <span className='span-join'><button className='button' onClick={boundLeagueJoinClick}>join</button></span>
+      //           </p>
+      //         </div>
+      //       })}
+      //     </div>
+      //   </div>
+      // </div>
     );
   }
 }
@@ -113,3 +181,36 @@ let mapDispatchToProps = dispatch => ({
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(LeagueAllContainer);
+
+
+{/* <div className='leagues-container page-outer-div'>
+<div className='grid-container'>
+  <div className='container'>
+    <div className='inner-wrapper'>
+      <p className='header create-header'>Join A Private League! </p>
+      <LeagueAllPrivateForm onComplete={this.handlePrivateLeagueJoin}/>
+    </div>
+  </div>
+<div className='container'>
+    <p className='header usersLeagueAndGroupsHeader'>Public Leagues</p>
+    <div className='myleaguesHeader'>
+      <p className='l-name myL-headers'> LEAGUE NAME </p>
+      <p className='l-creator myL-headers'> CREATOR </p>
+      <p className='l-players myL-headers'> PLAYERS </p>
+      <p className='l-scoring myL-headers'> SCORING </p>
+    </div>
+    {this.props.publicLeagues.map(league => {
+      let boundLeagueJoinClick = this.handleLeagueJoin.bind(this, league);
+      return <div key={league._id}>
+        <p className='span-row'>
+          <span className='span-name'>{league.leagueName} </span>
+          <span className='span-owner'>{league.ownerName} </span>
+          <span className='span-size'>{league.size} </span>
+          <span className='span-scoring'>{league.scoring} </span>
+          <span className='span-join'><button className='button' onClick={boundLeagueJoinClick}>join</button></span>
+        </p>
+      </div>
+    })}
+  </div>
+</div>
+</div> */}
