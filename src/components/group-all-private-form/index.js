@@ -84,10 +84,9 @@ class GroupAllPrivateForm extends React.Component {
     let { focused, submitted, groupName, passwordError, groupNameError } = this.state;
     return (
       <form onSubmit={this.handleSubmit} className={util.classToggler({
-        'form page-form group-all-private-form': true,
+        'form page-form all-private-form': true,
         'error': this.state.error && this.state.submitted,
       })}>
-        <h2>join a private group.</h2>
         <input
           className={util.classToggler({error: groupNameError })}
           type='text'
@@ -111,7 +110,7 @@ class GroupAllPrivateForm extends React.Component {
           onBlur={this.handleBlur}
         />
 
-        <button className='button' type='submit'> Join Group </button>
+        <p className='textRight'><button className='red-button b-button joinPrivate' type='submit'> Join Group </button></p>
       </form>
     );
   }

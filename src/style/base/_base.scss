@@ -3,6 +3,8 @@
 
 body {
   background: #FFF;
+  max-width: 100vw;
+  overflow-x: hidden;
 }
 textarea {
   resize: none;
