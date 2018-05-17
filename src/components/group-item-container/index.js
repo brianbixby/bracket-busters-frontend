@@ -7,8 +7,9 @@ import { leaguesFetchRequest, topPublicLeaguesFetchRequest } from '../../actions
 import { groupsFetchRequest, groupFetchRequest, groupDeleteRequest, groupUpdateRequest, topPublicGroupsFetchRequest } from '../../actions/group-actions.js';
 import { topScoresFetchRequest } from '../../actions/scoreboard-actions.js';
 import { sportingEventsFetchRequest } from '../../actions/sportingEvent-actions.js';
-import GroupForm from '../league-form';
 import MessageBoardContainer from '../message-board-container';
+import Table from '../helpers/table';
+import BannerAd from '../helpers/bannerAd';
 import * as util from '../../lib/util.js';
 
 class GroupItemContainer extends React.Component {
@@ -21,10 +22,30 @@ class GroupItemContainer extends React.Component {
   }
 
   render(){
+    let currentGroup = this.props.currentGroup;
+
     return (
       <div className='group-container page-outer-div'>
         <div className='grid-container'>
-          <MessageBoardContainer mBoardId={this.props.currentMessageBoard._id}/>
+          <BannerAd/>
+          <div className='row'>
+            <div className='col-md-8'>
+              <MessageBoardContainer mBoardId={this.props.currentMessageBoard._id} commentsArray={this.props.currentMessageBoard.comments}/>
+            </div>
+            <div className='col-md-4'>
+              <div className='grouInfoContianer'>
+                <p> Created On: {new Date(currentGroup.createdOn).toDateString()}</p>
+                <p> Name: {currentGroup.groupName}</p>
+                <p> <img src={currentGroup.image}/></p>
+                <p> Motto: {currentGroup.motto}</p>
+                <p> Creator: {currentGroup.ownerName}</p>
+                <p> Privacy: {currentGroup.privacy}</p>
+                <p> Size: {currentGroup.size}</p>
+                <p> Users: {currentGroup.users}</p>
+              </div>
+            </div>
+          </div>
+
         </div>
       </div>
     );
@@ -34,14 +55,14 @@ class GroupItemContainer extends React.Component {
 let mapStateToProps = state => ({
   userAuth: state.userAuth,
   userProfile: state.userProfile,
+  currentLeague: state.currentLeague,
+  currentGroup: state.currentGroup,
+  currentMessageBoard: state.currentMessageBoard,
+  scoreBoards: state.scoreBoards,
   sportingEvent: state.sportingEvent,
   topPublicLeagues: state.topPublicLeagues,
   topScores: state.topScores,
   topPublicGroups: state.topPublicGroups,
-  leagues: state.leagues,
-  messageBoards: state.messageBoards,
-  currentLeague: state.currentLeague,
-  currentMessageBoard: state.currentMessageBoard,
 });
 
 let mapDispatchToProps = dispatch => ({
