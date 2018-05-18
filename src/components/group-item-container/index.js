@@ -23,6 +23,7 @@ class GroupItemContainer extends React.Component {
 
   render(){
     let currentGroup = this.props.currentGroup;
+    let random = require('./../helpers/assets/leagueGeneric.png');
 
     return (
       <div className='group-container page-outer-div'>
@@ -30,22 +31,121 @@ class GroupItemContainer extends React.Component {
           <BannerAd/>
           <div className='row'>
             <div className='col-md-8'>
-              <MessageBoardContainer mBoardId={this.props.currentMessageBoard._id} commentsArray={this.props.currentMessageBoard.comments}/>
+              <div className='mainContainer'> 
+                <div className='outer'>
+                  <div className='outerLeft'>
+                    <i className='fa fa-users'></i>
+                    <p className='headerText'>group text </p>
+                  </div>
+                  <div className='outerRight'>
+                  </div>
+                </div>
+                <div className='createMain'>
+                  <div className='createMainWrapper'>
+                    <div className='createMainContent'>
+                      <div className='createMainBorder'></div>
+                      <div>
+                        <p className='createMainTitle'> {currentGroup.groupName} </p>
+                        <p className='createMainSubtitle'>{currentGroup.motto}</p>
+                      </div>
+                    </div>
+                    <div className='createImgDiv'>
+                      <img className="createImg" src={currentGroup.image} />
+                    </div>
+                  </div>
+                </div>
+
+
+                <div className='mainContainer hideLarge margin16 mBottom16'>
+                  <div className='mainContainer-header'>
+                    <div className='left'>
+                      <i className="fa fa-info-circle"></i>
+                      <p className='mainContainerHeader'>GROUP INFO.</p>
+                    </div>
+                  </div>
+                  <div className='mainContainerSection'>
+                    <div className='mainContainerSectionWrapper'>
+                      <div className='container'>
+                        <div className='inner-wrapper'>
+                          <p className='margin16 groupInfoP'> Creator: <span className='groupInfoData'>{currentGroup.ownerName}</span></p>
+                          <p className='margin16 groupInfoP'> Created On: <span className='groupInfoData'>{new Date(currentGroup.createdOn).toDateString()}</span></p>
+                          <p className='margin16 groupInfoP'> Privacy: <span className='groupInfoData'>{currentGroup.privacy}</span></p>
+                          <p className='margin16 groupInfoP'> Size: <span className='groupInfoData'>{currentGroup.size}</span></p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div className='mainContainer hideLarge margin16 mBottom16'>
+                  <div className='mainContainer-header'>
+                    <div className='left'>
+                      <i className="fa fa-users"></i>
+                      <p className='mainContainerHeader'>GROUP MEMBERS</p>
+                    </div>
+                  </div>
+                  <div className='mainContainerSection'>
+                    <div className='mainContainerSectionWrapper'>
+                      <div className='container'>
+                        <div className='inner-wrapper'>
+                          {currentGroup.users.map((user, idx) => {
+                            return <div className='rowColors' key={idx}>
+                              <p className='margin16'><span>{user}</span></p>
+                            </div>;
+                          })}
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div className='margin16'>
+                  <MessageBoardContainer mBoardId={this.props.currentMessageBoard._id} commentsArray={this.props.currentMessageBoard.comments}/>
+                </div>
+              </div>
             </div>
-            <div className='col-md-4'>
-              <div className='grouInfoContianer'>
-                <p> Created On: {new Date(currentGroup.createdOn).toDateString()}</p>
-                <p> Name: {currentGroup.groupName}</p>
-                <p> <img src={currentGroup.image}/></p>
-                <p> Motto: {currentGroup.motto}</p>
-                <p> Creator: {currentGroup.ownerName}</p>
-                <p> Privacy: {currentGroup.privacy}</p>
-                <p> Size: {currentGroup.size}</p>
-                <p> Users: {currentGroup.users}</p>
+            <div className='col-md-4 hideMedium'>
+              <div className='mainContainer'>
+                <div className='mainContainer-header'>
+                  <div className='left'>
+                    <i className="fa fa-info-circle"></i>
+                    <p className='mainContainerHeader'>GROUP INFO.</p>
+                  </div>
+                </div>
+                <div className='mainContainerSection'>
+                  <div className='mainContainerSectionWrapper'>
+                    <div className='container'>
+                      <div className='inner-wrapper'>
+                        <p className='margin16 groupInfoP'> Creator: <span className='groupInfoData'>{currentGroup.ownerName}</span></p>
+                        <p className='margin16 groupInfoP'> Created On: <span className='groupInfoData'>{new Date(currentGroup.createdOn).toDateString()}</span></p>
+                        <p className='margin16 groupInfoP'> Privacy: <span className='groupInfoData'>{currentGroup.privacy}</span></p>
+                        <p className='margin16 groupInfoP'> Size: <span className='groupInfoData'>{currentGroup.size}</span></p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div className='mainContainer'>
+                <div className='mainContainer-header'>
+                  <div className='left'>
+                    <i className="fa fa-users"></i>
+                    <p className='mainContainerHeader'>GROUP MEMBERS</p>
+                  </div>
+                </div>
+                <div className='mainContainerSection'>
+                  <div className='mainContainerSectionWrapper'>
+                    <div className='container'>
+                      <div className='inner-wrapper'>
+                        {currentGroup.users.map((user, idx) => {
+                          return <div className='rowColors' key={idx}>
+                            <p className='margin16'><span>{user}</span></p>
+                          </div>;
+                        })}
+                      </div>
+                    </div>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
-
         </div>
       </div>
     );
