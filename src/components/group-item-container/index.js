@@ -35,7 +35,7 @@ class GroupItemContainer extends React.Component {
                 <div className='outer'>
                   <div className='outerLeft'>
                     <i className='fa fa-users'></i>
-                    <p className='headerText'>group text </p>
+                    <p className='headerText'>GROUP </p>
                   </div>
                   <div className='outerRight'>
                   </div>
@@ -60,7 +60,7 @@ class GroupItemContainer extends React.Component {
                   <div className='mainContainer-header'>
                     <div className='left'>
                       <i className="fa fa-info-circle"></i>
-                      <p className='mainContainerHeader'>GROUP INFO.</p>
+                      <p className='mainContainerHeader'>GROUP INFO</p>
                     </div>
                   </div>
                   <div className='mainContainerSection'>
@@ -88,8 +88,8 @@ class GroupItemContainer extends React.Component {
                       <div className='container'>
                         <div className='inner-wrapper'>
                           {currentGroup.users.map((user, idx) => {
-                            return <div className='rowColors' key={idx}>
-                              <p className='margin16'><span>{user}</span></p>
+                            return <div className='rowColors2' key={idx}>
+                              <p className='margin16 padding8'><span>{user}</span></p>
                             </div>;
                           })}
                         </div>
@@ -107,7 +107,7 @@ class GroupItemContainer extends React.Component {
                 <div className='mainContainer-header'>
                   <div className='left'>
                     <i className="fa fa-info-circle"></i>
-                    <p className='mainContainerHeader'>GROUP INFO.</p>
+                    <p className='mainContainerHeader'>GROUP INFO</p>
                   </div>
                 </div>
                 <div className='mainContainerSection'>
@@ -135,8 +135,8 @@ class GroupItemContainer extends React.Component {
                     <div className='container'>
                       <div className='inner-wrapper'>
                         {currentGroup.users.map((user, idx) => {
-                          return <div className='rowColors' key={idx}>
-                            <p className='margin16'><span>{user}</span></p>
+                          return <div className='rowColors2' key={idx}>
+                            <p className='margin16 padding8'><span>{user}</span></p>
                           </div>;
                         })}
                       </div>

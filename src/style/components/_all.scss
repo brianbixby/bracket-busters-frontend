@@ -38,6 +38,7 @@
     .mainContainerSectionWrapper {
       box-shadow: none;
       margin: 0;
+      border-radius: 0;
     }
     .allHeader {
       margin: 20px 16px;
@@ -54,6 +55,10 @@
     }
   }
 }
+.hideLarge .mainContainerSectionWrapper {
+  border-radius: 0;
+}
+
 @media (min-width: 582px) {
   .allTableContainer p {
       width: 550px;
@@ -69,6 +74,8 @@
   .hideLarge{
     display: none;
   }
+}
+@media(max-width: 1199px) and (min-width: 992px) {
   .allTableOuter .allTableColumnDiv {
     padding: 0 15px;
   }
