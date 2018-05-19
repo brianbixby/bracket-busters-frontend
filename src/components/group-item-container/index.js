@@ -20,11 +20,14 @@ class GroupItemContainer extends React.Component {
   componentWillMount() {
     return util.userValidation(this.props);
   }
+  formatDate = date => {
+    let dateArr = new Date(date).toDateString().split(' ');
+    return `${dateArr[1]} ${dateArr[2]}, ${dateArr[3]}`;
+  };
 
   render(){
     let currentGroup = this.props.currentGroup;
     let random = require('./../helpers/assets/leagueGeneric.png');
-
     return (
       <div className='group-container page-outer-div'>
         <div className='grid-container'>
@@ -55,28 +58,67 @@ class GroupItemContainer extends React.Component {
                   </div>
                 </div>
 
+                {/* <div className='bigBox'>
+                  <div className='tablesContainer'>
+                    <div className='container tableContainer leagueBoards'>
+                      <div>
+                        <p className='tableHeadline'>GROUP DETAILS</p>
+                        <div className='tableColumnDiv'>
+                        </div>
+                      </div>
+                      <div className='rowColors'>
+                        <p className='margin16 groupInfoP'> <span className='groupInfoLabel'>Creator: </span> <span className='groupInfoData'>{currentGroup.ownerName}</span></p>
+                      </div>
+                      <div className='rowColors'>
+                        <p className='margin16 groupInfoP'> <span className='groupInfoLabel'>Created: </span> <span className='groupInfoData'>{this.formatDate(currentGroup.createdOn)}</span></p>
+                      </div>
+                      <div className='rowColors'>
+                        <p className='margin16 groupInfoP'> <span className='groupInfoLabel'>Privacy: </span> <span className='groupInfoData'>{currentGroup.privacy}</span></p>
+                      </div>
+                      <div className='rowColors'>
+                        <p className='margin16 groupInfoP'> <span className='groupInfoLabel'>Size: </span> <span className='groupInfoData'>{currentGroup.size}</span></p>
+                      </div>
+                      <div className='spacerRow'></div>
+                    </div>
+                    <div className='container tableContainer leagueBoards'>
+                      <div>
+                        <p className='tableHeadline'>GROUP MEMBERS</p>
+                        <div className='tableColumnDiv'></div>
+                      </div>
+                      {currentGroup.userNames.map((user, idx) => {
+                        return <div className='rowColors' key={idx}>
+                          <p className='margin16 padding8'><span>{user}</span></p>
+                        </div>;
+                      })}
+                      <div className='spacerRow'> </div>
+                    </div>
+                  </div>
+                </div> */}
 
-                <div className='mainContainer hideLarge margin16 mBottom16'>
-                  <div className='mainContainer-header'>
+
+                <div className='mainContainer hideLarge margin16 mBottom16 leagueBoards'>
+                  <div className='mainContainer-header borderBottom'>
                     <div className='left'>
                       <i className="fa fa-info-circle"></i>
                       <p className='mainContainerHeader'>GROUP INFO</p>
                     </div>
+                    <div className='right'>
+                    </div>
                   </div>
                   <div className='mainContainerSection'>
-                    <div className='mainContainerSectionWrapper'>
+                    <div className='mainContainerSectionWrapper noBorder'>
                       <div className='container'>
                         <div className='inner-wrapper'>
-                          <p className='margin16 groupInfoP'> Creator: <span className='groupInfoData'>{currentGroup.ownerName}</span></p>
-                          <p className='margin16 groupInfoP'> Created On: <span className='groupInfoData'>{new Date(currentGroup.createdOn).toDateString()}</span></p>
-                          <p className='margin16 groupInfoP'> Privacy: <span className='groupInfoData'>{currentGroup.privacy}</span></p>
-                          <p className='margin16 groupInfoP'> Size: <span className='groupInfoData'>{currentGroup.size}</span></p>
+                          <p className='margin16 groupInfoP'> <span className='groupInfoLabel'>Creator: </span> <span className='groupInfoData'>{currentGroup.ownerName}</span></p>
+                          <p className='margin16 groupInfoP'> <span className='groupInfoLabel'>Created: </span> <span className='groupInfoData'>{this.formatDate(currentGroup.createdOn)}</span></p>
+                          <p className='margin16 groupInfoP'> <span className='groupInfoLabel'>Privacy: </span> <span className='groupInfoData'>{currentGroup.privacy}</span></p>
+                          <p className='margin16 groupInfoP'> <span className='groupInfoLabel'>Size: </span> <span className='groupInfoData'>{currentGroup.size}</span></p>
                         </div>
                       </div>
                     </div>
                   </div>
                 </div>
-                <div className='mainContainer hideLarge margin16 mBottom16'>
+                <div className='mainContainer hideLarge margin16 mBottom16 leagueBoards medGroupMembersBox'>
                   <div className='mainContainer-header'>
                     <div className='left'>
                       <i className="fa fa-users"></i>
@@ -84,10 +126,10 @@ class GroupItemContainer extends React.Component {
                     </div>
                   </div>
                   <div className='mainContainerSection'>
-                    <div className='mainContainerSectionWrapper'>
+                    <div className='mainContainerSectionWrapper noBorder'>
                       <div className='container'>
                         <div className='inner-wrapper'>
-                          {currentGroup.users.map((user, idx) => {
+                          {currentGroup.userNames.map((user, idx) => {
                             return <div className='rowColors2' key={idx}>
                               <p className='margin16 padding8'><span>{user}</span></p>
                             </div>;
@@ -96,7 +138,7 @@ class GroupItemContainer extends React.Component {
                       </div>
                     </div>
                   </div>
-                </div>
+                </div> 
                 <div className='margin16'>
                   <MessageBoardContainer mBoardId={this.props.currentMessageBoard._id} commentsArray={this.props.currentMessageBoard.comments}/>
                 </div>
@@ -114,10 +156,10 @@ class GroupItemContainer extends React.Component {
                   <div className='mainContainerSectionWrapper'>
                     <div className='container'>
                       <div className='inner-wrapper'>
-                        <p className='margin16 groupInfoP'> Creator: <span className='groupInfoData'>{currentGroup.ownerName}</span></p>
-                        <p className='margin16 groupInfoP'> Created On: <span className='groupInfoData'>{new Date(currentGroup.createdOn).toDateString()}</span></p>
-                        <p className='margin16 groupInfoP'> Privacy: <span className='groupInfoData'>{currentGroup.privacy}</span></p>
-                        <p className='margin16 groupInfoP'> Size: <span className='groupInfoData'>{currentGroup.size}</span></p>
+                        <p className='margin24 groupInfoP'> Creator: <span className='groupInfoData'>{currentGroup.ownerName}</span></p>
+                        <p className='margin24 groupInfoP'> Created: <span className='groupInfoData'>{this.formatDate(currentGroup.createdOn)}</span></p>
+                        <p className='margin24 groupInfoP'> Privacy: <span className='groupInfoData'>{currentGroup.privacy}</span></p>
+                        <p className='margin24 groupInfoP'> Size: <span className='groupInfoData'>{currentGroup.size}</span></p>
                       </div>
                     </div>
                   </div>
@@ -134,9 +176,9 @@ class GroupItemContainer extends React.Component {
                   <div className='mainContainerSectionWrapper'>
                     <div className='container'>
                       <div className='inner-wrapper'>
-                        {currentGroup.users.map((user, idx) => {
+                        {currentGroup.userNames.map((user, idx) => {
                           return <div className='rowColors2' key={idx}>
-                            <p className='margin16 padding8'><span>{user}</span></p>
+                            <p className='margin24 padding8'><span>{user}</span></p>
                           </div>;
                         })}
                       </div>

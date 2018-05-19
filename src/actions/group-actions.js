@@ -46,6 +46,7 @@ export const groupCreateRequest = group => (dispatch, getState) => {
     .set('Authorization', `Bearer ${userAuth}`)
     .send(group)
     .then(res => {
+      console.log('res.body: ', res.body);
       dispatch(groupCreate(res.body));
       return res;
     });
