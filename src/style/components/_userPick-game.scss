@@ -2,390 +2,405 @@
 @import './../lib/vars'; 
 
 // games
-.userPicksDiv, .gamesDiv {
-  .container {
-    overflow: hidden;
-    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.24);
-  }
-  .createMainWrapper {
-    overflow: visible;
-    margin: 0 !important;
-  }
-  .createImgDiv{
-    display: flex;
-    justify-content: space-around;
-    overflow: visible;
-  }
-} 
-.gameContent {
-  position: relative;
-  height: 67px;
-}
-.homeTeamContent, .awayTeamContent {
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -moz-flex;
-  display: -ms-flexbox;
-  display: flex;
-  height: 67px;
-  position: relative;
-  overflow: hidden;
-  width: 50%;
-  float: left;
-  cursor: pointer;
-  -webkit-transition: -webkit-transform .5s ease-in-out; 
-  -moz-transition:    -moz-transform .5s ease-in-out; 
-    -o-transition:      -o-transform .5s ease-in-out; 
-       transition: -webkit-transform .5s ease-in-out; 
-       transition:         transform .5s ease-in-out; 
-}
-.teamContentWrapper {
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  -webkit-align-items: center;
-  -moz-align-items: center;
-  align-items: center;
-  height: auto;
-  width: 100%;
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -moz-flex;
-  display: -ms-flexbox;
-  display: flex;
-}
-.gameDate, .vsDiv {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  -webkit-transform: translate(-50%, -50%);
-  -ms-transform: translate(-50%, -50%);
-  transform: translate(-50%, -50%);
-  z-index: 2;
-}
-.teamContainer {
-  width: 100%;
-}
-.teamContentWrapper {
-  height: 67px;
-  padding: 12px 20px;
-}
-.homeTeamName, .awayTeamName {
-  color: #1d1e1f;
-  font-weight: 600;
-  line-height: 1.3;
-  font-size: 16px;
-  text-align: right;
-}
-.homeTeamRecord, .awayTeamRecord {
-  text-align: right;
-  color: #cbccce;
-  font-size: 10px;
-  padding-top: 2px;
-}
-.gameLogoWrapper {
-  padding: 0 6px;
-  text-align: center;
+// .userPicksDiv, .gamesDiv {
+//   .container {
+//     overflow: hidden;
+//     box-shadow: 0 1px 4px rgba(0, 0, 0, 0.24);
+//   }
+//   .createMainWrapper {
+//     overflow: visible;
+//     margin: 0 !important;
+//   }
+//   .createImgDiv{
+//     display: flex;
+//     justify-content: space-around;
+//     overflow: visible;
+//   }
+// } 
+// .gameContent {
+//   position: relative;
+//   height: 67px;
+// }
+// .homeTeamContent, .awayTeamContent {
+//   display: -webkit-box;
+//   display: -webkit-flex;
+//   display: -moz-flex;
+//   display: -ms-flexbox;
+//   display: flex;
+//   height: 67px;
+//   position: relative;
+//   overflow: hidden;
+//   width: 50%;
+//   float: left;
+//   cursor: pointer;
+//   -webkit-transition: -webkit-transform .5s ease-in-out; 
+//   -moz-transition:    -moz-transform .5s ease-in-out; 
+//     -o-transition:      -o-transform .5s ease-in-out; 
+//        transition: -webkit-transform .5s ease-in-out; 
+//        transition:         transform .5s ease-in-out; 
+// }
+// .teamContentWrapper {
+//   -webkit-box-align: center;
+//   -ms-flex-align: center;
+//   -webkit-align-items: center;
+//   -moz-align-items: center;
+//   align-items: center;
+//   height: auto;
+//   width: 100%;
+//   display: -webkit-box;
+//   display: -webkit-flex;
+//   display: -moz-flex;
+//   display: -ms-flexbox;
+//   display: flex;
+// }
+// .gameDate, .vsDiv {
+//   position: absolute;
+//   top: 50%;
+//   left: 50%;
+//   -webkit-transform: translate(-50%, -50%);
+//   -ms-transform: translate(-50%, -50%);
+//   transform: translate(-50%, -50%);
+//   z-index: 2;
+// }
+// .teamContainer {
+//   width: 100%;
+// }
+// .teamContentWrapper {
+//   height: 67px;
+//   padding: 12px 20px;
+// }
+// .homeTeamName, .awayTeamName {
+//   color: #1d1e1f;
+//   font-weight: 600;
+//   line-height: 1.3;
+//   font-size: 16px;
+//   text-align: right;
+// }
+// .homeTeamRecord, .awayTeamRecord {
+//   text-align: right;
+//   color: #cbccce;
+//   font-size: 10px;
+//   padding-top: 2px;
+// }
+// .gameLogoWrapper {
+//   padding: 0 6px;
+//   text-align: center;
 
-  img{
-    height: 40px;
-    width: 40px;
-  }
-}
-.gameDateP{
-  color: #48494a;
-  font-size: 12px;
-  line-height: 1;
-  padding: 2px 0;
-  font-weight: 600;
-}
-.teamInfo {
-  width: 80px;
-}
-.awayTeamContent {
-  .teamContentWrapper {
-    justify-content: flex-end;
-  }
-}
-.awayTeamName, .awayTeamRecord {
-  text-align: left;
-}
+//   img{
+//     height: 40px;
+//     width: 40px;
+//   }
+// }
+// .gameDateP{
+//   color: #48494a;
+//   font-size: 12px;
+//   line-height: 1;
+//   padding: 2px 0;
+//   font-weight: 600;
+// }
+// .teamInfo {
+//   width: 80px;
+// }
+// .awayTeamContent {
+//   .teamContentWrapper {
+//     justify-content: flex-end;
+//   }
+// }
+// .awayTeamName, .awayTeamRecord {
+//   text-align: left;
+// }
 
-// lower section with star players
-.starPlayerImageDiv {
-  display: flex;
-  position: relative;
-}
-.starPlayerImageDivWrapper {
-  width: 100%;
-}
-.starPlayerImageDivInnerWrapper {
-  display: block;
-  text-align: center;
-}
-.playerDiv {
-  padding: 15px 0;
-}
-.playerCardContentBorderTop {
-  background-image: linear-gradient(to right, rgba(252, 255, 200, 0) 0%, rgba(252, 255, 200, 0.48) 50%, rgba(252, 255, 200, 0) 100%);
-  height: 1.8%;
-  width: 100%;
-  background-color: rgba(0, 0, 0, 0.16);
-}
-.playerCardOuter {
-  border-radius: 10px;
-  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.16);
-  display: inline-block;
-  overflow: hidden;
-  cursor: pointer;
-  width: calc((100vw - 120px)/2);
-  height: 230px;
-  -webkit-transition: -webkit-transform .5s ease-in-out; 
-  -moz-transition:    -moz-transform .5s ease-in-out; 
-    -o-transition:      -o-transform .5s ease-in-out; 
-       transition: -webkit-transform .5s ease-in-out; 
-       transition:         transform .5s ease-in-out; 
-}
-.playerCardImageWrapper {
-  // background: #e1e1e1;
-  -webkit-transition: background-color .5s ease-in-out; 
-  -moz-transition: background-color .5s ease-in-out; 
-    -o-transition: background-color .5s ease-in-out; 
-       transition: background-color .5s ease-in-out; 
-  height: 75%;
-  width: 100%;
-  padding: 0;
-}
-.starPlayerName, .vs {
-  color: #1d1e1f;
-  font-size: 19px;
-  line-height: 21px;
-  font-weight: 600;
-}
-.playerCardNameWrapper{
-  height: 23.2%;
-  width: 100%;
-  position: relative;
+// // lower section with star players
+// .starPlayerImageDiv {
+//   display: flex;
+//   position: relative;
+// }
+// .starPlayerImageDivWrapper {
+//   width: 100%;
+// }
+// .starPlayerImageDivInnerWrapper {
+//   display: block;
+//   text-align: center;
+// }
+// .playerDiv {
+//   padding: 15px 0;
+// }
+// .playerCardContentBorderTop {
+//   background-image: linear-gradient(to right, rgba(252, 255, 200, 0) 0%, rgba(252, 255, 200, 0.48) 50%, rgba(252, 255, 200, 0) 100%);
+//   height: 1.8%;
+//   width: 100%;
+//   background-color: rgba(0, 0, 0, 0.16);
+// }
+// .playerCardOuter {
+//   border-radius: 10px;
+//   box-shadow: 0 1px 4px rgba(0, 0, 0, 0.16);
+//   display: inline-block;
+//   overflow: hidden;
+//   cursor: pointer;
+//   width: calc((100vw - 120px)/2);
+//   height: 230px;
+//   -webkit-transition: -webkit-transform .5s ease-in-out; 
+//   -moz-transition:    -moz-transform .5s ease-in-out; 
+//     -o-transition:      -o-transform .5s ease-in-out; 
+//        transition: -webkit-transform .5s ease-in-out; 
+//        transition:         transform .5s ease-in-out; 
+// }
+// .playerCardImageWrapper {
+//   // background: #e1e1e1;
+//   -webkit-transition: background-color .5s ease-in-out; 
+//   -moz-transition: background-color .5s ease-in-out; 
+//     -o-transition: background-color .5s ease-in-out; 
+//        transition: background-color .5s ease-in-out; 
+//   height: 75%;
+//   width: 100%;
+//   padding: 0;
+// }
+// .starPlayerName, .vs {
+//   color: #1d1e1f;
+//   font-size: 19px;
+//   line-height: 21px;
+//   font-weight: 600;
+// }
+// .playerCardNameWrapper{
+//   height: 23.2%;
+//   width: 100%;
+//   position: relative;
 
-  .starPlayerName{
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    -webkit-transform: translate(-50%, -50%);
-    -ms-transform: translate(-50%, -50%);
-    transform: translate(-50%, -50%);
-    z-index: 2;
-    width: 100%;
-  }
-}
-.gamesDiv .createMainWrapper, .userPicksDiv .createMainWrapper{
-  box-shadow: none;
-}
-.gamePick {
-  vertical-align: super;
-  color: #1d1e1f;
-  font-weight: 600;
-  font-size: 16px;
-  margin-right: 10px;
-  display: inline-block;
-  line-height: 30px;
-}
-.gamesDiv .fadeout {
-  -webkit-animation: fadeOut 1s forwards;
-  animation: fadeOut 1s forwards;
-  -webkit-animation-delay: 1.5s;
-  animation-delay: 1.5s;
-}
-@-webkit-keyframes fadeOut {
-  from {opacity: 1;}
-  to {opacity: 0;}
-}
-@keyframes fadeOut {
-  from {opacity: 1;}
-  to {opacity: 0;}
-}
-// picks
-.userPicksDiv .fa-edit {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  -webkit-transform: translate(-50%, -50%);
-  -ms-transform: translate(-50%, -50%);
-  transform: translate(-50%, -50%);
-  margin-left: 1px;
-  margin-top: 1px;
-  color: #FFF;
-}
-.circle {
-  display: inline-block;
-  background: #FF001F;
-  width: 30px;
-  height: 30px;
-  border-radius: 50%;
-  position: relative;
-  margin-right: 10px;
-  top: 2px;
-}
-.circle:hover {
-  background: rgba(255,0,31,.7);
-}
-.userPicksDiv .gamePick {
-  margin-right: 10px;
-}
-.mr50 {
-  margin-right: 50px;
-}
-.pickHover:hover{
-  -webkit-transform: scale(1.08);
-    -moz-transform: scale(1.08);
-      -ms-transform: scale(1.08);
-      -o-transform: scale(1.08);
-        transform: scale(1.08);
-}
-.hovBackground{
-  background-color: #e1e1e1;
-}
-@media only screen and (max-width: 413px) {
-  .playerCardOuter .starPlayerName {
-    font-size: 16px;
-  }
-  .awayTeamContent .teamContentWrapper {
-    padding: 12px 0 12px 20px;
-  }
-  .homeTeamContent .teamContentWrapper {
-    padding: 12px 20px 12px 0;
-  }
-}
-// to make horizontal on mobile again uncomment out commented code and comment existing code for that class and comment out .gamesDiv .CREATEiMGdIV DISPLAY BLOCK
-@media only screen and (max-width: 450px) {
-  .gamesDiv .createImgDiv, .userPicksDiv .createImgDiv {
-    display: block;
-  }
-  .playerCardOuter {
-    // height: auto;
-    // width: calc((100vw - 60px)/2);
-    width: 237px;
-    height: 230px;
-    margin-bottom: 10px;
+//   .starPlayerName{
+//     position: absolute;
+//     top: 50%;
+//     left: 50%;
+//     -webkit-transform: translate(-50%, -50%);
+//     -ms-transform: translate(-50%, -50%);
+//     transform: translate(-50%, -50%);
+//     z-index: 2;
+//     width: 100%;
+//   }
+// }
+// .gamesDiv .createMainWrapper, .userPicksDiv .createMainWrapper{
+//   box-shadow: none;
+// }
+// .gamePick {
+//   vertical-align: super;
+//   color: #1d1e1f;
+//   font-weight: 600;
+//   font-size: 16px;
+//   margin-right: 10px;
+//   display: inline-block;
+//   line-height: 30px;
+// }
+// .gamesDiv .fadeout {
+//   -webkit-animation: fadeOut 1s forwards;
+//   animation: fadeOut 1s forwards;
+//   -webkit-animation-delay: 1.5s;
+//   animation-delay: 1.5s;
+// }
+// @-webkit-keyframes fadeOut {
+//   from {opacity: 1;}
+//   to {opacity: 0;}
+// }
+// @keyframes fadeOut {
+//   from {opacity: 1;}
+//   to {opacity: 0;}
+// }
+// // picks
+// .userPicksDiv .fa-edit {
+//   position: absolute;
+//   top: 50%;
+//   left: 50%;
+//   -webkit-transform: translate(-50%, -50%);
+//   -ms-transform: translate(-50%, -50%);
+//   transform: translate(-50%, -50%);
+//   margin-left: 1px;
+//   margin-top: 1px;
+//   color: #FFF;
+// }
+// .circle {
+//   display: inline-block;
+//   background: #FF001F;
+//   width: 30px;
+//   height: 30px;
+//   border-radius: 50%;
+//   position: relative;
+//   margin-right: 10px;
+//   top: 2px;
+// }
+// .circle:hover {
+//   background: rgba(255,0,31,.7);
+// }
+// .userPicksDiv .gamePick {
+//   margin-right: 10px;
+// }
+// .mr50 {
+//   margin-right: 50px;
+// }
+// .pickHover:hover{
+//   -webkit-transform: scale(1.08);
+//     -moz-transform: scale(1.08);
+//       -ms-transform: scale(1.08);
+//       -o-transform: scale(1.08);
+//         transform: scale(1.08);
+// }
+// .hovBackground{
+//   background-color: #e1e1e1;
+// }
+// @media only screen and (max-width: 413px) {
+//   .playerCardOuter .starPlayerName {
+//     font-size: 16px;
+//   }
+//   .awayTeamContent .teamContentWrapper {
+//     padding: 12px 0 12px 20px;
+//   }
+//   .homeTeamContent .teamContentWrapper {
+//     padding: 12px 20px 12px 0;
+//   }
+// }
+// // to make horizontal on mobile again uncomment out commented code and comment existing code for that class and comment out .gamesDiv .CREATEiMGdIV DISPLAY BLOCK
+// @media only screen and (max-width: 450px) {
+//   .gamesDiv .createImgDiv, .userPicksDiv .createImgDiv {
+//     display: block;
+//   }
+//   .playerCardOuter {
+//     // height: auto;
+//     // width: calc((100vw - 60px)/2);
+//     width: 237px;
+//     height: 230px;
+//     margin-bottom: 10px;
 
-    .logoBackground {
-      // height: 40%;
-      // width: 40%;
-      // top: 0;
-      // left: 0;
-      width: 70px;
-      height: 70px;
-      top: 15%;
-      left: 5%;
-    }
-    .playerCardImageWrapper{
-      // height: calc((100vw - 60px)/2.77);
-      height: 75%;
-    }
-    .playerCardImageWrapper img {
-      max-width: 100% !important;
-      height: auto !important;
-    }
-    .playerCardContentBorderTop{
-      margin-top: -2px;
-      height: 3px;
-    }
-    .playerCardNameWrapper {
-      // height: 50px;
-      height: 23.2%;
-    }
-    .starPlayerName {
-      font-size: 18px;
-    }
-  }
-  .userPicksDiv, .gamesDiv{
-    .createMain{
-      padding-top: 16px;
-      padding-bottom: 0;
-    }
-    .gameDate{
-      top: 75px;
-    }
-    .vsDiv{
-      top: -69px;
-    }
-    .vs {
-      color: #48494a;
-      font-size: 16px;
-      line-height: 1;
-      padding: 2px 0;
-      font-weight: 600;
-    }
-    .gamePick{
-      color: #48494a;
-      font-size: 16px;
-      line-height: 1;
-      font-weight: 600;
-    }
-  }
-  .pickHover:hover{
-    -webkit-transform: scale(1.05);
-    -moz-transform: scale(1.05);
-    -ms-transform: scale(1.05);
-    -o-transform: scale(1.05);
-    transform: scale(1.05);
-  }
-}
-@media only screen and (min-width: 651px) {
-  .playerCardOuter {
-    width: 273px;
-  }
-}
-@media only screen and (min-width: 651px) {
-  .playerCardOuter {
-    width: 237px;
-  }
-}
+//     .logoBackground {
+//       // height: 40%;
+//       // width: 40%;
+//       // top: 0;
+//       // left: 0;
+//       width: 70px;
+//       height: 70px;
+//       top: 15%;
+//       left: 5%;
+//     }
+//     .playerCardImageWrapper{
+//       // height: calc((100vw - 60px)/2.77);
+//       height: 75%;
+//     }
+//     .playerCardImageWrapper img {
+//       max-width: 100% !important;
+//       height: auto !important;
+//     }
+//     .playerCardContentBorderTop{
+//       margin-top: -2px;
+//       height: 3px;
+//     }
+//     .playerCardNameWrapper {
+//       // height: 50px;
+//       height: 23.2%;
+//     }
+//     .starPlayerName {
+//       font-size: 18px;
+//     }
+//   }
+//   .userPicksDiv, .gamesDiv{
+//     .createMain{
+//       padding-top: 16px;
+//       padding-bottom: 0;
+//     }
+//     .gameDate{
+//       top: 75px;
+//     }
+//     .vsDiv{
+//       top: -69px;
+//     }
+//     .vs {
+//       color: #48494a;
+//       font-size: 16px;
+//       line-height: 1;
+//       padding: 2px 0;
+//       font-weight: 600;
+//     }
+//     .gamePick{
+//       color: #48494a;
+//       font-size: 16px;
+//       line-height: 1;
+//       font-weight: 600;
+//     }
+//   }
+//   .pickHover:hover{
+//     -webkit-transform: scale(1.05);
+//     -moz-transform: scale(1.05);
+//     -ms-transform: scale(1.05);
+//     -o-transform: scale(1.05);
+//     transform: scale(1.05);
+//   }
+// }
+// @media only screen and (min-width: 651px) {
+//   .playerCardOuter {
+//     width: 273px;
+//   }
+// }
+// @media only screen and (min-width: 651px) {
+//   .playerCardOuter {
+//     width: 237px;
+//   }
+// }
 
-.playerCardImageWrapper {
-  -webkit-transition: background-color .5s ease-in-out;
-  -moz-transition: background-color .5s ease-in-out;
-  -o-transition: background-color .5s ease-in-out;
-  transition: background-color .5s ease-in-out;
-  height: 75%;
-  width: 100%;
-  padding: 0;
-  position: relative;
-}
-.playerCardImageWrapper img {
-  height: 100%;
-  z-index: 1;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  -webkit-transform: translate(-50%, -50%);
-  -ms-transform: translate(-50%, -50%);
-  transform: translate(-50%, -50%);
-  z-index: 3;
-}
-.logoBackground {
-  height: 70px;
-  width: 70px;
-  background-repeat: no-repeat !important;
-  position: absolute;
-  top: 15%;
-  left: 5%;
-  background-size: contain !important;
-  z-index: 2;
-}
-.court{
-  position: absolute;
-  height: 100%;
-  width: 100%;
-  bottom: 0;
-  background: url(./../../components/helpers/assets/court.jpg);
-  background-size: cover;
-}
-.playerImageBackground {
-  position: absolute;
-  top: 0;
-  left: 0;
-  height: 100%;
-  width: 100%;
-  background: linear-gradient(rgba(255,255,255,.5), rgba(255,255,255,1));
-  z-index: 1;
+// .playerCardImageWrapper {
+//   -webkit-transition: background-color .5s ease-in-out;
+//   -moz-transition: background-color .5s ease-in-out;
+//   -o-transition: background-color .5s ease-in-out;
+//   transition: background-color .5s ease-in-out;
+//   height: 75%;
+//   width: 100%;
+//   padding: 0;
+//   position: relative;
+// }
+// .playerCardImageWrapper img {
+//   height: 100%;
+//   z-index: 1;
+//   position: absolute;
+//   top: 50%;
+//   left: 50%;
+//   -webkit-transform: translate(-50%, -50%);
+//   -ms-transform: translate(-50%, -50%);
+//   transform: translate(-50%, -50%);
+//   z-index: 3;
+// }
+// .logoBackground {
+//   height: 70px;
+//   width: 70px;
+//   background-repeat: no-repeat !important;
+//   position: absolute;
+//   top: 15%;
+//   left: 5%;
+//   background-size: contain !important;
+//   z-index: 2;
+// }
+// .court{
+//   position: absolute;
+//   height: 100%;
+//   width: 100%;
+//   bottom: 0;
+//   background: url(./../../components/helpers/assets/court.jpg);
+//   background-size: cover;
+// }
+// .playerImageBackground {
+//   position: absolute;
+//   top: 0;
+//   left: 0;
+//   height: 100%;
+//   width: 100%;
+//   background: linear-gradient(rgba(255,255,255,.5), rgba(255,255,255,1));
+//   z-index: 1;
+// }
+
+.leagueItem-page {
+  .cardOuter {
+    margin-right: 9px;
+    
+    .cardItem {
+      width: 240px;
+
+      .gpMidLeft, .gpMidRight, .gpBotLeft, .gpBotRight {
+        width: 50%;
+        display: inline-block;
+      }
+    }
+  }
 }

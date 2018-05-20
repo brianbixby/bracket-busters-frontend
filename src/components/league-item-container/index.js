@@ -152,23 +152,11 @@ class LeagueContainer extends React.Component {
                 <div className='container'>
                   <div className='sliderOuter'>
                     <div className='sliderOuterWrapper'>
-                      {/* {currentLeague.userNames.map((username, idx) => {
-                        return <div className='sliderInnerWrapper' key={idx}>
-                          <div className='cardOuter'>
-                            <div className='cardItem'>
-                              <div className='cardContentWrapper'>
-                                <div className='cardContentBorderTop'></div>
-                                <div className='cardContentDiv'>
-                                  <p className='joinTextTitle'>{username}</p> 
-                                </div>
-                              </div>
-                              <div className='cardImageDiv'>
-                                <img className='cardImage'src={currentLeague.image}/>
-                              </div>
-                            </div>
-                          </div>
-                        </div>;
-                      })} */}
+                      {this.props.games.map(game =>
+                        <div key={game._id} className='sliderInnerWrapper'>
+                          <GameItem  game={game} onComplete={this.handleCreate}/>
+                        </div>
+                      )}
                     </div>
                   </div>
                 </div>
