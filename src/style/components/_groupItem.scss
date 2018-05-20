@@ -1,75 +1,13 @@
-// .margin16 {
-//   margin-right: 16px !important;
-//   margin-left: 16px !important;
-// }
-// .margin24 {
-//   margin-right: 24px !important;
-//   margin-left: 24px !important;
-// }
-// .mBottom16 {
-//   margin-bottom: 16px;
-// }
-// .padding8 {
-//   padding-top: 8px;
-//   padding-bottom: 8px;
-// }
-// .group-container {
-//   .createMainWrapper:hover .createMainTitle {
-//     color: #1d1e1f;
-//   }
-//   .createMainWrapper {
-//     cursor: auto;
-//   }
-//   .hideLarge .noBorder .mainContainerSectionWrapper {
-//     box-shadow: none;
-//   }
-// }
-// .groupInfoP {
-//   padding: 8px 0;
-//   font-size: 16px;
-//   color: #000;
-//   font-weight: 400;
-//   text-transform: capitalize;
-// }
-// .groupInfoData {
-//   color: #000;
-//   font-weight: 400;
-// }
-// .halfSection {
-//   background: #fff;
-//   border-radius: 10px;
-//   margin-bottom: 16px;
-//   width: 290px;
-//   display: inline-block;
-//   box-shadow: 0 1px 4px rgba(0, 0, 0, 0.24);
-// }
-// @media (max-width: 991px) and (min-width: 582px) {
-//   .medGroupMembersBox {
-//     height: 212px;
-//     overflow: scroll;
-//     float: right;
-//     margin: 0 16px 16px 0 !important;
-//   }
-// }
-// @media (max-width: 991px) {
-//  .hideLarge .noBorder {
-//     border-radius: 0;
-//     box-shadow: none;
-//     margin: 0;
-//   }
-// }
-
-
 .groupItem-page {
   .createOuter {
     max-width: 660px;
     margin-right: auto;
     margin-left: auto;
 
-    .joinOuter, .createMainWrapper {
+    .joinOuter, .createMainWrapper, .cardOuter {
       cursor: auto;
     }
-    .joinOuter:hover .joinTextTitle, .createMainWrapper:hover .createMainTitle  {
+    .joinOuter:hover .joinTextTitle, .createMainWrapper:hover .createMainTitle, .cardOuter:hover .joinTextTitle  {
       color: #1d1e1f;
     }
     .joinTextDiv {
@@ -89,6 +27,9 @@
         font-size: 134px;
         color: #fff;
       }
+    }
+    .cardImage {
+      height: 130px;
     }
     .m16 {
       margin-right: 16px;

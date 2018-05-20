@@ -87,7 +87,7 @@ class GroupItemContainer extends React.Component {
                     <div className='joinTextDiv'>
                       <div>
                         <p className='joinTextTitle'>
-                          GROUP INFO
+                          Group Info
                         </p>
                         <p className='joinTextSubtitle'>
                           Creator: {currentGroup.ownerName} <br></br>
@@ -99,6 +99,29 @@ class GroupItemContainer extends React.Component {
                     </div>
                     <div className='joinImgDiv'>
                       <i className="fa fa-info-circle"></i>
+                    </div>
+                  </div>
+                </div>
+                <div className='container'>
+                  <div className='sliderOuter'>
+                    <div className='sliderOuterWrapper'>
+                      {currentGroup.userNames.map((username, idx) => {
+                        return <div className='sliderInnerWrapper' key={idx}>
+                          <div className='cardOuter'>
+                            <div className='cardItem'>
+                              <div className='cardContentWrapper'>
+                                <div className='cardContentBorderTop'></div>
+                                <div className='cardContentDiv'>
+                                  <p className='joinTextTitle'>{username}</p> 
+                                </div>
+                              </div>
+                              <div className='cardImageDiv'>
+                                <img className='cardImage'src={currentGroup.image}/>
+                              </div>
+                            </div>
+                          </div>
+                        </div>;
+                      })}
                     </div>
                   </div>
                 </div>
