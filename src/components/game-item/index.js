@@ -8,6 +8,7 @@ class GameItem extends React.Component {
   }
 
   awayTeamPick = team => {
+    console.log('atpick');
     this.setState({ pick: team, pickName: this.props.game.awayTeam.teamName });
     setTimeout(() => {
       this.props.onComplete({gameID: this.state.gameID, gameTime: this.state.gameTime, pick: this.state.awayTeam})
@@ -15,6 +16,7 @@ class GameItem extends React.Component {
   };
 
   homeTeamPick = team => {
+    console.log('htpick');
     this.setState({ pick: team, pickName: this.props.game.homeTeam.teamName});
     setTimeout(() => {
       this.props.onComplete({gameID: this.state.gameID, gameTime: this.state.gameTime, pick: this.state.homeTeam})
@@ -37,38 +39,53 @@ class GameItem extends React.Component {
     let awayBorderStyle = {
       background: `${game.awayTeam.color}`,
     };
-    let homeLogoStyle = {
-      background: `url(${game.homeTeam.image})`,
+    let homeColorStyle = {
+      background: `${game.homeTeam.color}`,
     };
+    let awayColorStyle = {
+      background: `${game.awayTeam.color}`,
+    };
+    let homeLogoStyle = {
+      background: `url(${game.homeTeam.image}) no-repeat`,
+    }; 
     let awayLogoStyle = {
-      background: `url(${game.awayTeam.image})`,
+      background: `url(${game.awayTeam.image}) no-repeat`,
     };
     let currPick = this.state.pickName ? this.state.pickName : 'Not Picked';
     return (
       <div className='cardOuter'>
         <div className='cardItem'>
-          <div className='gpWrapper'>
-            <div className='gpTop'>
-              <p>{game.homeTeam.teamCity} vs {game.awayTeam.teamCity}</p>
+          <div className='cardWrapper'>
+            <div className='homeTeamLogoDiv'>
             </div>
-            <div className='gpMiddle'>
-              <div className='gpMidLeft' onClick={this.homeTeamPick}>
-                <img src={game.homeTeam.image} />
-              </div>
-              <div className='gpMidRight' onClick={this.awayTeamPick}>
-                <img src={game.awayTeam.image} />
+            <div className='homeTeamLogoWrapper' style={homeLogoStyle}>
+            </div>
+            <div className='homeTeamInfoDiv'>
+              <div className='homeTeamInfoWrapper'>
+                <p className='cityRec'>{game.homeTeam.teamCity}({game.homeTeam.wins}-{game.homeTeam.losses})</p>
+                <p className='teamName'>{game.homeTeam.teamName}</p>
               </div>
             </div>
-            <div className='gpBottom'>
-              <p>{new Date(game.dateTime).toDateString()}</p>
-              <div className='gpBotLeft'>
-                <p className='homeTeamName'>{game.homeTeam.teamName}</p>
-                <p className='homeTeamRecord'>{game.homeTeam.wins} - {game.homeTeam.losses}</p>
+            <div className='middle'>
+              <div>
+                <span className='homePick' onClick={this.homeTeamPick}></span>
+                <span className='awayPick' onClick={this.awayTeamPick}></span>
               </div>
-              <div className='gpBotRight'>
-                <p className='awayTeamName'>{game.awayTeam.teamName}</p>
-                <p className='awayTeamRecord'>{game.awayTeam.wins} - {game.awayTeam.losses}</p>
+              <div className='sliderButtonWrapper'>
+                <div className={util.classToggler({ 'sliderButton': true, 'homeTeamPickButtonState ': this.state.pickName === this.props.game.homeTeam.teamName, 'awayTeamPickButtonState ': this.state.pickName === this.props.game.awayTeam.teamName })}></div>
+                
               </div>
+            </div>
+            <p className='gameTime'>{new Date(game.dateTime).toDateString()}</p>
+            <div className='awayTeamInfoDiv'>
+              <div className='awayTeamInfoWrapper'>
+                <p className='cityRec'>{game.awayTeam.teamCity}({game.awayTeam.wins}-{game.awayTeam.losses})</p>
+                <p className='teamName'>{game.awayTeam.teamName}</p>
+              </div>
+            </div>
+            <div className='awayTeamLogoDiv'>
+            </div>
+            <div className='awayTeamLogoWrapper' style={awayLogoStyle}>
             </div>
           </div>
         </div>
@@ -76,7 +93,6 @@ class GameItem extends React.Component {
     );
   }
 }
-
 
 export default GameItem;
 
@@ -170,7 +186,7 @@ export default GameItem;
 </div>
 <div className='checkmarkDiv'>
   {util.renderIf(this.state.pick,
-    <svg className="checkmark" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 52 52"><circle className="checkmark__circle" cx="26" cy="26" r="25" fill="none"/><path className="checkmark__check" fill="none" d="M14.1 27.2l7.1 7.2 16.7-16.8"/></svg>
+    <svg className='checkmark' xmlns='http://www.w3.org/2000/svg' viewBox='0 0 52 52'><circle className='checkmark__circle' cx='26' cy='26' r='25' fill='none'/><path className='checkmark__check' fill='none' d='M14.1 27.2l7.1 7.2 16.7-16.8'/></svg>
   )}
   <p className={ this.state.pick ? 'gamePick mr50' : 'gamePick' }>current pick: {currPick}</p>
 </div>

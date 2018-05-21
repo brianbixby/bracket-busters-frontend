@@ -163,6 +163,14 @@ class LeagueContainer extends React.Component {
                 <div className='container'>
                   <div className='sliderOuter'>
                     <div className='sliderOuterWrapper'>
+
+                                <div className='userPicksDiv'>
+            {this.props.userPicks.map((userPick, idx) =>
+              <div key={idx} className='margin16'>
+                <UserPickItem  userPick={userPick} onUpdate={this.handleUpdate}/>
+              </div>
+            )}
+          </div>
                       {/* {currentLeague.userNames.map((username, idx) => {
                         return <div className='sliderInnerWrapper' key={idx}>
                           <div className='cardOuter'>
