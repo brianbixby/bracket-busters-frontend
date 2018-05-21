@@ -396,7 +396,7 @@
     font-size: inherit;
   }
     .cardItem {
-      width: 613px;
+      width: 628px;
       height: 90px;
       border-bottom: 1px solid #000;
       border-top: 1px solid #333;
@@ -442,7 +442,7 @@
         left: 90px;
         text-align: right;
         top: 15px;
-        width: 130px;
+        width: 137.5px;
         height: 50px;
         color: #ccc;
         font-size: 26px;
@@ -466,13 +466,13 @@
   
       .awayTeamInfoDiv {
         top: 15px;
-        width: 130px;
+        width: 137.5px;
         height: 50px;
         color: #ccc;
         font-size: 26px;
         text-transform: uppercase;
         position: absolute;
-        left: 393px;
+        left: 400.5px;
   
         .cityRec {
           color: #888;
@@ -492,7 +492,7 @@
       .middle {
         background: url(http://weeklypickem.fantasy.nfl.com/static/img/siteSprite_1526681421.png) no-repeat scroll -203px -240px transparent;
         height: 40px;
-        left: 234px;
+        left: 241.5px;
         position: absolute;
         top: 15px;
         width: 145px;
@@ -546,6 +546,82 @@
       .gameTime {
         text-align: center;
         color: #fff;
+        left: 241.5px;
+        position: absolute;
+        bottom: 5px;
+        width: 145px;
       }
+    }
+  }
+
+  @media (max-width: 663px) {
+    .leagueItem-page .sliderOuterWrapper .cardItem {
+      width: 310px;
+      height: 180px;
+  
+      .homeTeamInfoDiv {
+        width: 200px;
+        left: 100px;
+
+        .cityRec, .teamName {
+          text-align: left;
+        }
+      }
+      .middle {
+        left: 200px;
+        top: 72.5px;
+        transform: rotate(90deg);
+        -webkit-transform: rotate(90deg);
+        -moz-transform: rotate(90deg);
+        z-index: 3;
+      }
+      .gameTime {
+        left: 100px;
+        text-align: left;
+        bottom: 82px;
+        font-weight: 900;
+      }
+      .awayTeamInfoDiv {
+        top: auto;
+        bottom: 15px;
+        width: 200px;
+        left: 100px;
+        text-align: right;
+  
+      }
+      .awayTeamLogoDiv {
+        right: auto;
+        background: -webkit-gradient(linear, right top, left top, from(#141414), color-stop(0.15, #1d1d1d), to(#202020));
+        width: 90px;
+        height: 90px;
+        position: absolute;
+        top: 90px;
+        left: 0;
+      }
+      .awayTeamLogoWrapper {
+        top: 90px;
+        right: auto;
+        left: 0;
+      }
+    }
+  }
+
+  @media (max-width: 1199px) and (min-width: 992px) {
+    .leagueItem-page .sliderOuterWrapper .cardItem {
+      width: 584.66px;
+  
+       .homeTeamInfoDiv {
+        width: 115.83px;
+       }
+       .awayTeamInfoDiv {
+        width: 115.83px;
+        left: 378.83px;
+       }
+       .middle, .gameTime {
+        left: 219.83px;
+       }
+       .awayTeamInfoDiv .teamName, .homeTeamInfoDiv .teamName {
+        font-size: 22px;
+       }
     }
   }
