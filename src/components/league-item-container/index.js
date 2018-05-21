@@ -149,47 +149,19 @@ class LeagueContainer extends React.Component {
                     </div>
                   </div>
                 </div>
-                <div className='container'>
-                  <div className='sliderOuter'>
-                    <div className='sliderOuterWrapper'>
-                      {this.props.games.map(game =>
-                        <div key={game._id} className='sliderInnerWrapper'>
-                          <GameItem  game={game} onComplete={this.handleCreate}/>
-                        </div>
-                      )}
+                <div className='container mtop8'>
+                  {this.props.games.map(game =>
+                    <div key={game._id} className='gameItemOuter'>
+                      <GameItem  game={game} onComplete={this.handleCreate}/>
                     </div>
-                  </div>
+                  )}
                 </div>
-                <div className='container'>
-                  <div className='sliderOuter'>
-                    <div className='sliderOuterWrapper'>
-
-                                <div className='userPicksDiv'>
-            {this.props.userPicks.map((userPick, idx) =>
-              <div key={idx} className='margin16'>
-                <UserPickItem  userPick={userPick} onUpdate={this.handleUpdate}/>
-              </div>
-            )}
-          </div>
-                      {/* {currentLeague.userNames.map((username, idx) => {
-                        return <div className='sliderInnerWrapper' key={idx}>
-                          <div className='cardOuter'>
-                            <div className='cardItem'>
-                              <div className='cardContentWrapper'>
-                                <div className='cardContentBorderTop'></div>
-                                <div className='cardContentDiv'>
-                                  <p className='joinTextTitle'>{username}</p> 
-                                </div>
-                              </div>
-                              <div className='cardImageDiv'>
-                                <img className='cardImage'src={currentLeague.image}/>
-                              </div>
-                            </div>
-                          </div>
-                        </div>;
-                      })} */}
+                <div className='container mtop8'>
+                  {this.props.userPicks.map((userPick, idx) =>
+                    <div key={idx} className='margin16'>
+                      <UserPickItem  userPick={userPick} onUpdate={this.handleUpdate}/>
                     </div>
-                  </div>
+                  )}
                 </div>
                 <div className='m16'>
                   <MessageBoardContainer mBoardId={this.props.currentMessageBoard._id} commentsArray={this.props.currentMessageBoard.comments}/>
