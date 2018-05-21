@@ -5,6 +5,20 @@
   .gameItemOuter {
     margin: 0 16px;
   }
+  .fadeout {
+    -webkit-animation: fadeOut 1s forwards;
+    animation: fadeOut 1s forwards;
+    -webkit-animation-delay: .5s;
+    animation-delay: .5s;
+  }
+  @-webkit-keyframes fadeOut {
+    from {opacity: 1;}
+    to {opacity: 0;}
+  }
+  @keyframes fadeOut {
+    from {opacity: 1;}
+    to {opacity: 0;}
+  }
 
     .cardItem {
       width: 628px;
@@ -72,6 +86,23 @@
           text-align: right;
           font-size: 25px;
           text-transform: uppercase;
+          -webkit-transition: color .35s ease;
+          -moz-transition: color .35s ease;
+          -o-transition: color .35s ease;
+          -ms-transition: color .35s ease;
+          transition: color .35s ease;
+        }
+        .picked {
+          color: #06c;
+        }
+        .correctPick .picked{
+          color: #2F7A1E;
+        }
+        .wrongPick .picked{
+          color: #9E0000;
+        }
+        .wrongPick .notPicked{
+          color: #06c;
         }
       }
   
@@ -93,11 +124,27 @@
           text-transform: uppercase;
         }
         .teamName {
-          color: #9E0000;
           color: #ccc;
           text-align: left;
           font-size: 25px;
           text-transform: uppercase;
+          -webkit-transition: color .35s ease;
+          -moz-transition: color .35s ease;
+          -o-transition: color .35s ease;
+          -ms-transition: color .35s ease;
+          transition: color .35s ease;
+        }
+        .picked {
+          color: #06c;
+        }
+        .correctPick .picked{
+          color: #2F7A1E;
+        }
+        .wrongPick .picked{
+          color: #9E0000;
+        }
+        .wrongPick .notPicked{
+          color: #06c;
         }
       }
       .middle {
@@ -164,7 +211,48 @@
         bottom: 5px;
         width: 145px;
       }
+      .homeArrow, .awayArrow {
+        color: #CCC;
+      }
+      .homeTeamPickButtonState .homeArrow {
+        color: #06c;
+      }
+      .awayTeamPickButtonState .awayArrow {
+        color: #06c;
+      }
     }
+    .locked .cardItem .middle {
+      .homePick, .awayPick {
+        cursor: auto;
+      }
+    } 
+  }
+
+  // pick logic styling
+  .correctPickButton, .wrongPickButton {
+    display: none;
+  }
+  .correctPick .correctPickButton, .wrongPick .wrongPickButton {
+    display: block;
+    height: 30px;
+    width: 120px;
+    position: absolute;
+    left: 17px;
+    top: 7px;
+  }
+  .correctPick .correctPickButton {
+    background: url(./../../components/helpers/assets/sprite.png) no-repeat scroll -324px -350px transparent;
+  }
+  .wrongPick .wrongPickButton {
+    background: url(./../../components/helpers/assets/sprite.png) no-repeat scroll -324px -391px transparent;
+  }
+  .lockedPickButton {
+    background: url(./../../components/helpers/assets/sprite.png) no-repeat scroll -324px -311px transparent;
+    height: 30px;
+    width: 90px;
+    position: absolute;
+    left: 26px;
+    top: 7px;
   }
 
   @media (max-width: 663px) {

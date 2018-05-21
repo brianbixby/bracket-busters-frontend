@@ -8,18 +8,24 @@ class GameItem extends React.Component {
   }
 
   awayTeamPick = team => {
-    this.setState({ pick: team, pickName: this.props.game.awayTeam.teamName });
-    setTimeout(() => {
-      this.props.onComplete({gameID: this.state.gameID, gameTime: this.state.gameTime, pick: this.state.awayTeam})
-    }, 2500);
+    if(new Date() < new Date(this.props.game.dateTime)) {
+      this.setState({ pick: team, pickName: this.props.game.awayTeam.teamName });
+      setTimeout(() => {
+        this.props.onComplete({gameID: this.state.gameID, gameTime: this.state.gameTime, pick: this.state.awayTeam})
+      }, 5500);
+    }
   };
 
   homeTeamPick = team => {
-    this.setState({ pick: team, pickName: this.props.game.homeTeam.teamName});
-    setTimeout(() => {
-      this.props.onComplete({gameID: this.state.gameID, gameTime: this.state.gameTime, pick: this.state.homeTeam})
-    }, 2500);
+    if(new Date() < new Date(this.props.game.dateTime)) {
+      this.setState({ pick: team, pickName: this.props.game.homeTeam.teamName});
+      setTimeout(() => {
+        this.props.onComplete({gameID: this.state.gameID, gameTime: this.state.gameTime, pick: this.state.homeTeam})
+      }, 5500);
+    }
   };
+
+
 
   formatDate = date => {
     let dateArr = new Date(date).toDateString().split(' ');
@@ -35,7 +41,7 @@ class GameItem extends React.Component {
       background: `url(${game.awayTeam.image}) no-repeat`,
     };
     return (
-      <div className='cardOuter'>
+      <div className={util.classToggler({ 'cardOuter': true, 'fadeout': this.state.pickName, 'locked': new Date() > new Date(game.dateTime) })}>
         <div className='cardItem'>
           <div className='cardWrapper'>
             <div className='homeTeamLogoDiv'></div>
@@ -43,7 +49,7 @@ class GameItem extends React.Component {
             <div className='homeTeamInfoDiv'>
               <div className='homeTeamInfoWrapper'>
                 <p className='cityRec'>{game.homeTeam.teamCity}({game.homeTeam.wins}-{game.homeTeam.losses})</p>
-                <p className='teamName'>{game.homeTeam.teamName}</p>
+                <p className={util.classToggler({ 'teamName': true, 'picked': this.state.pickName === this.props.game.homeTeam.teamName })}>{game.homeTeam.teamName}</p>
               </div>
             </div>
             <div className='middle'>
@@ -52,14 +58,21 @@ class GameItem extends React.Component {
                 <span className='awayPick' onClick={this.awayTeamPick}></span>
               </div>
               <div className='sliderButtonWrapper'>
-                <div className={util.classToggler({ 'sliderButton': true, 'homeTeamPickButtonState ': this.state.pickName === this.props.game.homeTeam.teamName, 'awayTeamPickButtonState ': this.state.pickName === this.props.game.awayTeam.teamName })}></div>
+                {util.renderIf(new Date() < new Date(game.dateTime),
+                <p className={util.classToggler({ 'sliderButton': true, 'homeTeamPickButtonState ': this.state.pickName === this.props.game.homeTeam.teamName, 'awayTeamPickButtonState ': this.state.pickName === this.props.game.awayTeam.teamName })}>
+                  <span className='homeArrow'>{`< < `}</span> <span className='awayArrow'>> > </span>
+                </p>
+                )}
+                {util.renderIf(new Date() > new Date(game.dateTime),
+                  <div className='lockedPickButton'></div>
+                )}
               </div>
             </div>
             <p className='gameTime'>{new Date(game.dateTime).toDateString()}</p>
             <div className='awayTeamInfoDiv'>
               <div className='awayTeamInfoWrapper'>
                 <p className='cityRec'>{game.awayTeam.teamCity}({game.awayTeam.wins}-{game.awayTeam.losses})</p>
-                <p className='teamName'>{game.awayTeam.teamName}</p>
+                <p className={util.classToggler({ 'teamName': true, 'picked': this.state.pickName === this.props.game.awayTeam.teamName })}>{game.awayTeam.teamName}</p>
               </div>
             </div>
             <div className='awayTeamLogoDiv'></div>
