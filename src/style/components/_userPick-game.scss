@@ -95,15 +95,6 @@
         .picked {
           color: #06c;
         }
-        .correctPick .picked{
-          color: #2F7A1E;
-        }
-        .wrongPick .picked{
-          color: #9E0000;
-        }
-        .wrongPick .notPicked{
-          color: #06c;
-        }
       }
   
       .awayTeamInfoDiv {
@@ -135,15 +126,6 @@
           transition: color .35s ease;
         }
         .picked {
-          color: #06c;
-        }
-        .correctPick .picked{
-          color: #2F7A1E;
-        }
-        .wrongPick .picked{
-          color: #9E0000;
-        }
-        .wrongPick .notPicked{
           color: #06c;
         }
       }
@@ -181,7 +163,8 @@
           width: 145px;
   
           .sliderButton {
-            background: #8b8b8b;
+            // background: #8b8b8b;
+            background: url(./../../components/helpers/assets/sprite.png) no-repeat scroll -205px -311px transparent;
             height: 30px;
             width: 75px;
             position: absolute;
@@ -193,12 +176,20 @@
             transition: all .3s ease;
           }
           .homeTeamPickButtonState {
+            background: url(./../../components/helpers/assets/sprite.png) no-repeat scroll -205px -350px transparent;
             left: 6px;
             right: auto;
+            cursor: pointer;
+            -webkit-transition: all .3s ease;
+            transition: all .3s ease;
           }
           .awayTeamPickButtonState {
+            background: url(./../../components/helpers/assets/sprite.png) no-repeat scroll -205px -391px transparent;
             right: 6px;
             left: auto;
+            cursor: pointer;
+            -webkit-transition: all .3s ease;
+            transition: all .3s ease;
           }
         }
       }
@@ -220,6 +211,15 @@
       .awayTeamPickButtonState .awayArrow {
         color: #06c;
       }
+    }
+    .correctPick .cardItem .homeTeamInfoDiv .picked, .correctPick .cardItem .awayTeamInfoDiv .picked{
+      color: #2F7A1E;
+    }
+    .wrongPick .cardItem .homeTeamInfoDiv .picked, .wrongPick .cardItem .awayTeamInfoDiv .picked, .locked .noPick .awayTeamInfoDiv .teamName, .locked .noPick .homeTeamInfoDiv .teamName{
+      color: #9E0000;
+    }
+    .wrongPick .cardItem .homeTeamInfoDiv .notPicked,  .wrongPick .cardItem .awayTeamInfoDiv .notPicked{
+      color: #06c;
     }
     .locked .cardItem .middle {
       .homePick, .awayPick {
@@ -254,6 +254,48 @@
     left: 26px;
     top: 7px;
   }
+  // .noPickButton {
+  //   background: url(image/sprite.png) no-repeat scroll -205px -311px transparent;
+  //   height: 30px;
+  //   width: 75px;
+  //   position: absolute;
+  //   top: 7px;
+  //   left: 35px;
+  // }
+  // .sliderButton {
+  //   // background: #8b8b8b;
+  //   background: url(image/sprite.png) no-repeat scroll -205px -311px transparent;
+  //   height: 30px;
+  //   width: 75px;
+  //   position: absolute;
+  //   left: 35px;
+  //   top: 5px;
+  //   border-radius: 15px;
+  //   cursor: pointer;
+  //   -webkit-transition: all .3s ease;
+  //   transition: all .3s ease;
+  // }
+  // .homeTeamPickButtonState {
+
+  // }
+  // .hPickButton {
+  //   background: url(./../../components/helpers/assets/sprite.png) no-repeat scroll -205px -350px transparent;
+  //   height: 30px;
+  //   width: 75px;
+  //   position: absolute;
+  //   top: 7px;
+  //   left: 7px;
+  // }
+  // .aPickButton {
+  //   background: url(./../../components/helpers/assets/sprite.png) no-repeat scroll -205px -391px transparent;
+  //   height: 30px;
+  //   width: 75px;
+  //   position: absolute;
+  //   top: 7px;
+  //   right: 9px;
+  // }
+
+
 
   @media (max-width: 663px) {
     .leagueItem-page .cardItem {

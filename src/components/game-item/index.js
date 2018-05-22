@@ -42,7 +42,7 @@ class GameItem extends React.Component {
     };
     return (
       <div className={util.classToggler({ 'cardOuter': true, 'fadeout': this.state.pickName, 'locked': new Date() > new Date(game.dateTime) })}>
-        <div className='cardItem'>
+        <div className={util.classToggler({ 'cardItem': true, 'noPick': !this.state.pick })}>
           <div className='cardWrapper'>
             <div className='homeTeamLogoDiv'></div>
             <div className='homeTeamLogoWrapper' style={homeLogoStyle}></div>
@@ -59,8 +59,7 @@ class GameItem extends React.Component {
               </div>
               <div className='sliderButtonWrapper'>
                 {util.renderIf(new Date() < new Date(game.dateTime),
-                <p className={util.classToggler({ 'sliderButton': true, 'homeTeamPickButtonState ': this.state.pickName === this.props.game.homeTeam.teamName, 'awayTeamPickButtonState ': this.state.pickName === this.props.game.awayTeam.teamName })}>
-                  <span className='homeArrow'>{`< < `}</span> <span className='awayArrow'>> > </span>
+                <p className={util.classToggler({ 'sliderButton': true, 'homeTeamPickButtonState': this.state.pickName === this.props.game.homeTeam.teamName, 'awayTeamPickButtonState': this.state.pickName === this.props.game.awayTeam.teamName })}>
                 </p>
                 )}
                 {util.renderIf(new Date() > new Date(game.dateTime),

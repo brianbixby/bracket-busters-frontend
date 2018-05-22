@@ -23,7 +23,6 @@ class UserPickItem extends React.Component {
       homeTeamStarPlayerImage: props.userPick.gameID.homeTeam.starPlayerImage,
       homeTeamImage: props.userPick.gameID.homeTeam.image,
       homeTeamColor: props.userPick.gameID.homeTeam.color,
-      editing: false,
     }
   }
 
@@ -32,25 +31,12 @@ class UserPickItem extends React.Component {
       this.setState(props.userPick)
   }
 
-  awayTeamPickUpdate = team => {
-    if(this.state.editing) {
-      this.setState({editing: false});
-      return this.props.onUpdate({ _id: this.state._id, pick: this.state.awayTeamID });
-    }
-  };
+  awayTeamPickUpdate = team => this.props.onUpdate({ _id: this.state._id, pick: this.state.awayTeamID });
 
-  homeTeamPickUpdate = team => {
-    if(this.state.editing) {
-      this.setState({editing: false});
-      return this.props.onUpdate({ _id: this.state._id, pick: this.state.homeTeamID });
-    }
-  };
-
-  handleEdit = () => !this.state.editing ? this.setState({editing: true}) : this.setState({editing: false});
+  homeTeamPickUpdate = team => this.props.onUpdate({ _id: this.state._id, pick: this.state.homeTeamID });
   
   render() {
     let { userPick } = this.props;
-    let { editing } = this.state;
     let currentPick = userPick.pick === this.state.homeTeamID ? this.state.homeTeamName : this.state.awayTeamName;
     let homeLogoStyle = {
       background: `url(${this.state.homeTeamImage}) no-repeat`,
@@ -79,7 +65,6 @@ class UserPickItem extends React.Component {
               <div className='sliderButtonWrapper'>
                 {util.renderIf(new Date() < new Date(userPick.gameTime),
                   <p className={util.classToggler({ 'sliderButton': true, 'homeTeamPickButtonState ': currentPick === this.state.homeTeamName, 'awayTeamPickButtonState': currentPick === this.state.awayTeamName })}>
-                    <span className='homeArrow'>{`< < `}</span> <span className='awayArrow'>> > </span>
                   </p>
                 )}
                 {util.renderIf(new Date() > new Date(userPick.gameTime) && !userPick.gameID.winner,
@@ -99,10 +84,6 @@ class UserPickItem extends React.Component {
             <div className='awayTeamLogoDiv'></div>
             <div className='awayTeamLogoWrapper' style={awayLogoStyle}></div>
           </div>
-        </div>
-        <div className='checkmarkDiv'>
-          <p className='gamePick'>current pick: {currentPick}</p>
-          <p className='circle' onClick={this.handleEdit}><i className="fa fa-edit"></i></p>
         </div>
       </div>
     );
