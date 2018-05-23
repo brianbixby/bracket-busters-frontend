@@ -27,13 +27,13 @@ class UserPickItem extends React.Component {
   }
 
   componentWillReceiveProps(props){
+    console.log('props: ', props);
     if(props.userPick)
       this.setState(props.userPick)
   }
 
-  awayTeamPickUpdate = team => this.props.onUpdate({ _id: this.state._id, pick: this.state.awayTeamID });
-
-  homeTeamPickUpdate = team => this.props.onUpdate({ _id: this.state._id, pick: this.state.homeTeamID });
+  awayTeamPickUpdate = () => this.props.onUpdate({ _id: this.state._id, pick: this.state.awayTeamID });
+  homeTeamPickUpdate = () =>  this.props.onUpdate({ _id: this.state._id, pick: this.state.homeTeamID });
   
   render() {
     let { userPick } = this.props;
@@ -45,8 +45,7 @@ class UserPickItem extends React.Component {
       background: `url(${this.state.awayTeamImage}) no-repeat`,
     };
     return (
-
-      <div className={util.classToggler({ 'cardOuter': true, 'correctPick': userPick.gameID.winner && userPick.gameID.winner === currentPick, 'wrongPick': userPick.gameID.winner && userPick.gameID.winner !== currentPick})}>
+      <div className={util.classToggler({ 'cardOuter': true, 'correctPick': userPick.gameID.winner && userPick.gameID.winner === userPick.pick, 'wrongPick': userPick.gameID.winner && userPick.gameID.winner !== userPick.pick })}>
         <div className='cardItem'>
           <div className='cardWrapper'>
             <div className='homeTeamLogoDiv'></div>
@@ -65,6 +64,8 @@ class UserPickItem extends React.Component {
               <div className='sliderButtonWrapper'>
                 {util.renderIf(new Date() < new Date(userPick.gameTime),
                   <p className={util.classToggler({ 'sliderButton': true, 'homeTeamPickButtonState ': currentPick === this.state.homeTeamName, 'awayTeamPickButtonState': currentPick === this.state.awayTeamName })}>
+                    <span className='homePick' onClick={this.homeTeamPickUpdate}></span>
+                    <span className='awayPick' onClick={this.awayTeamPickUpdate}></span>
                   </p>
                 )}
                 {util.renderIf(new Date() > new Date(userPick.gameTime) && !userPick.gameID.winner,
@@ -91,4 +92,3 @@ class UserPickItem extends React.Component {
 }
 
 export default UserPickItem;
-

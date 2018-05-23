@@ -12,7 +12,7 @@ class GameItem extends React.Component {
       this.setState({ pick: team, pickName: this.props.game.awayTeam.teamName });
       setTimeout(() => {
         this.props.onComplete({gameID: this.state.gameID, gameTime: this.state.gameTime, pick: this.state.awayTeam})
-      }, 5500);
+      }, 1500);
     }
   };
 
@@ -21,7 +21,7 @@ class GameItem extends React.Component {
       this.setState({ pick: team, pickName: this.props.game.homeTeam.teamName});
       setTimeout(() => {
         this.props.onComplete({gameID: this.state.gameID, gameTime: this.state.gameTime, pick: this.state.homeTeam})
-      }, 5500);
+      }, 1500);
     }
   };
 

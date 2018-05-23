@@ -172,24 +172,35 @@
             top: 5px;
             border-radius: 15px;
             cursor: pointer;
-            -webkit-transition: all .3s ease;
-            transition: all .3s ease;
+            -webkit-transition: left .3s ease;
+            transition: right .3s ease;
+            -webkit-transition: left .3s ease;
+            transition: right .3s ease;
+
+            .homePick, .awayPick {
+              width: 50%;
+              display: inline-block;
+            }
           }
           .homeTeamPickButtonState {
             background: url(./../../components/helpers/assets/sprite.png) no-repeat scroll -205px -350px transparent;
             left: 6px;
             right: auto;
             cursor: pointer;
-            -webkit-transition: all .3s ease;
-            transition: all .3s ease;
+            -webkit-transition: left .3s ease;
+            transition: right .3s ease;
+            -webkit-transition: left .3s ease;
+            transition: right .3s ease;
           }
           .awayTeamPickButtonState {
             background: url(./../../components/helpers/assets/sprite.png) no-repeat scroll -205px -391px transparent;
             right: 6px;
             left: auto;
             cursor: pointer;
-            -webkit-transition: all .3s ease;
-            transition: all .3s ease;
+            -webkit-transition: left .3s ease;
+            transition: right .3s ease;
+            -webkit-transition: left .3s ease;
+            transition: right .3s ease;
           }
         }
       }

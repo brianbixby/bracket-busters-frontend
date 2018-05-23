@@ -10,7 +10,6 @@ import { gamesFetchRequest, gameUpdateRequest } from '../../actions/game-actions
 import { userPicksFetchRequest, userPickUpdateRequest, userPickCreateRequest, userPickFetchRequest, } from '../../actions/userPick-actions.js';
 import { commentsFetchRequest } from '../../actions/comment-actions.js';
 import { messageBoardLeagueFetchRequest, messageBoardGroupFetchRequest } from '../../actions/messageBoard-actions.js';
-import UserPickContainer from '../user-pick-container';
 import GameItem from '../game-item';
 import UserPickItem from '../user-pick-item';
 import MessageBoardContainer from '../message-board-container';
@@ -21,7 +20,6 @@ import * as util from '../../lib/util.js';
 class LeagueContainer extends React.Component {
   constructor(props){
     super(props);
-    this.state = { maxHeight: true };
   }
 
   componentWillMount() {
@@ -38,15 +36,19 @@ class LeagueContainer extends React.Component {
       })
   }
 
-  componentDidMount(){
-    // this.props.userPicksFetch(this.props.currentLeague._id)
-    //   .then(picks => {
-    //     let gameIDArr = [];
-    //     gameIDArr.push(picks.map(userPick => userPick.gameID._id));
-    //     return this.props.gamesFetch(this.props.currentLeague.sportingEventID, gameIDArr)
-    //   })
-    //   .catch(util.logError);
-  }
+  // componentDidMount(){
+  //   util.userValidation(this.props);
+  //   this.props.scoreBoardsFetch(this.props.currentLeague._id)
+  //     .then(() => {
+  //       this.props.userPicksFetch(this.props.currentLeague._id)
+  //       .then(picks => {
+  //         let gameIDArr = [];
+  //         gameIDArr.push(picks.map(userPick => userPick.gameID._id));
+  //         return this.props.gamesFetch(this.props.currentLeague.sportingEventID, gameIDArr)
+  //       })
+  //       .catch(util.logError);
+  //     })
+  // }
 
   formatDate = date => {
     let dateArr = new Date(date).toDateString().split(' ');
@@ -87,17 +89,16 @@ class LeagueContainer extends React.Component {
       .catch(console.error);
   };
 
-  handleMaxHeight = () => this.setState({ maxHeight:!this.state.maxHeight });
-
   render(){
     let currentLeague = this.props.currentLeague;
     let scoreBoards = 'scores';
     let nbalogo = require('./../helpers/assets/nba-logo.png');
-    let maxHeight = this.state.isHovered ? 'hovTransform homeTeamContent' : 'homeTeamContent';
     let formTypeLeague = 'league';
     let formTypeGroup = 'group';
     let topScores = 'scores';
     let basketball = require('./../helpers/assets/basketball.png');
+    let leagueDef = require('./../helpers/assets/createleague.jpeg');
+    let leaguePhoto = currentLeague.image ? <img className='createImg' src={currentLeague.image} /> : <img className='createImg' src={leagueDef} />;
     return (
       <div className='leagueItem-page page-outer-div'>
         <div className='grid-container'>
@@ -124,7 +125,8 @@ class LeagueContainer extends React.Component {
                         </div>
                       </div>
                       <div className='createImgDiv'>
-                        <img className="createImg" src={currentLeague.image} />
+                        {/* {leaguePhoto} */}
+                        <img className='createImg' src={leagueDef}/>
                       </div>
                     </div>
                   </div>
@@ -156,12 +158,14 @@ class LeagueContainer extends React.Component {
                     </div>
                   )}
                 </div>
-                <div className='container mtop8'>
-                  {this.props.userPicks.map((userPick, idx) =>
-                    <div key={idx} className='margin16'>
-                      <UserPickItem  userPick={userPick} onUpdate={this.handleUpdate}/>
-                    </div>
-                  )}
+                <div>
+                  <div className='container mtop8'>
+                    {this.props.userPicks.map((userPick, idx) =>
+                      <div key={idx} className='margin16'>
+                        <UserPickItem  userPick={userPick} onUpdate={this.handleUpdate}/>
+                      </div>
+                    )}
+                  </div>
                 </div>
                 <div className='m16'>
                   <MessageBoardContainer mBoardId={this.props.currentMessageBoard._id} commentsArray={this.props.currentMessageBoard.comments}/>

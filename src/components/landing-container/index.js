@@ -20,6 +20,7 @@ import { messageBoardLeagueFetchRequest, messageBoardGroupFetchRequest } from '.
 import { commentsFetchRequest } from '../../actions/comment-actions.js';
 import { topScoresFetchRequest } from '../../actions/scoreboard-actions.js';
 import { sportingEventsFetchRequest } from '../../actions/sportingEvent-actions.js';
+import { userPicksFetchRequest } from '../../actions/userPick-actions.js';
 import * as util from './../../lib/util.js';
 
 class LandingContainer extends React.Component {
@@ -70,6 +71,7 @@ class LandingContainer extends React.Component {
       .then(messageBoard => {
         this.props.commentsFetch(messageBoard.comments);
       })
+      .then(()=> this.props.userPicksFetch(league._id))
       .then( () =>  this.props.history.push(`/league/${league._id}`))
       .catch(util.logError);
   }
@@ -242,6 +244,8 @@ let mapStateToProps = state => ({
   topPublicLeagues: state.topPublicLeagues,
   topScores: state.topScores,
   topPublicGroups: state.topPublicGroups,
+  games: state.games,
+  userPicks: state.userPicks,
 });
 
 let mapDispatchToProps = dispatch => ({
@@ -263,6 +267,7 @@ let mapDispatchToProps = dispatch => ({
   messageBoardLeagueFetch: leagueID => dispatch(messageBoardLeagueFetchRequest(leagueID)),
   messageBoardGroupFetch: groupID => dispatch(messageBoardGroupFetchRequest(groupID)),
   commentsFetch: commentArr => dispatch(commentsFetchRequest(commentArr)),
+  userPicksFetch: leagueID => dispatch(userPicksFetchRequest(leagueID)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(LandingContainer);
