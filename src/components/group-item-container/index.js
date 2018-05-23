@@ -51,6 +51,7 @@ class GroupItemContainer extends React.Component {
     let formTypeGroup = 'group';
     let topScores = 'scores';
     let basketball = require('./../helpers/assets/basketball.png');
+    let groupPhoto = currentGroup.image ? <img className='createImg' src={currentGroup.image} /> : <img className='createImg' src='https://i.imgur.com/xjGJJvv.jpg' />;
     return (
       <div className='groupItem-page page-outer-div'>
         <div className='grid-container'>
@@ -77,7 +78,7 @@ class GroupItemContainer extends React.Component {
                         </div>
                       </div>
                       <div className='createImgDiv'>
-                        <img className="createImg" src={currentGroup.image} />
+                        {groupPhoto}
                       </div>
                     </div>
                   </div>

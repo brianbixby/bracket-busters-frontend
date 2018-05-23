@@ -97,8 +97,7 @@ class LeagueContainer extends React.Component {
     let formTypeGroup = 'group';
     let topScores = 'scores';
     let basketball = require('./../helpers/assets/basketball.png');
-    let leagueDef = require('./../helpers/assets/createleague.jpeg');
-    let leaguePhoto = currentLeague.image ? <img className='createImg' src={currentLeague.image} /> : <img className='createImg' src={leagueDef} />;
+    let leaguePhoto = currentLeague.image ? <img className='createImg' src={currentLeague.image} /> : <img className='createImg' src='https://i.imgur.com/CAoW5n8.jpg' />;
     return (
       <div className='leagueItem-page page-outer-div'>
         <div className='grid-container'>
@@ -125,8 +124,7 @@ class LeagueContainer extends React.Component {
                         </div>
                       </div>
                       <div className='createImgDiv'>
-                        {/* {leaguePhoto} */}
-                        <img className='createImg' src={leagueDef}/>
+                        {leaguePhoto}
                       </div>
                     </div>
                   </div>

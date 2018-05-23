@@ -40,6 +40,7 @@ class GameItem extends React.Component {
     let awayLogoStyle = {
       background: `url(${game.awayTeam.image}) no-repeat`,
     };
+
     return (
       <div className={util.classToggler({ 'cardOuter': true, 'fadeout': this.state.pickName, 'locked': new Date() > new Date(game.dateTime) })}>
         <div className={util.classToggler({ 'cardItem': true, 'noPick': !this.state.pick })}>

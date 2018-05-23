@@ -3,9 +3,7 @@ import React from 'react';
 class Slider extends React.Component {
   render() {
     let { joinedItem, formType } = this.props;
-    // let genericImage = require('./../assets/leagueGeneric.png');
-    let genericImage = formType === 'league' ? <i className="fa fa-trophy cardImage"></i> : <i className="fa fa-users cardImage"></i>;
-    let itemImage = joinedItem.image ? <img className='cardImage' src={joinedItem.image} /> : genericImage;
+    let itemImage = formType === 'league' ? <img className='cardImage' src='https://i.imgur.com/CAoW5n8.jpg' />  : <img className='cardImage' src='https://i.imgur.com/xjGJJvv.jpg' /> ;
     let itemName = formType === 'league' ? joinedItem.leagueName : joinedItem.groupName;
 
     return (
