@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 
 import { tokenSignInRequest } from '../../actions/userAuth-actions.js';
-import { userProfileFetchRequest } from '../../actions/userProfile-actions.js';
+import { userProfileFetchRequest, groupProfilesFetchRequest } from '../../actions/userProfile-actions.js';
 import { leaguesFetchRequest, topPublicLeaguesFetchRequest, leagueFetch, leagueJoinRequest } from '../../actions/league-actions.js';
 import { groupsFetchRequest, groupFetchRequest, groupDeleteRequest, groupUpdateRequest, topPublicGroupsFetchRequest, groupFetch, groupJoinRequest } from '../../actions/group-actions.js';
 import { topScoresFetchRequest } from '../../actions/scoreboard-actions.js';
@@ -20,8 +20,15 @@ class GroupItemContainer extends React.Component {
   }
 
   componentWillMount() {
-    return util.userValidation(this.props);
+    util.userValidation(this.props);
+    this.props.groupProfilesFetch(this.props.currentGroup.users)
+      .catch(util.logError);
   }
+
+  // componentDidMount() {
+  //   this.props.groupProfilesFetch(this.props.currentGroup.users)
+  //     .catch(util.logError);
+  // }
 
   formatDate = date => {
     let dateArr = new Date(date).toDateString().split(' ');
@@ -46,12 +53,15 @@ class GroupItemContainer extends React.Component {
 
   render(){
     let currentGroup = this.props.currentGroup;
+    let groupProfiles = this.props.groupProfiles;
     // let random = require('./../helpers/assets/leagueGeneric.png');
     let formTypeLeague = 'league';
     let formTypeGroup = 'group';
     let topScores = 'scores';
     let basketball = require('./../helpers/assets/basketball.png');
     let groupPhoto = currentGroup.image ? <img className='createImg' src={currentGroup.image} /> : <img className='createImg' src='https://i.imgur.com/xjGJJvv.jpg' />;
+    let placeholderImage = require('./../helpers/assets/profilePlaceholder.jpeg');
+
     return (
       <div className='groupItem-page page-outer-div'>
         <div className='grid-container'>
@@ -105,25 +115,34 @@ class GroupItemContainer extends React.Component {
                 </div>
                 <div className='container'>
                   <div className='sliderOuter'>
-                    <div className='sliderOuterWrapper'>
-                      {currentGroup.userNames.map((username, idx) => {
-                        return <div className='sliderInnerWrapper' key={idx}>
-                          <div className='cardOuter'>
-                            <div className='cardItem'>
-                              <div className='cardContentWrapper'>
-                                <div className='cardContentBorderTop'></div>
-                                <div className='cardContentDiv'>
-                                  <p className='joinTextTitle'>{username}</p> 
+                    {util.renderIf(groupProfiles && groupProfiles.length >0,
+                      <div className='sliderOuterWrapper'>
+                        {groupProfiles.map(groupProfile => {
+                          return <div className='sliderInnerWrapper' key={groupProfile._id}>
+                            <div className='cardOuter'>
+                              <div className='cardItem'>
+                                <div className='cardContentWrapper'>
+                                  <div className='cardContentBorderTop'></div>
+                                  <div className='cardContentDiv'>
+                                    <p className='joinTextTitle'>{groupProfile.username}</p> 
+                                  </div>
                                 </div>
-                              </div>
-                              <div className='cardImageDiv'>
-                                <img className='cardImage'src={currentGroup.image}/>
+                                {util.renderIf(groupProfile.image,
+                                  <div className='cardImageDiv'>
+                                    <img className='createImg' src={groupProfile.image} />
+                                  </div>
+                                )}
+                                {util.renderIf(!groupProfile.image,
+                                  <div className='cardImageDiv'>
+                                    <img className='createImg' src={placeholderImage} />
+                                  </div>
+                                )}
                               </div>
                             </div>
-                          </div>
-                        </div>;
-                      })}
-                    </div>
+                          </div>;
+                        })}
+                      </div>
+                    )}
                   </div>
                 </div>
                 <div className='m16'>
@@ -214,6 +233,7 @@ let mapStateToProps = state => ({
   topPublicLeagues: state.topPublicLeagues,
   topScores: state.topScores,
   topPublicGroups: state.topPublicGroups,
+  groupProfiles: state.groupProfiles,
 });
 
 let mapDispatchToProps = dispatch => ({
@@ -233,6 +253,7 @@ let mapDispatchToProps = dispatch => ({
   messageBoardLeagueFetch: leagueID => dispatch(messageBoardLeagueFetchRequest(leagueID)),
   messageBoardGroupFetch: groupID => dispatch(messageBoardGroupFetchRequest(groupID)),
   commentsFetch: commentArr => dispatch(commentsFetchRequest(commentArr)),
+  groupProfilesFetch : profileIDs => dispatch(groupProfilesFetchRequest(profileIDs)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(GroupItemContainer);

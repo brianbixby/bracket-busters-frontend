@@ -18,6 +18,7 @@ import publicGroups from './allPublicGroups-reducers.js';
 import topPublicLeagues from './topLeagues-reducers';
 import topPublicGroups from './topGroups-reducers';
 import topScores from './topScores-reducers';
+import groupProfiles from './groupProfiles-reducers';
 
 export default combineReducers({
   userAuth,
@@ -39,4 +40,5 @@ export default combineReducers({
   topPublicLeagues,
   topPublicGroups,
   topScores,
+  groupProfiles,
 });

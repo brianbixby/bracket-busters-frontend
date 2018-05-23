@@ -20,6 +20,8 @@
     .joinImgDiv {
       text-align: center;
       background: #1d1e1f;
+      background: gradient(linear, left top, right top, from(#141414), color-stop(0.15, #1d1d1d), to(#202020));
+      background: -webkit-gradient(linear, left top, right top, from(#141414), color-stop(0.15, #1d1d1d), to(#202020));
       height: auto;
       width: 40%;
 
