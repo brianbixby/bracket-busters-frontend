@@ -55,7 +55,6 @@ class GroupItemContainer extends React.Component {
   render(){
     let currentGroup = this.props.currentGroup;
     let groupProfiles = this.props.groupProfiles;
-    // let random = require('./../helpers/assets/leagueGeneric.png');
     let formTypeLeague = 'league';
     let formTypeGroup = 'group';
     let topScores = 'scores';
@@ -130,12 +129,12 @@ class GroupItemContainer extends React.Component {
                                 </div>
                                 {util.renderIf(groupProfile.image,
                                   <div className='cardImageDiv'>
-                                    <img className='createImg' src={groupProfile.image} />
+                                    <img className='groupMemberImg' src={groupProfile.image} />
                                   </div>
                                 )}
                                 {util.renderIf(!groupProfile.image,
                                   <div className='cardImageDiv'>
-                                    <img className='createImg' src={placeholderImage} />
+                                    <img className='groupMemberImgNoPhoto' src={placeholderImage} />
                                   </div>
                                 )}
                               </div>
