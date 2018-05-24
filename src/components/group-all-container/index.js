@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 
 import { tokenSignInRequest } from '../../actions/userAuth-actions.js';
-import { userProfileFetchRequest } from '../../actions/userProfile-actions.js';
+import { userProfileFetchRequest, groupProfilesFetchRequest } from '../../actions/userProfile-actions.js';
 import { leaguesFetchRequest, topPublicLeaguesFetchRequest } from '../../actions/league-actions.js';
 import { groupsFetchRequest, allPublicGroupsFetchRequest, groupJoinRequest, privateGroupJoinRequest, groupFetch, topPublicGroupsFetchRequest } from '../../actions/group-actions.js';
 import { messageBoardGroupFetchRequest } from '../../actions/messageBoard-actions.js';
@@ -26,7 +26,8 @@ class GroupAllContainer extends React.Component {
   }
 
   handleGroupJoin = (group, e) => {
-    return this.props.groupJoin(group._id)
+    return this.props.groupProfilesFetch(group.users)
+      .then(() => this.props.groupJoin(group._id))
       .then(() => this.props.messageBoardGroupFetch(group._id))
       .then(messageBoard => this.props.commentsFetch(messageBoard.comments))
       .then(() => this.props.history.push(`/group/${group._id}`))
@@ -35,6 +36,10 @@ class GroupAllContainer extends React.Component {
 
   handlePrivateGroupJoin = credentials => {
     return this.props.privateGroupJoin(credentials)
+      .then(group => {
+        this.props.groupProfilesFetch(group.users);
+        return group;
+      })
       .then(group => this.props.messageBoardGroupFetch(group._id))
       .then(messageBoard => {
         this.props.commentsFetch(messageBoard.comments);
@@ -167,6 +172,7 @@ let mapDispatchToProps = dispatch => {
     groupFetchRequest: group => dispatch(groupFetch(group)),
     messageBoardGroupFetch: groupID => dispatch(messageBoardGroupFetchRequest(groupID)),
     commentsFetch: commentArr => dispatch(commentsFetchRequest(commentArr)),
+    groupProfilesFetch : profileIDs => dispatch(groupProfilesFetchRequest(profileIDs)),
   };
 };
 

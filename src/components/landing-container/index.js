@@ -13,7 +13,7 @@ import Slider from '../helpers/slider';
 import Table from '../helpers/table';
 import BannerAd from '../helpers/bannerAd';
 import { tokenSignInRequest } from '../../actions/userAuth-actions.js';
-import { userProfileFetchRequest, userProfileUpdateRequest } from '../../actions/userProfile-actions.js';
+import { userProfileFetchRequest, userProfileUpdateRequest, groupProfilesFetchRequest } from '../../actions/userProfile-actions.js';
 import { leaguesFetchRequest, leagueCreateRequest, leagueFetch, leagueJoinRequest, topPublicLeaguesFetchRequest } from '../../actions/league-actions.js';
 import { groupsFetchRequest, groupCreateRequest, groupFetch, topPublicGroupsFetchRequest, groupJoinRequest } from '../../actions/group-actions.js';
 import { messageBoardLeagueFetchRequest, messageBoardGroupFetchRequest } from '../../actions/messageBoard-actions.js';
@@ -49,14 +49,16 @@ class LandingContainer extends React.Component {
       .catch(util.logError);
   }
 
-  handleGroupCreate = group => {
-    return this.props.groupCreate(group)
-      .then(myGroup => this.props.messageBoardGroupFetch(myGroup.body._id))
-      .then(messageBoard => {
-        this.props.commentsFetch(messageBoard.comments);
-        return messageBoard.groupID
+  handleGroupCreate = groupInput => {
+    let group;
+    return this.props.groupCreate(groupInput)
+      .then(myGroup => {
+        group = myGroup.body;
+        return this.props.messageBoardGroupFetch(myGroup.body._id);
       })
-      .then(groupID => this.props.history.push(`/group/${groupID}`))
+      .then(messageBoard => this.props.commentsFetch(messageBoard.comments))
+      .then(() => this.props.groupProfilesFetch(group.users))
+      .then(groupID => this.props.history.push(`/group/${group._id}`))
       .catch(util.logError);
   }
 
@@ -77,8 +79,9 @@ class LandingContainer extends React.Component {
   }
 
   onGroupClick = (group, e) => {
-    this.props.groupFetchRequest(group);
-    return this.props.messageBoardGroupFetch(group._id)
+    this.props.groupFetchRequest(group)
+    return this.props.groupProfilesFetch(group.users)
+      .then(() => this.props.messageBoardGroupFetch(group._id))
       .then(messageBoard => {
         this.props.commentsFetch(messageBoard.comments);
       })
@@ -95,7 +98,8 @@ class LandingContainer extends React.Component {
   };
 
   handleBoundTopPublicGroupClick = (group, e) => {
-    return this.props.groupJoin(group._id)
+    return this.props.groupProfilesFetch(group.users)
+      .then(() => this.props.groupJoin(group._id))
       .then(() => this.props.messageBoardGroupFetch(group._id))
       .then(messageBoard => this.props.commentsFetch(messageBoard.comments))
       .then(() => this.props.history.push(`/group/${group._id}`))
@@ -268,6 +272,7 @@ let mapDispatchToProps = dispatch => ({
   messageBoardGroupFetch: groupID => dispatch(messageBoardGroupFetchRequest(groupID)),
   commentsFetch: commentArr => dispatch(commentsFetchRequest(commentArr)),
   userPicksFetch: leagueID => dispatch(userPicksFetchRequest(leagueID)),
+  groupProfilesFetch : profileIDs => dispatch(groupProfilesFetchRequest(profileIDs)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(LandingContainer);

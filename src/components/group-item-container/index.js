@@ -21,8 +21,8 @@ class GroupItemContainer extends React.Component {
 
   componentWillMount() {
     util.userValidation(this.props);
-    this.props.groupProfilesFetch(this.props.currentGroup.users)
-      .catch(util.logError);
+    // this.props.groupProfilesFetch(this.props.currentGroup.users)
+    //   .catch(util.logError);
   }
 
   // componentDidMount() {
@@ -44,7 +44,8 @@ class GroupItemContainer extends React.Component {
   };
 
   handleBoundTopPublicGroupClick = (group, e) => {
-    return this.props.groupJoin(group._id)
+    return this.props.groupProfilesFetch(group.users)
+      .then(() => this.props.groupJoin(group._id))
       .then(() => this.props.messageBoardGroupFetch(group._id))
       .then(messageBoard => this.props.commentsFetch(messageBoard.comments))
       .then(() => this.props.history.push(`/group/${group._id}`))
@@ -115,7 +116,7 @@ class GroupItemContainer extends React.Component {
                 </div>
                 <div className='container'>
                   <div className='sliderOuter'>
-                    {util.renderIf(groupProfiles && groupProfiles.length >0,
+                    {util.renderIf(groupProfiles && groupProfiles.length > 0,
                       <div className='sliderOuterWrapper'>
                         {groupProfiles.map(groupProfile => {
                           return <div className='sliderInnerWrapper' key={groupProfile._id}>

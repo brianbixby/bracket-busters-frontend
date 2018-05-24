@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { tokenSignInRequest } from '../../actions/userAuth-actions.js';
-import { userProfileFetchRequest } from '../../actions/userProfile-actions.js';
+import { userProfileFetchRequest, groupProfilesFetchRequest } from '../../actions/userProfile-actions.js';
 import { leaguesFetchRequest, leagueFetchRequest, leagueDeleteRequest, leagueUpdateRequest, topPublicLeaguesFetchRequest, leagueFetch, leagueJoinRequest } from '../../actions/league-actions.js';
 import { groupsFetchRequest, topPublicGroupsFetchRequest, groupFetch, groupJoinRequest } from '../../actions/group-actions.js';
 import { scoreBoardsFetchRequest, topScoresFetchRequest } from '../../actions/scoreboard-actions.js';
@@ -64,7 +64,8 @@ class LeagueContainer extends React.Component {
   };
 
   handleBoundTopPublicGroupClick = (group, e) => {
-    return this.props.groupJoin(group._id)
+    return this.props.groupProfilesFetch(group.users)
+      .then(() => this.props.groupJoin(group._id))
       .then(() => this.props.messageBoardGroupFetch(group._id))
       .then(messageBoard => this.props.commentsFetch(messageBoard.comments))
       .then(() => this.props.history.push(`/group/${group._id}`))
@@ -279,6 +280,7 @@ let mapDispatchToProps = dispatch => ({
   messageBoardLeagueFetch: leagueID => dispatch(messageBoardLeagueFetchRequest(leagueID)),
   messageBoardGroupFetch: groupID => dispatch(messageBoardGroupFetchRequest(groupID)),
   commentsFetch: commentArr => dispatch(commentsFetchRequest(commentArr)),
+  groupProfilesFetch : profileIDs => dispatch(groupProfilesFetchRequest(profileIDs)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(LeagueContainer);
