@@ -10,11 +10,14 @@ import { commentsFetchRequest } from '../../actions/comment-actions.js';
 import { topScoresFetchRequest } from '../../actions/scoreboard-actions.js';
 import { sportingEventsFetchRequest } from '../../actions/sportingEvent-actions.js';
 import LeagueAllPrivateForm from '../league-all-private-form';
+import Table from '../helpers/table';
+import BannerAd from '../helpers/bannerAd';
 import * as util from '../../lib/util.js';
 
 class LeagueAllContainer extends React.Component {
   constructor(props){
     super(props);
+    this.state = { leaguesShown: 10 };
   }
 
   componentWillMount() {
@@ -41,43 +44,96 @@ class LeagueAllContainer extends React.Component {
       .catch(util.logError);
   };
 
+  handleShowAll = () => {
+    this.state.leaguesShown === 10
+      ? this.setState({ leaguesShown: this.props.publicLeagues.length})
+        : this.setState({ leaguesShown: 10});
+  };
+
   render(){
+    let tableType = 'league';
+    let leagues = this.props.publicLeagues.slice(0, this.state.leaguesShown);
     return (
       <div className='leagues-container page-outer-div'>
-      <div className='grid-container'>
-      <div className='container'>
-        <div className='inner-wrapper'>
-          <p className='header create-header'>Join A Private League! </p>
-          <LeagueAllPrivateForm onComplete={this.handlePrivateLeagueJoin}/>
-        </div>
-      </div>
-      
-
-      <div className='container'>
-          <p className='header usersLeagueAndGroupsHeader'>Public Leagues</p>
-
-          <div className='myleaguesHeader'>
-            <p className='l-name myL-headers'> LEAGUE NAME </p>
-            <p className='l-creator myL-headers'> CREATOR </p>
-            <p className='l-players myL-headers'> PLAYERS </p>
-            <p className='l-scoring myL-headers'> SCORING </p>
-          </div>
-          {this.props.publicLeagues.map(league => {
-            let boundLeagueJoinClick = this.handleLeagueJoin.bind(this, league);
-            return <div key={league._id}>
-              <p className='span-row'>
-                <span className='span-name'>{league.leagueName} </span>
-                <span className='span-owner'>{league.ownerName} </span>
-                <span className='span-size'>{league.size} </span>
-                <span className='span-scoring'>{league.scoring} </span>
-                <span className='span-join'><button className='button' onClick={boundLeagueJoinClick}>join</button></span>
-              </p>
+        <div className='grid-container'>
+          <BannerAd/>
+          <div>
+            <div className='row'>
+              <div className='col-md-8'>
+                <div className='mainContainer hideLarge'>
+                  <div className='mainContainer-header'>
+                    <div className='left'>
+                      <i className="fa fa-lock"></i>
+                      <p className='mainContainerHeader'>
+                        PRIVATE LEAGUES
+                      </p>
+                    </div>
+                  </div>
+                  <div className='mainContainerSection'>
+                    <div className='mainContainerSectionWrapper'>
+                      <div className='container'>
+                        <div className='inner-wrapper'>
+                          <p className='allHeader'>Join A Private League! </p>
+                          <LeagueAllPrivateForm onComplete={this.handlePrivateLeagueJoin}/>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div className='mainContainer'>
+                  <div className='mainContainer-header'>
+                      <div className='left'>
+                        <i className="fa fa-users"></i>
+                        <p className='mainContainerHeader'>
+                          PUBLIC LEAGUES
+                        </p>
+                      </div>
+                      <div className='right'>
+                        <p className='seeAll' onClick={this.handleShowAll}> See All</p>
+                      </div>
+                  </div>
+                  <div className='container tableContainer allTableOuter'>
+                    <div>
+                      <p className='tableHeader'>Join A Public League</p>
+                      <div className='tableColumnDiv groupTableColumnDiv allTableColumnDiv'>
+                        <p className='tableColumn columnName'> LEAGUE NAME </p>
+                        <p className='tableColumn columnCreator'> CREATOR </p>
+                        <p className='tableColumn columnSize'> SIZE </p>
+                      </div>
+                    </div>
+                    {leagues.map(league => {
+                      let boundLeagueJoinClick = this.handleLeagueJoin.bind(this, league);
+                      return <div className='rowColors cursor allTableContainer' key={league._id} onClick={boundLeagueJoinClick}>
+                        <Table item={league} type={tableType} />
+                      </div>
+                    })}
+                    <div className='spacerRow'></div>
+                  </div>
+                </div>
+              </div>
+              <div className='col-md-4 hideMedium'>
+                <div className='mainContainer'>
+                  <div className='mainContainer-header'>
+                    <div className='left'>
+                      <i className="fa fa-lock"></i>
+                      <p className='mainContainerHeader'>PRIVATE LEAGUES</p>
+                    </div>
+                  </div>
+                  <div className='mainContainerSection'>
+                    <div className='mainContainerSectionWrapper'>
+                      <div className='container'>
+                        <div className='inner-wrapper'>
+                          <p className='allHeader'>Join A Private League </p>
+                          <LeagueAllPrivateForm onComplete={this.handlePrivateLeagueJoin}/>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
             </div>
-          })}
+          </div>
         </div>
-        
-        
-      </div>
       </div>
     );
   }

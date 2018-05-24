@@ -47,7 +47,7 @@ class MessageBoardContainer extends React.Component {
     let placeholderImage = require('./../helpers/assets/profilePlaceholder.jpeg');
     let profileImage = this.props.userProfile && this.props.userProfile.image ? this.props.userProfile.image : placeholderImage;
     return (
-      <div className='wideSectionWrapper messageBoardOuter maxWidth294Big'>
+      <div className='wideSectionWrapper messageBoardOuter'>
         <div className='outer messageboardHeader'>
           <div className='outerLeft'>
             <i className="fa fa-comments"></i>

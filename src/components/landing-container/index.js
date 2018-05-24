@@ -13,13 +13,14 @@ import Slider from '../helpers/slider';
 import Table from '../helpers/table';
 import BannerAd from '../helpers/bannerAd';
 import { tokenSignInRequest } from '../../actions/userAuth-actions.js';
-import { userProfileFetchRequest, userProfileUpdateRequest } from '../../actions/userProfile-actions.js';
+import { userProfileFetchRequest, userProfileUpdateRequest, groupProfilesFetchRequest } from '../../actions/userProfile-actions.js';
 import { leaguesFetchRequest, leagueCreateRequest, leagueFetch, leagueJoinRequest, topPublicLeaguesFetchRequest } from '../../actions/league-actions.js';
 import { groupsFetchRequest, groupCreateRequest, groupFetch, topPublicGroupsFetchRequest, groupJoinRequest } from '../../actions/group-actions.js';
 import { messageBoardLeagueFetchRequest, messageBoardGroupFetchRequest } from '../../actions/messageBoard-actions.js';
 import { commentsFetchRequest } from '../../actions/comment-actions.js';
 import { topScoresFetchRequest } from '../../actions/scoreboard-actions.js';
 import { sportingEventsFetchRequest } from '../../actions/sportingEvent-actions.js';
+import { userPicksFetchRequest } from '../../actions/userPick-actions.js';
 import * as util from './../../lib/util.js';
 
 class LandingContainer extends React.Component {
@@ -48,14 +49,16 @@ class LandingContainer extends React.Component {
       .catch(util.logError);
   }
 
-  handleGroupCreate = group => {
-    return this.props.groupCreate(group)
-      .then(myGroup => this.props.messageBoardGroupFetch(myGroup.body._id))
-      .then(messageBoard => {
-        this.props.commentsFetch(messageBoard.comments);
-        return messageBoard.groupID
+  handleGroupCreate = groupInput => {
+    let group;
+    return this.props.groupCreate(groupInput)
+      .then(myGroup => {
+        group = myGroup.body;
+        return this.props.messageBoardGroupFetch(myGroup.body._id);
       })
-      .then(groupID => this.props.history.push(`/group/${groupID}`))
+      .then(messageBoard => this.props.commentsFetch(messageBoard.comments))
+      .then(() => this.props.groupProfilesFetch(group.users))
+      .then(groupID => this.props.history.push(`/group/${group._id}`))
       .catch(util.logError);
   }
 
@@ -70,13 +73,15 @@ class LandingContainer extends React.Component {
       .then(messageBoard => {
         this.props.commentsFetch(messageBoard.comments);
       })
+      .then(()=> this.props.userPicksFetch(league._id))
       .then( () =>  this.props.history.push(`/league/${league._id}`))
       .catch(util.logError);
   }
 
   onGroupClick = (group, e) => {
-    this.props.groupFetchRequest(group);
-    return this.props.messageBoardGroupFetch(group._id)
+    this.props.groupFetchRequest(group)
+    return this.props.groupProfilesFetch(group.users)
+      .then(() => this.props.messageBoardGroupFetch(group._id))
       .then(messageBoard => {
         this.props.commentsFetch(messageBoard.comments);
       })
@@ -93,7 +98,8 @@ class LandingContainer extends React.Component {
   };
 
   handleBoundTopPublicGroupClick = (group, e) => {
-    return this.props.groupJoin(group._id)
+    return this.props.groupProfilesFetch(group.users)
+      .then(() => this.props.groupJoin(group._id))
       .then(() => this.props.messageBoardGroupFetch(group._id))
       .then(messageBoard => this.props.commentsFetch(messageBoard.comments))
       .then(() => this.props.history.push(`/group/${group._id}`))
@@ -242,6 +248,8 @@ let mapStateToProps = state => ({
   topPublicLeagues: state.topPublicLeagues,
   topScores: state.topScores,
   topPublicGroups: state.topPublicGroups,
+  games: state.games,
+  userPicks: state.userPicks,
 });
 
 let mapDispatchToProps = dispatch => ({
@@ -263,6 +271,8 @@ let mapDispatchToProps = dispatch => ({
   messageBoardLeagueFetch: leagueID => dispatch(messageBoardLeagueFetchRequest(leagueID)),
   messageBoardGroupFetch: groupID => dispatch(messageBoardGroupFetchRequest(groupID)),
   commentsFetch: commentArr => dispatch(commentsFetchRequest(commentArr)),
+  userPicksFetch: leagueID => dispatch(userPicksFetchRequest(leagueID)),
+  groupProfilesFetch : profileIDs => dispatch(groupProfilesFetchRequest(profileIDs)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(LandingContainer);
