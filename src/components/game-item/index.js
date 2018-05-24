@@ -47,6 +47,9 @@ class GameItem extends React.Component {
           <div className='cardWrapper'>
             <div className='homeTeamLogoDiv'></div>
             <div className='homeTeamLogoWrapper' style={homeLogoStyle}></div>
+            {util.renderIf(game.winner,
+              <div className='score homeScore'>{game.homeScore}</div>
+            )}
             <div className='homeTeamInfoDiv'>
               <div className='homeTeamInfoWrapper'>
                 <p className='cityRec'>{game.homeTeam.teamCity}({game.homeTeam.wins}-{game.homeTeam.losses})</p>
@@ -77,6 +80,9 @@ class GameItem extends React.Component {
             </div>
             <div className='awayTeamLogoDiv'></div>
             <div className='awayTeamLogoWrapper' style={awayLogoStyle}></div>
+            {util.renderIf(game.winner,
+              <div className='score awayScore'>{game.awayScore}</div>
+            )}
           </div>
         </div>
       </div>

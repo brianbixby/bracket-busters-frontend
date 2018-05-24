@@ -20,6 +20,7 @@ import * as util from '../../lib/util.js';
 class LeagueContainer extends React.Component {
   constructor(props){
     super(props);
+    this.state = { scoreBoardsShown: 10 };
   }
 
   componentWillMount() {
@@ -90,6 +91,12 @@ class LeagueContainer extends React.Component {
       .catch(console.error);
   };
 
+  handleShowAll = () => {
+    this.state.scoreBoardsShown === 10
+      ? this.setState({ scoreBoardsShown: this.props.scoreBoards.length})
+        : this.setState({ scoreBoardsShown: 10});
+  };
+
   render(){
     let currentLeague = this.props.currentLeague;
     let scoreBoards = 'scores';
@@ -99,6 +106,7 @@ class LeagueContainer extends React.Component {
     let topScores = 'scores';
     let basketball = require('./../helpers/assets/basketball.png');
     let leaguePhoto = currentLeague.image ? <img className='createImg' src={currentLeague.image} /> : <img className='createImg' src='https://i.imgur.com/CAoW5n8.jpg' />;
+    let scores = this.props.scoreBoards.slice(0, this.state.scoreBoardsShown);
     return (
       <div className='leagueItem-page page-outer-div'>
         <div className='grid-container'>
@@ -110,7 +118,7 @@ class LeagueContainer extends React.Component {
                   <div className='outer'>
                     <div className='outerLeft'>
                       <img src={nbalogo} />
-                      <p className='headerText'>League</p>
+                      <p className='headerText'>NBA</p>
                     </div>
                     <div className='outerRight'>
                     </div>
@@ -150,25 +158,33 @@ class LeagueContainer extends React.Component {
                     </div>
                   </div>
                 </div>
-                <div className='container mtop8'>
-                  {this.props.games.map(game =>
-                    <div key={game._id} className='gameItemOuter'>
-                      <GameItem  game={game} onComplete={this.handleCreate}/>
+                {util.renderIf(this.props.games && this.props.games.length > 0,
+                    <div className='mtop8'>
+                      <div className='picksGamesHeader'>Games</div>
+                      <div className='container overflow boxShadow'>
+                        {this.props.games.map(game =>
+                          <div key={game._id} className='gameItemOuter'>
+                            <GameItem  game={game} onComplete={this.handleCreate}/>
+                          </div>
+                        )}
+                      </div>
                     </div>
                   )}
-                </div>
-                <div>
-                  <div className='container mtop8'>
-                    {this.props.userPicks.map((userPick, idx) =>
-                      <div key={idx} className='margin16'>
-                        <UserPickItem  userPick={userPick} onUpdate={this.handleUpdate}/>
-                      </div>
-                    )}
-                  </div>
-                </div>
-                <div className='m16'>
-                  <MessageBoardContainer mBoardId={this.props.currentMessageBoard._id} commentsArray={this.props.currentMessageBoard.comments}/>
-                </div>
+                  {util.renderIf(this.props.userPicks && this.props.userPicks.length > 0,
+                    <div className=' mtop8'>
+                      <div className='picksGamesHeader'>Picks</div>
+                        <div className='container overflow boxShadow'>
+                          {this.props.userPicks.map((userPick, idx) =>
+                            <div key={idx} className='maxHeight90'>
+                              <UserPickItem  userPick={userPick} onUpdate={this.handleUpdate}/>
+                            </div>
+                          )}
+                        </div>
+                    </div>
+                  )}
+              </div>
+              <div className='m16'>
+                <MessageBoardContainer mBoardId={this.props.currentMessageBoard._id} commentsArray={this.props.currentMessageBoard.comments}/>
               </div>
             </div>
             <div className='col-md-4'>
@@ -186,29 +202,33 @@ class LeagueContainer extends React.Component {
                         <p className='tableColumn columnScore'> SCORE </p>
                       </div>
                     </div>
-                    {this.props.scoreBoards.map(scoreBoard => {
-                      return <div className='rowColors' key={scoreBoard._id}>
-                      <Table item={scoreBoard} type={topScores} />
+                    {scores.map(score => {
+                      return <div className='rowColors' key={score._id}>
+                      <Table item={score} type={topScores} />
                       </div>
                     })}
-                    <div className='spacerRow'> </div>
-                  </div>
-                  <div className='container tableContainer leagueBoards'>
-                    <div>
-                      <p className='tableHeadline'>FEATURED LEAGUES</p>
-                      <div className='tableColumnDiv'>
-                        <p className='tableColumn columnName'> LEAGUE NAME </p>
-                        <p className='tableColumn columnCreator'> CREATOR </p>
-                        <p className='tableColumn columnSize'> SIZE </p>
-                      </div>
+                    <div className='spacerRow'>
+                      <p className='seeAll' onClick={this.handleShowAll}> See All</p>
                     </div>
-                    {this.props.topPublicLeagues.map(topPublicLeague => {
-                      let boundTopPublicLeagueClick = this.handleBoundTopPublicLeagueClick.bind(this, topPublicLeague);
-                      return <div className='rowColors cursor' key={topPublicLeague._id} onClick={boundTopPublicLeagueClick}>
-                      <Table item={topPublicLeague} type={formTypeLeague} />
+                  </div>
+                  <div>
+                    <div className='container tableContainer leagueBoards'>
+                      <div>
+                        <p className='tableHeadline'>FEATURED LEAGUES</p>
+                        <div className='tableColumnDiv'>
+                          <p className='tableColumn columnName'> LEAGUE NAME </p>
+                          <p className='tableColumn columnCreator'> CREATOR </p>
+                          <p className='tableColumn columnSize'> SIZE </p>
+                        </div>
                       </div>
-                    })}
-                    <div className='spacerRow'></div>
+                      {this.props.topPublicLeagues.map(topPublicLeague => {
+                        let boundTopPublicLeagueClick = this.handleBoundTopPublicLeagueClick.bind(this, topPublicLeague);
+                        return <div className='rowColors cursor' key={topPublicLeague._id} onClick={boundTopPublicLeagueClick}>
+                        <Table item={topPublicLeague} type={formTypeLeague} />
+                        </div>
+                      })}
+                      <div className='spacerRow'></div>
+                    </div>
                   </div>
                 </div>
               </div>

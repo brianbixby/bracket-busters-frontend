@@ -2,8 +2,14 @@
 @import './../lib/vars'; 
 
 .leagueItem-page {
+  .picksGamesHeader {
+    text-align: center;
+    color: #fff;
+    background: url(./../../components/helpers/assets/sprite.png) no-repeat scroll center -517px transparent;
+    text-transform: uppercase;
+  }
   .gameItemOuter {
-    margin: 0 16px;
+    height: 90px;
   }
   .fadeout {
     -webkit-animation: fadeOut 1s forwards;
@@ -27,6 +33,27 @@
       border-top: 1px solid #333;
       position: relative;
       background-color: #202020;
+      border-radius: 0;
+
+      .score {
+        position: absolute;
+        top: 0;
+        color: #FFFFFF;
+        height: 90px;
+        text-align: center;
+        text-shadow: 0 0 18px #00ADEA;
+        width: 90px;
+        background-color: rgba(0, 0, 0, 0.7);
+        font-size: 48px;
+        line-height: 1;
+        padding-top: 20px;
+      }
+      .awayScore {
+        right: 0;
+      }
+      .homeScore {
+        left: 0;
+      }
   
       .homeTeamLogoDiv {
         background: -webkit-gradient(linear, right top, left top, from(#141414), color-stop(0.15, #1d1d1d), to(#202020));

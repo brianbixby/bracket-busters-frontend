@@ -23,11 +23,12 @@ class UserPickItem extends React.Component {
       homeTeamStarPlayerImage: props.userPick.gameID.homeTeam.starPlayerImage,
       homeTeamImage: props.userPick.gameID.homeTeam.image,
       homeTeamColor: props.userPick.gameID.homeTeam.color,
+      homeTeamScore: props.userPick.gameID.homeScore,
+      awayTeamScore: props.userPick.gameID.awayScore,
     }
   }
 
   componentWillReceiveProps(props){
-    console.log('props: ', props);
     if(props.userPick)
       this.setState(props.userPick)
   }
@@ -50,6 +51,9 @@ class UserPickItem extends React.Component {
           <div className='cardWrapper'>
             <div className='homeTeamLogoDiv'></div>
             <div className='homeTeamLogoWrapper' style={homeLogoStyle}></div>
+            {util.renderIf(userPick.gameID.winner,
+              <div className='score homeScore'>{this.state.homeTeamScore}</div>
+            )}
             <div className='homeTeamInfoDiv'>
               <div className='homeTeamInfoWrapper'>
                 <p className='cityRec'>{this.state.homeTeamCity}({this.state.homeTeamWins}-{this.state.homeTeamLosses})</p>
@@ -84,6 +88,9 @@ class UserPickItem extends React.Component {
             </div>
             <div className='awayTeamLogoDiv'></div>
             <div className='awayTeamLogoWrapper' style={awayLogoStyle}></div>
+            {util.renderIf(userPick.gameID.winner,
+              <div className='score awayScore'>{this.state.awayTeamScore}</div>
+            )}
           </div>
         </div>
       </div>
