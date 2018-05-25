@@ -175,7 +175,7 @@ class LeagueContainer extends React.Component {
                       <div className='picksGamesHeader'>Picks</div>
                         <div className='container overflow boxShadow'>
                           {this.props.userPicks.map((userPick, idx) =>
-                            <div key={idx} className='maxHeight90'>
+                            <div key={idx} className='maxHeight90 userPickItemOuter'>
                               <UserPickItem  userPick={userPick} onUpdate={this.handleUpdate}/>
                             </div>
                           )}

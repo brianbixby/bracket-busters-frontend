@@ -380,11 +380,17 @@
     .leagueItem-page .cardItem .awayTeamInfoDiv .cityRec, .leagueItem-page .cardItem .homeTeamInfoDiv .cityRec {
       font-size: 10px;
     }
+    .leagueItem-page .maxHeight90 {
+      max-height: none;
+    }
   }
 
   @media (max-width: 663px) and (min-width: 440px){
     .leagueItem-page {
-      .gameItemOuter {
+      .maxHeight90 {
+        max-height: none;
+      }
+      .gameItemOuter, .userPickItemOuter {
         height: 140px;
       }
       .cardOuter {
