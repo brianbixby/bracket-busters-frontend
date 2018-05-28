@@ -31,19 +31,22 @@ class ProfileForm extends React.Component {
     return (
       <section className='profile-form'>
         <form className='form' onSubmit={this.handleSubmit}>
-          <h2 className='title'>create your profile.</h2>
+          <h2 className='title'>{this.props.profileAction} your profile.</h2>
+          <label htmlFor='state' className='profileFormLabel'>State: </label>
           <input 
             type="text" 
             placeholder="State" 
             value={this.state.state || ''}
             name="state"
             onChange={this.handleChange}/>
+          <label htmlFor='country' className='profileFormLabel'>Country: </label>
           <input 
             type="text" 
             placeholder="Country"
             value={this.state.country || ''}
             name="country"
             onChange={this.handleChange}/>
+          <label htmlFor='image' className='profileFormLabel'>Profile img URL: </label>
           <input 
             type="text" 
             placeholder="img url"

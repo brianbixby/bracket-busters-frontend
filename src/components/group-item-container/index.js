@@ -8,6 +8,7 @@ import { groupsFetchRequest, groupFetchRequest, groupDeleteRequest, groupUpdateR
 import { topScoresFetchRequest } from '../../actions/scoreboard-actions.js';
 import { sportingEventsFetchRequest } from '../../actions/sportingEvent-actions.js';
 import { messageBoardLeagueFetchRequest, messageBoardGroupFetchRequest } from '../../actions/messageBoard-actions.js';
+import { userPicksFetchRequest } from '../../actions/userPick-actions.js';
 import MessageBoardContainer from '../message-board-container';
 import { commentsFetchRequest } from '../../actions/comment-actions.js';
 import Table from '../helpers/table';
@@ -35,21 +36,54 @@ class GroupItemContainer extends React.Component {
     return `${dateArr[1]} ${dateArr[2]}, ${dateArr[3]}`;
   };
 
+
+  onLeagueClick = (league, e) => {
+    this.props.leagueFetchRequest(league);
+    return this.props.messageBoardLeagueFetch(league._id)
+      .then(messageBoard => {
+        this.props.commentsFetch(messageBoard.comments);
+      })
+      .then(()=> this.props.userPicksFetch(league._id))
+      .then( () =>  this.props.history.push(`/league/${league._id}`))
+      .catch(util.logError);
+  }
+
+  onGroupClick = (group, e) => {
+    this.props.groupFetchRequest(group)
+    return this.props.groupProfilesFetch(group.users)
+      .then(() => this.props.messageBoardGroupFetch(group._id))
+      .then(messageBoard => {
+        this.props.commentsFetch(messageBoard.comments);
+      })
+      .then(() =>  this.props.history.push(`/group/${group._id}`))
+      .catch(util.logError);
+  }
+
   handleBoundTopPublicLeagueClick = (league, e) => {
-    return this.props.leagueJoin(league._id)
+    if (this.props.leagues.some(leagues => leagues._id === league._id)) {
+      this.onLeagueClick(league);
+    }
+    else {
+      return this.props.leagueJoin(league._id)
       .then(() => this.props.messageBoardLeagueFetch(league._id))
       .then(messageBoard => this.props.commentsFetch(messageBoard.comments))
       .then(() => this.props.history.push(`/league/${league._id}`))
       .catch(util.logError);
+    }
   };
 
   handleBoundTopPublicGroupClick = (group, e) => {
-    return this.props.groupProfilesFetch(group.users)
-      .then(() => this.props.groupJoin(group._id))
-      .then(() => this.props.messageBoardGroupFetch(group._id))
-      .then(messageBoard => this.props.commentsFetch(messageBoard.comments))
-      .then(() => this.props.history.push(`/group/${group._id}`))
-      .catch(util.logError);
+    if (this.props.groups.some(groups => groups._id === group._id)) {
+      this.onGroupClick(group);
+    }
+    else {
+      return this.props.groupProfilesFetch(group.users)
+        .then(() => this.props.groupJoin(group._id))
+        .then(() => this.props.messageBoardGroupFetch(group._id))
+        .then(messageBoard => this.props.commentsFetch(messageBoard.comments))
+        .then(() => this.props.history.push(`/group/${group._id}`))
+        .catch(util.logError);
+    }
   };
 
   render(){
@@ -234,6 +268,8 @@ let mapStateToProps = state => ({
   topScores: state.topScores,
   topPublicGroups: state.topPublicGroups,
   groupProfiles: state.groupProfiles,
+  leagues: state.leagues,
+  groups: state.groups,
 });
 
 let mapDispatchToProps = dispatch => ({
@@ -254,6 +290,9 @@ let mapDispatchToProps = dispatch => ({
   messageBoardGroupFetch: groupID => dispatch(messageBoardGroupFetchRequest(groupID)),
   commentsFetch: commentArr => dispatch(commentsFetchRequest(commentArr)),
   groupProfilesFetch : profileIDs => dispatch(groupProfilesFetchRequest(profileIDs)),
+  leagueFetchRequest: league => dispatch(leagueFetch(league)),
+  groupFetchRequest: group => dispatch(groupFetch(group)),
+  userPicksFetch: leagueID => dispatch(userPicksFetchRequest(leagueID)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(GroupItemContainer);

@@ -64,14 +64,14 @@ class LeagueAllPrivateForm extends React.Component {
   handleSubmit = e => {
     e.preventDefault();
     if(!this.state.error) {
-      this.props.onComplete(this.state)
-        .catch(err => {
-          console.error(err);
-          this.setState({ 
-            error,
-            submitted: true,
-        });
-      });
+      this.props.onComplete(this.state);
+      //   .catch(err => {
+      //     console.error(err);
+      //     this.setState({ 
+      //       error,
+      //       submitted: true,
+      //   });
+      // });
     }
     this.setState(state => ({
       submitted: true,

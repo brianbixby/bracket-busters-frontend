@@ -56,12 +56,10 @@ export const userProfileFetchRequest = ()  => (dispatch, getState) => {
 
 export const groupProfilesFetchRequest = profileIDs  => (dispatch, getState) => {
   let { userAuth } = getState();
-  console.log('groupProfilesFetchRequest: ', profileIDs );
   return superagent.post(`${__API_URL__}/api/profiles/group`)
     .set('Authorization', `Bearer ${userAuth}`)
     .send(profileIDs)
     .then(res => {
-      console.log('res.body: ', res.body);
       dispatch(groupProfilesFetch(res.body));
       return res.body;
     });

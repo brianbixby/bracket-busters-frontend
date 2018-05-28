@@ -24,7 +24,7 @@ export default (state=[], action) => {
     case 'GROUP_DELETE':
       if(state === []) throw new Error('USAGE ERROR: can not delete group not in state');
       validateGroup(payload);
-      return state.filter(item => item._id !== payload._id)
+      return state.filter(item => item._id !== payload._id);
     case 'GROUP_JOIN':
       return [payload, ...state];
     case 'SIGN_OUT':

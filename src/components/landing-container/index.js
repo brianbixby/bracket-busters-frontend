@@ -90,20 +90,30 @@ class LandingContainer extends React.Component {
   }
 
   handleBoundTopPublicLeagueClick = (league, e) => {
-    return this.props.leagueJoin(league._id)
+    if (this.props.leagues.some(leagues => leagues._id === league._id)) {
+      this.onLeagueClick(league);
+    }
+    else {
+      return this.props.leagueJoin(league._id)
       .then(() => this.props.messageBoardLeagueFetch(league._id))
       .then(messageBoard => this.props.commentsFetch(messageBoard.comments))
       .then(() => this.props.history.push(`/league/${league._id}`))
       .catch(util.logError);
+    }
   };
 
   handleBoundTopPublicGroupClick = (group, e) => {
-    return this.props.groupProfilesFetch(group.users)
-      .then(() => this.props.groupJoin(group._id))
-      .then(() => this.props.messageBoardGroupFetch(group._id))
-      .then(messageBoard => this.props.commentsFetch(messageBoard.comments))
-      .then(() => this.props.history.push(`/group/${group._id}`))
-      .catch(util.logError);
+    if (this.props.groups.some(groups => groups._id === group._id)) {
+      this.onGroupClick(group);
+    }
+    else {
+      return this.props.groupProfilesFetch(group.users)
+        .then(() => this.props.groupJoin(group._id))
+        .then(() => this.props.messageBoardGroupFetch(group._id))
+        .then(messageBoard => this.props.commentsFetch(messageBoard.comments))
+        .then(() => this.props.history.push(`/group/${group._id}`))
+        .catch(util.logError);
+    }
   };
 
   handleRedirect = link => this.props.history.push(link);
@@ -114,7 +124,9 @@ class LandingContainer extends React.Component {
     let formTypeLeague = 'league';
     let formTypeGroup = 'group';
     let topScores = 'scores';
+    let profileAction ='create';
     let basketball = require('./../helpers/assets/basketball.png');
+
     return (
       <section className='landing-page page-outer-div'>
         {util.renderIf(!this.props.userAuth,
@@ -224,7 +236,7 @@ class LandingContainer extends React.Component {
               )}
               {util.renderIf(this.state.profileFormDisplay && this.props.userProfile && this.props.userProfile.lastLogin === this.props.userProfile.createdOn,
                 <Modal heading='Create Profile' close={() => { this.setState({ profileFormDisplay: false }); this.handleProfileUpdate(this.props.userProfile); }}>
-                  <ProfileForm userProfile={this.props.userProfile} onComplete={this.handleProfileUpdate} />
+                  <ProfileForm userProfile={this.props.userProfile} onComplete={this.handleProfileUpdate} profileAction={profileAction} />
                 </Modal>
               )}
             </div>
