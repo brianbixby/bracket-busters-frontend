@@ -37,6 +37,25 @@
       margin-right: 16px;
       margin-left: 16px;
     }
+    .groupMemberImg {
+      background-size: cover;
+      max-height: 130px;
+      font-size: 90px;
+      object-fit: cover;
+      object-position: 50% 50%;
+      width: 100%;
+      text-align: center;
+      margin: auto;
+    }
+    .groupMemberImgNoPhoto {
+      display: block;
+      height: 100%;
+      object-fit: fill;
+      object-position: 50% 50%;
+      width: 100%;
+      background-size: cover;
+      max-height: 130px;
+    }
   }
 }
 @media (max-width: 410px) {

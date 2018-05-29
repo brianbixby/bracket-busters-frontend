@@ -1,10 +1,9 @@
 import React from 'react';
 import superagent from 'superagent';
-import { isEmail, isAlphanumeric, isAscii } from 'validator';
-// import debounce from 'lodash/fp/debounce';
+import { isAscii } from 'validator';
 
 import Tooltip from '../helpers/tooltip';
-import * as util from '../../lib/util';
+import { classToggler, renderIf } from '../../lib/util';
 
 class GroupForm extends React.Component {
   constructor(props){
@@ -30,19 +29,17 @@ class GroupForm extends React.Component {
     if(name === 'groupName') {
       if(!value)
         setError(name, `${name} can not be empty`)
-      else if(!isAlphanumeric(value))
-        setError(name, 'group name can only contain letters and numbers')
       else 
         deleteError(name)
     }
 
     if(name === 'password') {
       if(!value && input[name='privacy'].value === 'private')
-        setError(name, `${name} can not be empty`)
+        setError(name, `${name} can not be empty`);
       else if(!isAscii(value))
-        setError(name, 'password may only contain normal charachters')
+        setError(name, 'password may only contain normal charachters');
       else 
-        deleteError(name)
+        deleteError(name);
     }
 
     this.setState({
@@ -101,21 +98,21 @@ class GroupForm extends React.Component {
     let { focused, submitted, groupName, passwordError, groupNameError, groupNameAvailable } = this.state;
     let buttonText = this.props.group ? 'update' : 'create';
     return (
-      <form onSubmit={this.handleSubmit} className={util.classToggler({
+      <form onSubmit={this.handleSubmit} className={classToggler({
         'form group-form': true,
         'error': this.state.error && this.state.submitted,
       })}>
 
-        {util.renderIf(this.props.group,
+        {renderIf(this.props.group,
             <h2>update.</h2>
         )}
 
-        {util.renderIf(!this.props.group,
+        {renderIf(!this.props.group,
             <h2>create a group.</h2>
         )}
 
         <input
-          className={util.classToggler({error: groupNameError || !groupNameAvailable})}
+          className={classToggler({error: groupNameError || !groupNameAvailable})}
           type='text'
           name='groupName'
           placeholder='group name'
@@ -126,7 +123,7 @@ class GroupForm extends React.Component {
         />
         <Tooltip message={groupNameError} show={focused === 'groupName' || submitted}/>
 
-        {util.renderIf(groupName,
+        {renderIf(groupName,
           <div className='groupName-availability-outer'>
             <p className='groupName-availability'>
               {groupName} {groupNameAvailable ? 'is available': 'is not available'}
@@ -186,10 +183,10 @@ class GroupForm extends React.Component {
           </div>
         </div>
 
-        {util.renderIf(this.state.privacy === 'private',
+        {renderIf(this.state.privacy === 'private',
           <div>
             <input
-              className={util.classToggler({passwordError})}
+              className={classToggler({passwordError})}
               type='password'
               name='password'
               placeholder='password'

@@ -12,7 +12,7 @@ import { sportingEventsFetchRequest } from '../../actions/sportingEvent-actions.
 import GroupAllPrivateForm from '../group-all-private-form';
 import Table from '../helpers/table';
 import BannerAd from '../helpers/bannerAd';
-import * as util from './../../lib/util.js';
+import { userValidation, logError } from './../../lib/util.js';
 
 class GroupAllContainer extends React.Component {
   constructor(props){
@@ -21,21 +21,46 @@ class GroupAllContainer extends React.Component {
   }
 
   componentWillMount() {
-    util.userValidation(this.props);
+    userValidation(this.props);
     this.props.allPublicGroupsFetch();
   }
 
-  handleGroupJoin = (group, e) => {
+  onGroupClick = (group, e) => {
+    this.props.groupFetchRequest(group)
     return this.props.groupProfilesFetch(group.users)
-      .then(() => this.props.groupJoin(group._id))
       .then(() => this.props.messageBoardGroupFetch(group._id))
-      .then(messageBoard => this.props.commentsFetch(messageBoard.comments))
-      .then(() => this.props.history.push(`/group/${group._id}`))
-      .catch(util.logError);
+      .then(messageBoard => {
+        this.props.commentsFetch(messageBoard.comments);
+      })
+      .then(() =>  this.props.history.push(`/group/${group._id}`))
+      .catch(logError);
+  }
+
+  handleGroupJoin = (group, e) => {
+    if (this.props.groups.some(groups => groups._id === group._id)) {
+      this.onGroupClick(group);
+    }
+    else {
+      return this.props.groupProfilesFetch(group.users)
+        .then(() => this.props.groupJoin(group._id))
+        .then(() => this.props.messageBoardGroupFetch(group._id))
+        .then(messageBoard => this.props.commentsFetch(messageBoard.comments))
+        .then(() => this.props.history.push(`/group/${group._id}`))
+        .catch(logError);
+    }
   };
 
   handlePrivateGroupJoin = credentials => {
-    return this.props.privateGroupJoin(credentials)
+    let group;
+    if (this.props.groups.some(groups => {
+      if(groups.groupName === credentials.groupName)
+        return group = groups;
+    }
+    )) {
+      this.onGroupClick(group);
+    }
+    else {
+      return this.props.privateGroupJoin(credentials)
       .then(group => {
         this.props.groupProfilesFetch(group.users);
         return group;
@@ -46,7 +71,8 @@ class GroupAllContainer extends React.Component {
         return messageBoard.groupID
       })
       .then(groupID => this.props.history.push(`/group/${groupID}`))
-      .catch(util.logError);
+      .catch(logError);
+    }
   };
 
   handleShowAll = () => {

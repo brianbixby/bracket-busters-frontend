@@ -1,11 +1,9 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { Link } from 'react-router-dom';
 
 import JoinSection from './../joinSection';
 import Slider from './../slider';
-import Table from './../table';
-import * as util from './../../../lib/util.js';
+import { renderIf } from './../../../lib/util.js';
 
 class CreateSection extends React.Component {
   constructor(props){
@@ -20,10 +18,9 @@ class CreateSection extends React.Component {
     let nbalogo = require('./../assets/nba-logo.png');
 
     return (
-      // <div className='createOuter'>
       <div>
         <div className='createOuterInner'>
-          {util.renderIf(this.props.formType === 'league',
+          {renderIf(this.props.formType === 'league',
             <div className='outer'>
               <div className='outerLeft'>
                 <img src={nbalogo} />
@@ -34,7 +31,7 @@ class CreateSection extends React.Component {
               </div>
             </div>
           )}
-          {util.renderIf(this.props.formType === 'group',
+          {renderIf(this.props.formType === 'group',
             <div className='outer'>
               <div className='outerLeft'>
                 <i className="fa fa-users"></i>
@@ -51,19 +48,19 @@ class CreateSection extends React.Component {
                 <div className='createMainBorder'></div>
                 <div>
                   <p className='createMainTitle'> Create a {this.props.formType}, and bring your friends! </p>
-                  {util.renderIf(this.props.formType === 'league',
+                  {renderIf(this.props.formType === 'league',
                     <p className='createMainSubtitle'>You&#39;re the League Manager here. Set up a private or public league and play with your family and friends!</p>
                   )}
-                  {util.renderIf(this.props.formType === 'group',
+                  {renderIf(this.props.formType === 'group',
                     <p className='createMainSubtitle'>You&#39;re the leader of the group. Set up a private or public group to cheer on your favorite team with your family and friends!</p>
                   )}
                 </div>
               </div>
               <div className='createImgDiv'>
-                {util.renderIf(this.props.formType === 'league',
+                {renderIf(this.props.formType === 'league',
                   <img className="createImg" src={createleague} />
                 )}
-                {util.renderIf(this.props.formType === 'group',
+                {renderIf(this.props.formType === 'group',
                   <img className="createImg" src={creategroup} />
                 )}  
               </div>
@@ -73,7 +70,7 @@ class CreateSection extends React.Component {
 
         <JoinSection joinType={this.props.formType} handleRedirect={this.props.handleRedirect}/>
 
-        {util.renderIf(this.props.joinedItems.length > 0,
+        {renderIf(this.props.joinedItems.length > 0,
           <div className='container'>
             <div className='sliderOuter'>
               <div className='sliderOuterWrapper'>

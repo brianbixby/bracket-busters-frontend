@@ -9,7 +9,6 @@ import comments from './comment-reducers';
 import scoreBoards from './scoreBoard-reducers';
 import games from './game-reducers';
 import userPicks from './userPick-reducers';
-import teams from './team-reducers';
 import currentLeague from './currentLeague-reducers.js';
 import currentGroup from './currentGroup-reducers.js';
 import currentMessageBoard from './currentMessageBoard-reducers.js';
@@ -31,7 +30,6 @@ export default combineReducers({
   scoreBoards,
   games,
   userPicks,
-  teams,
   currentLeague,
   currentGroup,
   currentMessageBoard,

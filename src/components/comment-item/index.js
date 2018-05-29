@@ -6,12 +6,11 @@ export class CommentItem extends React.Component {
   }
 
   render(){
-    let { comment } = this.props;
+    let { comment, image } = this.props;
     return ( 
       <div className='comment-item'>
         <div className='comment-photo-div'>
-          
-          <img src={this.props.image} />
+          <img src={image} />
         </div>
         <div className='comment-text-div'>
           <div className='comment-commenter'> {comment.username} </div>

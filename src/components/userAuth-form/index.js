@@ -3,7 +3,7 @@ import superagent from 'superagent';
 import { isEmail, isAlphanumeric, isAscii } from 'validator';
 
 import Tooltip from '../helpers/tooltip';
-import * as util from '../../lib/util';
+import { classToggler, renderIf } from '../../lib/util';
 
 class UserAuthForm extends React.Component {
   constructor(props) {
@@ -118,7 +118,7 @@ class UserAuthForm extends React.Component {
     }))
   };
 
-  handleError = (err) => {
+  handleError = err => {
     const usernameError = (
       err.status === 401 
         ? 'username or password incorrect' 
@@ -128,21 +128,21 @@ class UserAuthForm extends React.Component {
     this.setState({
       usernameError
     });
-  }
+  };
   
   render() {
     let { focused, submitted, username, emailError, passwordError, usernameError, usernameAvailable } = this.state;
     return (
-      <form onSubmit={this.handleSubmit} className={util.classToggler({
+      <form onSubmit={this.handleSubmit} className={classToggler({
         'form userauth-form': true,
         'error': this.state.error && this.state.submitted,
       })}>
 
-        {util.renderIf(this.props.authFormAction === 'Sign Up',
+        {renderIf(this.props.authFormAction === 'Sign Up',
           <div>
             <h2 className='title'>sign up.</h2>
             <input
-              className={util.classToggler({error: emailError})}
+              className={classToggler({error: emailError})}
               type='text'
               name='email'
               placeholder='Email Address'
@@ -155,14 +155,14 @@ class UserAuthForm extends React.Component {
           </div>
         )}
 
-        {util.renderIf(this.props.authFormAction !== 'Sign Up',
+        {renderIf(this.props.authFormAction !== 'Sign Up',
           <div>
             <h2 className='title'>sign in.</h2>
           </div>
         )}
 
         <input
-          className={util.classToggler({error: usernameError || !usernameAvailable})}
+          className={classToggler({error: usernameError || !usernameAvailable})}
           type='text'
           name='username'
           placeholder='Username'
@@ -173,7 +173,7 @@ class UserAuthForm extends React.Component {
         />
         <Tooltip message={usernameError} show={focused === 'username' || submitted}/>
 
-        {util.renderIf(username && this.props.authFormAction=== 'Sign Up',
+        {renderIf(username && this.props.authFormAction=== 'Sign Up',
           <div className='username-availability-outer'>
             <p className='username-availability'>
               {username} {usernameAvailable ? 'is available': 'is not available'}
@@ -183,7 +183,7 @@ class UserAuthForm extends React.Component {
 
 
         <input
-          className={util.classToggler({passwordError})}
+          className={classToggler({passwordError})}
           type='password'
           name='password'
           placeholder='Password (case sensitive)'

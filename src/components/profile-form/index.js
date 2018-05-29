@@ -1,5 +1,4 @@
 import React from 'react';
-import * as util from './../../lib/util.js';
 
 class ProfileForm extends React.Component {
   constructor(props){
@@ -18,32 +17,35 @@ class ProfileForm extends React.Component {
   handleSubmit = e => {
     e.preventDefault();
     return this.props.onComplete(this.state);
-  } 
+  };
 
   handleChange = e => {
     this.setState({
       [e.target.name]: e.target.value
     })
-  }
+  };
 
   render() {
     let dateClass = !this.state.birthdate ? 'grayDate' : '';
     return (
       <section className='profile-form'>
         <form className='form' onSubmit={this.handleSubmit}>
-          <h2 className='title'>create your profile.</h2>
+          <h2 className='title'>{this.props.profileAction} your profile.</h2>
+          <label htmlFor='state' className='profileFormLabel'>State: </label>
           <input 
             type="text" 
             placeholder="State" 
             value={this.state.state || ''}
             name="state"
             onChange={this.handleChange}/>
+          <label htmlFor='country' className='profileFormLabel'>Country: </label>
           <input 
             type="text" 
             placeholder="Country"
             value={this.state.country || ''}
             name="country"
             onChange={this.handleChange}/>
+          <label htmlFor='image' className='profileFormLabel'>Profile img URL: </label>
           <input 
             type="text" 
             placeholder="img url"

@@ -5,7 +5,7 @@ import CommentItem from '../comment-item';
 import { messageBoardFetchRequest } from '../../actions/messageBoard-actions.js';
 import { commentCreateRequest, commentFetchRequest, commentsFetchRequest } from '../../actions/comment-actions.js';
 import Modal from '../helpers/modal';
-import * as util from './../../lib/util.js';
+import { logError, renderIf } from './../../lib/util.js';
 
 
 class MessageBoardContainer extends React.Component {
@@ -16,7 +16,7 @@ class MessageBoardContainer extends React.Component {
 
   componentWillMount() {
     this.props.commentsFetch(this.props.commentsArray)
-      .catch(err => util.logError(err));
+      .catch(err => logError(err));
   }
 
   componentWillReceiveProps(props) {
@@ -68,7 +68,7 @@ class MessageBoardContainer extends React.Component {
           )}
         </div>
         <div className='messageBoardModalContainer'>
-          {util.renderIf(this.state.launchCommentModal,
+          {renderIf(this.state.launchCommentModal,
             <Modal heading='MESSAGE BOARD' close={() => this.setState({ launchCommentModal: false })}>
               <div>
                 <div className='messageBoard-wrapper'>

@@ -2,13 +2,14 @@ import React from 'react';
 import { connect } from 'react-redux';
 
 import ProfileForm from '../profile-form';
+import BannerAd from '../helpers/bannerAd';
 import { tokenSignInRequest } from '../../actions/userAuth-actions.js';
 import { userProfileFetchRequest, userProfileUpdateRequest } from '../../actions/userProfile-actions.js';
 import { leaguesFetchRequest, topPublicLeaguesFetchRequest } from '../../actions/league-actions.js';
 import { groupsFetchRequest, topPublicGroupsFetchRequest } from '../../actions/group-actions.js';
 import { topScoresFetchRequest } from '../../actions/scoreboard-actions.js';
 import { sportingEventsFetchRequest } from '../../actions/sportingEvent-actions.js';
-import * as util from './../../lib/util.js';
+import { userValidation, logError, formatDate } from './../../lib/util.js';
 
 class ProfileContainer extends React.Component {
   constructor(props){
@@ -16,32 +17,63 @@ class ProfileContainer extends React.Component {
   }
 
   componentWillMount() {
-    util.userValidation(this.props);
+    userValidation(this.props);
   }
 
   handleProfileUpdate = profile => {
     return this.props.userProfileUpdate(profile)
-      .catch(util.logError);
-  }
+      .catch(logError);
+  };
 
   render(){
+    let profileAction='update';
+    let placeholderImage = require('./../helpers/assets/profilePlaceholder.jpeg');
+    let profileImage = this.props.userProfile && this.props.userProfile.image ? this.props.userProfile.image : placeholderImage;
     return (
       <div className='profile-container page-outer-div'>
-      <div className='grid-container'>
-        <h2>tell us about yourself.</h2>
-        <div className='page-form'>
-          <ProfileForm 
-            userProfile={this.props.userProfile} 
-            onComplete={this.handleProfileUpdate}
-          />
-        </div>
-        <div className='profile-image-div'>
-          <h2>{this.props.userProfile.username}</h2>
-          <img className='profile-image' src={this.props.userProfile.image} />
-        </div>
+        <div className='grid-container'>
+          <BannerAd/>
+          <div>
+            <div className='row'>
+              <div className='col-md-8'>
+                <div className='createOuter'>
+                  <div className='page-form'>
+                    <ProfileForm 
+                      userProfile={this.props.userProfile} 
+                      onComplete={this.handleProfileUpdate}
+                      profileAction={profileAction}
+                    />
+                  </div>
+                </div>
+              </div>
+              <div className='col-md-4 hideMedium'>
+                <div className='mainContainer'>
+                  <div className='mainContainer-header'>
+                    <div className='left'>
+                      <p className='mainContainerHeader'>{this.props.userProfile.username}</p>
+                    </div>
+                  </div>
+                  <div className='mainContainerSection'>
+                    <div className='mainContainerSectionWrapper'>
+                      <div className='container'>
+                        <div className='inner-wrapper'>
+                          <div className='profile-image-div'>
+                            <img className='profile-image' src={profileImage} />
+                          </div>
+                          <div className='userProfileData'>
+                            <p>Member Since: {formatDate(this.props.userProfile.createdOn)}</p>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
-    )
+    );
   }
 }
 

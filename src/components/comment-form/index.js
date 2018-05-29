@@ -1,8 +1,6 @@
 import React from 'react';
-import superagent from 'superagent';
 
-import Tooltip from '../helpers/tooltip';
-import * as util from '../../lib/util';
+import { renderIf } from '../../lib/util';
 
 class CommentForm extends React.Component {
   constructor(props) {
@@ -10,7 +8,6 @@ class CommentForm extends React.Component {
     this.textAreaHeight = React.createRef();
     this.state = {
       content: '',
-      focused: null,
       textAreaHeight: 37,
     };
   }
@@ -18,15 +15,6 @@ class CommentForm extends React.Component {
   componentWillUnmount() {
     this.setState({ content: '', textAreaHeight: 37 });
   }
-
-  handleFocus = e => this.setState({ focused: e.target.name});
-
-  handleBlur = e => {
-    let { name } = e.target;
-    this.setState(state => ({
-      focused: state.focused == name ? null : state.focused,
-    }))
-  };
 
   handleChange = e => {
     let currHeight = this.textAreaHeight.current.scrollHeight;
@@ -68,15 +56,13 @@ class CommentForm extends React.Component {
               placeholder='add a comment...'
               value={this.state.content}
               onChange={this.handleChange}
-              onFocus={this.handleFocus}
-              onBlur={this.handleBlur}
               ref={this.textAreaHeight}
               style={textAreaStyle}
             ></textarea>
           </div>
         </div>
         
-        {util.renderIf(content,
+        {renderIf(content,
           <div className='commentFormButtonDiv'>
             <div className='ButtonDiv'>
               <button className='button' type='submit'> post </button>

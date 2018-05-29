@@ -15,15 +15,16 @@ import UserPickItem from '../user-pick-item';
 import MessageBoardContainer from '../message-board-container';
 import Table from '../helpers/table';
 import BannerAd from '../helpers/bannerAd';
-import * as util from '../../lib/util.js';
+import { userValidation, logError, renderIf } from '../../lib/util.js';
 
 class LeagueContainer extends React.Component {
   constructor(props){
     super(props);
+    this.state = { scoreBoardsShown: 10 };
   }
 
   componentWillMount() {
-    util.userValidation(this.props);
+    userValidation(this.props);
     this.props.scoreBoardsFetch(this.props.currentLeague._id)
       .then(() => {
         this.props.userPicksFetch(this.props.currentLeague._id)
@@ -32,51 +33,69 @@ class LeagueContainer extends React.Component {
           gameIDArr.push(picks.map(userPick => userPick.gameID._id));
           return this.props.gamesFetch(this.props.currentLeague.sportingEventID, gameIDArr)
         })
-        .catch(util.logError);
+        .catch(logError);
       })
   }
-
-  // componentDidMount(){
-  //   util.userValidation(this.props);
-  //   this.props.scoreBoardsFetch(this.props.currentLeague._id)
-  //     .then(() => {
-  //       this.props.userPicksFetch(this.props.currentLeague._id)
-  //       .then(picks => {
-  //         let gameIDArr = [];
-  //         gameIDArr.push(picks.map(userPick => userPick.gameID._id));
-  //         return this.props.gamesFetch(this.props.currentLeague.sportingEventID, gameIDArr)
-  //       })
-  //       .catch(util.logError);
-  //     })
-  // }
 
   formatDate = date => {
     let dateArr = new Date(date).toDateString().split(' ');
     return `${dateArr[1]} ${dateArr[2]}, ${dateArr[3]}`;
   };
 
+  onLeagueClick = (league, e) => {
+    this.props.leagueFetchRequest(league);
+    return this.props.messageBoardLeagueFetch(league._id)
+      .then(messageBoard => {
+        this.props.commentsFetch(messageBoard.comments);
+      })
+      .then(()=> this.props.userPicksFetch(league._id))
+      .then( () =>  this.props.history.push(`/league/${league._id}`))
+      .catch(logError);
+  };
+
+  onGroupClick = (group, e) => {
+    this.props.groupFetchRequest(group)
+    return this.props.groupProfilesFetch(group.users)
+      .then(() => this.props.messageBoardGroupFetch(group._id))
+      .then(messageBoard => {
+        this.props.commentsFetch(messageBoard.comments);
+      })
+      .then(() =>  this.props.history.push(`/group/${group._id}`))
+      .catch(logError);
+  };
+
   handleBoundTopPublicLeagueClick = (league, e) => {
-    return this.props.leagueJoin(league._id)
+    if (this.props.leagues.some(leagues => leagues._id === league._id)) {
+      this.onLeagueClick(league);
+    }
+    else {
+      return this.props.leagueJoin(league._id)
       .then(() => this.props.messageBoardLeagueFetch(league._id))
       .then(messageBoard => this.props.commentsFetch(messageBoard.comments))
       .then(() => this.props.history.push(`/league/${league._id}`))
-      .catch(util.logError);
+      .catch(logError);
+    }
   };
 
   handleBoundTopPublicGroupClick = (group, e) => {
-    return this.props.groupProfilesFetch(group.users)
-      .then(() => this.props.groupJoin(group._id))
-      .then(() => this.props.messageBoardGroupFetch(group._id))
-      .then(messageBoard => this.props.commentsFetch(messageBoard.comments))
-      .then(() => this.props.history.push(`/group/${group._id}`))
-      .catch(util.logError);
+    if (this.props.groups.some(groups => groups._id === group._id)) {
+      this.onGroupClick(group);
+    }
+    else {
+      return this.props.groupProfilesFetch(group.users)
+        .then(() => this.props.groupJoin(group._id))
+        .then(() => this.props.messageBoardGroupFetch(group._id))
+        .then(messageBoard => this.props.commentsFetch(messageBoard.comments))
+        .then(() => this.props.history.push(`/group/${group._id}`))
+        .catch(logError);
+    }
   };
 
   handleComplete = league => {
     return this.props.leagueUpdate(league)
       .then(() => this.props.history.push(`/league/${this.props.league._id}`))
-      .catch(util.logError);
-  }
+      .catch(logError);
+  };
 
   handleUpdate = userPick => {
     return this.props.userPickUpdate(userPick)
@@ -90,6 +109,12 @@ class LeagueContainer extends React.Component {
       .catch(console.error);
   };
 
+  handleShowAll = () => {
+    this.state.scoreBoardsShown === 10
+      ? this.setState({ scoreBoardsShown: this.props.scoreBoards.length})
+        : this.setState({ scoreBoardsShown: 10});
+  };
+
   render(){
     let currentLeague = this.props.currentLeague;
     let scoreBoards = 'scores';
@@ -99,6 +124,7 @@ class LeagueContainer extends React.Component {
     let topScores = 'scores';
     let basketball = require('./../helpers/assets/basketball.png');
     let leaguePhoto = currentLeague.image ? <img className='createImg' src={currentLeague.image} /> : <img className='createImg' src='https://i.imgur.com/CAoW5n8.jpg' />;
+    let scores = this.props.scoreBoards.slice(0, this.state.scoreBoardsShown);
     return (
       <div className='leagueItem-page page-outer-div'>
         <div className='grid-container'>
@@ -110,7 +136,7 @@ class LeagueContainer extends React.Component {
                   <div className='outer'>
                     <div className='outerLeft'>
                       <img src={nbalogo} />
-                      <p className='headerText'>League</p>
+                      <p className='headerText'>NBA</p>
                     </div>
                     <div className='outerRight'>
                     </div>
@@ -150,25 +176,33 @@ class LeagueContainer extends React.Component {
                     </div>
                   </div>
                 </div>
-                <div className='container mtop8'>
-                  {this.props.games.map(game =>
-                    <div key={game._id} className='gameItemOuter'>
-                      <GameItem  game={game} onComplete={this.handleCreate}/>
+                {renderIf(this.props.games && this.props.games.length > 0,
+                    <div className='mtop8'>
+                      <div className='picksGamesHeader'>Games</div>
+                      <div className='container overflow boxShadow'>
+                        {this.props.games.map(game =>
+                          <div key={game._id} className='gameItemOuter'>
+                            <GameItem  game={game} onComplete={this.handleCreate}/>
+                          </div>
+                        )}
+                      </div>
                     </div>
                   )}
-                </div>
-                <div>
-                  <div className='container mtop8'>
-                    {this.props.userPicks.map((userPick, idx) =>
-                      <div key={idx} className='margin16'>
-                        <UserPickItem  userPick={userPick} onUpdate={this.handleUpdate}/>
-                      </div>
-                    )}
-                  </div>
-                </div>
-                <div className='m16'>
-                  <MessageBoardContainer mBoardId={this.props.currentMessageBoard._id} commentsArray={this.props.currentMessageBoard.comments}/>
-                </div>
+                  {renderIf(this.props.userPicks && this.props.userPicks.length > 0,
+                    <div className=' mtop8'>
+                      <div className='picksGamesHeader'>Picks</div>
+                        <div className='container overflow boxShadow'>
+                          {this.props.userPicks.map((userPick, idx) =>
+                            <div key={idx} className='maxHeight90 userPickItemOuter'>
+                              <UserPickItem  userPick={userPick} onUpdate={this.handleUpdate}/>
+                            </div>
+                          )}
+                        </div>
+                    </div>
+                  )}
+              </div>
+              <div className='m16'>
+                <MessageBoardContainer mBoardId={this.props.currentMessageBoard._id} commentsArray={this.props.currentMessageBoard.comments}/>
               </div>
             </div>
             <div className='col-md-4'>
@@ -186,29 +220,35 @@ class LeagueContainer extends React.Component {
                         <p className='tableColumn columnScore'> SCORE </p>
                       </div>
                     </div>
-                    {this.props.scoreBoards.map(scoreBoard => {
-                      return <div className='rowColors' key={scoreBoard._id}>
-                      <Table item={scoreBoard} type={topScores} />
+                    {scores.map(score => {
+                      return <div className='rowColors' key={score._id}>
+                      <Table item={score} type={topScores} />
                       </div>
                     })}
-                    <div className='spacerRow'> </div>
-                  </div>
-                  <div className='container tableContainer leagueBoards'>
-                    <div>
-                      <p className='tableHeadline'>FEATURED LEAGUES</p>
-                      <div className='tableColumnDiv'>
-                        <p className='tableColumn columnName'> LEAGUE NAME </p>
-                        <p className='tableColumn columnCreator'> CREATOR </p>
-                        <p className='tableColumn columnSize'> SIZE </p>
-                      </div>
+                    <div className='spacerRow'>
+                      {renderIf( this.props.scoreBoards.length >10,
+                        <p className='seeAll' onClick={this.handleShowAll}> See All</p>
+                      )}
                     </div>
-                    {this.props.topPublicLeagues.map(topPublicLeague => {
-                      let boundTopPublicLeagueClick = this.handleBoundTopPublicLeagueClick.bind(this, topPublicLeague);
-                      return <div className='rowColors cursor' key={topPublicLeague._id} onClick={boundTopPublicLeagueClick}>
-                      <Table item={topPublicLeague} type={formTypeLeague} />
+                  </div>
+                  <div>
+                    <div className='container tableContainer leagueBoards'>
+                      <div>
+                        <p className='tableHeadline'>FEATURED LEAGUES</p>
+                        <div className='tableColumnDiv'>
+                          <p className='tableColumn columnName'> LEAGUE NAME </p>
+                          <p className='tableColumn columnCreator'> CREATOR </p>
+                          <p className='tableColumn columnSize'> SIZE </p>
+                        </div>
                       </div>
-                    })}
-                    <div className='spacerRow'></div>
+                      {this.props.topPublicLeagues.map(topPublicLeague => {
+                        let boundTopPublicLeagueClick = this.handleBoundTopPublicLeagueClick.bind(this, topPublicLeague);
+                        return <div className='rowColors cursor' key={topPublicLeague._id} onClick={boundTopPublicLeagueClick}>
+                        <Table item={topPublicLeague} type={formTypeLeague} />
+                        </div>
+                      })}
+                      <div className='spacerRow'></div>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -255,6 +295,8 @@ let mapStateToProps = state => ({
   topPublicGroups: state.topPublicGroups,
   games: state.games,
   userPicks: state.userPicks,
+  leagues: state.leagues,
+  groups: state.groups,
 });
 
 let mapDispatchToProps = dispatch => ({
@@ -281,83 +323,8 @@ let mapDispatchToProps = dispatch => ({
   messageBoardGroupFetch: groupID => dispatch(messageBoardGroupFetchRequest(groupID)),
   commentsFetch: commentArr => dispatch(commentsFetchRequest(commentArr)),
   groupProfilesFetch : profileIDs => dispatch(groupProfilesFetchRequest(profileIDs)),
+  leagueFetchRequest: league => dispatch(leagueFetch(league)),
+  groupFetchRequest: group => dispatch(groupFetch(group)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(LeagueContainer);
-
-
-{/* <div className='page-outer-div leagueContainer'>
-<div className='grid-container'>
-  <BannerAd/>
-  <div className='row'>
-    <div className='col-md-8'>
-      {util.renderIf(this.props.games.length > 0,
-        <div className='wideSectionWrapper'>
-          <div className='outer'>
-            <div className='outerLeft'>
-              <img src={nbalogo} />
-              <p className='headerText'>UNPICKED GAMES </p>
-              <p className='subheaderText'> </p>
-            </div>
-            <div className='outerRight'>
-              <p className='seeAll'>See All</p>
-            </div>
-          </div>
-          <div className='gamesDiv'>
-            {this.props.games.map(game =>
-              <div key={game._id} className='margin16'>
-                <GameItem  game={game} onComplete={this.handleCreate}/>
-              </div>
-            )}
-          </div>
-        </div>
-      )}
-      {util.renderIf(this.props.userPicks.length > 0,
-        <div className='wideSectionWrapper'>
-          <div className='outer'>
-            <div className='outerLeft'>
-              <img src={nbalogo} />
-              <p className='headerText'>PICKS </p>
-              <p className='subheaderText'> </p>
-            </div>
-            <div className='outerRight'>
-              <p className='seeAll'>See All</p>
-            </div>
-          </div>
-          <div className='userPicksDiv'>
-            {this.props.userPicks.map((userPick, idx) =>
-              <div key={idx} className='margin16'>
-                <UserPickItem  userPick={userPick} onUpdate={this.handleUpdate}/>
-              </div>
-            )}
-          </div>
-        </div>
-      )}
-    </div>
-    <div className='col-md-4'>
-      <div className='leagueBoardsContainer'>
-        <div className='leaguesContainerHeader'>
-          <i className="fa fa-users"></i>
-          <p className='leaguesBoardHeader'>LEADERBOARD</p>
-        </div>
-        <div className='container tableContainer'>
-          <div>
-            <p className='tableHeadline hideMed'>LEADERBOARD</p>
-            <div className='tableColumnDiv'>
-              <p className='tableColumn columnUser'> USER NAME </p>
-              <p className='tableColumn columnScore'> SCORE </p>
-            </div>
-          </div>
-          {this.props.scoreBoards.map(scoreBoard => {
-            return <div className='rowColors' key={scoreBoard._id}>
-              <Table item={scoreBoard} type={scoreBoards} />
-            </div>
-          })}
-          <div className='spacerRow'> </div>
-        </div>
-      </div>
-      <MessageBoardContainer mBoardId={this.props.currentMessageBoard._id} commentsArray={this.props.currentMessageBoard.comments}/>
-    </div>
-  </div>
-</div>
-</div> */}

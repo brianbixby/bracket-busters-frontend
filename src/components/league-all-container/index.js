@@ -9,10 +9,11 @@ import { messageBoardLeagueFetchRequest } from '../../actions/messageBoard-actio
 import { commentsFetchRequest } from '../../actions/comment-actions.js';
 import { topScoresFetchRequest } from '../../actions/scoreboard-actions.js';
 import { sportingEventsFetchRequest } from '../../actions/sportingEvent-actions.js';
+import { userPicksFetchRequest } from '../../actions/userPick-actions.js';
 import LeagueAllPrivateForm from '../league-all-private-form';
 import Table from '../helpers/table';
 import BannerAd from '../helpers/bannerAd';
-import * as util from '../../lib/util.js';
+import { userValidation, logError} from '../../lib/util.js';
 
 class LeagueAllContainer extends React.Component {
   constructor(props){
@@ -21,27 +22,53 @@ class LeagueAllContainer extends React.Component {
   }
 
   componentWillMount() {
-    util.userValidation(this.props);
+    userValidation(this.props);
     this.props.allPublicLeaguesFetch();
   };
 
+  onLeagueClick = (league, e) => {
+    this.props.leagueFetchRequest(league);
+    return this.props.messageBoardLeagueFetch(league._id)
+      .then(messageBoard => {
+        this.props.commentsFetch(messageBoard.comments);
+      })
+      .then(()=> this.props.userPicksFetch(league._id))
+      .then( () =>  this.props.history.push(`/league/${league._id}`))
+      .catch(logError);
+  }
+
   handleLeagueJoin = (league, e) => {
-    return this.props.leagueJoin(league._id)
+    if (this.props.leagues.some(leagues => leagues._id === league._id)) {
+      this.onLeagueClick(league);
+    }
+    else {
+      return this.props.leagueJoin(league._id)
       .then(() => this.props.messageBoardLeagueFetch(league._id))
       .then(messageBoard => this.props.commentsFetch(messageBoard.comments))
       .then(() => this.props.history.push(`/league/${league._id}`))
-      .catch(util.logError);
+      .catch(logError);
+    }
   };
 
   handlePrivateLeagueJoin = credentials => {
-    return this.props.privateLeagueJoin(credentials)
-      .then(league => this.props.messageBoardLeagueFetch(league._id))
-      .then(messageBoard => {
-        this.props.commentsFetch(messageBoard.comments);
-        return messageBoard.leagueID
-      })
-      .then(leagueID => this.props.history.push(`/league/${leagueID}`))
-      .catch(util.logError);
+    let league;
+    if (this.props.leagues.some(leagues => {
+      if(leagues.leagueName === credentials.leagueName)
+        return league = leagues;
+    }
+    )) {
+      this.onLeagueClick(league);
+    }
+    else {
+      return this.props.privateLeagueJoin(credentials)
+        .then(league => this.props.messageBoardLeagueFetch(league._id))
+        .then(messageBoard => {
+          this.props.commentsFetch(messageBoard.comments);
+          return messageBoard.leagueID
+        })
+        .then(leagueID => this.props.history.push(`/league/${leagueID}`))
+        .catch(logError);
+      }
   };
 
   handleShowAll = () => {
@@ -166,6 +193,7 @@ let mapDispatchToProps = dispatch => ({
   leagueFetchRequest: league => dispatch(leagueFetch(league)),
   messageBoardLeagueFetch: leagueID => dispatch(messageBoardLeagueFetchRequest(leagueID)),
   commentsFetch: commentArr => dispatch(commentsFetchRequest(commentArr)),
+  userPicksFetch: leagueID => dispatch(userPicksFetchRequest(leagueID)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(LeagueAllContainer);

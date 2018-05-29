@@ -20,7 +20,6 @@ export const userPickFetch = userPick => ({
   payload: userPick,
 });
 
-// ASYNC
 export const userPickCreateRequest = userPick => (dispatch, getState) => {
   let { userAuth } = getState();
 

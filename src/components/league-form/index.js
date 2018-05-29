@@ -1,9 +1,9 @@
 import React from 'react';
 import superagent from 'superagent';
-import { isEmail, isAlphanumeric, isAscii } from 'validator';
+import { isAlphanumeric, isAscii } from 'validator';
 
 import Tooltip from '../helpers/tooltip';
-import * as util from '../../lib/util';
+import { classToggler, renderIf } from '../../lib/util';
 
 class LeagueForm extends React.Component {
   constructor(props){
@@ -29,8 +29,8 @@ class LeagueForm extends React.Component {
     if(name === 'leagueName') {
       if(!value)
         setError(name, `${name} can not be empty`)
-      else if(!isAlphanumeric(value))
-        setError(name, 'league name can only contain letters and numbers')
+      else if(!isAscii(value))
+        setError(name, 'password may only contain normal charachters')
       else 
         deleteError(name)
     }
@@ -100,21 +100,21 @@ class LeagueForm extends React.Component {
     let { focused, submitted, leagueName, emailError, passwordError, leagueNameError, leagueNameAvailable } = this.state;
     let buttonText = this.props.league ? 'update' : 'create';
     return (
-      <form onSubmit={this.handleSubmit} className={util.classToggler({
+      <form onSubmit={this.handleSubmit} className={classToggler({
         'form league-form': true,
         'error': this.state.error && this.state.submitted,
       })}>
 
-        {util.renderIf(this.props.league,
+        {renderIf(this.props.league,
             <h2>update.</h2>
         )}
 
-        {util.renderIf(!this.props.league,
+        {renderIf(!this.props.league,
             <h2>create a league.</h2>
         )}
 
         <input
-          className={util.classToggler({error: leagueNameError || !leagueNameAvailable})}
+          className={classToggler({error: leagueNameError || !leagueNameAvailable})}
           type='text'
           name='leagueName'
           placeholder='league name'
@@ -125,23 +125,13 @@ class LeagueForm extends React.Component {
         />
         <Tooltip message={leagueNameError} show={focused === 'leagueName' || submitted}/>
 
-        {util.renderIf(leagueName,
+        {renderIf(leagueName,
           <div className='leagueName-availability-outer'>
             <p className='leagueName-availability'>
               {leagueName} {leagueNameAvailable ? 'is available': 'is not available'}
             </p>
           </div>
         )}
-
-        {/* <input
-          type='text'
-          name='poolSize'
-          placeholder='pool size'
-          value={this.state.poolSize}
-          onChange={this.handleChange}
-          onFocus={this.handleFocus}
-          onBlur={this.handleBlur}
-        /> */}
 
         <input
           type='text'
@@ -162,36 +152,6 @@ class LeagueForm extends React.Component {
           onFocus={this.handleFocus}
           onBlur={this.handleBlur}
         />
-
-        {/* <div className='radio-div'>
-          <p className='labelDesc'>Scoring:</p>
-          <div>
-            <input 
-              type="radio"
-              name="scoring" 
-              value="regular"
-              onChange={this.handleChange}
-              onFocus={this.handleFocus}
-              onBlur={this.handleBlur}
-              checked={this.state.scoring === 'regular' ? true : false}
-            />
-            <label>regular</label>
-            <span>If win, you get 10 points.</span>
-          </div>
-
-          <div>
-            <input 
-              type="radio"
-              name="scoring" 
-              value="underDog"
-              onChange={this.handleChange}
-              onFocus={this.handleFocus}
-              onBlur={this.handleBlur}
-            />
-            <label>Under Dog</label>
-            <span>If win, you get 20 points.</span>
-          </div>
-        </div> */}
 
         <div className='radio-div'>
           <p className='labelDesc'>Privacy:</p>
@@ -228,10 +188,10 @@ class LeagueForm extends React.Component {
           </div>
         </div>
 
-        {util.renderIf(this.state.privacy === 'private',
+        {renderIf(this.state.privacy === 'private',
           <div>
             <input
-              className={util.classToggler({passwordError})}
+              className={classToggler({passwordError})}
               type='password'
               name='password'
               placeholder='password'
