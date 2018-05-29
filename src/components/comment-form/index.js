@@ -1,6 +1,6 @@
 import React from 'react';
 
-import * as util from '../../lib/util';
+import { renderIf } from '../../lib/util';
 
 class CommentForm extends React.Component {
   constructor(props) {
@@ -62,7 +62,7 @@ class CommentForm extends React.Component {
           </div>
         </div>
         
-        {util.renderIf(content,
+        {renderIf(content,
           <div className='commentFormButtonDiv'>
             <div className='ButtonDiv'>
               <button className='button' type='submit'> post </button>

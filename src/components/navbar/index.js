@@ -2,9 +2,9 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 
-import {  signOut  } from '../../actions/userAuth-actions.js';
 import Icon from '../helpers/icons';
 import Avatar from '../helpers/avatar';
+import { signOut } from '../../actions/userAuth-actions.js';
 import { classToggler, renderIf } from '../../lib/util.js';
 
 
@@ -13,7 +13,6 @@ class Navbar extends React.Component {
     super(props);
     this.state={ visible: false, intro: false};
   }
-
 
   componentWillMount() {
     this.tokenCheck();
@@ -28,7 +27,7 @@ class Navbar extends React.Component {
     else {
       this.setState({ intro: false })
     }
-  }
+  };
 
   handleSignOut = () => {
     this.props.signOut();
@@ -39,17 +38,17 @@ class Navbar extends React.Component {
     let profileImage = this.props.userProfile && this.props.userProfile.image ? <Avatar url={this.props.userProfile.image} /> : <span><i className='fa fa-user colorChangeHover'></i> </span>;
     let profileLink = this.props.userProfile && this.props.userProfile._id ? `/user/${this.props.userProfile._id}` : '';
     return (
-      <header className={util.classToggler({
+      <header className={classToggler({
         'navbar': true,
         'introNavbar': !this.props.userAuth,
       })}>
         <nav>
           <div className='logo'>
-              <Link to='/' className={util.classToggler({ 'link': true, 'logo-text': true, 'intro-text': !this.props.userAuth })}><span className='bracket'>BRACKET</span><span className='light'>BUSTERS</span></Link>
+              <Link to='/' className={classToggler({ 'link': true, 'logo-text': true, 'intro-text': !this.props.userAuth })}><span className='bracket'>BRACKET</span><span className='light'>BUSTERS</span></Link>
           </div>
           <ul className='socials'>
             <li className='social dropdown'>
-              {util.renderIf(this.props.userAuth,
+              {renderIf(this.props.userAuth,
                 <div>
                   <div className='avatarDiv' onClick={() => this.setState({ visible: !this.state.visible })} >
                     <i className={this.props.userProfile && this.props.userProfile.image ? 'fa fa-caret-down colorChangeHover noTop' : 'fa fa-caret-down colorChangeHover' }></i>

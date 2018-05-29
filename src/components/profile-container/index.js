@@ -27,6 +27,8 @@ class ProfileContainer extends React.Component {
 
   render(){
     let profileAction='update';
+    let placeholderImage = require('./../helpers/assets/profilePlaceholder.jpeg');
+    let profileImage = this.props.userProfile && this.props.userProfile.image ? this.props.userProfile.image : placeholderImage;
     return (
       <div className='profile-container page-outer-div'>
         <div className='grid-container'>
@@ -56,7 +58,7 @@ class ProfileContainer extends React.Component {
                       <div className='container'>
                         <div className='inner-wrapper'>
                           <div className='profile-image-div'>
-                            <img className='profile-image' src={this.props.userProfile.image} />
+                            <img className='profile-image' src={profileImage} />
                           </div>
                           <div className='userProfileData'>
                             <p>Member Since: {formatDate(this.props.userProfile.createdOn)}</p>

@@ -19,7 +19,7 @@ import Modal from '../helpers/modal';
 import CreateSection from '../helpers/createSection';
 import Table from '../helpers/table';
 import BannerAd from '../helpers/bannerAd';
-import { userVaildation, logError, renderIf } from './../../lib/util.js';
+import { userValidation, logError, renderIf } from './../../lib/util.js';
 
 class LandingContainer extends React.Component {
   constructor(props){
