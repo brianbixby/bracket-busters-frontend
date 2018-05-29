@@ -12,7 +12,7 @@ import { sportingEventsFetchRequest } from '../../actions/sportingEvent-actions.
 import GroupAllPrivateForm from '../group-all-private-form';
 import Table from '../helpers/table';
 import BannerAd from '../helpers/bannerAd';
-import * as util from './../../lib/util.js';
+import { userValidation, logError } from './../../lib/util.js';
 
 class GroupAllContainer extends React.Component {
   constructor(props){
@@ -21,7 +21,7 @@ class GroupAllContainer extends React.Component {
   }
 
   componentWillMount() {
-    util.userValidation(this.props);
+    userValidation(this.props);
     this.props.allPublicGroupsFetch();
   }
 
@@ -33,7 +33,7 @@ class GroupAllContainer extends React.Component {
         this.props.commentsFetch(messageBoard.comments);
       })
       .then(() =>  this.props.history.push(`/group/${group._id}`))
-      .catch(util.logError);
+      .catch(logError);
   }
 
   handleGroupJoin = (group, e) => {
@@ -46,7 +46,7 @@ class GroupAllContainer extends React.Component {
         .then(() => this.props.messageBoardGroupFetch(group._id))
         .then(messageBoard => this.props.commentsFetch(messageBoard.comments))
         .then(() => this.props.history.push(`/group/${group._id}`))
-        .catch(util.logError);
+        .catch(logError);
     }
   };
 
@@ -71,7 +71,7 @@ class GroupAllContainer extends React.Component {
         return messageBoard.groupID
       })
       .then(groupID => this.props.history.push(`/group/${groupID}`))
-      .catch(util.logError);
+      .catch(logError);
     }
   };
 

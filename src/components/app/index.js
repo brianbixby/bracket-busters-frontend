@@ -10,7 +10,6 @@ import LeagueItemContainer from '../league-item-container';
 import GroupAllContainer from '../group-all-container';
 import GroupItemContainer from '../group-item-container';
 import ProfileContainer from '../profile-container';
-import Footer from '../footer';
 import { signIn, tokenSignInRequest } from '../../actions/userAuth-actions.js';
 import { userProfileFetchRequest } from '../../actions/userProfile-actions.js';
 
@@ -26,7 +25,6 @@ class App extends React.Component {
           <Route exact path='/groups' component={GroupAllContainer} />
           <Route path='/group/:groupID' component={GroupItemContainer} />
           <Route exact path='/user/:profileID' component={ProfileContainer} /> 
-          <Route path='*' component={Footer} />
         </section>
       </BrowserRouter>
     );

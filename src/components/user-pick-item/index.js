@@ -1,5 +1,5 @@
 import React from 'react';
-import * as util from './../../lib/util.js';
+import { classToggler, renderIf } from './../../lib/util.js';
 
 class UserPickItem extends React.Component {
   constructor(props){
@@ -46,18 +46,18 @@ class UserPickItem extends React.Component {
       background: `url(${this.state.awayTeamImage}) no-repeat`,
     };
     return (
-      <div className={util.classToggler({ 'cardOuter': true, 'correctPick': userPick.gameID.winner && userPick.gameID.winner === userPick.pick, 'wrongPick': userPick.gameID.winner && userPick.gameID.winner !== userPick.pick })}>
+      <div className={classToggler({ 'cardOuter': true, 'correctPick': userPick.gameID.winner && userPick.gameID.winner === userPick.pick, 'wrongPick': userPick.gameID.winner && userPick.gameID.winner !== userPick.pick })}>
         <div className='cardItem'>
           <div className='cardWrapper'>
             <div className='homeTeamLogoDiv'></div>
             <div className='homeTeamLogoWrapper' style={homeLogoStyle}></div>
-            {util.renderIf(userPick.gameID.winner,
+            {renderIf(userPick.gameID.winner,
               <div className='score homeScore'>{this.state.homeTeamScore}</div>
             )}
             <div className='homeTeamInfoDiv'>
               <div className='homeTeamInfoWrapper'>
                 <p className='cityRec'>{this.state.homeTeamCity}({this.state.homeTeamWins}-{this.state.homeTeamLosses})</p>
-                <p className={util.classToggler({ 'teamName': true, 'picked': currentPick === this.state.homeTeamName, 'notPicked': currentPick !== this.state.homeTeamName })}>{this.state.homeTeamName}</p>
+                <p className={classToggler({ 'teamName': true, 'picked': currentPick === this.state.homeTeamName, 'notPicked': currentPick !== this.state.homeTeamName })}>{this.state.homeTeamName}</p>
               </div>
             </div>
             <div className='middle'>
@@ -66,13 +66,13 @@ class UserPickItem extends React.Component {
                 <span className='awayPick' onClick={this.awayTeamPickUpdate}></span>
               </div>
               <div className='sliderButtonWrapper'>
-                {util.renderIf(new Date() < new Date(userPick.gameTime),
-                  <p className={util.classToggler({ 'sliderButton': true, 'homeTeamPickButtonState ': currentPick === this.state.homeTeamName, 'awayTeamPickButtonState': currentPick === this.state.awayTeamName })}>
+                {renderIf(new Date() < new Date(userPick.gameTime),
+                  <p className={classToggler({ 'sliderButton': true, 'homeTeamPickButtonState ': currentPick === this.state.homeTeamName, 'awayTeamPickButtonState': currentPick === this.state.awayTeamName })}>
                     <span className='homePick' onClick={this.homeTeamPickUpdate}></span>
                     <span className='awayPick' onClick={this.awayTeamPickUpdate}></span>
                   </p>
                 )}
-                {util.renderIf(new Date() > new Date(userPick.gameTime) && !userPick.gameID.winner,
+                {renderIf(new Date() > new Date(userPick.gameTime) && !userPick.gameID.winner,
                   <div className='lockedPickButton'></div>
                 )}
                 <div className='correctPickButton'></div>
@@ -83,12 +83,12 @@ class UserPickItem extends React.Component {
             <div className='awayTeamInfoDiv'>
               <div className='awayTeamInfoWrapper'>
                 <p className='cityRec'>{this.state.awayTeamCity}({this.state.awayTeamWins}-{this.state.awayTeamLosses})</p>
-                <p className={util.classToggler({ 'teamName': true, 'picked': currentPick === this.state.awayTeamName, 'notPicked': currentPick !== this.state.awayTeamName })}>{this.state.awayTeamName}</p>
+                <p className={classToggler({ 'teamName': true, 'picked': currentPick === this.state.awayTeamName, 'notPicked': currentPick !== this.state.awayTeamName })}>{this.state.awayTeamName}</p>
               </div>
             </div>
             <div className='awayTeamLogoDiv'></div>
             <div className='awayTeamLogoWrapper' style={awayLogoStyle}></div>
-            {util.renderIf(userPick.gameID.winner,
+            {renderIf(userPick.gameID.winner,
               <div className='score awayScore'>{this.state.awayTeamScore}</div>
             )}
           </div>

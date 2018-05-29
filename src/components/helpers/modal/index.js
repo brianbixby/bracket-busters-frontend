@@ -10,7 +10,6 @@ class Modal extends React.Component {
           <div className='modal-header'>
             <h2 className='modal-heading'>{this.props.heading}</h2>
           </div>
-          
           <div className='modal-body'>
             <div className='modal-content'>
               {this.props.children}

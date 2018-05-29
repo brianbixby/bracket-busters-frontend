@@ -1,9 +1,9 @@
 import React from 'react';
-import * as util from '../../../lib/util.js';
+import { renderIf } from '../../../lib/util.js';
 
 const Tooltip = props => (
   <div className='tooltip'>
-    {util.renderIf(props.message && props.show,
+    {renderIf(props.message && props.show,
       <section>
         <i className='fa fa-caret-up' />
         <p> {props.message} </p>

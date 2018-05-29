@@ -15,7 +15,7 @@ import UserPickItem from '../user-pick-item';
 import MessageBoardContainer from '../message-board-container';
 import Table from '../helpers/table';
 import BannerAd from '../helpers/bannerAd';
-import * as util from '../../lib/util.js';
+import { userValidation, logError, renderIf } from '../../lib/util.js';
 
 class LeagueContainer extends React.Component {
   constructor(props){
@@ -24,7 +24,7 @@ class LeagueContainer extends React.Component {
   }
 
   componentWillMount() {
-    util.userValidation(this.props);
+    userValidation(this.props);
     this.props.scoreBoardsFetch(this.props.currentLeague._id)
       .then(() => {
         this.props.userPicksFetch(this.props.currentLeague._id)
@@ -33,23 +33,9 @@ class LeagueContainer extends React.Component {
           gameIDArr.push(picks.map(userPick => userPick.gameID._id));
           return this.props.gamesFetch(this.props.currentLeague.sportingEventID, gameIDArr)
         })
-        .catch(util.logError);
+        .catch(logError);
       })
   }
-
-  // componentDidMount(){
-  //   util.userValidation(this.props);
-  //   this.props.scoreBoardsFetch(this.props.currentLeague._id)
-  //     .then(() => {
-  //       this.props.userPicksFetch(this.props.currentLeague._id)
-  //       .then(picks => {
-  //         let gameIDArr = [];
-  //         gameIDArr.push(picks.map(userPick => userPick.gameID._id));
-  //         return this.props.gamesFetch(this.props.currentLeague.sportingEventID, gameIDArr)
-  //       })
-  //       .catch(util.logError);
-  //     })
-  // }
 
   formatDate = date => {
     let dateArr = new Date(date).toDateString().split(' ');
@@ -64,8 +50,8 @@ class LeagueContainer extends React.Component {
       })
       .then(()=> this.props.userPicksFetch(league._id))
       .then( () =>  this.props.history.push(`/league/${league._id}`))
-      .catch(util.logError);
-  }
+      .catch(logError);
+  };
 
   onGroupClick = (group, e) => {
     this.props.groupFetchRequest(group)
@@ -75,8 +61,8 @@ class LeagueContainer extends React.Component {
         this.props.commentsFetch(messageBoard.comments);
       })
       .then(() =>  this.props.history.push(`/group/${group._id}`))
-      .catch(util.logError);
-  }
+      .catch(logError);
+  };
 
   handleBoundTopPublicLeagueClick = (league, e) => {
     if (this.props.leagues.some(leagues => leagues._id === league._id)) {
@@ -87,7 +73,7 @@ class LeagueContainer extends React.Component {
       .then(() => this.props.messageBoardLeagueFetch(league._id))
       .then(messageBoard => this.props.commentsFetch(messageBoard.comments))
       .then(() => this.props.history.push(`/league/${league._id}`))
-      .catch(util.logError);
+      .catch(logError);
     }
   };
 
@@ -101,15 +87,15 @@ class LeagueContainer extends React.Component {
         .then(() => this.props.messageBoardGroupFetch(group._id))
         .then(messageBoard => this.props.commentsFetch(messageBoard.comments))
         .then(() => this.props.history.push(`/group/${group._id}`))
-        .catch(util.logError);
+        .catch(logError);
     }
   };
 
   handleComplete = league => {
     return this.props.leagueUpdate(league)
       .then(() => this.props.history.push(`/league/${this.props.league._id}`))
-      .catch(util.logError);
-  }
+      .catch(logError);
+  };
 
   handleUpdate = userPick => {
     return this.props.userPickUpdate(userPick)
@@ -190,7 +176,7 @@ class LeagueContainer extends React.Component {
                     </div>
                   </div>
                 </div>
-                {util.renderIf(this.props.games && this.props.games.length > 0,
+                {renderIf(this.props.games && this.props.games.length > 0,
                     <div className='mtop8'>
                       <div className='picksGamesHeader'>Games</div>
                       <div className='container overflow boxShadow'>
@@ -202,7 +188,7 @@ class LeagueContainer extends React.Component {
                       </div>
                     </div>
                   )}
-                  {util.renderIf(this.props.userPicks && this.props.userPicks.length > 0,
+                  {renderIf(this.props.userPicks && this.props.userPicks.length > 0,
                     <div className=' mtop8'>
                       <div className='picksGamesHeader'>Picks</div>
                         <div className='container overflow boxShadow'>
@@ -240,7 +226,7 @@ class LeagueContainer extends React.Component {
                       </div>
                     })}
                     <div className='spacerRow'>
-                      {util.renderIf( this.props.scoreBoards.length >10,
+                      {renderIf( this.props.scoreBoards.length >10,
                         <p className='seeAll' onClick={this.handleShowAll}> See All</p>
                       )}
                     </div>

@@ -2,10 +2,11 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 
+import {  signOut  } from '../../actions/userAuth-actions.js';
 import Icon from '../helpers/icons';
 import Avatar from '../helpers/avatar';
-import * as util from '../../lib/util.js';
-import {  signOut  } from '../../actions/userAuth-actions.js';
+import { classToggler, renderIf } from '../../lib/util.js';
+
 
 class Navbar extends React.Component {
   constructor(props){
@@ -47,8 +48,6 @@ class Navbar extends React.Component {
               <Link to='/' className={util.classToggler({ 'link': true, 'logo-text': true, 'intro-text': !this.props.userAuth })}><span className='bracket'>BRACKET</span><span className='light'>BUSTERS</span></Link>
           </div>
           <ul className='socials'>
-            
-
             <li className='social dropdown'>
               {util.renderIf(this.props.userAuth,
                 <div>

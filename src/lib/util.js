@@ -65,10 +65,6 @@ export const userValidation = props => {
   return;
 };
 
-export const privacyCheck = props => {
-
-};
-
 export const checkAndAdd = (payload, state) => {
   var found = state.some(function (el) {
     return el._id === payload._id;
@@ -119,4 +115,9 @@ export const createCookie = (name,value,days) => {
 
 export const deleteCookie  = (name) => {
   return createCookie(name,'',-1);
+};
+
+export const formatDate = date => {
+  let dateArr = new Date(date).toDateString().split(' ');
+  return `${dateArr[1]} ${dateArr[2]}, ${dateArr[3]}`;
 };

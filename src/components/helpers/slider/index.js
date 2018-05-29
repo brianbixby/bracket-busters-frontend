@@ -5,7 +5,6 @@ class Slider extends React.Component {
     let { joinedItem, formType } = this.props;
     let itemImage = formType === 'league' ? <img className='cardImage' src='https://i.imgur.com/CAoW5n8.jpg' />  : <img className='cardImage' src='https://i.imgur.com/xjGJJvv.jpg' /> ;
     let itemName = formType === 'league' ? joinedItem.leagueName : joinedItem.groupName;
-
     return (
       <div className='cardItem'>
         <div className='cardContentWrapper'>

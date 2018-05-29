@@ -11,7 +11,6 @@ export const signOut = () => {
   return { type: 'SIGN_OUT' };
 };
 
-// ASYNC
 export const signUpRequest = user => dispatch => {
   return superagent.post(`${__API_URL__}/api/signup`)
     .withCredentials()

@@ -2,16 +2,6 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 
-import Intro from '../intro';
-import LeagueForm from '../league-form';
-import GroupForm from '../group-form';
-import ProfileForm from '../profile-form';
-import Modal from '../helpers/modal';
-import CreateSection from '../helpers/createSection';
-import JoinSection from '../helpers/joinSection';
-import Slider from '../helpers/slider';
-import Table from '../helpers/table';
-import BannerAd from '../helpers/bannerAd';
 import { tokenSignInRequest } from '../../actions/userAuth-actions.js';
 import { userProfileFetchRequest, userProfileUpdateRequest, groupProfilesFetchRequest } from '../../actions/userProfile-actions.js';
 import { leaguesFetchRequest, leagueCreateRequest, leagueFetch, leagueJoinRequest, topPublicLeaguesFetchRequest } from '../../actions/league-actions.js';
@@ -21,7 +11,15 @@ import { commentsFetchRequest } from '../../actions/comment-actions.js';
 import { topScoresFetchRequest } from '../../actions/scoreboard-actions.js';
 import { sportingEventsFetchRequest } from '../../actions/sportingEvent-actions.js';
 import { userPicksFetchRequest } from '../../actions/userPick-actions.js';
-import * as util from './../../lib/util.js';
+import Intro from '../intro';
+import LeagueForm from '../league-form';
+import GroupForm from '../group-form';
+import ProfileForm from '../profile-form';
+import Modal from '../helpers/modal';
+import CreateSection from '../helpers/createSection';
+import Table from '../helpers/table';
+import BannerAd from '../helpers/bannerAd';
+import { userVaildation, logError, renderIf } from './../../lib/util.js';
 
 class LandingContainer extends React.Component {
   constructor(props){
@@ -30,11 +28,11 @@ class LandingContainer extends React.Component {
   }
 
   componentWillMount() {
-    util.userValidation(this.props);
+    userValidation(this.props);
   }
   componentDidMount() {
     this.props.sportingEventsFetch()
-      .catch(err => util.logError(err));
+      .catch(err => logError(err));
   }
 
   handleLeagueCreate = league => {
@@ -46,8 +44,8 @@ class LandingContainer extends React.Component {
         return messageBoard.leagueID
       })
       .then(leagueID => this.props.history.push(`/league/${leagueID}`))
-      .catch(util.logError);
-  }
+      .catch(logError);
+  };
 
   handleGroupCreate = groupInput => {
     let group;
@@ -59,13 +57,13 @@ class LandingContainer extends React.Component {
       .then(messageBoard => this.props.commentsFetch(messageBoard.comments))
       .then(() => this.props.groupProfilesFetch(group.users))
       .then(groupID => this.props.history.push(`/group/${group._id}`))
-      .catch(util.logError);
-  }
+      .catch(logError);
+  };
 
   handleProfileUpdate = profile => {
     return this.props.userProfileUpdate(profile)
-      .catch(util.logError);
-  }
+      .catch(logError);
+  };
 
   onLeagueClick = (league, e) => {
     this.props.leagueFetchRequest(league);
@@ -75,8 +73,8 @@ class LandingContainer extends React.Component {
       })
       .then(()=> this.props.userPicksFetch(league._id))
       .then( () =>  this.props.history.push(`/league/${league._id}`))
-      .catch(util.logError);
-  }
+      .catch(logError);
+  };
 
   onGroupClick = (group, e) => {
     this.props.groupFetchRequest(group)
@@ -86,8 +84,8 @@ class LandingContainer extends React.Component {
         this.props.commentsFetch(messageBoard.comments);
       })
       .then(() =>  this.props.history.push(`/group/${group._id}`))
-      .catch(util.logError);
-  }
+      .catch(logError);
+  };
 
   handleBoundTopPublicLeagueClick = (league, e) => {
     if (this.props.leagues.some(leagues => leagues._id === league._id)) {
@@ -98,7 +96,7 @@ class LandingContainer extends React.Component {
       .then(() => this.props.messageBoardLeagueFetch(league._id))
       .then(messageBoard => this.props.commentsFetch(messageBoard.comments))
       .then(() => this.props.history.push(`/league/${league._id}`))
-      .catch(util.logError);
+      .catch(logError);
     }
   };
 
@@ -112,7 +110,7 @@ class LandingContainer extends React.Component {
         .then(() => this.props.messageBoardGroupFetch(group._id))
         .then(messageBoard => this.props.commentsFetch(messageBoard.comments))
         .then(() => this.props.history.push(`/group/${group._id}`))
-        .catch(util.logError);
+        .catch(logError);
     }
   };
 
@@ -129,11 +127,11 @@ class LandingContainer extends React.Component {
 
     return (
       <section className='landing-page page-outer-div'>
-        {util.renderIf(!this.props.userAuth,
+        {renderIf(!this.props.userAuth,
           <Intro />
         )}
         
-        {util.renderIf(this.props.userAuth,
+        {renderIf(this.props.userAuth,
           <div className='grid-container'>
            <BannerAd/>
             <div>
@@ -150,7 +148,7 @@ class LandingContainer extends React.Component {
                     <p className='leaguesBoardHeader'>LEAGUES</p>
                   </div>
                   <div className='tablesContainer'>
-                  {util.renderIf(this.props.topPublicLeagues.length > 0,
+                  {renderIf(this.props.topPublicLeagues.length > 0,
                     <div className='container tableContainer leagueBoards'>
                       <div>
                         <p className='tableHeadline'>FEATURED LEAGUES</p>
@@ -169,7 +167,7 @@ class LandingContainer extends React.Component {
                       <div className='spacerRow'></div>
                     </div>
                   )}
-                  {util.renderIf(this.props.topScores.length > 0,
+                  {renderIf(this.props.topScores.length > 0,
                     <div className='container tableContainer leagueBoards'>
                       <div>
                         <p className='tableHeadline'>LEADERBOARD</p>
@@ -200,7 +198,7 @@ class LandingContainer extends React.Component {
                     <i className="fa fa-users"></i>
                     <p className='leaguesBoardHeader'>FEATURED GROUPS</p>
                   </div>
-                  {util.renderIf(this.props.topPublicGroups.length > 0,
+                  {renderIf(this.props.topPublicGroups.length > 0,
                     <div className='container tableContainer'>
                       <div>
                         <p className='tableHeadline hideMed'>FEATURED GROUPS</p>
@@ -222,26 +220,26 @@ class LandingContainer extends React.Component {
                   </div>
                 </div>
               </div>
-              {util.renderIf(this.state.leagueFormDisplay,
+              {renderIf(this.state.leagueFormDisplay,
                 <Modal heading='Create League' close={() => this.setState({ leagueFormDisplay: false })}>
                   <LeagueForm 
                     onComplete={this.handleLeagueCreate} 
                   />
                 </Modal>
               )}
-              {util.renderIf(this.state.groupFormDisplay,
+              {renderIf(this.state.groupFormDisplay,
                 <Modal heading='Create Group' close={() => this.setState({ groupFormDisplay: false })}>
                   <GroupForm onComplete={this.handleGroupCreate} />
                 </Modal>
               )}
-              {util.renderIf(this.state.profileFormDisplay && this.props.userProfile && this.props.userProfile.lastLogin === this.props.userProfile.createdOn,
+              {renderIf(this.state.profileFormDisplay && this.props.userProfile && this.props.userProfile.lastLogin === this.props.userProfile.createdOn,
                 <Modal heading='Create Profile' close={() => { this.setState({ profileFormDisplay: false }); this.handleProfileUpdate(this.props.userProfile); }}>
                   <ProfileForm userProfile={this.props.userProfile} onComplete={this.handleProfileUpdate} profileAction={profileAction} />
                 </Modal>
               )}
             </div>
           
-            {util.renderIf(this.props.groups.length > 0,
+            {renderIf(this.props.groups.length > 0,
               <div className='spacer'></div>
             )}
           </div>

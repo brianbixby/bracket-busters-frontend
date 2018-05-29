@@ -23,10 +23,23 @@
 
     .fa-caret-up {
       position: absolute;
-      top: -9px;
+      top: -10px;
       left: 20px;
       color: $color-primary;
     }
 
+  }
+}
+.leagues-container {
+  .hideLarge .tooltip section {
+    transform: translateY(-30px);
+    margin-left: 26px;
+  }
+  .hideMedium .tooltip section {
+    transform: translateY(-30px);
+    margin-left: 10px;
+  }
+  .all-private-form input {
+    margin-bottom: 30px;
   }
 }

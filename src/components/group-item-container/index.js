@@ -9,11 +9,11 @@ import { topScoresFetchRequest } from '../../actions/scoreboard-actions.js';
 import { sportingEventsFetchRequest } from '../../actions/sportingEvent-actions.js';
 import { messageBoardLeagueFetchRequest, messageBoardGroupFetchRequest } from '../../actions/messageBoard-actions.js';
 import { userPicksFetchRequest } from '../../actions/userPick-actions.js';
-import MessageBoardContainer from '../message-board-container';
 import { commentsFetchRequest } from '../../actions/comment-actions.js';
+import MessageBoardContainer from '../message-board-container';
 import Table from '../helpers/table';
 import BannerAd from '../helpers/bannerAd';
-import * as util from '../../lib/util.js';
+import { userValidation, logError, renderIf, formatDate } from '../../lib/util.js';
 
 class GroupItemContainer extends React.Component {
   constructor(props){
@@ -21,21 +21,8 @@ class GroupItemContainer extends React.Component {
   }
 
   componentWillMount() {
-    util.userValidation(this.props);
-    // this.props.groupProfilesFetch(this.props.currentGroup.users)
-    //   .catch(util.logError);
+    userValidation(this.props);
   }
-
-  // componentDidMount() {
-  //   this.props.groupProfilesFetch(this.props.currentGroup.users)
-  //     .catch(util.logError);
-  // }
-
-  formatDate = date => {
-    let dateArr = new Date(date).toDateString().split(' ');
-    return `${dateArr[1]} ${dateArr[2]}, ${dateArr[3]}`;
-  };
-
 
   onLeagueClick = (league, e) => {
     this.props.leagueFetchRequest(league);
@@ -45,7 +32,7 @@ class GroupItemContainer extends React.Component {
       })
       .then(()=> this.props.userPicksFetch(league._id))
       .then( () =>  this.props.history.push(`/league/${league._id}`))
-      .catch(util.logError);
+      .catch(logError);
   }
 
   onGroupClick = (group, e) => {
@@ -56,7 +43,7 @@ class GroupItemContainer extends React.Component {
         this.props.commentsFetch(messageBoard.comments);
       })
       .then(() =>  this.props.history.push(`/group/${group._id}`))
-      .catch(util.logError);
+      .catch(logError);
   }
 
   handleBoundTopPublicLeagueClick = (league, e) => {
@@ -68,7 +55,7 @@ class GroupItemContainer extends React.Component {
       .then(() => this.props.messageBoardLeagueFetch(league._id))
       .then(messageBoard => this.props.commentsFetch(messageBoard.comments))
       .then(() => this.props.history.push(`/league/${league._id}`))
-      .catch(util.logError);
+      .catch(logError);
     }
   };
 
@@ -82,7 +69,7 @@ class GroupItemContainer extends React.Component {
         .then(() => this.props.messageBoardGroupFetch(group._id))
         .then(messageBoard => this.props.commentsFetch(messageBoard.comments))
         .then(() => this.props.history.push(`/group/${group._id}`))
-        .catch(util.logError);
+        .catch(logError);
     }
   };
 
@@ -136,7 +123,7 @@ class GroupItemContainer extends React.Component {
                         </p>
                         <p className='joinTextSubtitle'>
                           Creator: {currentGroup.ownerName} <br></br>
-                          Created: {this.formatDate(currentGroup.createdOn)} <br></br>
+                          Created: {formatDate(currentGroup.createdOn)} <br></br>
                           Privacy: {currentGroup.privacy} <br></br>
                           Size: {currentGroup.size}
                         </p>
@@ -149,7 +136,7 @@ class GroupItemContainer extends React.Component {
                 </div>
                 <div className='container'>
                   <div className='sliderOuter'>
-                    {util.renderIf(groupProfiles && groupProfiles.length > 0,
+                    {renderIf(groupProfiles && groupProfiles.length > 0,
                       <div className='sliderOuterWrapper'>
                         {groupProfiles.map(groupProfile => {
                           return <div className='sliderInnerWrapper' key={groupProfile._id}>
@@ -161,12 +148,12 @@ class GroupItemContainer extends React.Component {
                                     <p className='joinTextTitle'>{groupProfile.username}</p> 
                                   </div>
                                 </div>
-                                {util.renderIf(groupProfile.image,
+                                {renderIf(groupProfile.image,
                                   <div className='cardImageDiv'>
                                     <img className='groupMemberImg' src={groupProfile.image} />
                                   </div>
                                 )}
-                                {util.renderIf(!groupProfile.image,
+                                {renderIf(!groupProfile.image,
                                   <div className='cardImageDiv'>
                                     <img className='groupMemberImgNoPhoto' src={placeholderImage} />
                                   </div>
@@ -296,127 +283,3 @@ let mapDispatchToProps = dispatch => ({
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(GroupItemContainer);
-
-
-{/* <div className='group-container page-outer-div'>
-<div className='grid-container'>
-  <BannerAd/>
-  <div className='row'>
-    <div className='col-md-8'>
-      <div className='mainContainer'> 
-        <div className='outer'>
-          <div className='outerLeft'>
-            <i className='fa fa-users'></i>
-            <p className='headerText'>GROUP </p>
-          </div>
-          <div className='outerRight'>
-          </div>
-        </div>
-        <div className='createMain'>
-          <div className='createMainWrapper'>
-            <div className='createMainContent'>
-              <div className='createMainBorder'></div>
-              <div>
-                <p className='createMainTitle'> {currentGroup.groupName} </p>
-                <p className='createMainSubtitle'>{currentGroup.motto}</p>
-              </div>
-            </div>
-            <div className='createImgDiv'>
-              <img className="createImg" src={currentGroup.image} />
-            </div>
-          </div>
-        </div>
-        <div className='mainContainer hideLarge margin16 mBottom16 leagueBoards'>
-          <div className='mainContainer-header borderBottom'>
-            <div className='left'>
-              <i className="fa fa-info-circle"></i>
-              <p className='mainContainerHeader'>GROUP INFO</p>
-            </div>
-            <div className='right'>
-            </div>
-          </div>
-          <div className='mainContainerSection'>
-            <div className='mainContainerSectionWrapper noBorder'>
-              <div className='container'>
-                <div className='inner-wrapper'>
-                  <p className='margin16 groupInfoP'> <span className='groupInfoLabel'>Creator: </span> <span className='groupInfoData'>{currentGroup.ownerName}</span></p>
-                  <p className='margin16 groupInfoP'> <span className='groupInfoLabel'>Created: </span> <span className='groupInfoData'>{this.formatDate(currentGroup.createdOn)}</span></p>
-                  <p className='margin16 groupInfoP'> <span className='groupInfoLabel'>Privacy: </span> <span className='groupInfoData'>{currentGroup.privacy}</span></p>
-                  <p className='margin16 groupInfoP'> <span className='groupInfoLabel'>Size: </span> <span className='groupInfoData'>{currentGroup.size}</span></p>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div className='mainContainer hideLarge margin16 mBottom16 leagueBoards medGroupMembersBox'>
-          <div className='mainContainer-header'>
-            <div className='left'>
-              <i className="fa fa-users"></i>
-              <p className='mainContainerHeader'>GROUP MEMBERS</p>
-            </div>
-          </div>
-          <div className='mainContainerSection'>
-            <div className='mainContainerSectionWrapper noBorder'>
-              <div className='container'>
-                <div className='inner-wrapper'>
-                  {currentGroup.userNames.map((user, idx) => {
-                    return <div className='rowColors2' key={idx}>
-                      <p className='margin16 padding8'><span>{user}</span></p>
-                    </div>;
-                  })}
-                </div>
-              </div>
-            </div>
-          </div>
-        </div> 
-        <div className='margin16'>
-          <MessageBoardContainer mBoardId={this.props.currentMessageBoard._id} commentsArray={this.props.currentMessageBoard.comments}/>
-        </div>
-      </div>
-    </div>
-    <div className='col-md-4 hideMedium'>
-      <div className='mainContainer'>
-        <div className='mainContainer-header'>
-          <div className='left'>
-            <i className="fa fa-info-circle"></i>
-            <p className='mainContainerHeader'>GROUP INFO</p>
-          </div>
-        </div>
-        <div className='mainContainerSection'>
-          <div className='mainContainerSectionWrapper'>
-            <div className='container'>
-              <div className='inner-wrapper'>
-                <p className='margin24 groupInfoP'> Creator: <span className='groupInfoData'>{currentGroup.ownerName}</span></p>
-                <p className='margin24 groupInfoP'> Created: <span className='groupInfoData'>{this.formatDate(currentGroup.createdOn)}</span></p>
-                <p className='margin24 groupInfoP'> Privacy: <span className='groupInfoData'>{currentGroup.privacy}</span></p>
-                <p className='margin24 groupInfoP'> Size: <span className='groupInfoData'>{currentGroup.size}</span></p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div className='mainContainer'>
-        <div className='mainContainer-header'>
-          <div className='left'>
-            <i className="fa fa-users"></i>
-            <p className='mainContainerHeader'>GROUP MEMBERS</p>
-          </div>
-        </div>
-        <div className='mainContainerSection'>
-          <div className='mainContainerSectionWrapper'>
-            <div className='container'>
-              <div className='inner-wrapper'>
-                {currentGroup.userNames.map((user, idx) => {
-                  return <div className='rowColors2' key={idx}>
-                    <p className='margin24 padding8'><span>{user}</span></p>
-                  </div>;
-                })}
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
-</div> */}

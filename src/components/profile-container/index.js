@@ -9,7 +9,7 @@ import { leaguesFetchRequest, topPublicLeaguesFetchRequest } from '../../actions
 import { groupsFetchRequest, topPublicGroupsFetchRequest } from '../../actions/group-actions.js';
 import { topScoresFetchRequest } from '../../actions/scoreboard-actions.js';
 import { sportingEventsFetchRequest } from '../../actions/sportingEvent-actions.js';
-import * as util from './../../lib/util.js';
+import { userValidation, logError, formatDate } from './../../lib/util.js';
 
 class ProfileContainer extends React.Component {
   constructor(props){
@@ -17,17 +17,12 @@ class ProfileContainer extends React.Component {
   }
 
   componentWillMount() {
-    util.userValidation(this.props);
+    userValidation(this.props);
   }
 
   handleProfileUpdate = profile => {
     return this.props.userProfileUpdate(profile)
-      .catch(util.logError);
-  }
-
-  formatDate = date => {
-    let dateArr = new Date(date).toDateString().split(' ');
-    return `${dateArr[1]} ${dateArr[2]}, ${dateArr[3]}`;
+      .catch(logError);
   };
 
   render(){
@@ -64,9 +59,7 @@ class ProfileContainer extends React.Component {
                             <img className='profile-image' src={this.props.userProfile.image} />
                           </div>
                           <div className='userProfileData'>
-                            <p>Member Since: {this.formatDate(this.props.userProfile.createdOn)}</p>
-                            {/* <p>{this.props.userProfile.leagues}</p>
-                            <p>{this.props.userProfile.groups}</p> */}
+                            <p>Member Since: {formatDate(this.props.userProfile.createdOn)}</p>
                           </div>
                         </div>
                       </div>
@@ -78,9 +71,7 @@ class ProfileContainer extends React.Component {
           </div>
         </div>
       </div>
-      
-
-    )
+    );
   }
 }
 

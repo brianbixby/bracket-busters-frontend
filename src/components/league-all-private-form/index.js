@@ -1,7 +1,7 @@
 import React from 'react';
 
 import Tooltip from '../helpers/tooltip';
-import * as util from '../../lib/util';
+import { classToggler } from '../../lib/util';
 
 class LeagueAllPrivateForm extends React.Component {
   constructor(props){
@@ -24,19 +24,10 @@ class LeagueAllPrivateForm extends React.Component {
     let setError = (name, error) => errors[`${name}Error`] = error;
     let deleteError = name => errors[`${name}Error`] = null;
 
-    if(name === 'leagueName') {
-      if(!value)
-        setError(name, `${name} can not be empty`)
-      else 
-        deleteError(name)
-    }
-
-    if(name === 'password') {
-      if(!value)
-        setError(name, `${name} can not be empty`)
-      else 
-        deleteError(name)
-    }
+    if(!value)
+      setError(name, `${name} can not be empty`)
+    else 
+      deleteError(name)
 
     this.setState({
       ...errors, error: !!(errors.leagueNameError || errors.passwordError),
@@ -65,13 +56,6 @@ class LeagueAllPrivateForm extends React.Component {
     e.preventDefault();
     if(!this.state.error) {
       this.props.onComplete(this.state);
-      //   .catch(err => {
-      //     console.error(err);
-      //     this.setState({ 
-      //       error,
-      //       submitted: true,
-      //   });
-      // });
     }
     this.setState(state => ({
       submitted: true,
@@ -83,13 +67,12 @@ class LeagueAllPrivateForm extends React.Component {
   render(){
     let { focused, submitted, leagueName, passwordError, leagueNameError } = this.state;
     return (
-      <form onSubmit={this.handleSubmit} className={util.classToggler({
+      <form onSubmit={this.handleSubmit} className={classToggler({
         'form page-form all-private-form': true,
         'error': this.state.error && this.state.submitted,
       })}>
-
         <input
-          className={util.classToggler({error: leagueNameError })}
+          className={classToggler({error: leagueNameError })}
           type='text'
           name='leagueName'
           placeholder='league name'
@@ -101,7 +84,7 @@ class LeagueAllPrivateForm extends React.Component {
         <Tooltip message={leagueNameError} show={focused === 'leagueName' || submitted}/>
 
         <input
-          className={util.classToggler({passwordError})}
+          className={classToggler({passwordError})}
           type='password'
           name='password'
           placeholder='password'
@@ -110,6 +93,7 @@ class LeagueAllPrivateForm extends React.Component {
           onFocus={this.handleFocus}
           onBlur={this.handleBlur}
         />
+        <Tooltip message={passwordError} show={focused === 'password' || submitted}/>
 
         <p className='textRight'><button className='red-button b-button joinPrivate' type='submit'> Join </button></p>
       </form>

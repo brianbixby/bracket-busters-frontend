@@ -1,5 +1,5 @@
 import React from 'react';
-import * as util from './../../../lib/util.js';
+import { renderIf } from './../../../lib/util.js';
 
 class Table extends React.Component {
   render() {
@@ -8,14 +8,14 @@ class Table extends React.Component {
     let username = type === 'scores' ? item.userID.username : null;
     return (
       <div className='tableRow'>
-        {util.renderIf(type !== 'scores',
+        {renderIf(type !== 'scores',
           <p>
             <span className='columnNameData columnData'>{itemName} </span>
             <span className='columnCreatorData columnData'>{item.ownerName} </span>
             <span className='columnSizeData columnData'>{item.size} </span>
           </p>
         )}
-        {util.renderIf(type === 'scores',
+        {renderIf(type === 'scores',
           <p>
             <span className='columnUserData columnData'>{username} </span>
             <span className='columnScoreData columnData'>{item.score} </span>

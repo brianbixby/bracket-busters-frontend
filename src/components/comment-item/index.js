@@ -10,7 +10,6 @@ export class CommentItem extends React.Component {
     return ( 
       <div className='comment-item'>
         <div className='comment-photo-div'>
-          
           <img src={this.props.image} />
         </div>
         <div className='comment-text-div'>

@@ -20,7 +20,6 @@ export const groupProfilesFetch = groupProfiles => ({
   payload: groupProfiles,
 });
 
-// ASYNC
 export const userProfileCreateRequest = userProfile => (dispatch, getState) => {
   let { userAuth } = getState();
   return superagent.post(`${__API_URL__}/api/profile`)

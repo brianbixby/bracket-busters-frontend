@@ -13,7 +13,7 @@ import { userPicksFetchRequest } from '../../actions/userPick-actions.js';
 import LeagueAllPrivateForm from '../league-all-private-form';
 import Table from '../helpers/table';
 import BannerAd from '../helpers/bannerAd';
-import * as util from '../../lib/util.js';
+import { userValidation, logError} from '../../lib/util.js';
 
 class LeagueAllContainer extends React.Component {
   constructor(props){
@@ -22,7 +22,7 @@ class LeagueAllContainer extends React.Component {
   }
 
   componentWillMount() {
-    util.userValidation(this.props);
+    userValidation(this.props);
     this.props.allPublicLeaguesFetch();
   };
 
@@ -34,7 +34,7 @@ class LeagueAllContainer extends React.Component {
       })
       .then(()=> this.props.userPicksFetch(league._id))
       .then( () =>  this.props.history.push(`/league/${league._id}`))
-      .catch(util.logError);
+      .catch(logError);
   }
 
   handleLeagueJoin = (league, e) => {
@@ -46,7 +46,7 @@ class LeagueAllContainer extends React.Component {
       .then(() => this.props.messageBoardLeagueFetch(league._id))
       .then(messageBoard => this.props.commentsFetch(messageBoard.comments))
       .then(() => this.props.history.push(`/league/${league._id}`))
-      .catch(util.logError);
+      .catch(logError);
     }
   };
 
@@ -67,7 +67,7 @@ class LeagueAllContainer extends React.Component {
           return messageBoard.leagueID
         })
         .then(leagueID => this.props.history.push(`/league/${leagueID}`))
-        .catch(util.logError);
+        .catch(logError);
       }
   };
 

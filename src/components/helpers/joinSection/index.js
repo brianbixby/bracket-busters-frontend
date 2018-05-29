@@ -1,5 +1,5 @@
 import React from 'react';
-import * as util from './../../../lib/util.js';
+import { renderIf } from './../../../lib/util.js';
 
 class JoinSection extends React.Component {
   constructor(props){

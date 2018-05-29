@@ -2,15 +2,15 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { Link, Redirect } from 'react-router-dom';
 
-import Modal from '../helpers/modal';
-import UserAuthForm from '../userAuth-form';
 import { signUpRequest, signInRequest } from '../../actions/userAuth-actions.js';
 import { userProfileFetchRequest } from '../../actions/userProfile-actions.js';
 import { leaguesFetchRequest, topPublicLeaguesFetchRequest } from '../../actions/league-actions.js';
 import { groupsFetchRequest, topPublicGroupsFetchRequest } from '../../actions/group-actions.js';
 import { topScoresFetchRequest } from '../../actions/scoreboard-actions.js';
 import { sportingEventsFetchRequest } from '../../actions/sportingEvent-actions.js';
-import * as util from './../../lib/util.js';
+import Modal from '../helpers/modal';
+import UserAuthForm from '../userAuth-form';
+import { logError, renderIf } from './../../lib/util.js';
 
 class Intro extends React.Component {
   constructor(props){
@@ -20,15 +20,6 @@ class Intro extends React.Component {
 
   handleSignin = (user, errCB) => {
     return this.props.signIn(user)
-      // .then(() => this.props.userProfileFetch())
-      // .then(profile => {
-      //   if(profile.body.leagues.length)
-      //     this.props.leaguesFetch(profile.body.leagues);
-      //   return profile;
-      // })
-      // .then(profile => {
-      //   return this.props.groupsFetch(profile.body.groups);
-      // })
       .then(() => {
         return this.props.sportingEventsFetch()
           .catch(() => logError);
@@ -71,14 +62,13 @@ class Intro extends React.Component {
           .catch(() => logError);
       })
       .catch(err => {
-        util.logError(err);
+        logError(err);
         errCB(err);
       });
   };
 
   handleSignup = (user, errCB) => {
     return this.props.signUp(user)
-      // .then(() => this.props.userProfileFetch())
       .then(() => {
         return this.props.sportingEventsFetch()
           .catch(() => logError);
@@ -121,7 +111,7 @@ class Intro extends React.Component {
           .catch(() => logError);
       })
       .catch(err => {
-        util.logError(err);
+        logError(err);
         errCB(err);
     });
   };
@@ -158,17 +148,17 @@ class Intro extends React.Component {
           </div>
         </section>
           <div>
-            {util.renderIf(this.state.formDisplay,
+            {renderIf(this.state.formDisplay,
               <div>
                 <Modal heading='Bracket Busters' close={() => this.setState({ formDisplay: false })}>
                   <UserAuthForm authFormAction={this.state.authFormAction} onComplete={handleComplete} />
 
                   <div className='userauth-buttons'>
-                    {util.renderIf(this.state.authFormAction==='Sign In',
+                    {renderIf(this.state.authFormAction==='Sign In',
                       <button className='b-button dark-button' onClick={() => this.setState({authFormAction: 'Sign Up'})}>Sign Up</button>
                     )}
 
-                    {util.renderIf(this.state.authFormAction==='Sign Up',
+                    {renderIf(this.state.authFormAction==='Sign Up',
                       <button className='b-button dark-button' onClick={() => this.setState({authFormAction: 'Sign In'})}>Sign In</button>
                     )}
                   </div>

@@ -1,5 +1,4 @@
 import React from 'react';
-import * as util from './../../lib/util.js';
 
 class ProfileForm extends React.Component {
   constructor(props){
@@ -18,13 +17,13 @@ class ProfileForm extends React.Component {
   handleSubmit = e => {
     e.preventDefault();
     return this.props.onComplete(this.state);
-  } 
+  };
 
   handleChange = e => {
     this.setState({
       [e.target.name]: e.target.value
     })
-  }
+  };
 
   render() {
     let dateClass = !this.state.birthdate ? 'grayDate' : '';
