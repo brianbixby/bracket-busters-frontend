@@ -1,4 +1,5 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import { BrowserRouter, Route } from 'react-router-dom';
 
 import Navbar from '../navbar';
@@ -8,6 +9,8 @@ import LeagueItemContainer from '../league-item-container';
 import GroupAllContainer from '../group-all-container';
 import GroupItemContainer from '../group-item-container';
 import ProfileContainer from '../profile-container';
+import { signIn, tokenSignInRequest } from '../../actions/userAuth-actions.js';
+import { userProfileFetchRequest } from '../../actions/userProfile-actions.js';
 
 class App extends React.Component {
   render() {
@@ -27,4 +30,15 @@ class App extends React.Component {
   }
 }
 
-export default App;
+let mapStateToProps = state => ({
+  userAuth: state.userAuth,
+  userProfile: state.userProfile,
+});
+
+let mapDispatchToProps = dispatch => ({
+  signIn: token => dispatch(signIn(token)),
+  userProfileFetch: () => dispatch(userProfileFetchRequest()),
+  tokenSignIn: token => dispatch(tokenSignInRequest(token)),
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(App);

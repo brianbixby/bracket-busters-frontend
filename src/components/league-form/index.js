@@ -100,21 +100,21 @@ class LeagueForm extends React.Component {
     let { focused, submitted, leagueName, emailError, passwordError, leagueNameError, leagueNameAvailable } = this.state;
     let buttonText = this.props.league ? 'update' : 'create';
     return (
-      <form onSubmit={this.handleSubmit} className={util.classToggler({
+      <form onSubmit={this.handleSubmit} className={classToggler({
         'form league-form': true,
         'error': this.state.error && this.state.submitted,
       })}>
 
-        {util.renderIf(this.props.league,
+        {renderIf(this.props.league,
             <h2>update.</h2>
         )}
 
-        {util.renderIf(!this.props.league,
+        {renderIf(!this.props.league,
             <h2>create a league.</h2>
         )}
 
         <input
-          className={util.classToggler({error: leagueNameError || !leagueNameAvailable})}
+          className={classToggler({error: leagueNameError || !leagueNameAvailable})}
           type='text'
           name='leagueName'
           placeholder='league name'
@@ -125,7 +125,7 @@ class LeagueForm extends React.Component {
         />
         <Tooltip message={leagueNameError} show={focused === 'leagueName' || submitted}/>
 
-        {util.renderIf(leagueName,
+        {renderIf(leagueName,
           <div className='leagueName-availability-outer'>
             <p className='leagueName-availability'>
               {leagueName} {leagueNameAvailable ? 'is available': 'is not available'}
@@ -188,10 +188,10 @@ class LeagueForm extends React.Component {
           </div>
         </div>
 
-        {util.renderIf(this.state.privacy === 'private',
+        {renderIf(this.state.privacy === 'private',
           <div>
             <input
-              className={util.classToggler({passwordError})}
+              className={classToggler({passwordError})}
               type='password'
               name='password'
               placeholder='password'
