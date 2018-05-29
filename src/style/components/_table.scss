@@ -61,28 +61,26 @@
 .leaguesContainerHeader{
   display: none;
 }
-// @media (min-width: 582px) {
-  .columnUserData{
-    text-align: left;
-    padding-left: 45px;
-  }
-  span.columnNameData.columnData {
-    text-align: left;
-    padding-left: 10px;
-  }
-  span.columnCreatorData.columnData {
-    text-align: left;
-    padding-left: 10px;
-  }
-  p.tableColumn.columnName, p.tableColumn.columnCreator {
-    text-align: left;
-    padding-left: 10px;
-  }
-  p.tableColumn.columnUser {
-    text-align: left;
-    padding-left: 45px;
-  }
-// }
+.columnUserData{
+  text-align: left;
+  padding-left: 45px;
+}
+span.columnNameData.columnData {
+  text-align: left;
+  padding-left: 10px;
+}
+span.columnCreatorData.columnData {
+  text-align: left;
+  padding-left: 10px;
+}
+p.tableColumn.columnName, p.tableColumn.columnCreator {
+  text-align: left;
+  padding-left: 10px;
+}
+p.tableColumn.columnUser {
+  text-align: left;
+  padding-left: 45px;
+}
 @media (max-width: 991px) {
   .hideMed{
     display: none;
@@ -110,41 +108,6 @@
     width: 290px;
     display: inline-block;
   }
-  // .leagueBoardsContainer{
-  //   max-width: 660px;
-  //   margin-right: auto;
-  //   margin-left: auto;
-  //   box-shadow: 0 1px 4px rgba(0, 0, 0, 0.24);
-  //   background: #fff;
-  //   border-radius: 10px;
-  //   margin-bottom: 10px;
-  //   position: relative;
-  //   overflow: hidden;
-  //   padding: 16px 16px 0;
-  // }
-  // .leaguesBoardHeader{
-  //   color: #1d1e1f;
-  //   font-size: 19px;
-  //   line-height: 21px;
-  //   font-weight: 600;
-  //   display: inline-block;
-  // }
-  // .leaguesContainerHeader{
-  //   -webkit-box-align: center;
-  //   -ms-flex-align: center;
-  //   -webkit-align-items: center;
-  //   -moz-align-items: center;
-  //   align-items: center;
-  //   display: -webkit-box;
-  //   display: -webkit-flex;
-  //   display: -moz-flex;
-  //   display: -ms-flexbox;
-  //   display: flex;
-  //   margin-bottom: 16px;
-  // }
-  // .leaguesBoardIcon{
-  //   margin-right: 10px;
-  // }
   .tablesContainer{
     -webkit-justify-content: space-between;
     -moz-justify-content: space-between;
