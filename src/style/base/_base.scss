@@ -1,4 +1,4 @@
-@import './../lib/vars'; 
+// @import './../lib/vars'; 
 
 body {
   background: #FFF;
@@ -53,7 +53,7 @@ input[type='text'], input[type='password'] {
 
 h2.title, h2 {
   margin-bottom: 10px;
-  margin-left: $margin;
+  // margin-left: $margin;
 }
 button, a, .modal-close, form input, form textarea {
   transition: opacity 0.5s cubic-bezier(0.77, 0, 0.175, 1), -webkit-transform 0.1s cubic-bezier(0.77, 0, 0.175, 1);
@@ -68,7 +68,7 @@ button, a {
 }
 @media only screen and (min-width: 371px) {
   .title {
-    margin-bottom: $margin;
+    // margin-bottom: $margin;
   }
 }
 @media screen and (-webkit-min-device-pixel-ratio: 2), screen and (min-resolution: 2dppx) {

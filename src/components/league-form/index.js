@@ -11,7 +11,7 @@ class LeagueForm extends React.Component {
     this.state = props.league ? this.props.league : { leagueName: '', privacy: 'public', password: '', image: '', motto: '',   leagueNameError: null, poolSizeError: null, leagueNameAvailable: true, passwordError: null, error: null, focused: null, submitted: false, };
   }
 
-  componentWillUnmount() {
+  componentDidUnmount() {
     this.setState({ leagueName: '', privacy: 'public', password: '' });
   }
 
@@ -72,7 +72,7 @@ class LeagueForm extends React.Component {
   };
 
   leagueNameCheckAvailable = leagueName => {
-    return superagent.get(`${__API_URL__}/api/leagueNames/${leagueName}`)
+    return superagent.get(`${process.env.API_URL}/api/leagueNames/${leagueName}`)
       .then(() => this.setState({leagueNameAvailable: true }))
       .catch(() => this.setState({ leagueNameAvailable: false }))
   };

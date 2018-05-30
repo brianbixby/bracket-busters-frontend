@@ -1,12 +1,12 @@
-@import './../lib/vars'; 
+// @import './../lib/vars'; 
 
 .form {
   input {
     width: 100%;
     background-color: #f9f9f9;
-    border-radius: $border-radius;
+    // border-radius: $border-radius;
     border-width: 0px;
-    margin: $margin;
+    // margin: $margin;
     box-sizing: border-box;
     padding: 15px;
     border-radius: 3px;
@@ -16,8 +16,8 @@
     width: 2vw;
   }
   input:focus {
-    background-color: $color-primary-hover;
-    border-radius: $border-radius;
+    // background-color: $color-primary-hover;
+    // border-radius: $border-radius;
     border-width: 0px;
   }
   label {
@@ -27,10 +27,10 @@
   .radio-div {
     color: #4A4A4A;
     font-size: 16px;
-    padding: $pad;
+    // padding: $pad;
   }
   .username-availability, .groupName-availability {
-    margin-left: $margin;
+    // margin-left: $margin;
   }
 }
 .userauth-form {

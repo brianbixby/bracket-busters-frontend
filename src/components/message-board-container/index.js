@@ -14,7 +14,7 @@ class MessageBoardContainer extends React.Component {
     this.state = { launchCommentModal: false };
   }
 
-  componentWillMount() {
+  componentDidMount() {
     this.props.commentsFetch(this.props.commentsArray)
       .catch(err => logError(err));
   }
@@ -24,7 +24,7 @@ class MessageBoardContainer extends React.Component {
       this.setState({commentCount: props.commentsArray.length});
   }
 
-  componentWillUnmount() {
+  componentDidUnmount() {
     this.setState({ launchCommetnModal: false });
   }
 

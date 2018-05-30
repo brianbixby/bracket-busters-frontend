@@ -42,7 +42,7 @@ export const leagueJoin = league => ({
 
 export const leagueFetchRequest = leagueID => (dispatch, getState) => {
   let { userAuth } = getState();
-  return superagent.get(`${__API_URL__}/api/league/${leagueID}`)
+  return superagent.get(`${process.env.API_URL}/api/league/${leagueID}`)
     .set('Authorization', `Bearer ${userAuth}`)
     .then(res => {
       dispatch(leagueFetch(res.body));
@@ -52,7 +52,7 @@ export const leagueFetchRequest = leagueID => (dispatch, getState) => {
 
 export const leaguesFetchRequest = leaguesArr => (dispatch, getState) => {
   let { userAuth } = getState();
-  return superagent.post(`${__API_URL__}/api/leagues/user`)
+  return superagent.post(`${process.env.API_URL}/api/leagues/user`)
     .set('Authorization', `Bearer ${userAuth}`)
     .send(leaguesArr)
     .then(res => {
@@ -63,7 +63,7 @@ export const leaguesFetchRequest = leaguesArr => (dispatch, getState) => {
 
 export const leagueCreateRequest = league => (dispatch, getState) => {
   let { userAuth } = getState();
-  return superagent.post(`${__API_URL__}/api/sportingevent/${league.sportingEventID}/league`)
+  return superagent.post(`${process.env.API_URL}/api/sportingevent/${league.sportingEventID}/league`)
     .set('Authorization', `Bearer ${userAuth}`)
     .send(league)
     .then(res => {
@@ -74,7 +74,7 @@ export const leagueCreateRequest = league => (dispatch, getState) => {
 
 export const leagueDeleteRequest = league => (dispatch, getState) => {
   let { userAuth } = getState();
-  return superagent.delete(`${__API_URL__}/api/league/${league._id}`)
+  return superagent.delete(`${process.env.API_URL}/api/league/${league._id}`)
     .set('Authorization', `Bearer ${userAuth}`)
     .then(res => {
       dispatch(leagueDelete(league));
@@ -84,7 +84,7 @@ export const leagueDeleteRequest = league => (dispatch, getState) => {
 
 export const leagueUpdateRequest = league => (dispatch, getState) => {
   let { userAuth } = getState();
-  return superagent.put(`${__API_URL__}/api/league/${league._id}`)
+  return superagent.put(`${process.env.API_URL}/api/league/${league._id}`)
     .set('Authorization', `Bearer ${userAuth}`)
     .send(league)
     .then(res => {
@@ -95,7 +95,7 @@ export const leagueUpdateRequest = league => (dispatch, getState) => {
 
 export const allPublicLeaguesFetchRequest = () => (dispatch, getState) => {
   let { userAuth } = getState();
-  return superagent.get(`${__API_URL__}/api/leagues/allpublic`)
+  return superagent.get(`${process.env.API_URL}/api/leagues/allpublic`)
     .set('Authorization', `Bearer ${userAuth}`)
     .then(res => {
       dispatch(allPublicLeaguesFetch(res.body));
@@ -105,7 +105,7 @@ export const allPublicLeaguesFetchRequest = () => (dispatch, getState) => {
 
 export const topPublicLeaguesFetchRequest = (sportingEventID, leaguesIDArr) => (dispatch, getState) => {
   let { userAuth } = getState();
-  return superagent.post(`${__API_URL__}/api/leagues/top/${sportingEventID}`)
+  return superagent.post(`${process.env.API_URL}/api/leagues/top/${sportingEventID}`)
     .set('Authorization', `Bearer ${userAuth}`)
     .send(leaguesIDArr)
     .then(res => {
@@ -116,7 +116,7 @@ export const topPublicLeaguesFetchRequest = (sportingEventID, leaguesIDArr) => (
 
 export const leagueJoinRequest = leagueID => (dispatch, getState) => {
   let { userAuth } = getState();
-  return superagent.put(`${__API_URL__}/api/league/${leagueID}/adduser`)
+  return superagent.put(`${process.env.API_URL}/api/league/${leagueID}/adduser`)
     .set('Authorization', `Bearer ${userAuth}`)
     .then(res => {
       dispatch(leagueJoin(res.body));
@@ -126,7 +126,7 @@ export const leagueJoinRequest = leagueID => (dispatch, getState) => {
 
 export const privateLeagueJoinRequest = credentials => (dispatch, getState) => {
   let { userAuth } = getState();
-  return superagent.post(`${__API_URL__}/api/league/private/adduser`)
+  return superagent.post(`${process.env.API_URL}/api/league/private/adduser`)
     .set('Authorization', `Bearer ${userAuth}`)
     .send(credentials)
     .then(res => {

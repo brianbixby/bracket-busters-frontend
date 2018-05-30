@@ -94,7 +94,7 @@ class UserAuthForm extends React.Component {
   };
 
   usernameCheckAvailable = username => {
-    return superagent.get(`${__API_URL__}/api/signup/usernames/${username}`)
+    return superagent.get(`${process.env.API_URL}/api/signup/usernames/${username}`)
       .then(() => this.setState({usernameAvailable: true }))
       .catch(() => this.setState({ usernameAvailable: false }))
   };
