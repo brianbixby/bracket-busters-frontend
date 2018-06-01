@@ -11,7 +11,7 @@ class LeagueForm extends React.Component {
     this.state = props.league ? this.props.league : { leagueName: '', privacy: 'public', password: '', image: '', motto: '',   leagueNameError: null, poolSizeError: null, leagueNameAvailable: true, passwordError: null, error: null, focused: null, submitted: false, };
   }
 
-  componentDidUnmount() {
+  componentWillUnmount() {
     this.setState({ leagueName: '', privacy: 'public', password: '' });
   }
 

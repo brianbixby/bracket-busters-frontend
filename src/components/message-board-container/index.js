@@ -24,7 +24,7 @@ class MessageBoardContainer extends React.Component {
       this.setState({commentCount: props.commentsArray.length});
   }
 
-  componentDidUnmount() {
+  componentWillUnmount() {
     this.setState({ launchCommetnModal: false });
   }
 

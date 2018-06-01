@@ -9,7 +9,7 @@ class LeagueAllPrivateForm extends React.Component {
     this.state = { leagueName: '', password: '',   leagueNameError: null, passwordError: null, error: null, focused: null, submitted: false, };
   }
 
-  componentDidUnmount() {
+  componentWillUnmount() {
     this.setState({ leagueName: '', password: '' });
   }
 

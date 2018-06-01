@@ -5,7 +5,7 @@
   .picksGamesHeader {
     text-align: center;
     color: #fff;
-    background: url(./../../components/helpers/assets/sprite.png) no-repeat scroll center -517px transparent;
+    background: url(https://i.imgur.com/YjfVsTE.png) no-repeat scroll center -517px transparent;
     text-transform: uppercase;
   }
   .gameItemOuter {
@@ -155,9 +155,9 @@
         .picked {
           color: #06c;
         }
-      }
+      }     
       .middle {
-        background: url(./../../components/helpers/assets/sprite.png) no-repeat scroll -203px -240px transparent;
+        background: url(https://i.imgur.com/YjfVsTE.png) no-repeat scroll -203px -240px transparent;
         height: 40px;
         left: 241.5px;
         position: absolute;
@@ -191,7 +191,7 @@
   
           .sliderButton {
             // background: #8b8b8b;
-            background: url(./../../components/helpers/assets/sprite.png) no-repeat scroll -205px -311px transparent;
+            background: url(https://i.imgur.com/YjfVsTE.png) no-repeat scroll -205px -311px transparent;
             height: 30px;
             width: 75px;
             position: absolute;
@@ -210,7 +210,7 @@
             }
           }
           .homeTeamPickButtonState {
-            background: url(./../../components/helpers/assets/sprite.png) no-repeat scroll -205px -350px transparent;
+            background: url(https://i.imgur.com/YjfVsTE.png) no-repeat scroll -205px -350px transparent;
             left: 6px;
             right: auto;
             cursor: pointer;
@@ -220,7 +220,7 @@
             transition: right .3s ease;
           }
           .awayTeamPickButtonState {
-            background: url(./../../components/helpers/assets/sprite.png) no-repeat scroll -205px -391px transparent;
+            background: url(https://i.imgur.com/YjfVsTE.png) no-repeat scroll -205px -391px transparent;
             right: 6px;
             left: auto;
             cursor: pointer;
@@ -279,13 +279,13 @@
     top: 7px;
   }
   .correctPick .correctPickButton {
-    background: url(./../../components/helpers/assets/sprite.png) no-repeat scroll -324px -350px transparent;
+    background: url(https://i.imgur.com/YjfVsTE.png) no-repeat scroll -324px -350px transparent;
   }
   .wrongPick .wrongPickButton {
-    background: url(./../../components/helpers/assets/sprite.png) no-repeat scroll -324px -391px transparent;
+    background: url(https://i.imgur.com/YjfVsTE.png) no-repeat scroll -324px -391px transparent;
   }
   .lockedPickButton {
-    background: url(./../../components/helpers/assets/sprite.png) no-repeat scroll -324px -311px transparent;
+    background: url(https://i.imgur.com/YjfVsTE.png) no-repeat scroll -324px -311px transparent;
     height: 30px;
     width: 90px;
     position: absolute;
