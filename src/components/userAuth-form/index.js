@@ -94,10 +94,12 @@ class UserAuthForm extends React.Component {
   };
 
   usernameCheckAvailable = username => {
-    return superagent.get(`${process.env.API_URL}/api/signup/usernames/${username}`)
+    let __API_URL__ = JSON.stringify(process.env.API_URL);
+    return superagent.get(`${__API_URL__}/api/signup/usernames/${username}`)
       .then(() => this.setState({usernameAvailable: true }))
       .catch(() => this.setState({ usernameAvailable: false }))
   };
+  
 
   handleSubmit = e => {
     e.preventDefault();
