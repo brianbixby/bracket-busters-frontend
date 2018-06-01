@@ -17,7 +17,7 @@ export const commentsFetch = comments => ({
 
 export const commentCreateRequest = comment => (dispatch, getState) => {
   let { userAuth } = getState();
-  return superagent.post(`${process.env.API_URL}/api/messageboard/${comment.messageBoardID}/comment`)
+  return superagent.post(`${API_URL}/api/messageboard/${comment.messageBoardID}/comment`)
     .set('Authorization', `Bearer ${userAuth}`)
     .send(comment)
     .then(res => {
@@ -28,7 +28,7 @@ export const commentCreateRequest = comment => (dispatch, getState) => {
 
 export const commentFetchRequest = commentID => (dispatch, getState) => {
   let { userAuth } = getState();
-  return superagent.get(`${process.env.API_URL}/api/comment/${commentID}`)
+  return superagent.get(`${API_URL}/api/comment/${commentID}`)
     .set('Authorization', `Bearer ${userAuth}`)
     .then(res => {
       dispatch(commentFetch(res.body.data));
@@ -38,7 +38,7 @@ export const commentFetchRequest = commentID => (dispatch, getState) => {
 
 export const commentsFetchRequest = commentsArr => (dispatch, getState) => {
   let { userAuth } = getState();
-  return superagent.post(`${process.env.API_URL}/api/comments/messageboard`)
+  return superagent.post(`${API_URL}/api/comments/messageboard`)
     .set('Authorization', `Bearer ${userAuth}`)
     .send(commentsArr)
     .then(res => {

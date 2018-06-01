@@ -22,7 +22,7 @@ export const groupProfilesFetch = groupProfiles => ({
 
 export const userProfileCreateRequest = userProfile => (dispatch, getState) => {
   let { userAuth } = getState();
-  return superagent.post(`${process.env.API_URL}/api/profile`)
+  return superagent.post(`${API_URL}/api/profile`)
     .set('Authorization', `Bearer ${userAuth}`)
     .field({username: userProfile.username, image: userProfile.image, country: userProfile.country, state: userProfile.state, birthdate: userProfile.birthdate, tags: userProfile.tags })
     .then( res => {
@@ -34,7 +34,7 @@ export const userProfileCreateRequest = userProfile => (dispatch, getState) => {
 export const userProfileUpdateRequest = profile => (dispatch, getState) => {
   let { userAuth, userProfile } = getState();
   
-  return superagent.put(`${process.env.API_URL}/api/profile/${userProfile._id}`)
+  return superagent.put(`${API_URL}/api/profile/${userProfile._id}`)
     .set('Authorization', `Bearer ${userAuth}`)
     .send(profile)
     .then( res => {
@@ -45,7 +45,7 @@ export const userProfileUpdateRequest = profile => (dispatch, getState) => {
 
 export const userProfileFetchRequest = ()  => (dispatch, getState) => {
   let { userAuth } = getState();
-  return superagent.get(`${process.env.API_URL}/api/profiles/currentuser`)
+  return superagent.get(`${API_URL}/api/profiles/currentuser`)
     .set('Authorization', `Bearer ${userAuth}`)
     .then(res => {
       dispatch(userProfileFetch(res.body));
@@ -55,7 +55,7 @@ export const userProfileFetchRequest = ()  => (dispatch, getState) => {
 
 export const groupProfilesFetchRequest = profileIDs  => (dispatch, getState) => {
   let { userAuth } = getState();
-  return superagent.post(`${process.env.API_URL}/api/profiles/group`)
+  return superagent.post(`${API_URL}/api/profiles/group`)
     .set('Authorization', `Bearer ${userAuth}`)
     .send(profileIDs)
     .then(res => {
