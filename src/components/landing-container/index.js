@@ -28,7 +28,6 @@ class LandingContainer extends React.Component {
   }
 
   componentWillMount() {
-    console.log('hi');
     userValidation(this.props);
   }
   componentDidMount() {
@@ -129,7 +128,10 @@ class LandingContainer extends React.Component {
     return (
       <section className='landing-page page-outer-div'>
         {renderIf(!this.props.userAuth,
+          <div>
           <Intro />
+          <p> change</p>
+          </div>
         )}
         
         {renderIf(this.props.userAuth,
