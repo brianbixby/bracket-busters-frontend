@@ -12,7 +12,7 @@ export const signOut = () => {
 };
 
 export const signUpRequest = user => dispatch => {
-  return superagent.post(`${process.env.API_URL}/api/signup`)
+  return superagent.post(`https://redobracketbustersbackendstagi.herokuapp.com/api/signup`)
     .withCredentials()
     .send(user)
     .then( res => {
