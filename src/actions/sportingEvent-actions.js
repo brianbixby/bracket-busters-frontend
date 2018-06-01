@@ -8,7 +8,7 @@ export const sportingEventsFetch = sportingEvent => ({
 
 export const sportingEventsFetchRequest = () => (dispatch, getState) => {
   let { userAuth } = getState();
-  return superagent.get(`${API_URL}/api/sportingevents`)
+  return superagent.get(`${process.env.API_URL}/api/sportingevents`)
     .set('Authorization', `Bearer ${userAuth}`)
     .then(res => {
       dispatch(sportingEventsFetch(res.body[0]));

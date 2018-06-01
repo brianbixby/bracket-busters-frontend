@@ -72,7 +72,7 @@ class LeagueForm extends React.Component {
   };
 
   leagueNameCheckAvailable = leagueName => {
-    return superagent.get(`${API_URL}/api/leagueNames/${leagueName}`)
+    return superagent.get(`${process.env.API_URL}/api/leagueNames/${leagueName}`)
       .then(() => this.setState({leagueNameAvailable: true }))
       .catch(() => this.setState({ leagueNameAvailable: false }))
   };

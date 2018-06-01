@@ -7,7 +7,7 @@ export const messageBoardFetch = messageBoard => ({
 
 export const messageBoardGroupFetchRequest = groupID  => (dispatch, getState) => {
   let { userAuth } = getState();
-  return superagent.get(`${API_URL}/api/messageboard/group/${groupID}`)
+  return superagent.get(`${process.env.API_URL}/api/messageboard/group/${groupID}`)
     .set('Authorization', `Bearer ${userAuth}`)
     .then(res => {
       dispatch(messageBoardFetch(res.body[0]));
@@ -17,7 +17,7 @@ export const messageBoardGroupFetchRequest = groupID  => (dispatch, getState) =>
 
 export const messageBoardLeagueFetchRequest = leagueID  => (dispatch, getState) => {
   let { userAuth } = getState();
-  return superagent.get(`${API_URL}/api/messageboard/league/${leagueID}`)
+  return superagent.get(`${process.env.API_URL}/api/messageboard/league/${leagueID}`)
     .set('Authorization', `Bearer ${userAuth}`)
     .then(res => {
       dispatch(messageBoardFetch(res.body[0]));
