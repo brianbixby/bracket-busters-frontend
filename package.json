@@ -2,7 +2,7 @@
   "name": "sportsapp-front-end",
   "version": "1.0.0",
   "description": "",
-  "main": "webpack.config.js",
+  "main": "src/index.html",
   "jest": {
     "globals": {
       "API_URL": "http://localhost:3000"
@@ -14,7 +14,7 @@
     "test": "jest",
     "test-watch": "jest --watchAll",
     "start": "node server.js",
-    "heroku-postbuild": "npm run build"
+    "heroku-postbuild": "yarn build"
   },
   "keywords": [],
   "author": "",
