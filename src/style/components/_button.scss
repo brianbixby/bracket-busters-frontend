@@ -1,4 +1,4 @@
-// @import './../lib/vars'; 
+@import './../lib/vars'; 
 
 .b-button {
   line-height: 1;
@@ -18,7 +18,7 @@
   border: 2px solid #FF001F;
 }
 .red-button:hover {
-  // color: $color-primary;
+  color: $color-primary;
   background: #FFF;
   border-width: 2px;
   font-weight: 900;
