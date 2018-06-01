@@ -94,10 +94,14 @@ class UserAuthForm extends React.Component {
   };
 
   usernameCheckAvailable = username => {
+    console.log('hit');
+    // let __API_URL__ = JSON.stringify(process.env.API_URL);
     return superagent.get(`${process.env.API_URL}/api/signup/usernames/${username}`)
+    // return superagent.get(`https://redobracketbustersbackendstagi.herokuapp.com/api/signup/usernames/${username}`)
       .then(() => this.setState({usernameAvailable: true }))
       .catch(() => this.setState({ usernameAvailable: false }))
   };
+  
 
   handleSubmit = e => {
     e.preventDefault();
@@ -137,6 +141,7 @@ class UserAuthForm extends React.Component {
         'form userauth-form': true,
         'error': this.state.error && this.state.submitted,
       })}>
+      {/* test */}
 
         {renderIf(this.props.authFormAction === 'Sign Up',
           <div>
