@@ -28,6 +28,7 @@ class LandingContainer extends React.Component {
   }
 
   componentWillMount() {
+    console.log('hi');
     userValidation(this.props);
   }
   componentDidMount() {
