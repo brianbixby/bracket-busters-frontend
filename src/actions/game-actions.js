@@ -13,7 +13,7 @@ export const gameUpdate = game => ({
 
 export const gameUpdateRequest = game => (dispatch, getState) => {
   let { userAuth } = getState();
-  return superagent.put(`${__API_URL__}/api/game/${game._id}`)
+  return superagent.put(`${process.env.API_URL}/api/game/${game._id}`)
     .set('Authorization', `Bearer ${userAuth}`)
     .send(game)
     .then(res => {
@@ -24,7 +24,7 @@ export const gameUpdateRequest = game => (dispatch, getState) => {
 
 export const gamesFetchRequest = (sportingEventID, gamesIDArr) => (dispatch, getState) => {
   let { userAuth } = getState();
-  return superagent.post(`${__API_URL__}/api/games/${sportingEventID}`)
+  return superagent.post(`${process.env.API_URL}/api/games/${sportingEventID}`)
     .set('Authorization', `Bearer ${userAuth}`)
     .send(gamesIDArr)
     .then(res => {

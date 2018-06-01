@@ -12,7 +12,7 @@ class CommentForm extends React.Component {
     };
   }
 
-  componentWillUnmount() {
+  componentDidUnmount() {
     this.setState({ content: '', textAreaHeight: 37 });
   }
 

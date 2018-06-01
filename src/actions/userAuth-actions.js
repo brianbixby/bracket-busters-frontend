@@ -12,7 +12,7 @@ export const signOut = () => {
 };
 
 export const signUpRequest = user => dispatch => {
-  return superagent.post(`${__API_URL__}/api/signup`)
+  return superagent.post(`${process.env.API_URL}/api/signup`)
     .withCredentials()
     .send(user)
     .then( res => {
@@ -32,7 +32,7 @@ export const signUpRequest = user => dispatch => {
 };
 
 export const signInRequest = user => dispatch => {
-  return superagent.get(`${__API_URL__}/api/signin`)
+  return superagent.get(`${process.env.API_URL}/api/signin`)
     .withCredentials()
     .auth(user.username, user.password)
     .then( res => {
@@ -52,7 +52,7 @@ export const signInRequest = user => dispatch => {
 };
 
 export const tokenSignInRequest = token => dispatch => {
-  return superagent.get(`${__API_URL__}/api/signin/token`)
+  return superagent.get(`${process.env.API_URL}/api/signin/token`)
     .set('Authorization', `Bearer ${token}`)
     .then( res => {
       dispatch(signIn(res.text));

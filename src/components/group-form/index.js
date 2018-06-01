@@ -11,7 +11,7 @@ class GroupForm extends React.Component {
     this.state = props.group ? this.props.group : { groupName: '', privacy: 'public', motto: '', image: '', password: '', groupNameError: null, groupNameAvailable: true, passwordError: null, error: null, focused: null, submitted: false, };
   }
 
-  componentWillUnmount() {
+  componentDidUnmount() {
     this.setState({ groupName: '', privacy: 'public', motto: '', image: '', password: '', tags: '' });
   }
 
@@ -70,7 +70,7 @@ class GroupForm extends React.Component {
   };
 
   groupNameCheckAvailable = groupName => {
-    return superagent.get(`${__API_URL__}/api/groupNames/${groupName}`)
+    return superagent.get(`${process.env.API_URL}/api/groupNames/${groupName}`)
       .then(() => this.setState({groupNameAvailable: true }))
       .catch(() => this.setState({ groupNameAvailable: false }))
   };
