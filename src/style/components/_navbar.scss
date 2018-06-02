@@ -1,5 +1,11 @@
 
 @import './../lib/vars'; 
+.github, .linkedin {
+  display: none;
+}
+.introNavbar .github, .introNavbar .linkedin {
+  display: inline-block;
+}
 .navbar {
   position: fixed;
   top: 0;
@@ -11,6 +17,18 @@
   background: #2b2c2d;
   box-shadow: 0 4px 2px -2px rgba(0,0,0,0.3);
 
+  .linkedin, .github  {
+    height: 20px;
+    transition: all 0.35s cubic-bezier(0.77, 0, 0.175, 1);
+  }
+  .linkedin:hover, .github:hover {
+    opacity: .8;
+  }
+  .caretDown {
+    height: 15px;
+    margin-bottom: 7px;
+    padding-left: 18px;
+  }
   .noProfileImageNav {
     border-radius: 50%;
     overflow: hidden;
@@ -72,11 +90,6 @@
       padding: 0;
       transition-delay: 0.5s;
       transition: all 0.35s cubic-bezier(0.77, 0, 0.175, 1);
-
-      .fa-github, .fa-linkedin {
-        font-size: 20px;
-        transition: all 0.5s cubic-bezier(0.77, 0, 0.175, 1);
-      }
     }
 
     .dropdown {
@@ -161,7 +174,6 @@
     background: #FFF;
   }
 }
-
 @media only screen and (min-width: 411px) {
   .navbar {
     .noProfileImageNav {
@@ -198,14 +210,9 @@
         }
       }
 
-      .social .fa-github, .social .fa-linkedin {
-        font-size: 26px;
+      .linkedin, .github {
+        height: 26px;
       }
     }
   }
-}
-.caretDown {
-  height: 15px;
-  margin-bottom: 7px;
-  padding-left: 18px;
 }

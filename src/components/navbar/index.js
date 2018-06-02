@@ -37,6 +37,8 @@ class Navbar extends React.Component {
   render() {
     let user = require('./../helpers/assets/icons/user.icon.svg');
     let caretDown = require('./../helpers/assets/icons/caret-down.icon.svg');
+    let github = require('./../helpers/assets/icons/github.icon.svg');
+    let linkedin = require('./../helpers/assets/icons/linkedin.icon.svg');
     let profileImage = this.props.userProfile && this.props.userProfile.image ? <Avatar url={this.props.userProfile.image} /> : <img className='noProfileImageNav' src={user} />;
     let profileLink = this.props.userProfile && this.props.userProfile._id ? `/user/${this.props.userProfile._id}` : '';
     return (
@@ -66,10 +68,10 @@ class Navbar extends React.Component {
               )}
             </li>
             <li className='social'>
-              <a href="https://github.com/brianbixby" rel="noopener noreferrer" target="_blank"><span><i className="fa fa-github social-icons"></i></span> </a>
+              <a href="https://github.com/brianbixby" rel="noopener noreferrer" target="_blank"><span><img className='github' src={github} /></span> </a>
             </li>
             <li className='social'>
-              <a href="https://www.linkedin.com/in/brianbixby1/" rel="noopener noreferrer" target="_blank"><span><i className="fa fa-linkedin social-icons"></i></span></a>
+              <a href="https://www.linkedin.com/in/brianbixby1/" rel="noopener noreferrer" target="_blank"><span><img className='linkedin' src={linkedin} /></span></a>
             </li>
           </ul>
         </nav>
@@ -77,6 +79,7 @@ class Navbar extends React.Component {
     );
   }
 }
+
 
 let mapStateToProps = state => ({
   userAuth: state.userAuth,
