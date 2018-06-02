@@ -35,7 +35,6 @@
     "cors": "^2.8.4",
     "dotenv": "^5.0.1",
     "express": "^4.16.3",
-    "font-awesome": "^4.7.0",
     "lodash": "^4.17.5",
     "node-sass": "^4.9.0",
     "npm": "^5.8.0",

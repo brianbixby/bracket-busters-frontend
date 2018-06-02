@@ -813,11 +813,11 @@ button, a {
 
 .red-button {
   color: #FFF;
-  background: #00ADEA;
-  border: 2px solid #00ADEA; }
+  background: #FF001F;
+  border: 2px solid #FF001F; }
 
 .red-button:hover {
-  color: #00ADEA;
+  color: #FF001F;
   background: #FFF;
   border-width: 2px;
   font-weight: 900; }
@@ -842,10 +842,6 @@ button, a {
 
 .messageboardHeader {
   position: relative; }
-  .messageboardHeader .fa-comments {
-    color: #1d1e1f;
-    font-size: 30px;
-    margin-right: 10px; }
 
 .messageboardHeader:after {
   border-bottom: #dcdddf 1px solid;
@@ -1021,12 +1017,6 @@ button, a {
         .navbar .socials .dropdown .avatarDiv i {
           font-size: 20px;
           padding-top: 0; }
-        .navbar .socials .dropdown .avatarDiv .fa-caret-down {
-          padding-right: 5px;
-          position: absolute;
-          left: 0; }
-        .navbar .socials .dropdown .avatarDiv .fa-user {
-          padding-left: 21px; }
       .navbar .socials .dropdown .dropdownDiv {
         position: fixed;
         right: 0;
@@ -1082,8 +1072,6 @@ button, a {
       margin-right: 8px; }
       .navbar .socials .dropdown .dropdownDiv {
         padding: 5px 40px 15px 40px; }
-      .navbar .socials .dropdown .avatarDiv .fa-caret-down {
-        padding-right: 10px; }
       .navbar .socials .dropdown .avatarDiv i {
         font-size: 26px; }
       .navbar .socials .dropdown .avatarDiv .avatar img {
@@ -1269,8 +1257,8 @@ button, a {
   border: 2px solid #4a4a4a; }
 
 #start-button:hover {
-  color: #00ADEA;
-  border-color: #00ADEA; }
+  color: #FF001F;
+  border-color: #FF001F; }
 
 .intro {
   background: #FFF !important; }
@@ -1393,19 +1381,20 @@ button, a {
     width: 100%; }
     .tooltip section p {
       background: #FFF;
-      color: #00ADEA;
+      color: #FF001F;
       font-weight: 700;
       display: inline-block;
       padding: .5vw;
       width: auto;
-      border: 2px solid #00ADEA;
+      border: 2px solid #FF001F;
       border-radius: 4px;
       margin-left: 10px; }
-    .tooltip section .fa-caret-up {
+    .tooltip section .caret-up {
       position: absolute;
       top: -10px;
       left: 20px;
-      color: #00ADEA; }
+      color: #FF001F;
+      height: 15px; }
 
 .leagues-container .hideLarge .tooltip section {
   transform: translateY(-30px);
@@ -1546,11 +1535,6 @@ button, a {
   margin-right: 10%;
   margin-bottom: 30px; }
 
-.fa-edit {
-  cursor: pointer;
-  color: #00ADEA;
-  font-size: 20px; }
-
 @media only screen and (min-width: 481px) {
   .landing-page .intro {
     margin-top: -18px; } }
@@ -1585,10 +1569,10 @@ button, a {
   font-size: 30px;
   text-align: center; }
 
-.leaguesContainerHeader .fa-users {
-  color: #1d1e1f;
-  font-size: 30px;
-  margin-right: 10px; }
+.leaguesContainerHeader .users {
+  margin-right: 10px;
+  width: 40px;
+  height: 40px; }
 
 @media only screen and (min-width: 768px) {
   .contentOuter {
@@ -1986,7 +1970,7 @@ p.tableColumn.columnUser {
   letter-spacing: 1px;
   padding: 0 10px;
   color: #fff;
-  background: linear-gradient(to right, #000000, #00ADEA);
+  background: linear-gradient(to right, #000000, #FF001F);
   text-align: center;
   overflow: hidden;
   position: relative;
@@ -2140,10 +2124,6 @@ p.tableColumn.columnUser {
       font-size: 13px;
       font-weight: 900;
       letter-spacing: 1px; }
-    .outer .outerLeft .fa-users {
-      color: #1d1e1f;
-      font-size: 30px;
-      margin-right: 10px; }
   .outer .outerRight {
     display: -webkit-box;
     display: -webkit-flex;
@@ -2510,10 +2490,6 @@ p.tableColumn.columnUser {
     width: 145px; }
   .leagueItem-page .cardItem .homeArrow, .leagueItem-page .cardItem .awayArrow {
     color: #CCC; }
-  .leagueItem-page .cardItem .homeTeamPickButtonState .homeArrow {
-    color: #00ADEA; }
-  .leagueItem-page .cardItem .awayTeamPickButtonState .awayArrow {
-    color: #00ADEA; }
 
 .leagueItem-page .correctPick .cardItem .homeTeamInfoDiv .picked, .leagueItem-page .correctPick .cardItem .awayTeamInfoDiv .picked {
   color: #2F7A1E; }
@@ -2679,7 +2655,7 @@ p.tableColumn.columnUser {
   stroke-dashoffset: 166;
   stroke-width: 2;
   stroke-miterlimit: 10;
-  stroke: #00ADEA;
+  stroke: #FF001F;
   fill: none;
   animation: stroke 0.6s cubic-bezier(0.65, 0, 0.45, 1) forwards; }
 
@@ -2690,7 +2666,7 @@ p.tableColumn.columnUser {
   stroke-width: 2;
   stroke: #fff;
   stroke-miterlimit: 10;
-  box-shadow: inset 0px 0px 0px #00ADEA;
+  box-shadow: inset 0px 0px 0px #FF001F;
   animation: fill .4s ease-in-out .4s forwards, scale .3s ease-in-out .9s both;
   position: absolute;
   right: 10px; }
@@ -2713,7 +2689,7 @@ p.tableColumn.columnUser {
 
 @keyframes fill {
   100% {
-    box-shadow: inset 0px 0px 0px 30px #00ADEA; } }
+    box-shadow: inset 0px 0px 0px 30px #FF001F; } }
 
 @media only screen and (max-width: 450px) {
   .checkmarkDiv {
@@ -2773,7 +2749,9 @@ p.tableColumn.columnUser {
   height: 50px;
   width: 100%;
   padding: 10px;
-  text-align: center; }
+  text-align: center;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.24);
+  border-radius: 5px; }
   .bannerAd .company {
     font-size: 30px;
     font-weight: 900;
@@ -2909,9 +2887,9 @@ p.tableColumn.columnUser {
     background: -webkit-gradient(linear, left top, right top, from(#141414), color-stop(0.15, #1d1d1d), to(#202020));
     height: auto;
     width: 40%; }
-    .groupItem-page .createOuter .joinImgDiv .fa, .leagueItem-page .createOuter .joinImgDiv .fa {
-      font-size: 134px;
-      color: #fff; }
+    .groupItem-page .createOuter .joinImgDiv .info, .leagueItem-page .createOuter .joinImgDiv .info {
+      height: 130px;
+      margin-top: 2px; }
   .groupItem-page .createOuter .cardImage, .leagueItem-page .createOuter .cardImage {
     height: 130px; }
   .groupItem-page .createOuter .m16, .leagueItem-page .createOuter .m16 {
@@ -2939,5 +2917,5 @@ p.tableColumn.columnUser {
   .groupItem-page .createOuter .joinImgDiv, .leagueItem-page .createOuter .joinImgDiv {
     width: 104px;
     padding-top: 15px; }
-  .groupItem-page .createOuter .joinImgDiv .fa, .leagueItem-page .createOuter .joinImgDiv .fa {
-    font-size: 104px; } }
+  .groupItem-page .createOuter .joinImgDiv .info, .leagueItem-page .createOuter .joinImgDiv .info {
+    height: 104px; } }

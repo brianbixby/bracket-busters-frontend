@@ -84,6 +84,8 @@ class GroupAllContainer extends React.Component {
   render() {
     let tableType = 'group';
     let groups = this.props.publicGroups.slice(0, this.state.groupsShown);
+    let users = require('./../helpers/assets/icons/users.icon.svg');
+    let lock = require('./../helpers/assets/icons/lock.icon.svg');
     return (
       <div className='leagues-container page-outer-div'>
         <div className='grid-container'>
@@ -94,7 +96,7 @@ class GroupAllContainer extends React.Component {
                 <div className='mainContainer hideLarge'>
                   <div className='mainContainer-header'>
                     <div className='left'>
-                      <i className="fa fa-lock"></i>
+                      <img className='lock' src={lock} />
                       <p className='mainContainerHeader'>
                         PRIVATE GROUPS
                       </p>
@@ -114,7 +116,7 @@ class GroupAllContainer extends React.Component {
                 <div className='mainContainer'>
                   <div className='mainContainer-header'>
                       <div className='left'>
-                        <i className="fa fa-users"></i>
+                        <img className='users' src={users} />
                         <p className='mainContainerHeader'>
                           PUBLIC GROUPS
                         </p>
@@ -146,7 +148,7 @@ class GroupAllContainer extends React.Component {
                 <div className='mainContainer'>
                   <div className='mainContainer-header'>
                     <div className='left'>
-                      <i className="fa fa-lock"></i>
+                      <img className='lock' src={lock} />
                       <p className='mainContainerHeader'>PRIVATE GROUPS</p>
                     </div>
                   </div>

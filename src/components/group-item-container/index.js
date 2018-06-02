@@ -82,7 +82,8 @@ class GroupItemContainer extends React.Component {
     let basketball = require('./../helpers/assets/basketball.png');
     let groupPhoto = currentGroup.image ? <img className='createImg' src={currentGroup.image} /> : <img className='createImg' src='https://i.imgur.com/xjGJJvv.jpg' />;
     let placeholderImage = require('./../helpers/assets/profilePlaceholder.jpeg');
-
+    let users = require('./../helpers/assets/icons/users.icon.svg');
+    let info = require('./../helpers/assets/icons/info.icon.svg');
     return (
       <div className='groupItem-page page-outer-div'>
         <div className='grid-container'>
@@ -93,7 +94,7 @@ class GroupItemContainer extends React.Component {
                 <div className='createOuterInner'>
                   <div className='outer'>
                     <div className='outerLeft'>
-                      <i className="fa fa-users"></i>
+                      <img className='users' src={users} />
                       <p className='headerText'>GROUP</p>
                     </div>
                     <div className='outerRight'>
@@ -130,7 +131,7 @@ class GroupItemContainer extends React.Component {
                       </div>
                     </div>
                     <div className='joinImgDiv'>
-                      <i className="fa fa-info-circle"></i>
+                      <img className='info' src={info} />
                     </div>
                   </div>
                 </div>
@@ -214,7 +215,7 @@ class GroupItemContainer extends React.Component {
               </div>
               <div className='leagueBoardsContainer'>
                 <div className='leaguesContainerHeader'>
-                  <i className="fa fa-users"></i>
+                  <img className='users' src={users} />
                   <p className='leaguesBoardHeader'>FEATURED GROUPS</p>
                 </div>
                 <div className='container tableContainer'>

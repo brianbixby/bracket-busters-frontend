@@ -125,6 +125,8 @@ class LeagueContainer extends React.Component {
     let basketball = require('./../helpers/assets/basketball.png');
     let leaguePhoto = currentLeague.image ? <img className='createImg' src={currentLeague.image} /> : <img className='createImg' src='https://i.imgur.com/CAoW5n8.jpg' />;
     let scores = this.props.scoreBoards.slice(0, this.state.scoreBoardsShown);
+    let users = require('./../helpers/assets/icons/users.icon.svg');
+    let info = require('./../helpers/assets/icons/info.icon.svg');
     return (
       <div className='leagueItem-page page-outer-div'>
         <div className='grid-container'>
@@ -172,7 +174,7 @@ class LeagueContainer extends React.Component {
                       </div>
                     </div>
                     <div className='joinImgDiv'>
-                      <i className="fa fa-info-circle"></i>
+                      <img className='info' src={info} />
                     </div>
                   </div>
                 </div>
@@ -254,7 +256,7 @@ class LeagueContainer extends React.Component {
               </div>
               <div className='leagueBoardsContainer'>
                 <div className='leaguesContainerHeader'>
-                  <i className="fa fa-users"></i>
+                  <img className='users' src={users} />
                   <p className='leaguesBoardHeader'>FEATURED GROUPS</p>
                 </div>
                 <div className='container tableContainer'>

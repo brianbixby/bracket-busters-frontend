@@ -46,11 +46,12 @@ class MessageBoardContainer extends React.Component {
     let comments = this.props.comments.slice(0, 5)
     let placeholderImage = require('./../helpers/assets/profilePlaceholder.jpeg');
     let profileImage = this.props.userProfile && this.props.userProfile.image ? this.props.userProfile.image : placeholderImage;
+    let commentsIcon = require('./../helpers/assets/icons/comments.icon.svg');
     return (
       <div className='wideSectionWrapper messageBoardOuter'>
         <div className='outer messageboardHeader'>
           <div className='outerLeft'>
-            <i className="fa fa-comments"></i>
+            <img className='comments' src={commentsIcon} />
             <p className='headerText'>MESSAGE BOARD </p>
           </div>
           <div className='outerRight'>

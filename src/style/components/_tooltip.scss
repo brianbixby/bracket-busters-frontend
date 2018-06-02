@@ -21,11 +21,12 @@
       margin-left: 10px;
     }
 
-    .fa-caret-up {
+    .caret-up {
       position: absolute;
       top: -10px;
       left: 20px;
       color: $color-primary;
+      height: 15px;
     }
 
   }

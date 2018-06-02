@@ -124,7 +124,7 @@ class LandingContainer extends React.Component {
     let topScores = 'scores';
     let profileAction ='create';
     let basketball = require('./../helpers/assets/basketball.png');
-
+    let users = require('./../helpers/assets/icons/users.icon.svg');
     return (
       <section className='landing-page page-outer-div'>
         {renderIf(!this.props.userAuth,
@@ -195,7 +195,7 @@ class LandingContainer extends React.Component {
                 <div className={this.props.leagues.length > 0 ? 'marginTopL57 col-md-4' : 'col-md-4'}>
                 <div className='leagueBoardsContainer'>
                   <div className='leaguesContainerHeader'>
-                    <i className="fa fa-users"></i>
+                    <img className='users' src={users} />
                     <p className='leaguesBoardHeader'>FEATURED GROUPS</p>
                   </div>
                   {renderIf(this.props.topPublicGroups.length > 0,

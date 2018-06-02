@@ -16,6 +16,7 @@ class CreateSection extends React.Component {
     let createleague = require('./../assets/createleague.jpeg');
     let creategroup = require('./../assets/creategroup.jpeg');
     let nbalogo = require('./../assets/nba-logo.png');
+    let users = require('./../assets/icons/users.icon.svg');
 
     return (
       <div>
@@ -34,7 +35,7 @@ class CreateSection extends React.Component {
           {renderIf(this.props.formType === 'group',
             <div className='outer'>
               <div className='outerLeft'>
-                <i className="fa fa-users"></i>
+              <img className='users' src={users} />
                 <p className='headerText'>GROUPS </p>
               </div>
               <div className='outerRight'>
