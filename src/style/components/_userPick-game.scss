@@ -5,7 +5,7 @@
   .picksGamesHeader {
     text-align: center;
     color: #fff;
-    background: url(./../../components/helpers/assets/sprite.png) no-repeat scroll center -517px transparent;
+    background: url(https://i.imgur.com/YjfVsTE.png) no-repeat scroll center -517px transparent;
     text-transform: uppercase;
   }
   .gameItemOuter {
@@ -41,7 +41,7 @@
         color: #FFFFFF;
         height: 90px;
         text-align: center;
-        text-shadow: 0 0 18px #00ADEA;
+        text-shadow: 0 0 18px #06c;
         width: 90px;
         background-color: rgba(0, 0, 0, 0.7);
         font-size: 48px;
@@ -108,7 +108,7 @@
           text-transform: uppercase;
         }
         .teamName {
-          color: #00ADEA;
+          color: #06c;
           color: #ccc;
           text-align: right;
           font-size: 25px;
@@ -120,7 +120,7 @@
           transition: color .35s ease;
         }
         .picked {
-          color: #06c;
+          color: #00ADEA;
         }
       }
   
@@ -153,11 +153,11 @@
           transition: color .35s ease;
         }
         .picked {
-          color: #06c;
+          color: #00ADEA;
         }
-      }
+      }     
       .middle {
-        background: url(./../../components/helpers/assets/sprite.png) no-repeat scroll -203px -240px transparent;
+        background: url(https://i.imgur.com/YjfVsTE.png) no-repeat scroll -203px -240px transparent;
         height: 40px;
         left: 241.5px;
         position: absolute;
@@ -191,7 +191,7 @@
   
           .sliderButton {
             // background: #8b8b8b;
-            background: url(./../../components/helpers/assets/sprite.png) no-repeat scroll -205px -311px transparent;
+            background: url(https://i.imgur.com/YjfVsTE.png) no-repeat scroll -205px -311px transparent;
             height: 30px;
             width: 75px;
             position: absolute;
@@ -210,7 +210,7 @@
             }
           }
           .homeTeamPickButtonState {
-            background: url(./../../components/helpers/assets/sprite.png) no-repeat scroll -205px -350px transparent;
+            background: url(https://i.imgur.com/YjfVsTE.png) no-repeat scroll -205px -350px transparent;
             left: 6px;
             right: auto;
             cursor: pointer;
@@ -220,7 +220,7 @@
             transition: right .3s ease;
           }
           .awayTeamPickButtonState {
-            background: url(./../../components/helpers/assets/sprite.png) no-repeat scroll -205px -391px transparent;
+            background: url(https://i.imgur.com/YjfVsTE.png) no-repeat scroll -205px -391px transparent;
             right: 6px;
             left: auto;
             cursor: pointer;
@@ -243,12 +243,6 @@
       .homeArrow, .awayArrow {
         color: #CCC;
       }
-      .homeTeamPickButtonState .homeArrow {
-        color: #06c;
-      }
-      .awayTeamPickButtonState .awayArrow {
-        color: #06c;
-      }
     }
     .correctPick .cardItem .homeTeamInfoDiv .picked, .correctPick .cardItem .awayTeamInfoDiv .picked{
       color: #2F7A1E;
@@ -257,7 +251,7 @@
       color: #9E0000;
     }
     .wrongPick .cardItem .homeTeamInfoDiv .notPicked,  .wrongPick .cardItem .awayTeamInfoDiv .notPicked{
-      color: #06c;
+      color: #00ADEA;
     }
     .locked .cardItem .middle {
       .homePick, .awayPick {
@@ -279,13 +273,13 @@
     top: 7px;
   }
   .correctPick .correctPickButton {
-    background: url(./../../components/helpers/assets/sprite.png) no-repeat scroll -324px -350px transparent;
+    background: url(https://i.imgur.com/YjfVsTE.png) no-repeat scroll -324px -350px transparent;
   }
   .wrongPick .wrongPickButton {
-    background: url(./../../components/helpers/assets/sprite.png) no-repeat scroll -324px -391px transparent;
+    background: url(https://i.imgur.com/YjfVsTE.png) no-repeat scroll -324px -391px transparent;
   }
   .lockedPickButton {
-    background: url(./../../components/helpers/assets/sprite.png) no-repeat scroll -324px -311px transparent;
+    background: url(https://i.imgur.com/YjfVsTE.png) no-repeat scroll -324px -311px transparent;
     height: 30px;
     width: 90px;
     position: absolute;

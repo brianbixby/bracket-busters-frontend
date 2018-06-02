@@ -14,8 +14,8 @@
 }
 .red-button {
   color: #FFF;
-  background: #FF001F;
-  border: 2px solid #FF001F;
+  background: $color-primary;
+  border: 2px solid $color-primary;
 }
 .red-button:hover {
   color: $color-primary;

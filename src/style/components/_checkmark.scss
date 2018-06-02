@@ -11,7 +11,7 @@
   stroke-dashoffset: 166;
   stroke-width: 2;
   stroke-miterlimit: 10;
-  stroke: #FF001F;
+  stroke: $color-primary;
   fill: none;
   animation: stroke .6s $curve forwards;
 }
@@ -22,7 +22,7 @@
   stroke-width: 2;
   stroke: #fff;
   stroke-miterlimit: 10;
-  box-shadow: inset 0px 0px 0px #FF001F;
+  box-shadow: inset 0px 0px 0px $color-primary;
   animation: fill .4s ease-in-out .4s forwards, scale .3s ease-in-out .9s both;
   position: absolute;
   right: 10px;
@@ -48,7 +48,7 @@
 }
 @keyframes fill {
   100% {
-    box-shadow: inset 0px 0px 0px 30px #FF001F;
+    box-shadow: inset 0px 0px 0px 30px $color-primary;
   }
 }
 @media only screen and (max-width: 450px) {

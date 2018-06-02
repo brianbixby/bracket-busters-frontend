@@ -25,9 +25,9 @@
       height: auto;
       width: 40%;
 
-      .fa {
-        font-size: 134px;
-        color: #fff;
+      .info {
+        height: 130px;
+        margin-top: 2px;
       }
     }
     .cardImage {
@@ -64,8 +64,8 @@
       width: 104px;
       padding-top: 15px;
     }
-    .joinImgDiv .fa {
-      font-size: 104px;
+    .joinImgDiv .info {
+      height: 104px;
     }
   }
 }

@@ -11,7 +11,7 @@ class GroupForm extends React.Component {
     this.state = props.group ? this.props.group : { groupName: '', privacy: 'public', motto: '', image: '', password: '', groupNameError: null, groupNameAvailable: true, passwordError: null, error: null, focused: null, submitted: false, };
   }
 
-  componentDidUnmount() {
+  componentWillUnmount() {
     this.setState({ groupName: '', privacy: 'public', motto: '', image: '', password: '', tags: '' });
   }
 

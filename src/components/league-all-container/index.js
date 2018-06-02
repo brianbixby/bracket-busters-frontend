@@ -13,6 +13,7 @@ import { userPicksFetchRequest } from '../../actions/userPick-actions.js';
 import LeagueAllPrivateForm from '../league-all-private-form';
 import Table from '../helpers/table';
 import BannerAd from '../helpers/bannerAd';
+import Icon from '../helpers/icons';
 import { userValidation, logError} from '../../lib/util.js';
 
 class LeagueAllContainer extends React.Component {
@@ -80,6 +81,8 @@ class LeagueAllContainer extends React.Component {
   render(){
     let tableType = 'league';
     let leagues = this.props.publicLeagues.slice(0, this.state.leaguesShown);
+    let users = require('./../helpers/assets/icons/users.icon.svg');
+    let lock = require('./../helpers/assets/icons/lock.icon.svg');
     return (
       <div className='leagues-container page-outer-div'>
         <div className='grid-container'>
@@ -90,7 +93,7 @@ class LeagueAllContainer extends React.Component {
                 <div className='mainContainer hideLarge'>
                   <div className='mainContainer-header'>
                     <div className='left'>
-                      <i className="fa fa-lock"></i>
+                      <img className='lock' src={lock} />
                       <p className='mainContainerHeader'>
                         PRIVATE LEAGUES
                       </p>
@@ -110,7 +113,7 @@ class LeagueAllContainer extends React.Component {
                 <div className='mainContainer'>
                   <div className='mainContainer-header'>
                       <div className='left'>
-                        <i className="fa fa-users"></i>
+                        <img className='users' src={users} />
                         <p className='mainContainerHeader'>
                           PUBLIC LEAGUES
                         </p>
@@ -142,7 +145,8 @@ class LeagueAllContainer extends React.Component {
                 <div className='mainContainer'>
                   <div className='mainContainer-header'>
                     <div className='left'>
-                      <i className="fa fa-lock"></i>
+                      <img className='lock' src={lock} />
+                      
                       <p className='mainContainerHeader'>PRIVATE LEAGUES</p>
                     </div>
                   </div>

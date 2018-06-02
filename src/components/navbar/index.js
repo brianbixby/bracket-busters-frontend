@@ -35,7 +35,11 @@ class Navbar extends React.Component {
   };
 
   render() {
-    let profileImage = this.props.userProfile && this.props.userProfile.image ? <Avatar url={this.props.userProfile.image} /> : <span><i className='fa fa-user colorChangeHover'></i> </span>;
+    let user = require('./../helpers/assets/icons/user.icon.svg');
+    let caretDown = require('./../helpers/assets/icons/caret-down.icon.svg');
+    let github = require('./../helpers/assets/icons/github.icon.svg');
+    let linkedin = require('./../helpers/assets/icons/linkedin.icon.svg');
+    let profileImage = this.props.userProfile && this.props.userProfile.image ? <Avatar url={this.props.userProfile.image} /> : <img className='noProfileImageNav' src={user} />;
     let profileLink = this.props.userProfile && this.props.userProfile._id ? `/user/${this.props.userProfile._id}` : '';
     return (
       <header className={classToggler({
@@ -51,7 +55,7 @@ class Navbar extends React.Component {
               {renderIf(this.props.userAuth,
                 <div>
                   <div className='avatarDiv' onClick={() => this.setState({ visible: !this.state.visible })} >
-                    <i className={this.props.userProfile && this.props.userProfile.image ? 'fa fa-caret-down colorChangeHover noTop' : 'fa fa-caret-down colorChangeHover' }></i>
+                    <img className='caretDown' src={caretDown}/>
                     {profileImage}
                   </div>
                   <div className={ this.state.visible ? 'slideIn dropdownDiv' : 'slideOut dropdownDiv' }>
@@ -64,10 +68,10 @@ class Navbar extends React.Component {
               )}
             </li>
             <li className='social'>
-              <a href="https://github.com/brianbixby" rel="noopener noreferrer" target="_blank"><span><i className="fa fa-github social-icons"></i></span> </a>
+              <a href="https://github.com/brianbixby" rel="noopener noreferrer" target="_blank"><span><img className='github' src={github} /></span> </a>
             </li>
             <li className='social'>
-              <a href="https://www.linkedin.com/in/brianbixby1/" rel="noopener noreferrer" target="_blank"><span><i className="fa fa-linkedin social-icons"></i></span></a>
+              <a href="https://www.linkedin.com/in/brianbixby1/" rel="noopener noreferrer" target="_blank"><span><img className='linkedin' src={linkedin} /></span></a>
             </li>
           </ul>
         </nav>
@@ -75,6 +79,7 @@ class Navbar extends React.Component {
     );
   }
 }
+
 
 let mapStateToProps = state => ({
   userAuth: state.userAuth,

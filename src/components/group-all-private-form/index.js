@@ -9,7 +9,7 @@ class GroupAllPrivateForm extends React.Component {
     this.state = { groupName: '', password: '',   groupNameError: null, passwordError: null, error: null, focused: null, submitted: false, };
   }
 
-  componentDidUnmount() {
+  componentWillUnmount() {
     this.setState({ groupName: '', password: '' });
   }
 
