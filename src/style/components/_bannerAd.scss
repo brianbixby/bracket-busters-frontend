@@ -2,21 +2,67 @@
   margin-top: -16px;
   margin-bottom: 10px;
   height: 70px;
-  background: red;
+  background: -webkit-gradient(linear, left top, right top, from(#cc0000), to(#b90000));
+  background: -webkit-linear-gradient(left, #cc0000, #b90000);
+  background: -o-linear-gradient(left, #cc0000, #b90000);
+  background: linear-gradient(to right, #cc0000, #b90000);
+  color: #FFF;
+  cursor: pointer;
   height: 50px;
   width: 100%;
-}
+  padding: 10px;
+  text-align: center;
 
+  .company {
+    font-size: 30px;
+    font-weight: 900;
+    font-family: 'Work Sans', sans-serif;
+    margin-right: 5px;
+  }
+  .tagLine {
+    font-size: 15px;
+    font-family: 'Roboto Slab', serif;
+  }
+}
+@media (max-width: 430px) {
+  .bannerAd {
+    padding: 15px 0 0 0;
+
+    .company {
+      font-size: 20px;
+    }
+    .tagLine {
+      font-size: 12px;
+    }
+  }
+}
 @media (min-width: 768px) {
   .bannerAd {
     height: 70px;
     width: 728px;
+    padding: 15px;
+
+    .company {
+      font-size: 40px;
+    }
+    .tagLine {
+      font-size: 20px;
+    }
   }
 }
 @media (min-width: 992px) {
   .bannerAd {
     width: 100%;
     height: 90px;
+    padding: 20px;
+
+    .company {
+      font-size: 50px;
+      margin-right: 10px;
+    }
+    .tagLine {
+      font-size: 25px;
+    }
   }
 }
 @media (min-width: 1200px) {

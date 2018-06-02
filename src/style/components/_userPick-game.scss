@@ -41,7 +41,7 @@
         color: #FFFFFF;
         height: 90px;
         text-align: center;
-        text-shadow: 0 0 18px #00ADEA;
+        text-shadow: 0 0 18px #06c;
         width: 90px;
         background-color: rgba(0, 0, 0, 0.7);
         font-size: 48px;
@@ -108,7 +108,7 @@
           text-transform: uppercase;
         }
         .teamName {
-          color: #00ADEA;
+          color: #06c;
           color: #ccc;
           text-align: right;
           font-size: 25px;
@@ -120,7 +120,7 @@
           transition: color .35s ease;
         }
         .picked {
-          color: #06c;
+          color: #00ADEA;
         }
       }
   
@@ -153,7 +153,7 @@
           transition: color .35s ease;
         }
         .picked {
-          color: #06c;
+          color: #00ADEA;
         }
       }     
       .middle {
@@ -244,10 +244,10 @@
         color: #CCC;
       }
       .homeTeamPickButtonState .homeArrow {
-        color: #06c;
+        color: #00ADEA;
       }
       .awayTeamPickButtonState .awayArrow {
-        color: #06c;
+        color: #00ADEA;
       }
     }
     .correctPick .cardItem .homeTeamInfoDiv .picked, .correctPick .cardItem .awayTeamInfoDiv .picked{
@@ -257,7 +257,7 @@
       color: #9E0000;
     }
     .wrongPick .cardItem .homeTeamInfoDiv .notPicked,  .wrongPick .cardItem .awayTeamInfoDiv .notPicked{
-      color: #06c;
+      color: #00ADEA;
     }
     .locked .cardItem .middle {
       .homePick, .awayPick {
