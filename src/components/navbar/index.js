@@ -35,7 +35,9 @@ class Navbar extends React.Component {
   };
 
   render() {
-    let profileImage = this.props.userProfile && this.props.userProfile.image ? <Avatar url={this.props.userProfile.image} /> : <span><i className='fa fa-user colorChangeHover'></i> </span>;
+    let user = require('./../helpers/assets/icons/user.svg');
+    let caretDown = require('./../helpers/assets/icons/caret-down.svg');
+    let profileImage = this.props.userProfile && this.props.userProfile.image ? <Avatar url={this.props.userProfile.image} /> : <img className='noProfileImageNav' src={user} />;
     let profileLink = this.props.userProfile && this.props.userProfile._id ? `/user/${this.props.userProfile._id}` : '';
     return (
       <header className={classToggler({
@@ -51,7 +53,7 @@ class Navbar extends React.Component {
               {renderIf(this.props.userAuth,
                 <div>
                   <div className='avatarDiv' onClick={() => this.setState({ visible: !this.state.visible })} >
-                    <i className={this.props.userProfile && this.props.userProfile.image ? 'fa fa-caret-down colorChangeHover noTop' : 'fa fa-caret-down colorChangeHover' }></i>
+                    <img className='caretDown' src={caretDown}/>
                     {profileImage}
                   </div>
                   <div className={ this.state.visible ? 'slideIn dropdownDiv' : 'slideOut dropdownDiv' }>

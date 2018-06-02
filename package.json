@@ -16,6 +16,11 @@
     "start": "node server.js",
     "heroku-postbuild": "yarn build"
   },
+  "browserslist": [
+    "> 1%",
+    "last 2 versions",
+    "not ie <= 8"
+  ],
   "keywords": [],
   "author": "",
   "license": "ISC",

@@ -13,6 +13,7 @@ import { userPicksFetchRequest } from '../../actions/userPick-actions.js';
 import LeagueAllPrivateForm from '../league-all-private-form';
 import Table from '../helpers/table';
 import BannerAd from '../helpers/bannerAd';
+import Icon from '../helpers/icons';
 import { userValidation, logError} from '../../lib/util.js';
 
 class LeagueAllContainer extends React.Component {
@@ -143,6 +144,7 @@ class LeagueAllContainer extends React.Component {
                   <div className='mainContainer-header'>
                     <div className='left'>
                       <i className="fa fa-lock"></i>
+                      
                       <p className='mainContainerHeader'>PRIVATE LEAGUES</p>
                     </div>
                   </div>
