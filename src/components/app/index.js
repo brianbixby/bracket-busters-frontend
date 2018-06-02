@@ -23,7 +23,7 @@ class App extends React.Component {
           <Route exact path='/league/:leagueID' component={LeagueItemContainer} />
           <Route exact path='/groups' component={GroupAllContainer} />
           <Route path='/group/:groupID' component={GroupItemContainer} />
-          <Route exact path='/user/:profileID' component={ProfileContainer} /> 
+          <Route exact path='/user/:profileID' component={ProfileContainer} />
         </section>
       </BrowserRouter>
     );
