@@ -8,11 +8,9 @@ class GroupAllPrivateForm extends React.Component {
     super(props);
     this.state = { groupName: '', password: '',   groupNameError: null, passwordError: null, error: null, focused: null, submitted: false, };
   }
-
   componentWillUnmount() {
     this.setState({ groupName: '', password: '' });
   }
-
   validateInput = e => {
     let { name, value } = e.target;
 
@@ -33,16 +31,13 @@ class GroupAllPrivateForm extends React.Component {
       ...errors, error: !!(errors.groupNameError || errors.passwordError),
     })
   };
-
   handleFocus = e => this.setState({ focused: e.target.name});
-
   handleBlur = e => {
     let { name } = e.target;
     this.setState(state => ({
       focused: state.focused == name ? null : state.focused,
     }))
   };
-
   handleChange = e => {
     let { name, value } = e.target;
     this.validateInput({...e});
@@ -51,7 +46,6 @@ class GroupAllPrivateForm extends React.Component {
       [name]: value,
     });
   };
-
   handleSubmit = e => {
     e.preventDefault();
     if(!this.state.error) {
@@ -63,7 +57,6 @@ class GroupAllPrivateForm extends React.Component {
       passwordError: state.passwordError || state.password ? null : 'required',
     }))
   };
-
   render(){
     let { focused, submitted, groupName, passwordError, groupNameError } = this.state;
     return (
@@ -82,7 +75,6 @@ class GroupAllPrivateForm extends React.Component {
           onBlur={this.handleBlur}
         />
         <Tooltip message={groupNameError} show={focused === 'groupName' || submitted}/>
-
         <input
           className={classToggler({passwordError})}
           type='password'
@@ -94,7 +86,6 @@ class GroupAllPrivateForm extends React.Component {
           onBlur={this.handleBlur}
         />
         <Tooltip message={passwordError} show={focused === 'password' || submitted}/>
-
         <p className='textRight'><button className='red-button b-button joinPrivate' type='submit'> Join Group </button></p>
       </form>
     );

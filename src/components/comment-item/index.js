@@ -4,7 +4,6 @@ export class CommentItem extends React.Component {
   constructor(props){
     super(props);
   }
-
   render(){
     let { comment, image } = this.props;
     return ( 

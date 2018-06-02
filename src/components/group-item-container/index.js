@@ -23,7 +23,6 @@ class GroupItemContainer extends React.Component {
   componentWillMount() {
     userValidation(this.props);
   }
-
   onLeagueClick = (league, e) => {
     this.props.leagueFetchRequest(league);
     return this.props.messageBoardLeagueFetch(league._id)
@@ -33,8 +32,7 @@ class GroupItemContainer extends React.Component {
       .then(()=> this.props.userPicksFetch(league._id))
       .then( () =>  this.props.history.push(`/league/${league._id}`))
       .catch(logError);
-  }
-
+  };
   onGroupClick = (group, e) => {
     this.props.groupFetchRequest(group)
     return this.props.groupProfilesFetch(group.users)
@@ -44,8 +42,7 @@ class GroupItemContainer extends React.Component {
       })
       .then(() =>  this.props.history.push(`/group/${group._id}`))
       .catch(logError);
-  }
-
+  };
   handleBoundTopPublicLeagueClick = (league, e) => {
     if (this.props.leagues.some(leagues => leagues._id === league._id)) {
       this.onLeagueClick(league);
@@ -58,7 +55,6 @@ class GroupItemContainer extends React.Component {
       .catch(logError);
     }
   };
-
   handleBoundTopPublicGroupClick = (group, e) => {
     if (this.props.groups.some(groups => groups._id === group._id)) {
       this.onGroupClick(group);
@@ -72,7 +68,6 @@ class GroupItemContainer extends React.Component {
         .catch(logError);
     }
   };
-
   render(){
     let currentGroup = this.props.currentGroup;
     let groupProfiles = this.props.groupProfiles;

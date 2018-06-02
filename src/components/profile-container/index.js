@@ -15,16 +15,13 @@ class ProfileContainer extends React.Component {
   constructor(props){
     super(props);
   }
-
   componentWillMount() {
     userValidation(this.props);
   }
-
   handleProfileUpdate = profile => {
     return this.props.userProfileUpdate(profile)
       .catch(logError);
   };
-
   render(){
     let profileAction='update';
     let placeholderImage = require('./../helpers/assets/profilePlaceholder.jpeg');

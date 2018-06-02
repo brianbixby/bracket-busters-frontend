@@ -22,7 +22,6 @@ class LeagueContainer extends React.Component {
     super(props);
     this.state = { scoreBoardsShown: 10 };
   }
-
   componentWillMount() {
     userValidation(this.props);
     this.props.scoreBoardsFetch(this.props.currentLeague._id)
@@ -36,12 +35,10 @@ class LeagueContainer extends React.Component {
         .catch(logError);
       })
   }
-
   formatDate = date => {
     let dateArr = new Date(date).toDateString().split(' ');
     return `${dateArr[1]} ${dateArr[2]}, ${dateArr[3]}`;
   };
-
   onLeagueClick = (league, e) => {
     this.props.leagueFetchRequest(league);
     return this.props.messageBoardLeagueFetch(league._id)
@@ -52,7 +49,6 @@ class LeagueContainer extends React.Component {
       .then( () =>  this.props.history.push(`/league/${league._id}`))
       .catch(logError);
   };
-
   onGroupClick = (group, e) => {
     this.props.groupFetchRequest(group)
     return this.props.groupProfilesFetch(group.users)
@@ -63,7 +59,6 @@ class LeagueContainer extends React.Component {
       .then(() =>  this.props.history.push(`/group/${group._id}`))
       .catch(logError);
   };
-
   handleBoundTopPublicLeagueClick = (league, e) => {
     if (this.props.leagues.some(leagues => leagues._id === league._id)) {
       this.onLeagueClick(league);
@@ -76,7 +71,6 @@ class LeagueContainer extends React.Component {
       .catch(logError);
     }
   };
-
   handleBoundTopPublicGroupClick = (group, e) => {
     if (this.props.groups.some(groups => groups._id === group._id)) {
       this.onGroupClick(group);
@@ -90,31 +84,26 @@ class LeagueContainer extends React.Component {
         .catch(logError);
     }
   };
-
   handleComplete = league => {
     return this.props.leagueUpdate(league)
       .then(() => this.props.history.push(`/league/${this.props.league._id}`))
       .catch(logError);
   };
-
   handleUpdate = userPick => {
     return this.props.userPickUpdate(userPick)
       .catch(console.error);
   };
-
   handleCreate = userPick => {
     userPick.leagueID= this.props.currentLeague._id;
     return this.props.userPickCreate(userPick)
       .then(userPick => this.props.userPickFetch(userPick._id))
       .catch(console.error);
   };
-
   handleShowAll = () => {
     this.state.scoreBoardsShown === 10
       ? this.setState({ scoreBoardsShown: this.props.scoreBoards.length})
         : this.setState({ scoreBoardsShown: 10});
   };
-
   render(){
     let currentLeague = this.props.currentLeague;
     let scoreBoards = 'scores';

@@ -9,9 +9,7 @@ class CreateSection extends React.Component {
   constructor(props){
     super(props);
   }
-
   redirect = () => this.props.handleRedirect(`/${this.props.formType}s`);
-
   render() {
     let createleague = require('./../assets/createleague.jpeg');
     let creategroup = require('./../assets/creategroup.jpeg');
@@ -68,9 +66,7 @@ class CreateSection extends React.Component {
             </div>
           </div>
         </div>
-
         <JoinSection joinType={this.props.formType} handleRedirect={this.props.handleRedirect}/>
-
         {renderIf(this.props.joinedItems.length > 0,
           <div className='container'>
             <div className='sliderOuter'>

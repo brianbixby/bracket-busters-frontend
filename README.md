@@ -106,17 +106,6 @@ Information about the backend of Bracket Busters can be found here: [Bracket Bus
 
 MIT © [Brian Bixby](https://github.com/brianbixby),
 
-  - footer 
-      https://theundefeated.com/features/kareem-says-ballers-just-want-to-have-fun-on-dancing-with-the-stars/ 
-  - dev tools 
-      hyperlink and message
-  - modal 
-      set min password length to 8 charachters
-      max username to 12 charachters
-  - landing container
-      make navbar dropdown always be closed at first
-  - check code, spacing
-  - filter out dead css
   - css autoprefixer
   - fix join and create league on mobile
   - banner ad font size

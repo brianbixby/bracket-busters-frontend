@@ -6,7 +6,6 @@ class GameItem extends React.Component {
     super(props);
     this.state = {gameID: props.game._id, gameTime: props.game.dateTime, pick: '', pickName: '', awayTeam: props.game.awayTeam._id, homeTeam: props.game.homeTeam._id };
   }
-
   awayTeamPick = team => {
     if(new Date() < new Date(this.props.game.dateTime)) {
       this.setState({ pick: team, pickName: this.props.game.awayTeam.teamName });
@@ -15,7 +14,6 @@ class GameItem extends React.Component {
       }, 1500);
     }
   };
-
   homeTeamPick = team => {
     if(new Date() < new Date(this.props.game.dateTime)) {
       this.setState({ pick: team, pickName: this.props.game.homeTeam.teamName});
@@ -24,7 +22,6 @@ class GameItem extends React.Component {
       }, 1500);
     }
   };
-  
   render() {
     let { game } = this.props;
     let homeLogoStyle = {
@@ -33,7 +30,6 @@ class GameItem extends React.Component {
     let awayLogoStyle = {
       background: `url(${game.awayTeam.image}) no-repeat`,
     };
-
     return (
       <div className={classToggler({ 'cardOuter': true, 'fadeout': this.state.pickName, 'locked': new Date() > new Date(game.dateTime) })}>
         <div className={classToggler({ 'cardItem': true, 'noPick': !this.state.pick })}>

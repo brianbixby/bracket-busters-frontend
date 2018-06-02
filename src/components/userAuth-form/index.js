@@ -21,12 +21,9 @@ class UserAuthForm extends React.Component {
       submitted: false,
     };
   }
-
-
   componentWillUnmount() {
     this.setState({ username: '', email: '', password: '' });
   }
-
   validateInput = e => {
     let { name, value } = e.target;
 
@@ -70,16 +67,13 @@ class UserAuthForm extends React.Component {
       ...errors, error: !!(errors.emailError || errors.usernameError || errors.passwordError),
     })
   };
-
   handleFocus = e => this.setState({ focused: e.target.name});
-
   handleBlur = e => {
     let { name } = e.target;
     this.setState(state => ({
       focused: state.focused == name ? null : state.focused,
     }))
   };
-
   handleChange = e => {
     let { name, value } = e.target;
     this.validateInput({...e});
@@ -92,13 +86,11 @@ class UserAuthForm extends React.Component {
       this.usernameCheckAvailable(value);
     }
   };
-
   usernameCheckAvailable = username => {
     return superagent.get(`${process.env.API_URL}/api/signup/usernames/${username}`)
       .then(() => this.setState({usernameAvailable: true }))
       .catch(() => this.setState({ usernameAvailable: false }))
   };
-  
   handleSubmit = e => {
     e.preventDefault();
     if(!this.state.error) {
@@ -117,7 +109,6 @@ class UserAuthForm extends React.Component {
       passwordError: state.passwordError || state.password ? null : 'required',
     }))
   };
-
   handleError = err => {
     const usernameError = (
       err.status === 401 
@@ -129,7 +120,6 @@ class UserAuthForm extends React.Component {
       usernameError
     });
   };
-  
   render() {
     let { focused, submitted, username, emailError, passwordError, usernameError, usernameAvailable } = this.state;
     return (
@@ -137,8 +127,6 @@ class UserAuthForm extends React.Component {
         'form userauth-form': true,
         'error': this.state.error && this.state.submitted,
       })}>
-      {/* test */}
-
         {renderIf(this.props.authFormAction === 'Sign Up',
           <div>
             <h2 className='title'>sign up.</h2>
@@ -155,13 +143,11 @@ class UserAuthForm extends React.Component {
             <Tooltip message={emailError} show={focused === 'email' || submitted} />
           </div>
         )}
-
         {renderIf(this.props.authFormAction !== 'Sign Up',
           <div>
             <h2 className='title'>sign in.</h2>
           </div>
         )}
-
         <input
           className={classToggler({error: usernameError || !usernameAvailable})}
           type='text'
@@ -173,7 +159,6 @@ class UserAuthForm extends React.Component {
           onBlur={this.handleBlur}
         />
         <Tooltip message={usernameError} show={focused === 'username' || submitted}/>
-
         {renderIf(username && this.props.authFormAction=== 'Sign Up',
           <div className='username-availability-outer'>
             <p className='username-availability'>
@@ -181,8 +166,6 @@ class UserAuthForm extends React.Component {
             </p>
           </div>
         )}
-
-
         <input
           className={classToggler({passwordError})}
           type='password'
@@ -194,7 +177,6 @@ class UserAuthForm extends React.Component {
           onBlur={this.handleBlur}
         />
         <Tooltip message={passwordError} show={ focused === 'password' || submitted}/>
-
         <button className='red-button b-button float-right ml20' type='submit'> {this.props.authFormAction} </button>
       </form>
     );

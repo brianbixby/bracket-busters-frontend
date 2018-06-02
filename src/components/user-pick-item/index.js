@@ -27,15 +27,12 @@ class UserPickItem extends React.Component {
       awayTeamScore: props.userPick.gameID.awayScore,
     }
   }
-
   componentWillReceiveProps(props){
     if(props.userPick)
       this.setState(props.userPick)
   }
-
   awayTeamPickUpdate = () => this.props.onUpdate({ _id: this.state._id, pick: this.state.awayTeamID });
   homeTeamPickUpdate = () =>  this.props.onUpdate({ _id: this.state._id, pick: this.state.homeTeamID });
-  
   render() {
     let { userPick } = this.props;
     let currentPick = userPick.pick === this.state.homeTeamID ? this.state.homeTeamName : this.state.awayTeamName;
