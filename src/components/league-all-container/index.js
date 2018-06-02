@@ -13,7 +13,6 @@ import { userPicksFetchRequest } from '../../actions/userPick-actions.js';
 import LeagueAllPrivateForm from '../league-all-private-form';
 import Table from '../helpers/table';
 import BannerAd from '../helpers/bannerAd';
-import Icon from '../helpers/icons';
 import { userValidation, logError} from '../../lib/util.js';
 
 class LeagueAllContainer extends React.Component {

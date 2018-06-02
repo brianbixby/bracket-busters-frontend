@@ -1,112 +1,145 @@
-# Bracket Busters
+## Project: Bracket Busters (NBA Pick 'em App)
 
-Bracket Busters is an application allows users to compete against their friends by choosing winners for real world sports games.
+Bracket Busters is an application allows users to compete against their friends by pricking winners for real world NBA basketball games.
 
-You are able to create and manage your own leagues and will have a personal scoreboard for each participant. Each league will also have its own message board that will allow you to communicate with those in your league. Each league also has the option to be private or public.
+You are able to create and manage your own private and public leagues with a real time scoreboard for all participants. Each league has it's own message board  (aka smack talk board) that is private to only league participants.
 
-If you are not participating in a league or would like to communicate with those outside of your league, you can also create a group. Like a league, each group has its own message board so users can communicate with each other.
+If it's too late to join a league, but you want to stay up to date on the latest happenings or would just like to communicate with those outside of your league, groups are for you. Each group has its own message board so users can communicate with each other.
 
 ## Backend
 
-Information about the backend of Bracket Busters can be found here: [Bracket Busters](https://github.com/brianbixby/bracket-busters-back-end)
+Information about the backend of Bracket Busters can be found here: [Bracket Busters Backend](https://github.com/brianbixby/bracket-busters-back-end)
 
 ## Tech/Framework/Packages
 
-- node 
+- Node 
 - MongoDB
-- travis
+- Travis
 - heroku
 - github
 - npm
-- node packages:
-  - babel-core          
-  - babel-loader          
-  - babel-plugin-transform-class-properties          
-  - babel-plugin-transform-object-rest-spread          
-  - babel-preset-env          
-  - babel-preset-react          
-  - bootstrap          
-  - clean-webpack-plugin          
-  - cors          
-  - css-loader          
-  - dotenv          
-  - express          
-  - extract-text-webpack-plugin          
-  - file-loader          
-  - font-awesome          
-  - html-webpack-plugin          
-  - lodash          
-  - node-sass          
-  - npm          
-  - raw-loader          
-  - react          
-  - react-bootstrap          
-  - react-dom          
-  - react-redux          
-  - react-router          
-  - react-router-dom          
-  - redux          
-  - redux-logger          
-  - resolve-url-loader          
-  - sass-loader          
-  - style-loader          
-  - superagent          
-  - uglifyjs-webpack-plugin          
-  - url-loader          
-  - validator          
-  - webpack          
-  - webpack-dev-server          
+- Frontend Node packages:
+  - Autoprefixer          
+  - Babel-core         
+  - Babel-plugin-transform-class-properties          
+  - Babel-plugin-transform-object-rest-spread          
+  - Babel-preset-env          
+  - Babel-preset-react                        
+  - Cors                   
+  - Dotenv          
+  - Express          
+  - Node-sass         
+  - NPM          
+  - Parcel-bundler
+  - Postcss-modules          
+  - React                   
+  - React-dom          
+  - React-redux          
+  - React-router          
+  - React-router-dom          
+  - Redux                          
+  - Superagent                  
+  - Validator                  
 - devDependencies:
-  - babel-jest          
-  - enzyme          
-  - enzyme-adapter-react-16          
-  - eslint          
-  - eslint-plugin-react          
-  - jest          
-  - redux-devtools-extension          
+  - Babel-jest
+  - Babel-plugin-stylus-compiler
+  - Babel-plugin-transform-async-to-generator
+  - Babel-plugin-transform-css-import-to-string
+  - Babel-plugin-transform-es2015-modules-amd
+  - Babel-plugin-transform-es3-member-expression-literals
+  - Babel-plugin-transform-es3-property-literals
+  - Babel-plugin-transform-object-assign
+  - Babel-plugin-transform-version-inline
+  - Babel-preset-es2015
+  - Babel-preset-stage-0     
+  - Enzyme          
+  - Enzyme-adapter-react-16          
+  - Eslint          
+  - Eslint-plugin-react          
+  - Jest          
+  - Redux-devtools-extension
+  - Redux-logger
+
+- Backend Node packages:
+  - Production
+    - Bcrypt
+    - Bluebird
+    - Cors
+    - Coveralls
+    - Crypto 
+    - Debug 
+    - Del 
+    - Dotenv 
+    - Express  
+    - Http-errors 
+    - Istanbul 
+    - Jsonwebtoken 
+    - Mongoose 
+    - Morgan
+  - Development
+    - Eslint
+    - Faker
+    - Jest
+    - Superagent 
 
 ## Component Tree
 ```
 <App>
   <Navbar>
     <Avatar>
-    <Icons>
+
   <LandingContainer>
-    <CreateSection>
-    <JoinSection>
-    <Modal>
     <Intro>
       <Modal>
       <UserAuthForm>
-    <ProfileContainer>
-      <ProfileForm>
-    <LeagueAllContainer>
-      <LeagueAllPublicList>
-      <PrivateLeagueForm>
-    <LeagueItemContainer>
-      <LeagueItem>
-      <LeagueForm>
-      <Messageboard>
-      <Scoreboard>
-      <UserPickContainer>
-        <GamesList>
-        <UserPickForm>
-        <UserPickItem>
-    <GroupAllContainer>
-      <GroupAllPublicList>
-      <PrivateGroupForm>
-    <GroupItemContainer>
-      <GroupItem>
-      <GroupForm>
-      <Messageboard>
-  <Footer>
+        <ToolTip>
+    <BannerAd>
+    <CreateSection>
+      <Slider>
+      <JoinSection>
+    <Table>
+    <Modal>
+    <LeagueForm>
+      <ToolTip>
+    <GroupForm>
+      <ToolTip>
+    <ProfileForm>
+
+  <LeagueItemContainer>
+    <BannerAd>
+    <GameItem>
+    <UserPickItem>
+    <MessageBoardContainer>
+      <CommentForm>
+      <CommentItem>
+      <Modal>
+    <Table>
+
+  <GroupItemContainer>
+    <BannerAd>
+    <MessageBoardContainer>
+      <CommentForm>
+      <CommentItem>
+      <Modal>
+    <Table>
+
+  <LeagueAllContainer>
+    <BannerAd>
+    <LeagueAllPrivateForm>
+      <ToolTip>
+    <Table>
+
+  <GroupAllContainer>
+    <BannerAd>
+    <GroupAllPrivateForm>
+      <ToolTip>
+    <Table>
+
+  <ProfileContainer>
+    <BannerAd>
+    <ProfileForm>
 ```
 
 ## License
 
 MIT © [Brian Bixby](https://github.com/brianbixby),
-
-  - css autoprefixer
-  - banner ad font size
-  - populate games
-  - readme

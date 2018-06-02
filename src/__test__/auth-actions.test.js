@@ -25,32 +25,4 @@ describe('Auth actions', () => {
     let action = signOut({ token: '12345' });
     expect(action).toEqual({'type': 'SIGN_OUT'});
   });
-
-  // ASYNC
-  // test('signup req should return a token', done => {
-  //   superagent.post('http://localhost:3000/api/signup')
-  //     .send(mockUser)
-  //     .end((err, res) => {
-  //       if(err) return done(err);
-  //       expect(res.text).toBeTruthy();
-  //       expect(typeof res.text).toEqual('string');
-  //       expect(err).toEqual(null);
-  //       console.log('::::::::::::res.text:::::::', res.text);
-  //       tempUser = mockUser;
-  //       done();
-  //     });
-  // });
-
-  // test('login req should return a token', done => {
-  //   superagent.get('http://localhost:3000/api/signin')
-  //     .auth(tempUser.username, tempUser.password)
-  //     .end((err, res) => {
-  //       if(err) return done(err);
-  //       expect(res.text).toBeTruthy();
-  //       expect(typeof res.text).toEqual('string');
-  //       expect(err).toEqual(null);
-  //       console.log('::::::::::::res.text:::::::', res.text);
-  //       done();
-  //     });
-  // });
 });
