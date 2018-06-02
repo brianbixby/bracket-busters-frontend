@@ -61,7 +61,6 @@ class CommentForm extends React.Component {
             ></textarea>
           </div>
         </div>
-        
         {renderIf(content,
           <div className='commentFormButtonDiv'>
             <div className='ButtonDiv'>

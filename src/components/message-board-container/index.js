@@ -13,21 +13,17 @@ class MessageBoardContainer extends React.Component {
     super(props);
     this.state = { launchCommentModal: false };
   }
-
   componentDidMount() {
     this.props.commentsFetch(this.props.commentsArray)
       .catch(err => logError(err));
   }
-
   componentWillReceiveProps(props) {
     if (props.commentsArray) 
       this.setState({commentCount: props.commentsArray.length});
   }
-
   componentWillUnmount() {
     this.setState({ launchCommetnModal: false });
   }
-
   handleComplete = comment => {
     comment.username = this.props.userProfile.username;
     if(this.props.userProfile.image)
@@ -41,7 +37,6 @@ class MessageBoardContainer extends React.Component {
       })
       .catch(console.error);
   };
-
   render(){
     let comments = this.props.comments.slice(0, 5)
     let placeholderImage = require('./../helpers/assets/profilePlaceholder.jpeg');

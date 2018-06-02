@@ -13,11 +13,9 @@ class Navbar extends React.Component {
     super(props);
     this.state={ visible: false, intro: false};
   }
-
   componentWillMount() {
     this.tokenCheck();
   }
-
   tokenCheck = () => {
     if(!this.props.userAuth) {
       let token;
@@ -28,12 +26,10 @@ class Navbar extends React.Component {
       this.setState({ intro: false })
     }
   };
-
   handleSignOut = () => {
     this.props.signOut();
     this.props.history.push('/');
   };
-
   render() {
     let user = require('./../helpers/assets/icons/user.icon.svg');
     let caretDown = require('./../helpers/assets/icons/caret-down.icon.svg');
@@ -79,7 +75,6 @@ class Navbar extends React.Component {
     );
   }
 }
-
 
 let mapStateToProps = state => ({
   userAuth: state.userAuth,

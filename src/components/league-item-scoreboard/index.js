@@ -4,7 +4,6 @@ export class LeagueItemScoreBoard extends React.Component {
   constructor(props){
     super(props);
   }
-
   render(){
     let { scoreBoard } = this.props;
     return ( 

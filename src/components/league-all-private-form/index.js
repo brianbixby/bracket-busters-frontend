@@ -8,11 +8,9 @@ class LeagueAllPrivateForm extends React.Component {
     super(props);
     this.state = { leagueName: '', password: '',   leagueNameError: null, passwordError: null, error: null, focused: null, submitted: false, };
   }
-
   componentWillUnmount() {
     this.setState({ leagueName: '', password: '' });
   }
-
   validateInput = e => {
     let { name, value } = e.target;
 
@@ -33,16 +31,13 @@ class LeagueAllPrivateForm extends React.Component {
       ...errors, error: !!(errors.leagueNameError || errors.passwordError),
     })
   };
-
   handleFocus = e => this.setState({ focused: e.target.name});
-
   handleBlur = e => {
     let { name } = e.target;
     this.setState(state => ({
       focused: state.focused == name ? null : state.focused,
     }))
   };
-
   handleChange = e => {
     let { name, value } = e.target;
     this.validateInput({...e});
@@ -51,7 +46,6 @@ class LeagueAllPrivateForm extends React.Component {
       [name]: value,
     });
   };
-
   handleSubmit = e => {
     e.preventDefault();
     if(!this.state.error) {
@@ -63,7 +57,6 @@ class LeagueAllPrivateForm extends React.Component {
       passwordError: state.passwordError || state.password ? null : 'required',
     }))
   };
-
   render(){
     let { focused, submitted, leagueName, passwordError, leagueNameError } = this.state;
     return (
@@ -82,7 +75,6 @@ class LeagueAllPrivateForm extends React.Component {
           onBlur={this.handleBlur}
         />
         <Tooltip message={leagueNameError} show={focused === 'leagueName' || submitted}/>
-
         <input
           className={classToggler({passwordError})}
           type='password'
@@ -94,7 +86,6 @@ class LeagueAllPrivateForm extends React.Component {
           onBlur={this.handleBlur}
         />
         <Tooltip message={passwordError} show={focused === 'password' || submitted}/>
-
         <p className='textRight'><button className='red-button b-button joinPrivate' type='submit'> Join </button></p>
       </form>
     );
@@ -102,4 +93,3 @@ class LeagueAllPrivateForm extends React.Component {
 }
 
 export default LeagueAllPrivateForm;
-

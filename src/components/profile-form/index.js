@@ -13,18 +13,15 @@ class ProfileForm extends React.Component {
   componentWillReceiveProps(props) {
     if (props.userProfile) this.setState(props.userProfile);
   }
-
   handleSubmit = e => {
     e.preventDefault();
     return this.props.onComplete(this.state);
   };
-
   handleChange = e => {
     this.setState({
       [e.target.name]: e.target.value
     })
   };
-
   render() {
     let dateClass = !this.state.birthdate ? 'grayDate' : '';
     return (

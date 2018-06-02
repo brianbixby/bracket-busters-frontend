@@ -10,11 +10,9 @@ class GroupForm extends React.Component {
     super(props);
     this.state = props.group ? this.props.group : { groupName: '', privacy: 'public', motto: '', image: '', password: '', groupNameError: null, groupNameAvailable: true, passwordError: null, error: null, focused: null, submitted: false, };
   }
-
   componentWillUnmount() {
     this.setState({ groupName: '', privacy: 'public', motto: '', image: '', password: '', tags: '' });
   }
-
   validateInput = e => {
     let { name, value } = e.target;
 
@@ -46,16 +44,13 @@ class GroupForm extends React.Component {
       ...errors, error: !!(errors.groupNameError || errors.passwordError),
     })
   };
-
   handleFocus = e => this.setState({ focused: e.target.name});
-
   handleBlur = e => {
     let { name } = e.target;
     this.setState(state => ({
       focused: state.focused == name ? null : state.focused,
     }))
   };
-
   handleChange = e => {
     let { name, value } = e.target;
     this.validateInput({...e});
@@ -68,13 +63,11 @@ class GroupForm extends React.Component {
       this.groupNameCheckAvailable(value);
     }
   };
-
   groupNameCheckAvailable = groupName => {
     return superagent.get(`${process.env.API_URL}/api/groupNames/${groupName}`)
       .then(() => this.setState({groupNameAvailable: true }))
       .catch(() => this.setState({ groupNameAvailable: false }))
   };
-
   handleSubmit = e => {
     e.preventDefault();
     if(!this.state.error) {
@@ -93,7 +86,6 @@ class GroupForm extends React.Component {
       passwordError: state.passwordError || state.password ? null : 'required',
     }))
   };
-
   render(){
     let { focused, submitted, groupName, passwordError, groupNameError, groupNameAvailable } = this.state;
     let buttonText = this.props.group ? 'update' : 'create';
@@ -102,15 +94,12 @@ class GroupForm extends React.Component {
         'form group-form': true,
         'error': this.state.error && this.state.submitted,
       })}>
-
         {renderIf(this.props.group,
             <h2>update.</h2>
         )}
-
         {renderIf(!this.props.group,
             <h2>create a group.</h2>
         )}
-
         <input
           className={classToggler({error: groupNameError || !groupNameAvailable})}
           type='text'
@@ -122,7 +111,6 @@ class GroupForm extends React.Component {
           onBlur={this.handleBlur}
         />
         <Tooltip message={groupNameError} show={focused === 'groupName' || submitted}/>
-
         {renderIf(groupName,
           <div className='groupName-availability-outer'>
             <p className='groupName-availability'>
@@ -130,7 +118,6 @@ class GroupForm extends React.Component {
             </p>
           </div>
         )}
-
         <input
           type='text'
           name='image'
@@ -140,7 +127,6 @@ class GroupForm extends React.Component {
           onFocus={this.handleFocus}
           onBlur={this.handleBlur}
         />
-
         <input
           type='text'
           name='motto'
@@ -150,7 +136,6 @@ class GroupForm extends React.Component {
           onFocus={this.handleFocus}
           onBlur={this.handleBlur}
         />
-
         <div className='radio-div'>
           <p className='labelDesc'>Privacy:</p>
           <div>
@@ -165,9 +150,7 @@ class GroupForm extends React.Component {
             />
             <label>public</label>
             <span>Public groups are open for anyone to join.</span>
-
           </div>
-
           <div className="radioPri">
             <input 
               type="radio"
@@ -177,12 +160,10 @@ class GroupForm extends React.Component {
               onFocus={this.handleFocus}
               onBlur={this.handleBlur}
             />
-
             <label>private</label>
             <span>Set up within your office, or a group of family or friends.</span>
           </div>
         </div>
-
         {renderIf(this.state.privacy === 'private',
           <div>
             <input
@@ -198,8 +179,7 @@ class GroupForm extends React.Component {
             <Tooltip message={passwordError} show={ focused === 'password' || submitted}/>
           </div>
         )}
-        
-          <p className='textRight'><button className='red-button b-button' type='submit'> {buttonText} </button></p>
+        <p className='textRight'><button className='red-button b-button' type='submit'> {buttonText} </button></p>
       </form>
     );
   }

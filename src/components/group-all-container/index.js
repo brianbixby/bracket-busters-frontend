@@ -19,12 +19,10 @@ class GroupAllContainer extends React.Component {
     super(props);
     this.state = { groupsShown: 10 };
   }
-
   componentWillMount() {
     userValidation(this.props);
     this.props.allPublicGroupsFetch();
   }
-
   onGroupClick = (group, e) => {
     this.props.groupFetchRequest(group)
     return this.props.groupProfilesFetch(group.users)
@@ -34,8 +32,7 @@ class GroupAllContainer extends React.Component {
       })
       .then(() =>  this.props.history.push(`/group/${group._id}`))
       .catch(logError);
-  }
-
+  };
   handleGroupJoin = (group, e) => {
     if (this.props.groups.some(groups => groups._id === group._id)) {
       this.onGroupClick(group);
@@ -49,7 +46,6 @@ class GroupAllContainer extends React.Component {
         .catch(logError);
     }
   };
-
   handlePrivateGroupJoin = credentials => {
     let group;
     if (this.props.groups.some(groups => {
@@ -74,13 +70,11 @@ class GroupAllContainer extends React.Component {
       .catch(logError);
     }
   };
-
   handleShowAll = () => {
     this.state.groupsShown === 10
       ? this.setState({ groupsShown: this.props.publicGroups.length})
         : this.setState({ groupsShown: 10});
   };
-
   render() {
     let tableType = 'group';
     let groups = this.props.publicGroups.slice(0, this.state.groupsShown);

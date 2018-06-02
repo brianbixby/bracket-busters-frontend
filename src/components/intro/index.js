@@ -17,7 +17,6 @@ class Intro extends React.Component {
     super(props);
     this.state = { authFormAction: 'Sign Up', formDisplay: false, };
   }
-
   handleSignin = (user, errCB) => {
     return this.props.signIn(user)
       .then(() => {
@@ -66,7 +65,6 @@ class Intro extends React.Component {
         errCB(err);
       });
   };
-
   handleSignup = (user, errCB) => {
     return this.props.signUp(user)
       .then(() => {
@@ -115,13 +113,11 @@ class Intro extends React.Component {
         errCB(err);
     });
   };
-
   render() {
     let background = require('./../helpers/assets/introBackground.png');
     let lebron = require('./../helpers/assets/introLebron.png');
     let curry = require('./../helpers/assets/introCurry.png');
     let handleComplete = this.state.authFormAction === 'Sign Up' ? this.handleSignup : this.handleSignin;
-    
     return (
       <div className="intro">
         <section id="introView" className="view introView">

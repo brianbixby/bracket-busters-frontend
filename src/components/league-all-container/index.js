@@ -21,12 +21,10 @@ class LeagueAllContainer extends React.Component {
     super(props);
     this.state = { leaguesShown: 10 };
   }
-
   componentWillMount() {
     userValidation(this.props);
     this.props.allPublicLeaguesFetch();
   };
-
   onLeagueClick = (league, e) => {
     this.props.leagueFetchRequest(league);
     return this.props.messageBoardLeagueFetch(league._id)
@@ -36,8 +34,7 @@ class LeagueAllContainer extends React.Component {
       .then(()=> this.props.userPicksFetch(league._id))
       .then( () =>  this.props.history.push(`/league/${league._id}`))
       .catch(logError);
-  }
-
+  };
   handleLeagueJoin = (league, e) => {
     if (this.props.leagues.some(leagues => leagues._id === league._id)) {
       this.onLeagueClick(league);
@@ -50,7 +47,6 @@ class LeagueAllContainer extends React.Component {
       .catch(logError);
     }
   };
-
   handlePrivateLeagueJoin = credentials => {
     let league;
     if (this.props.leagues.some(leagues => {
@@ -71,13 +67,11 @@ class LeagueAllContainer extends React.Component {
         .catch(logError);
       }
   };
-
   handleShowAll = () => {
     this.state.leaguesShown === 10
       ? this.setState({ leaguesShown: this.props.publicLeagues.length})
         : this.setState({ leaguesShown: 10});
   };
-
   render(){
     let tableType = 'league';
     let leagues = this.props.publicLeagues.slice(0, this.state.leaguesShown);

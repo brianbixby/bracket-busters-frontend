@@ -10,11 +10,9 @@ class LeagueForm extends React.Component {
     super(props);
     this.state = props.league ? this.props.league : { leagueName: '', privacy: 'public', password: '', image: '', motto: '',   leagueNameError: null, poolSizeError: null, leagueNameAvailable: true, passwordError: null, error: null, focused: null, submitted: false, };
   }
-
   componentWillUnmount() {
     this.setState({ leagueName: '', privacy: 'public', password: '' });
   }
-
   validateInput = e => {
     let { name, value } = e.target;
 
@@ -48,16 +46,13 @@ class LeagueForm extends React.Component {
       ...errors, error: !!(errors.leagueNameError || errors.passwordError),
     })
   };
-
   handleFocus = e => this.setState({ focused: e.target.name});
-
   handleBlur = e => {
     let { name } = e.target;
     this.setState(state => ({
       focused: state.focused == name ? null : state.focused,
     }))
   };
-
   handleChange = e => {
     let { name, value } = e.target;
     this.validateInput({...e});
@@ -70,13 +65,11 @@ class LeagueForm extends React.Component {
       this.leagueNameCheckAvailable(value);
     }
   };
-
   leagueNameCheckAvailable = leagueName => {
     return superagent.get(`${process.env.API_URL}/api/leagueNames/${leagueName}`)
       .then(() => this.setState({leagueNameAvailable: true }))
       .catch(() => this.setState({ leagueNameAvailable: false }))
   };
-
   handleSubmit = e => {
     e.preventDefault();
     if(!this.state.error) {
@@ -95,7 +88,6 @@ class LeagueForm extends React.Component {
       passwordError: state.passwordError || state.password ? null : 'required',
     }))
   };
-
   render(){
     let { focused, submitted, leagueName, emailError, passwordError, leagueNameError, leagueNameAvailable } = this.state;
     let buttonText = this.props.league ? 'update' : 'create';
@@ -104,15 +96,12 @@ class LeagueForm extends React.Component {
         'form league-form': true,
         'error': this.state.error && this.state.submitted,
       })}>
-
         {renderIf(this.props.league,
             <h2>update.</h2>
         )}
-
         {renderIf(!this.props.league,
             <h2>create a league.</h2>
         )}
-
         <input
           className={classToggler({error: leagueNameError || !leagueNameAvailable})}
           type='text'
@@ -124,7 +113,6 @@ class LeagueForm extends React.Component {
           onBlur={this.handleBlur}
         />
         <Tooltip message={leagueNameError} show={focused === 'leagueName' || submitted}/>
-
         {renderIf(leagueName,
           <div className='leagueName-availability-outer'>
             <p className='leagueName-availability'>
@@ -132,7 +120,6 @@ class LeagueForm extends React.Component {
             </p>
           </div>
         )}
-
         <input
           type='text'
           name='image'
@@ -142,7 +129,6 @@ class LeagueForm extends React.Component {
           onFocus={this.handleFocus}
           onBlur={this.handleBlur}
         />
-
         <input
           type='text'
           name='motto'
@@ -152,7 +138,6 @@ class LeagueForm extends React.Component {
           onFocus={this.handleFocus}
           onBlur={this.handleBlur}
         />
-
         <div className='radio-div'>
           <p className='labelDesc'>Privacy:</p>
           <div>
@@ -165,12 +150,9 @@ class LeagueForm extends React.Component {
               onBlur={this.handleBlur}
               checked={this.state.privacy === 'public' ? true : false}
             />
-
             <label>public</label>
             <span>Public leagues are open for anyone to join.</span>
-
           </div>
-
           <div className="radioPri">
             <input 
               type="radio"
@@ -181,13 +163,10 @@ class LeagueForm extends React.Component {
               onBlur={this.handleBlur}
               checked={this.state.privacy === 'private' ? true : false}
             />
-
             <label>private</label>
             <span>Set up within your office, or a group of family or friends.</span>
-
           </div>
         </div>
-
         {renderIf(this.state.privacy === 'private',
           <div>
             <input

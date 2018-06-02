@@ -5,19 +5,14 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-
   // font
   font-family: $font-primary;
-	// font-size:  @include responsive-font(2.5vw, 12px, 20px);
-	// font-size:  @include responsive-font(3.8vw, 20px, 32px);
   font-weight: normal;
   font-style: normal;
   text-decoration: none;
   white-space: normal;
-
   // color
   background: none;
-
   // other
   list-style: none;
 }

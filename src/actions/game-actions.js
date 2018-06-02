@@ -1,6 +1,5 @@
 import superagent from 'superagent';
 
-
 export const gamesFetch = games => ({
   type: 'GAMES_FETCH',
   payload: games,
