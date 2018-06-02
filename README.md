@@ -107,7 +107,6 @@ Information about the backend of Bracket Busters can be found here: [Bracket Bus
 MIT © [Brian Bixby](https://github.com/brianbixby),
 
   - css autoprefixer
-  - fix join and create league on mobile
   - banner ad font size
   - populate games
   - readme
