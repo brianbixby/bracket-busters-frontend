@@ -5,7 +5,7 @@ class BannerAd extends React.Component {
     return (
       <p className='bannerAd' onClick={()=> window.open('http://www.builtbybixby.com', '_blank')}>
         <span className='company'>BUILT BY BIXBY</span>
-        <span className='tagLine'>BECAUSE WEBSITES</span>
+        <span className='tagLine'>YOUR WEBSITE MATTERS.</span>
       </p>
     );
   }

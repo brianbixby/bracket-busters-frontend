@@ -2,7 +2,6 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 
-import Icon from '../helpers/icons';
 import Avatar from '../helpers/avatar';
 import { signOut } from '../../actions/userAuth-actions.js';
 import { classToggler, renderIf, readCookie } from '../../lib/util.js';
