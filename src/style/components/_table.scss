@@ -44,6 +44,8 @@
   box-sizing: border-box;
   font-size: 12px;
   font-weight: 400;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 .cursor {
   cursor: pointer;

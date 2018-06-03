@@ -1,5 +1,5 @@
 import React from 'react';
-import { classToggler, renderIf } from './../../lib/util.js';
+import { classToggler, renderIf, formatDate } from './../../lib/util.js';
 
 class UserPickItem extends React.Component {
   constructor(props){
@@ -76,7 +76,7 @@ class UserPickItem extends React.Component {
                 <div className='wrongPickButton'></div>
               </div>
             </div>
-            <p className='gameTime'>{new Date(userPick.gameTime).toDateString()}</p>
+            <p className='gameTime'>{formatDate(userPick.gameTime)}</p>
             <div className='awayTeamInfoDiv'>
               <div className='awayTeamInfoWrapper'>
                 <p className='cityRec'>{this.state.awayTeamCity}({this.state.awayTeamWins}-{this.state.awayTeamLosses})</p>
