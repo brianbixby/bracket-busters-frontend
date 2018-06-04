@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 
 import Avatar from '../helpers/avatar';
 import { signOut } from '../../actions/userAuth-actions.js';
-import { classToggler, renderIf, readCookie } from '../../lib/util.js';
+import { classToggler, renderIf } from '../../lib/util.js';
 
 
 class Navbar extends React.Component {
@@ -17,8 +17,7 @@ class Navbar extends React.Component {
   }
   tokenCheck = () => {
     if(!this.props.userAuth) {
-      let token;
-      process.env.NODE_ENV === 'production' ? token = readCookie('Bracket-Busters-Token') : token = localStorage.token;  
+      let token = localStorage.token;  
       if(!token) this.setState({ introNav: true })
     }
     else {
