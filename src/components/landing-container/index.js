@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { Link } from 'react-router-dom';
+import { browserHistory } from 'react-router'
 
 import { tokenSignInRequest } from '../../actions/userAuth-actions.js';
 import { userProfileFetchRequest, userProfileUpdateRequest, groupProfilesFetchRequest } from '../../actions/userProfile-actions.js';

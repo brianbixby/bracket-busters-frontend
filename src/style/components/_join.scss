@@ -65,9 +65,11 @@
   display: block;
   white-space: nowrap;
 }
-.landing-page .joinTextTitle {
+ .landing-page .joinTextDiv .joinTextTitle {
   white-space: normal;
   max-height: 44px;
+  display: block;
+  display: -webkit-box;
 }
 .joinTextSubtitle {
   -webkit-line-clamp: 2;
@@ -116,8 +118,8 @@
     margin-left: -50%;
   }
 }
-@media only screen and (min-width: 570px) {
-  .joinTextSubtitle {
+@media only screen and (min-width: 585px) {
+  .joinTextDiv .joinTextSubtitle {
     -webkit-line-clamp: unset;
     max-height: none;
   }

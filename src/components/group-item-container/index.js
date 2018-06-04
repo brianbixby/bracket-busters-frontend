@@ -22,6 +22,7 @@ class GroupItemContainer extends React.Component {
 
   componentWillMount() {
     userValidation(this.props);
+    window.scrollTo(0, 0);
   }
   onLeagueClick = (league, e) => {
     this.props.leagueFetchRequest(league);
@@ -80,7 +81,7 @@ class GroupItemContainer extends React.Component {
     let users = require('./../helpers/assets/icons/users.icon.svg');
     let info = require('./../helpers/assets/icons/info.icon.svg');
     return (
-      <div className='groupItem-page page-outer-div'>
+      <div className='groupItem-page page-outer-div' id='top'>
         <div className='grid-container'>
           <BannerAd/>
           <div className='row'>
