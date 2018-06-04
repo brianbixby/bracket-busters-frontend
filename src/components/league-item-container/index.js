@@ -34,6 +34,7 @@ class LeagueContainer extends React.Component {
         })
         .catch(logError);
       })
+      window.scrollTo(0, 0);
   }
   formatDate = date => {
     let dateArr = new Date(date).toDateString().split(' ');
@@ -117,7 +118,7 @@ class LeagueContainer extends React.Component {
     let users = require('./../helpers/assets/icons/users.icon.svg');
     let info = require('./../helpers/assets/icons/info.icon.svg');
     return (
-      <div className='leagueItem-page page-outer-div'>
+      <div className='leagueItem-page page-outer-div' id='top'>
         <div className='grid-container'>
           <BannerAd/>
           <div className='row'>

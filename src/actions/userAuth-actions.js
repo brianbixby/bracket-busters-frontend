@@ -7,7 +7,7 @@ export const signIn = token => ({
 });
 
 export const signOut = () => {
-  process.env.NODE_ENV === 'production' ? util.deleteCookie('Bracket-Busters-Token') : delete localStorage.token;
+  delete localStorage.token;
   return { type: 'SIGN_OUT' };
 };
 
@@ -17,16 +17,7 @@ export const signUpRequest = user => dispatch => {
     .send(user)
     .then( res => {
       dispatch(signIn(res.text));
-      if(process.env.NODE_ENV === 'production') {
-        try {
-          util.createCookie('Bracket-Busters-Token', res.text.token, 30);
-        } catch (err) {
-          console.error(err);
-        }
-      }
-      else {
-        localStorage.token = res.text;
-      }
+      localStorage.token = res.text;
       return res;
     });
 };
@@ -37,16 +28,7 @@ export const signInRequest = user => dispatch => {
     .auth(user.username, user.password)
     .then( res => {
       dispatch(signIn(res.text));
-      if(process.env.NODE_ENV === 'production') {
-        try {
-          util.createCookie('Bracket-Busters-Token', res.text.token, 30);
-        } catch (err) {
-          console.error(err);
-        }
-      }
-      else {
-        localStorage.token = res.text;
-      }
+      localStorage.token = res.text;
       return res;
     });
 };
@@ -56,16 +38,7 @@ export const tokenSignInRequest = token => dispatch => {
     .set('Authorization', `Bearer ${token}`)
     .then( res => {
       dispatch(signIn(res.text));
-      if(process.env.NODE_ENV === 'production') {
-        try {
-          util.createCookie('Bracket-Busters-Token', res.text.token, 30);
-        } catch (err) {
-          console.error(err);
-        }
-      }
-      else {
-        localStorage.token = res.text;
-      }
+      localStorage.token = res.text;
       return res;
     });
 };
