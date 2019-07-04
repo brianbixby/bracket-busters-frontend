@@ -1,5 +1,4 @@
 import superagent from 'superagent';
-import * as util from '../lib/util.js';
 
 export const signIn = token => ({
   type: 'SIGN_IN',

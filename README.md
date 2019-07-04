@@ -62,7 +62,7 @@ Information about the backend of Bracket Busters can be found here: [Bracket Bus
 
 - Backend Node packages:
   - Production
-    - Bcrypt
+    - Bcryptjs
     - Bluebird
     - Cors
     - Coveralls

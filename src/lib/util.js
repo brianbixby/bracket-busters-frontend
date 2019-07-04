@@ -22,7 +22,7 @@ export const userValidation = props => {
     
     let token = localStorage.token;  
     if(token) {
-      props.tokenSignIn(token)
+      return props.tokenSignIn(token)
         .then(() => {
           return props.sportingEventsFetch()
             .catch(() => logError);
@@ -61,18 +61,25 @@ export const userValidation = props => {
         .then(returnObj => {
           if(!returnObj.groups) 
             returnObj.groups = [];
-          props.topPublicGroupsFetch(returnObj.groups)
+          return props.topPublicGroupsFetch(returnObj.groups)
             .catch(() => logError);
         })
         .catch(() => {
           logError;
           if(props.location.pathname !== '/')
             return history.replace('/');
+          return;
         });
     } else {
-      if(props.location.pathname !== '/')
-        return history.replace('/');
+      return props.sportingEventsFetch()
+        .then((event) => {
+          if(props.location.pathname !== '/')
+            history.replace('/');
+          return event;
+        })
+        .catch(() => logError);
     }
   }
-  return;
+  return props.sportingEventsFetch()
+    .catch(() => logError);
 };

@@ -56,8 +56,8 @@ export const groupFetchRequest = group => (dispatch, getState) => {
   return superagent.get(`${process.env.API_URL}/api/group/${group._id}`)
     .set('Authorization', `Bearer ${userAuth}`)
     .then(res => {
-      dispatch(groupFetch(res.body.data));
-      return res;
+      dispatch(groupFetch(res.body));
+      return res.body;
     });
 };
 

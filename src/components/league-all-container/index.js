@@ -1,5 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import { withRouter } from "react-router-dom";
 
 import { tokenSignInRequest } from '../../actions/userAuth-actions.js';
 import { userProfileFetchRequest } from '../../actions/userProfile-actions.js';
@@ -21,9 +22,14 @@ class LeagueAllContainer extends React.Component {
     this.state = { leaguesShown: 10 };
   }
   componentWillMount() {
-    userValidation(this.props);
-    this.props.allPublicLeaguesFetch();
+    return userValidation(this.props)
+      .then(() => {
+        return this.props.allPublicLeaguesFetch()
+          .catch(() => logError);
+      })
+      .catch(() => logError);
   };
+
   onLeagueClick = (league, e) => {
     this.props.leagueFetchRequest(league);
     return this.props.messageBoardLeagueFetch(league._id)
@@ -193,4 +199,4 @@ let mapDispatchToProps = dispatch => ({
   userPicksFetch: leagueID => dispatch(userPicksFetchRequest(leagueID)),
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(LeagueAllContainer);
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(LeagueAllContainer));

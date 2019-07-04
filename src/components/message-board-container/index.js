@@ -14,8 +14,10 @@ class MessageBoardContainer extends React.Component {
     this.state = { launchCommentModal: false };
   }
   componentDidMount() {
-    this.props.commentsFetch(this.props.commentsArray)
-      .catch(err => logError(err));
+    if (this.props.commentsArray) {
+      this.props.commentsFetch(this.props.commentsArray)
+        .catch(err => logError(err));
+    }
   }
   componentWillReceiveProps(props) {
     if (props.commentsArray) 

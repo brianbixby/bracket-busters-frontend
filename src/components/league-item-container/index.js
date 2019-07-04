@@ -1,5 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import { withRouter } from "react-router-dom";
+
 import { tokenSignInRequest } from '../../actions/userAuth-actions.js';
 import { userProfileFetchRequest, groupProfilesFetchRequest } from '../../actions/userProfile-actions.js';
 import { leaguesFetchRequest, leagueFetchRequest, leagueDeleteRequest, leagueUpdateRequest, topPublicLeaguesFetchRequest, leagueFetch, leagueJoinRequest } from '../../actions/league-actions.js';
@@ -23,18 +25,24 @@ class LeagueContainer extends React.Component {
     this.state = { scoreBoardsShown: 10 };
   }
   componentWillMount() {
-    userValidation(this.props);
-    this.props.scoreBoardsFetch(this.props.currentLeague._id)
+    return userValidation(this.props)
       .then(() => {
-        this.props.userPicksFetch(this.props.currentLeague._id)
-        .then(picks => {
-          let gameIDArr = [];
-          gameIDArr.push(picks.map(userPick => userPick.gameID._id));
-          return this.props.gamesFetch(this.props.currentLeague.sportingEventID, gameIDArr)
-        })
-        .catch(logError);
+        if (Object.entries(this.props.currentLeague).length === 0) {
+          return this.props.leagueFetch(window.location.href.split('/league/')[1])
+            .then(league => this.props.messageBoardLeagueFetch(league._id))
+            .then(mb => this.props.commentsFetch(mb.comments))
+        }
+        return ;
       })
-      window.scrollTo(0, 0);
+      .then(() => this.props.scoreBoardsFetch(window.location.href.split('/league/')[1]))
+      .then(() => this.props.userPicksFetch(window.location.href.split('/league/')[1]))
+      .then(picks => {
+        let gameIDArr = [];
+        gameIDArr.push(picks.map(userPick => userPick.gameID._id));
+        return this.props.gamesFetch(this.props.currentLeague.sportingEventID, gameIDArr)
+      })
+      .then(() => window.scrollTo(0, 0))
+      .catch(() => logError);
   }
   formatDate = date => {
     let dateArr = new Date(date).toDateString().split(' ');
@@ -319,4 +327,4 @@ let mapDispatchToProps = dispatch => ({
   groupFetchRequest: group => dispatch(groupFetch(group)),
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(LeagueContainer);
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(LeagueContainer));

@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { browserHistory } from 'react-router'
+import { withRouter } from "react-router-dom";
 
 import { tokenSignInRequest } from '../../actions/userAuth-actions.js';
 import { userProfileFetchRequest, userProfileUpdateRequest, groupProfilesFetchRequest } from '../../actions/userProfile-actions.js';
@@ -28,7 +28,7 @@ class LandingContainer extends React.Component {
   }
   componentWillMount() {
     userValidation(this.props);
-    console.log('If you have any questions about my code please email me @BrianBixby0@gmail.com and visit www.BuiltByBixby.com to see my latest projects.');
+    console.log('If you have any questions about my code please email me @BrianBixby0@gmail.com and visit https://www.builtbybixby.us to see my latest projects.');
   }
   componentDidMount() {
     this.props.sportingEventsFetch()
@@ -274,4 +274,4 @@ let mapDispatchToProps = dispatch => ({
   groupProfilesFetch : profileIDs => dispatch(groupProfilesFetchRequest(profileIDs)),
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(LandingContainer);
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(LandingContainer));

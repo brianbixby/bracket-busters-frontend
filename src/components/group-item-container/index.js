@@ -1,5 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import { withRouter } from "react-router-dom";
 
 import { tokenSignInRequest } from '../../actions/userAuth-actions.js';
 import { userProfileFetchRequest, groupProfilesFetchRequest } from '../../actions/userProfile-actions.js';
@@ -21,9 +22,36 @@ class GroupItemContainer extends React.Component {
   }
 
   componentWillMount() {
-    userValidation(this.props);
-    window.scrollTo(0, 0);
+    return userValidation(this.props)
+      .then(() => {
+        if (Object.entries(this.props.currentGroup).length === 0) {
+          let myGroup = {_id: window.location.href.split('/group/')[1]};
+          return this.props.groupFetch(myGroup)
+            .then(group => {
+              return this.props.groupProfilesFetch(group.users)
+                .then(() => group)
+            })
+            .then(group => this.props.messageBoardGroupFetch(group._id))
+            .then(mb => this.props.commentsFetch(mb.comments))
+        }
+        return ;
+      })
+      .then(() => window.scrollTo(0, 0))
+      .catch(() => logError);
   }
+
+
+  // onGroupClick = (group, e) => {
+  //   this.props.groupFetchRequest(group)
+  //   return this.props.groupProfilesFetch(group.users)
+  //     .then(() => this.props.messageBoardGroupFetch(group._id))
+  //     .then(messageBoard => {
+  //       this.props.commentsFetch(messageBoard.comments);
+  //     })
+  //     .then(() =>  this.props.history.push(`/group/${group._id}`))
+  //     .catch(logError);
+  // };
+
   onLeagueClick = (league, e) => {
     this.props.leagueFetchRequest(league);
     return this.props.messageBoardLeagueFetch(league._id)
@@ -279,4 +307,4 @@ let mapDispatchToProps = dispatch => ({
   userPicksFetch: leagueID => dispatch(userPicksFetchRequest(leagueID)),
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(GroupItemContainer);
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(GroupItemContainer));

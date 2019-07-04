@@ -1,5 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import { withRouter } from "react-router-dom";
 
 import ProfileForm from '../profile-form';
 import BannerAd from '../helpers/bannerAd';
@@ -9,7 +10,7 @@ import { leaguesFetchRequest, topPublicLeaguesFetchRequest } from '../../actions
 import { groupsFetchRequest, topPublicGroupsFetchRequest } from '../../actions/group-actions.js';
 import { topScoresFetchRequest } from '../../actions/scoreboard-actions.js';
 import { sportingEventsFetchRequest } from '../../actions/sportingEvent-actions.js';
-import { userValidation, logError, formatDate } from './../../lib/util.js';
+import { userValidation, logError, formatDate, renderIf } from './../../lib/util.js';
 
 class ProfileContainer extends React.Component {
   constructor(props){
@@ -26,6 +27,9 @@ class ProfileContainer extends React.Component {
     let profileAction='update';
     let placeholderImage = require('./../helpers/assets/profilePlaceholder.jpeg');
     let profileImage = this.props.userProfile && this.props.userProfile.image ? this.props.userProfile.image : placeholderImage;
+    let { userProfile } = this.props;
+    let username = userProfile ? userProfile.username : null;
+    let createdOn = userProfile ? userProfile.createdOn : null;
     return (
       <div className='profile-container page-outer-div'>
         <div className='grid-container'>
@@ -34,21 +38,25 @@ class ProfileContainer extends React.Component {
             <div className='row'>
               <div className='col-md-8'>
                 <div className='createOuter'>
-                  <div className='page-form'>
-                    <ProfileForm 
-                      userProfile={this.props.userProfile} 
-                      onComplete={this.handleProfileUpdate}
-                      profileAction={profileAction}
-                    />
-                  </div>
+                  {renderIf(userProfile,
+                    <div className='page-form'>
+                      <ProfileForm 
+                        userProfile={userProfile} 
+                        onComplete={this.handleProfileUpdate}
+                        profileAction={profileAction}
+                      />
+                    </div>
+                  )}
                 </div>
               </div>
               <div className='col-md-4 hideMedium'>
                 <div className='mainContainer'>
                   <div className='mainContainer-header'>
-                    <div className='left'>
-                      <p className='mainContainerHeader'>{this.props.userProfile.username}</p>
-                    </div>
+                    {renderIf(userProfile,
+                      <div className='left'>
+                        <p className='mainContainerHeader'>{username}</p>
+                      </div>
+                    )}
                   </div>
                   <div className='mainContainerSection'>
                     <div className='mainContainerSectionWrapper'>
@@ -57,9 +65,11 @@ class ProfileContainer extends React.Component {
                           <div className='profile-image-div'>
                             <img className='profile-image' src={profileImage} />
                           </div>
-                          <div className='userProfileData'>
-                            <p>Member Since: {formatDate(this.props.userProfile.createdOn)}</p>
-                          </div>
+                            {renderIf(userProfile,
+                              <div className='userProfileData'>
+                                <p>Member Since: {formatDate(createdOn)}</p>
+                              </div>
+                            )}
                         </div>
                       </div>
                     </div>
@@ -97,4 +107,4 @@ let mapDispatchToProps = (dispatch) => ({
   userProfileUpdate: profile => dispatch(userProfileUpdateRequest(profile)),
 })
 
-export default connect(mapStateToProps, mapDispatchToProps)(ProfileContainer);
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(ProfileContainer));

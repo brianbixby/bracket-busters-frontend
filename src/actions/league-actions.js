@@ -46,7 +46,7 @@ export const leagueFetchRequest = leagueID => (dispatch, getState) => {
     .set('Authorization', `Bearer ${userAuth}`)
     .then(res => {
       dispatch(leagueFetch(res.body));
-      return res;
+      return res.body;
     });
 };
 
