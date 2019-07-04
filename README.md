@@ -15,9 +15,9 @@ Information about the backend of Bracket Busters can be found here: [Bracket Bus
 - Node 
 - MongoDB
 - Travis
-- heroku
-- github
-- npm
+- Heroku
+- Github
+- NPM/Yarn
 - Frontend Node packages:
   - Autoprefixer          
   - Babel-core         
@@ -42,6 +42,7 @@ Information about the backend of Bracket Busters can be found here: [Bracket Bus
   - Validator                  
 - devDependencies:
   - Babel-jest
+  - babel-plugin-static-fs
   - Babel-plugin-stylus-compiler
   - Babel-plugin-transform-async-to-generator
   - Babel-plugin-transform-css-import-to-string
@@ -54,8 +55,7 @@ Information about the backend of Bracket Busters can be found here: [Bracket Bus
   - Babel-preset-stage-0     
   - Enzyme          
   - Enzyme-adapter-react-16          
-  - Eslint          
-  - Eslint-plugin-react          
+  - Eslint                  
   - Jest          
   - Redux-devtools-extension
   - Redux-logger
@@ -66,16 +66,15 @@ Information about the backend of Bracket Busters can be found here: [Bracket Bus
     - Bluebird
     - Cors
     - Coveralls
-    - Crypto 
     - Debug 
     - Del 
     - Dotenv 
     - Express  
     - Http-errors 
-    - Istanbul 
     - Jsonwebtoken 
     - Mongoose 
     - Morgan
+    - Nyc
   - Development
     - Eslint
     - Faker
