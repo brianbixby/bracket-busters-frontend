@@ -7,8 +7,8 @@ class JoinSection extends React.Component {
   }
   redirect = () => this.props.handleRedirect(`/${this.props.joinType}s`);
   render() {
-    let steph = require('./../assets/steph.jpeg');
-    let russell = require('./../assets/russell.png');
+    let steph = require('./../assets/steph.webp');
+    let russell = require('./../assets/russell.webp');
     return (
       <div className='joinOuter'>
         <div className='joinWrapper' onClick={this.redirect}>

@@ -116,12 +116,13 @@ class LeagueContainer extends React.Component {
   render(){
     let currentLeague = this.props.currentLeague;
     let scoreBoards = 'scores';
-    let nbalogo = require('./../helpers/assets/nba-logo.png');
+    let nbalogo = require('./../helpers/assets/nba-logo.webp');
     let formTypeLeague = 'league';
     let formTypeGroup = 'group';
     let topScores = 'scores';
-    let basketball = require('./../helpers/assets/basketball.png');
-    let leaguePhoto = currentLeague.image ? <img className='createImg' src={currentLeague.image} /> : <img className='createImg' src='https://i.imgur.com/CAoW5n8.jpg' />;
+    let basketball = require('./../helpers/assets/basketball.webp');
+    let kd = require('./../helpers/assets/2.webp');
+    let leaguePhoto = currentLeague.image ? <img className='createImg' src={currentLeague.image} /> : <img className='createImg' src={kd} />;
     let scores = this.props.scoreBoards.slice(0, this.state.scoreBoardsShown);
     let users = require('./../helpers/assets/icons/users.icon.svg');
     let info = require('./../helpers/assets/icons/info.icon.svg');

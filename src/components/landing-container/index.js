@@ -20,6 +20,7 @@ import CreateSection from '../helpers/createSection';
 import Table from '../helpers/table';
 import BannerAd from '../helpers/bannerAd';
 import { userValidation, logError, renderIf } from './../../lib/util.js';
+import css from './../../style/main.scss';
 
 class LandingContainer extends React.Component {
   constructor(props){
@@ -114,8 +115,9 @@ class LandingContainer extends React.Component {
     let formTypeGroup = 'group';
     let topScores = 'scores';
     let profileAction ='create';
-    let basketball = require('./../helpers/assets/basketball.png');
+    let basketball = require('./../helpers/assets/basketball.webp');
     let users = require('./../helpers/assets/icons/users.icon.svg');
+    let slide = require('./../helpers/assets/3.webp');
     return (
       <section className='landing-page page-outer-div'>
         {renderIf(!this.props.userAuth,

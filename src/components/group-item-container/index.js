@@ -103,9 +103,10 @@ class GroupItemContainer extends React.Component {
     let formTypeLeague = 'league';
     let formTypeGroup = 'group';
     let topScores = 'scores';
-    let basketball = require('./../helpers/assets/basketball.png');
-    let groupPhoto = currentGroup.image ? <img className='createImg' src={currentGroup.image} /> : <img className='createImg' src='https://i.imgur.com/xjGJJvv.jpg' />;
-    let placeholderImage = require('./../helpers/assets/profilePlaceholder.jpeg');
+    let basketball = require('./../helpers/assets/basketball.webp');
+    let steph = require('./../helpers/assets/basketball.webp');
+    let groupPhoto = currentGroup.image ? <img className='createImg' src={currentGroup.image} /> : <img className='createImg' src={steph} />;
+    let placeholderImage = require('./../helpers/assets/profilePlaceholder.webp');
     let users = require('./../helpers/assets/icons/users.icon.svg');
     let info = require('./../helpers/assets/icons/info.icon.svg');
     return (

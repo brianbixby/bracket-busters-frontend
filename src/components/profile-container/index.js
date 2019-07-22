@@ -25,7 +25,7 @@ class ProfileContainer extends React.Component {
   };
   render(){
     let profileAction='update';
-    let placeholderImage = require('./../helpers/assets/profilePlaceholder.jpeg');
+    let placeholderImage = require('./../helpers/assets/profilePlaceholder.webp');
     let profileImage = this.props.userProfile && this.props.userProfile.image ? this.props.userProfile.image : placeholderImage;
     let { userProfile } = this.props;
     let username = userProfile ? userProfile.username : null;

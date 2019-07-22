@@ -3,7 +3,9 @@ import React from 'react';
 class Slider extends React.Component {
   render() {
     let { joinedItem, formType } = this.props;
-    let itemImage = formType === 'league' ? <img className='cardImage' src='https://i.imgur.com/CAoW5n8.jpg' />  : <img className='cardImage' src='https://i.imgur.com/xjGJJvv.jpg' /> ;
+    let kd = require('./../assets/2.webp');
+    let steph = require('./../assets/1.webp');
+    let itemImage = formType === 'league' ? <img className='cardImage' src={kd} />  : <img className='cardImage' src={steph} /> ;
     let itemName = formType === 'league' ? joinedItem.leagueName : joinedItem.groupName;
     let itemImageRender = joinedItem.image ? <img className='cardImage' src={joinedItem.image} /> : itemImage;
     return (
