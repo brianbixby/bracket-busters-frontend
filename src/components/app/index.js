@@ -1,13 +1,15 @@
 import React from 'react';
 import { BrowserRouter, Route } from 'react-router-dom';
 
+import { makeAsyncComponent } from "./../../lib/util.js";
 import Navbar from '../navbar';
 import LandingContainer from '../landing-container';
-import LeagueAllContainer from '../league-all-container';
-import LeagueItemContainer from '../league-item-container';
-import GroupAllContainer from '../group-all-container';
-import GroupItemContainer from '../group-item-container';
-import ProfileContainer from '../profile-container';
+
+const LeagueAllContainer = makeAsyncComponent(import('../league-all-container'));
+const LeagueItemContainer = makeAsyncComponent(import('../league-item-container'));
+const GroupAllContainer = makeAsyncComponent(import('../group-all-container'));
+const GroupItemContainer = makeAsyncComponent(import('../group-item-container'));
+const ProfileContainer = makeAsyncComponent(import('../profile-container'));
 
 class App extends React.Component {
   render() {

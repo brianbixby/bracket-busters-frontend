@@ -7,7 +7,7 @@ const app = express();
 const PORT = process.env.PORT || 8080;
 const path = require('path');
 
-app.use(compression())
+app.use(compression());
 app.use(cors());
 
 app.use(express.static(`${__dirname}/dist`));
