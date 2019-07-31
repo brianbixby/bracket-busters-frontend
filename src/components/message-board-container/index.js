@@ -41,7 +41,7 @@ class MessageBoardContainer extends React.Component {
   };
   render(){
     let comments = this.props.comments.slice(0, 5)
-    let placeholderImage = require('./../helpers/assets/profilePlaceholder.webp');
+    let placeholderImage = require('./../helpers/assets/profilePlaceholder.png');
     let profileImage = this.props.userProfile && this.props.userProfile.image ? this.props.userProfile.image : placeholderImage;
     let commentsIcon = require('./../helpers/assets/icons/comments.icon.svg');
     return (

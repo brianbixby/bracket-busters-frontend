@@ -115,9 +115,9 @@ class LandingContainer extends React.Component {
     let formTypeGroup = 'group';
     let topScores = 'scores';
     let profileAction ='create';
-    let basketball = require('./../helpers/assets/basketball.webp');
+    let basketball = require('./../helpers/assets/basketball.png');
     let users = require('./../helpers/assets/icons/users.icon.svg');
-    let slide = require('./../helpers/assets/3.webp');
+    let slide = require('./../helpers/assets/3.png');
     return (
       <section className='landing-page page-outer-div'>
         {renderIf(!this.props.userAuth,

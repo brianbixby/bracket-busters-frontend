@@ -11,9 +11,9 @@ class CreateSection extends React.Component {
   }
   redirect = () => this.props.handleRedirect(`/${this.props.formType}s`);
   render() {
-    let createleague = require('./../assets/createleague.webp');
-    let creategroup = require('./../assets/creategroup.webp');
-    let nbalogo = require('./../assets/nba-logo.webp');
+    let createleague = require('./../assets/createleague.png');
+    let creategroup = require('./../assets/creategroup.png');
+    let nbalogo = require('./../assets/nba-logo.png');
     let users = require('./../assets/icons/users.icon.svg');
 
     return (
