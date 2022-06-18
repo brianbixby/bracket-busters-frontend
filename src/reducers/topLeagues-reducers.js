@@ -1,4 +1,4 @@
-export default (state=[], action) => {
+let topLeagues = (state=[], action) => {
   let { type, payload } = action;
 
   switch(type) {
@@ -10,3 +10,5 @@ export default (state=[], action) => {
       return state;
   }
 };
+
+export default topLeagues;

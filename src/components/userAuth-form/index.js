@@ -71,7 +71,7 @@ class UserAuthForm extends React.Component {
   handleBlur = e => {
     let { name } = e.target;
     this.setState(state => ({
-      focused: state.focused == name ? null : state.focused,
+      focused: state.focused === name ? null : state.focused,
     }))
   };
   handleChange = e => {
@@ -97,7 +97,7 @@ class UserAuthForm extends React.Component {
       this.props.onComplete(this.state, this.handleError)
         .catch(err => {
           this.setState({ 
-            error,
+            error: true,
             submitted: true,
         });
       });

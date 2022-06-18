@@ -35,7 +35,7 @@ class LeagueAllPrivateForm extends React.Component {
   handleBlur = e => {
     let { name } = e.target;
     this.setState(state => ({
-      focused: state.focused == name ? null : state.focused,
+      focused: state.focused === name ? null : state.focused,
     }))
   };
   handleChange = e => {
@@ -58,7 +58,7 @@ class LeagueAllPrivateForm extends React.Component {
     }))
   };
   render(){
-    let { focused, submitted, leagueName, passwordError, leagueNameError } = this.state;
+    let { focused, submitted, passwordError, leagueNameError } = this.state;
     return (
       <form onSubmit={this.handleSubmit} className={classToggler({
         'form page-form all-private-form': true,

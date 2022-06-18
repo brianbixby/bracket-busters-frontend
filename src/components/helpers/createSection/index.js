@@ -1,14 +1,10 @@
 import React from 'react';
-import { connect } from 'react-redux';
 
 import JoinSection from './../joinSection';
 import Slider from './../slider';
 import { renderIf } from './../../../lib/util.js';
 
 class CreateSection extends React.Component {
-  constructor(props){
-    super(props);
-  }
   redirect = () => this.props.handleRedirect(`/${this.props.formType}s`);
   render() {
     let createleague = require('./../assets/createleague.png');
@@ -22,7 +18,7 @@ class CreateSection extends React.Component {
           {renderIf(this.props.formType === 'league',
             <div className='outer'>
               <div className='outerLeft'>
-                <img src={nbalogo} />
+                <img src={nbalogo} alt="NBA logo" />
                 <p className='headerText'>2018 NBA PLAYOFFS </p>
               </div>
               <div className='outerRight'>
@@ -33,7 +29,7 @@ class CreateSection extends React.Component {
           {renderIf(this.props.formType === 'group',
             <div className='outer'>
               <div className='outerLeft'>
-              <img className='users' src={users} />
+              <img className='users' src={users} alt="Users icon" />
                 <p className='headerText'>GROUPS </p>
               </div>
               <div className='outerRight'>
@@ -57,10 +53,10 @@ class CreateSection extends React.Component {
               </div>
               <div className='createImgDiv'>
                 {renderIf(this.props.formType === 'league',
-                  <img className="createImg" src={createleague} />
+                  <img className="createImg" src={createleague} alt="Create league icon" />
                 )}
                 {renderIf(this.props.formType === 'group',
-                  <img className="createImg" src={creategroup} />
+                  <img className="createImg" src={creategroup} alt="Create group icon" />
                 )}  
               </div>
             </div>

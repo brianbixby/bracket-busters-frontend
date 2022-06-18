@@ -4,7 +4,7 @@ let validateUserProfile = userProfile => {
   }
 };
 
-export default (state=null, action) => {
+let userProfile = (state=null, action) => {
   let { type, payload } = action;
 
   switch(type) {
@@ -29,3 +29,5 @@ export default (state=null, action) => {
       return state;
   }
 };
+
+export default userProfile;

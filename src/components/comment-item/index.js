@@ -1,15 +1,12 @@
 import React from 'react';
 
 export class CommentItem extends React.Component {
-  constructor(props){
-    super(props);
-  }
   render(){
     let { comment, image } = this.props;
     return ( 
       <div className='comment-item'>
         <div className='comment-photo-div'>
-          <img src={image} />
+          <img src={image} alt="Commenter profile" />
         </div>
         <div className='comment-text-div'>
           <div className='comment-commenter'> {comment.username} </div>

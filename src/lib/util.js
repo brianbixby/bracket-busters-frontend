@@ -16,7 +16,7 @@ export const formatDate = date => {
   return `${dateArr[1]} ${dateArr[2]}, ${dateArr[3]}`;
 };
 
-export const userValidation = async (props, navigate) => {
+export const userValidation = async (props, navigate, redirect=true) => {
     try {
         if (props.userAuth) {
             await props.sportingEventsFetch()

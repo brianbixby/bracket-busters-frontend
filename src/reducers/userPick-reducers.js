@@ -4,7 +4,7 @@ let validateUserPick = userPick => {
   }
 };
 
-export default (state=[], action) => {
+let userPick = (state=[], action) => {
   let { type, payload } = action;
 
   switch(type) {
@@ -25,3 +25,5 @@ export default (state=[], action) => {
       return state;
   }
 };
+
+export default userPick;

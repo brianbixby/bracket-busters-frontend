@@ -32,7 +32,7 @@ class GroupForm extends React.Component {
     }
 
     if(name === 'password') {
-      if(!value && input[name='privacy'].value === 'private')
+      if(!value && this.state.privacy === 'private')
         setError(name, `${name} can not be empty`);
       else if(!isAscii(value))
         setError(name, 'password may only contain normal charachters');
@@ -48,7 +48,7 @@ class GroupForm extends React.Component {
   handleBlur = e => {
     let { name } = e.target;
     this.setState(state => ({
-      focused: state.focused == name ? null : state.focused,
+      focused: state.focused === name ? null : state.focused,
     }))
   };
   handleChange = e => {
@@ -75,7 +75,7 @@ class GroupForm extends React.Component {
         .catch(err => {
           console.error(err);
           this.setState({ 
-            error,
+            error: true,
             submitted: true,
         });
       });

@@ -1,4 +1,4 @@
-export default (state=null, action) => {
+let userAuth = (state=null, action) => {
   let { type, payload } = action;
 
   switch(type) {
@@ -10,3 +10,5 @@ export default (state=null, action) => {
       return state;
   }
 };
+
+export default userAuth;

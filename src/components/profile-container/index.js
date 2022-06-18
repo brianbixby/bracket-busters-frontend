@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import { connect } from 'react-redux';
 import { useNavigate } from "react-router-dom";
 
@@ -12,23 +12,19 @@ import { topScoresFetchRequest } from '../../actions/scoreboard-actions.js';
 import { sportingEventsFetchRequest } from '../../actions/sportingEvent-actions.js';
 import { userValidation, logError, formatDate, renderIf } from './../../lib/util.js';
 
-class ProfileContainer extends React.Component {
-  constructor(props){
-    super(props);
-  }
-  componentWillMount() {
+function ProfileContainer(props) {
     let navigate = useNavigate();
-    userValidation(this.props, navigate);
-  }
-  handleProfileUpdate = profile => {
-    return this.props.userProfileUpdate(profile)
+    useEffect(() => {
+        userValidation(props, navigate);
+    }, [])
+  const handleProfileUpdate = profile => {
+    return props.userProfileUpdate(profile)
       .catch(logError);
   };
-  render(){
     let profileAction='update';
     let placeholderImage = require('./../helpers/assets/profilePlaceholder.png');
-    let profileImage = this.props.userProfile && this.props.userProfile.image ? this.props.userProfile.image : placeholderImage;
-    let { userProfile } = this.props;
+    let profileImage = props.userProfile && props.userProfile.image ? props.userProfile.image : placeholderImage;
+    let { userProfile } = props;
     let username = userProfile ? userProfile.username : null;
     let createdOn = userProfile ? userProfile.createdOn : null;
     return (
@@ -43,7 +39,7 @@ class ProfileContainer extends React.Component {
                     <div className='page-form'>
                       <ProfileForm 
                         userProfile={userProfile} 
-                        onComplete={this.handleProfileUpdate}
+                        onComplete={handleProfileUpdate}
                         profileAction={profileAction}
                       />
                     </div>
@@ -64,7 +60,7 @@ class ProfileContainer extends React.Component {
                       <div className='container'>
                         <div className='inner-wrapper'>
                           <div className='profile-image-div'>
-                            <img className='profile-image' src={profileImage} />
+                            <img className='profile-image' src={profileImage} alt="profile" />
                           </div>
                             {renderIf(userProfile,
                               <div className='userProfileData'>
@@ -82,7 +78,6 @@ class ProfileContainer extends React.Component {
         </div>
       </div>
     );
-  }
 }
 
 let mapStateToProps = (state) => ({

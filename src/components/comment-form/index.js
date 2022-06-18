@@ -38,14 +38,14 @@ class CommentForm extends React.Component {
   };
 
   render() {
-    let { focused, content} = this.state;
+    let { content} = this.state;
     let textAreaStyle = {
       height: `${this.state.textAreaHeight}px`,
     };
     return (
       <form onSubmit={this.handleSubmit} className='form comment-form'>
         <div className='photo-div'>
-          <img src={this.props.image} />
+          <img src={this.props.image} alt="Comment Icon" />
         </div>
         <div className='commentInput-div'>
           <div className='commentInputWrapper'>

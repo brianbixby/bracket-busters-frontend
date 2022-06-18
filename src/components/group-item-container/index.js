@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 import { useNavigate } from "react-router-dom";
 
@@ -16,97 +16,93 @@ import Table from '../helpers/table';
 import BannerAd from '../helpers/bannerAd';
 import { userValidation, logError, renderIf, formatDate } from '../../lib/util.js';
 
-class GroupItemContainer extends React.Component {
-  constructor(props){
-    super(props);
-  }
-
-  componentWillMount() {
+function GroupItemContainer(props) {
     let navigate = useNavigate();
-    return userValidation(this.props, navigate)
-      .then(() => {
-        if (Object.entries(this.props.currentGroup).length === 0) {
-          let myGroup = {_id: window.location.href.split('/group/')[1]};
-          return this.props.groupFetch(myGroup)
-            .then(group => {
-              return this.props.groupProfilesFetch(group.users)
-                .then(() => group)
-            })
-            .then(group => this.props.messageBoardGroupFetch(group._id))
-            .then(mb => this.props.commentsFetch(mb.comments))
-        }
-        return ;
-      })
-      .then(() => window.scrollTo(0, 0))
-      .catch(() => logError);
-  }
+
+    useEffect(() => {
+        return userValidation(props, navigate)
+        .then(() => {
+          if (Object.entries(props.currentGroup).length === 0) {
+            let myGroup = {_id: window.location.href.split('/group/')[1]};
+            return props.groupFetch(myGroup)
+              .then(group => {
+                return props.groupProfilesFetch(group.users)
+                  .then(() => group)
+              })
+              .then(group => props.messageBoardGroupFetch(group._id))
+              .then(mb => props.commentsFetch(mb.comments))
+          }
+          return ;
+        })
+        .then(() => window.scrollTo(0, 0))
+        .catch(() => logError);
+    }, []);
 
 
   // onGroupClick = (group, e) => {
-  //   this.props.groupFetchRequest(group)
-  //   return this.props.groupProfilesFetch(group.users)
-  //     .then(() => this.props.messageBoardGroupFetch(group._id))
+  //   props.groupFetchRequest(group)
+  //   return props.groupProfilesFetch(group.users)
+  //     .then(() => props.messageBoardGroupFetch(group._id))
   //     .then(messageBoard => {
-  //       this.props.commentsFetch(messageBoard.comments);
+  //       props.commentsFetch(messageBoard.comments);
   //     })
-  //     .then(() =>  this.props.history.push(`/group/${group._id}`))
+  //     .then(() =>  props.history.push(`/group/${group._id}`))
   //     .catch(logError);
   // };
 
-  onLeagueClick = (league, e) => {
-    this.props.leagueFetchRequest(league);
-    return this.props.messageBoardLeagueFetch(league._id)
+  const onLeagueClick = (league, e) => {
+    props.leagueFetchRequest(league);
+    return props.messageBoardLeagueFetch(league._id)
       .then(messageBoard => {
-        this.props.commentsFetch(messageBoard.comments);
+        props.commentsFetch(messageBoard.comments);
       })
-      .then(()=> this.props.userPicksFetch(league._id))
-      .then( () =>  this.props.history.push(`/league/${league._id}`))
+      .then(()=> props.userPicksFetch(league._id))
+      .then( () =>  props.history.push(`/league/${league._id}`))
       .catch(logError);
   };
-  onGroupClick = (group, e) => {
-    this.props.groupFetchRequest(group)
-    return this.props.groupProfilesFetch(group.users)
-      .then(() => this.props.messageBoardGroupFetch(group._id))
+  const onGroupClick = (group, e) => {
+    props.groupFetchRequest(group)
+    return props.groupProfilesFetch(group.users)
+      .then(() => props.messageBoardGroupFetch(group._id))
       .then(messageBoard => {
-        this.props.commentsFetch(messageBoard.comments);
+        props.commentsFetch(messageBoard.comments);
       })
-      .then(() =>  this.props.history.push(`/group/${group._id}`))
+      .then(() =>  props.history.push(`/group/${group._id}`))
       .catch(logError);
   };
-  handleBoundTopPublicLeagueClick = (league, e) => {
-    if (this.props.leagues.some(leagues => leagues._id === league._id)) {
-      this.onLeagueClick(league);
+  const handleBoundTopPublicLeagueClick = (league, e) => {
+    if (props.leagues.some(leagues => leagues._id === league._id)) {
+      onLeagueClick(league);
     }
     else {
-      return this.props.leagueJoin(league._id)
-      .then(() => this.props.messageBoardLeagueFetch(league._id))
-      .then(messageBoard => this.props.commentsFetch(messageBoard.comments))
-      .then(() => this.props.history.push(`/league/${league._id}`))
+      return props.leagueJoin(league._id)
+      .then(() => props.messageBoardLeagueFetch(league._id))
+      .then(messageBoard => props.commentsFetch(messageBoard.comments))
+      .then(() => props.history.push(`/league/${league._id}`))
       .catch(logError);
     }
   };
-  handleBoundTopPublicGroupClick = (group, e) => {
-    if (this.props.groups.some(groups => groups._id === group._id)) {
-      this.onGroupClick(group);
+  const handleBoundTopPublicGroupClick = (group, e) => {
+    if (props.groups.some(groups => groups._id === group._id)) {
+      onGroupClick(group);
     }
     else {
-      return this.props.groupProfilesFetch(group.users)
-        .then(() => this.props.groupJoin(group._id))
-        .then(() => this.props.messageBoardGroupFetch(group._id))
-        .then(messageBoard => this.props.commentsFetch(messageBoard.comments))
-        .then(() => this.props.history.push(`/group/${group._id}`))
+      return props.groupProfilesFetch(group.users)
+        .then(() => props.groupJoin(group._id))
+        .then(() => props.messageBoardGroupFetch(group._id))
+        .then(messageBoard => props.commentsFetch(messageBoard.comments))
+        .then(() => props.history.push(`/group/${group._id}`))
         .catch(logError);
     }
   };
-  render(){
-    let currentGroup = this.props.currentGroup;
-    let groupProfiles = this.props.groupProfiles;
+    let currentGroup = props.currentGroup;
+    let groupProfiles = props.groupProfiles;
     let formTypeLeague = 'league';
     let formTypeGroup = 'group';
     let topScores = 'scores';
     let basketball = require('./../helpers/assets/basketball.png');
     let steph = require('./../helpers/assets/basketball.png');
-    let groupPhoto = currentGroup.image ? <img className='createImg' src={currentGroup.image} /> : <img className='createImg' src={steph} />;
+    let groupPhoto = currentGroup.image ? <img className='createImg' src={currentGroup.image} alt="Group icon" /> : <img className='createImg' src={steph} alt="Steph Curry" />;
     let placeholderImage = require('./../helpers/assets/profilePlaceholder.png');
     let users = require('./../helpers/assets/icons/users.icon.svg');
     let info = require('./../helpers/assets/icons/info.icon.svg');
@@ -120,7 +116,7 @@ class GroupItemContainer extends React.Component {
                 <div className='createOuterInner'>
                   <div className='outer'>
                     <div className='outerLeft'>
-                      <img className='users' src={users} />
+                      <img className='users' src={users} alt="Users icon" />
                       <p className='headerText'>GROUP</p>
                     </div>
                     <div className='outerRight'>
@@ -157,7 +153,7 @@ class GroupItemContainer extends React.Component {
                       </div>
                     </div>
                     <div className='joinImgDiv'>
-                      <img className='info' src={info} />
+                      <img className='info' src={info} alt="Info icon" />
                     </div>
                   </div>
                 </div>
@@ -177,12 +173,12 @@ class GroupItemContainer extends React.Component {
                                 </div>
                                 {renderIf(groupProfile.image,
                                   <div className='cardImageDiv'>
-                                    <img className='groupMemberImg' src={groupProfile.image} />
+                                    <img className='groupMemberImg' src={groupProfile.image} alt="Group member profile" />
                                   </div>
                                 )}
                                 {renderIf(!groupProfile.image,
                                   <div className='cardImageDiv'>
-                                    <img className='groupMemberImgNoPhoto' src={placeholderImage} />
+                                    <img className='groupMemberImgNoPhoto' src={placeholderImage} alt="placeholder" />
                                   </div>
                                 )}
                               </div>
@@ -194,14 +190,14 @@ class GroupItemContainer extends React.Component {
                   </div>
                 </div>
                 <div className='m16'>
-                  <MessageBoardContainer mBoardId={this.props.currentMessageBoard._id} commentsArray={this.props.currentMessageBoard.comments}/>
+                  <MessageBoardContainer mBoardId={props.currentMessageBoard._id} commentsArray={props.currentMessageBoard.comments}/>
                 </div>
               </div>
             </div>
             <div className='col-md-4'>
               <div className='leagueBoardsContainer'>
                 <div className='leaguesContainerHeader'>
-                  <img className='leaguesBoardIcon' src={basketball} />
+                  <img className='leaguesBoardIcon' src={basketball} alt="Basketball icon" />
                   <p className='leaguesBoardHeader'>LEAGUES</p>
                 </div>
                 <div className='tablesContainer'>
@@ -214,8 +210,8 @@ class GroupItemContainer extends React.Component {
                         <p className='tableColumn columnSize'> SIZE </p>
                       </div>
                     </div>
-                    {this.props.topPublicLeagues.map(topPublicLeague => {
-                      let boundTopPublicLeagueClick = this.handleBoundTopPublicLeagueClick.bind(this, topPublicLeague);
+                    {props.topPublicLeagues.map(topPublicLeague => {
+                      let boundTopPublicLeagueClick = handleBoundTopPublicLeagueClick.bind(this, topPublicLeague);
                       return <div className='rowColors cursor' key={topPublicLeague._id} onClick={boundTopPublicLeagueClick}>
                       <Table item={topPublicLeague} type={formTypeLeague} />
                       </div>
@@ -230,7 +226,7 @@ class GroupItemContainer extends React.Component {
                         <p className='tableColumn columnScore'> SCORE </p>
                       </div>
                     </div>
-                    {this.props.topScores.map(topScore => {
+                    {props.topScores.map(topScore => {
                       return <div className='rowColors' key={topScore._id}>
                       <Table item={topScore} type={topScores} />
                       </div>
@@ -241,7 +237,7 @@ class GroupItemContainer extends React.Component {
               </div>
               <div className='leagueBoardsContainer'>
                 <div className='leaguesContainerHeader'>
-                  <img className='users' src={users} />
+                  <img className='users' src={users} alt="Users icon" />
                   <p className='leaguesBoardHeader'>FEATURED GROUPS</p>
                 </div>
                 <div className='container tableContainer'>
@@ -253,8 +249,8 @@ class GroupItemContainer extends React.Component {
                       <p className='tableColumn columnSize'> SIZE </p>
                     </div>
                   </div>
-                  {this.props.topPublicGroups.map(topPublicGroup => {
-                    let boundTopPublicGroupClick = this.handleBoundTopPublicGroupClick.bind(this, topPublicGroup);
+                  {props.topPublicGroups.map(topPublicGroup => {
+                    let boundTopPublicGroupClick = handleBoundTopPublicGroupClick.bind(this, topPublicGroup);
                     return <div className='rowColors cursor groupsTableContainer' key={topPublicGroup._id} onClick={boundTopPublicGroupClick}>
                     <Table item={topPublicGroup} type={formTypeGroup} />
                     </div>
@@ -267,7 +263,6 @@ class GroupItemContainer extends React.Component {
         </div>
       </div>
     );
-  }
 }
 
 let mapStateToProps = state => ({

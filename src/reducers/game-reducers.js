@@ -4,7 +4,7 @@ let validateGame = game => {
   }
 };
 
-export default (state=[], action) => {
+let game = (state=[], action) => {
   let { type, payload } = action;
 
   switch(type) {
@@ -22,3 +22,5 @@ export default (state=[], action) => {
       return state;
   }
 };
+
+export default game;

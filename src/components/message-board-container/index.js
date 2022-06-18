@@ -48,7 +48,7 @@ class MessageBoardContainer extends React.Component {
       <div className='wideSectionWrapper messageBoardOuter'>
         <div className='outer messageboardHeader'>
           <div className='outerLeft'>
-            <img className='comments' src={commentsIcon} />
+            <img className='comments' src={commentsIcon} alt="comments icon" />
             <p className='headerText'>MESSAGE BOARD </p>
           </div>
           <div className='outerRight'>

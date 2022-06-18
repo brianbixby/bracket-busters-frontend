@@ -34,7 +34,7 @@ class LeagueForm extends React.Component {
     }
 
     if(name === 'password') {
-      if(!value && input[name='privacy'].value === 'private')
+      if(!value && this.state.privacy === 'private')
         setError(name, `${name} can not be empty`)
       else if(!isAscii(value))
         setError(name, 'password may only contain normal charachters')
@@ -50,7 +50,7 @@ class LeagueForm extends React.Component {
   handleBlur = e => {
     let { name } = e.target;
     this.setState(state => ({
-      focused: state.focused == name ? null : state.focused,
+      focused: state.focused === name ? null : state.focused,
     }))
   };
   handleChange = e => {
@@ -77,7 +77,7 @@ class LeagueForm extends React.Component {
         .catch(err => {
           console.error(err);
           this.setState({ 
-            error,
+            error: true,
             submitted: true,
         });
       });
@@ -89,7 +89,7 @@ class LeagueForm extends React.Component {
     }))
   };
   render(){
-    let { focused, submitted, leagueName, emailError, passwordError, leagueNameError, leagueNameAvailable } = this.state;
+    let { focused, submitted, leagueName, passwordError, leagueNameError, leagueNameAvailable } = this.state;
     let buttonText = this.props.league ? 'update' : 'create';
     return (
       <form onSubmit={this.handleSubmit} className={classToggler({
