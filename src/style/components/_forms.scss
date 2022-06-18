@@ -1,0 +1,82 @@
+@import './../lib/vars'; 
+
+.form {
+  input {
+    width: 100%;
+    background-color: #f9f9f9;
+    border-radius: $border-radius;
+    border-width: 0px;
+    margin: $margin;
+    box-sizing: border-box;
+    padding: 15px;
+    border-radius: 3px;
+    margin-bottom: 10px;
+  }
+  input[type='radio'] {
+    width: 2vw;
+  }
+  input:focus {
+    background-color: $color-primary-hover;
+    border-radius: $border-radius;
+    border-width: 0px;
+  }
+  label {
+    display: inline-block;
+    width: 20%;
+  }
+  .radio-div {
+    color: #4A4A4A;
+    font-size: 16px;
+    padding: $pad;
+  }
+  .username-availability, .groupName-availability {
+    margin-left: $margin;
+  }
+}
+.userauth-form {
+  margin-right: 3vw;
+
+  input {
+    margin-bottom: 30px;
+  }
+}
+.page-form {
+  width: 50%;
+  display: inline-block;
+}
+.userauth-buttons {
+  text-align: right;
+}
+.leagueName-availability {
+  margin-left: .7vw;
+}
+.form label {
+  margin-left: 4px;
+  text-transform: capitalize;
+}
+@media (max-width: 710px) {
+  .radio-div div {
+    height: 38px;
+  }
+  .radio-div .radioPri {
+    height: 48px;
+  }
+  .modal-close {
+    font-size: 20px;
+  }
+  .radio-div div span {
+    display: block;
+    width: 68%;
+    float: right;
+  }
+}
+@media (max-width: 550px) {
+  .modal-wrapper{
+    width: 90vw;
+  }
+}
+@media (max-width: 350px) {
+  .radio-div .radioPri {
+    height: 58px;
+  }
+}

@@ -1,0 +1,43 @@
+// keep
+@import './../lib/vars'; 
+
+.wideSectionWrapper{
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.24);
+  background: #fff;
+  border-radius: 10px;
+  margin-bottom: 16px;
+  position: relative;
+  overflow: hidden;
+  max-width: 660px;
+  margin-right: auto;
+  margin-left: auto;
+}
+.margin16 {
+  margin: 0 16px;
+}
+.maxHeight90 {
+  max-height: 90px;
+}
+.leagueItem-page {
+  .tableHeadline {
+    text-transform: uppercase;
+  }
+  .seeAll {
+    padding-top: 10px;
+    padding-right: 16px;
+    color: #06c;
+    font-size: 12px;
+    text-transform: capitalize;
+    cursor: pointer;
+    width: 100%;
+    text-align: right;
+    cursor: pointer;
+  }
+  .seeAll:hover {
+    color: #004d9a;
+  }
+}
+.mtop8{
+  margin: 8px 16px 16px;
+  overflow: hidden;
+}

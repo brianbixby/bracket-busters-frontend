@@ -1,0 +1,460 @@
+@import './../lib/vars'; 
+
+.leagueItem-page {
+  .picksGamesHeader {
+    text-align: center;
+    color: #fff;
+    background: url('./../../components/helpers/assets/3.png') no-repeat scroll center -517px transparent;
+    text-transform: uppercase;
+  }
+  .gameItemOuter {
+    height: 90px;
+  }
+  .fadeout {
+    -webkit-animation: fadeOut 1s forwards;
+    animation: fadeOut 1s forwards;
+    -webkit-animation-delay: .5s;
+    animation-delay: .5s;
+  }
+  @-webkit-keyframes fadeOut {
+    from {opacity: 1;}
+    to {opacity: 0;}
+  }
+  @keyframes fadeOut {
+    from {opacity: 1;}
+    to {opacity: 0;}
+  }
+
+    .cardItem {
+      width: 628px;
+      height: 90px;
+      border-bottom: 1px solid #000;
+      border-top: 1px solid #333;
+      position: relative;
+      background-color: #202020;
+      border-radius: 0;
+
+      .score {
+        position: absolute;
+        top: 0;
+        color: #FFFFFF;
+        height: 90px;
+        text-align: center;
+        text-shadow: 0 0 18px #06c;
+        width: 90px;
+        background-color: rgba(0, 0, 0, 0.7);
+        font-size: 48px;
+        line-height: 1;
+        padding-top: 20px;
+      }
+      .awayScore {
+        right: 0;
+      }
+      .homeScore {
+        left: 0;
+      }
+  
+      .homeTeamLogoDiv {
+        background: -webkit-gradient(linear, right top, left top, from(#141414), color-stop(0.15, #1d1d1d), to(#202020));
+        width: 90px;
+        height: 90px;
+        position: absolute;
+        top: 0;
+        left: 0;
+      }
+      .homeTeamLogoWrapper {
+        width: 90px;
+        height: 90px;
+        position: absolute;
+        top: 0;
+        left: 0;
+        background-size: contain !important;
+      }
+      .awayTeamLogoDiv {
+        right: 0;
+        left: auto;
+        background: -webkit-gradient(linear, left top, right top, from(#141414), color-stop(0.15, #1d1d1d), to(#202020));
+        width: 90px;
+        height: 90px;
+        position: absolute;
+        top: 0;
+      }
+      .awayTeamLogoWrapper {
+        width: 90px;
+        height: 90px;
+        position: absolute;
+        top: 0;
+        right: 0;
+        left: auto;
+        background-size: contain !important;
+      }
+      .homeTeamInfoDiv {
+        position: absolute;
+        left: 90px;
+        text-align: right;
+        top: 15px;
+        width: 137.5px;
+        height: 50px;
+        color: #ccc;
+        font-size: 26px;
+        text-transform: uppercase;
+  
+        .cityRec {
+          color: #888;
+          font-size: 13px;
+          margin-bottom: 12px;
+          text-align: right;
+          text-transform: uppercase;
+        }
+        .teamName {
+          color: #06c;
+          color: #ccc;
+          text-align: right;
+          font-size: 25px;
+          text-transform: uppercase;
+          -webkit-transition: color .35s ease;
+          -moz-transition: color .35s ease;
+          -o-transition: color .35s ease;
+          -ms-transition: color .35s ease;
+          transition: color .35s ease;
+        }
+        .picked {
+          color: #00ADEA;
+        }
+      }
+  
+      .awayTeamInfoDiv {
+        top: 15px;
+        width: 137.5px;
+        height: 50px;
+        color: #ccc;
+        font-size: 26px;
+        text-transform: uppercase;
+        position: absolute;
+        left: 400.5px;
+  
+        .cityRec {
+          color: #888;
+          font-size: 13px;
+          margin-bottom: 12px;
+          text-align: left;
+          text-transform: uppercase;
+        }
+        .teamName {
+          color: #ccc;
+          text-align: left;
+          font-size: 25px;
+          text-transform: uppercase;
+          -webkit-transition: color .35s ease;
+          -moz-transition: color .35s ease;
+          -o-transition: color .35s ease;
+          -ms-transition: color .35s ease;
+          transition: color .35s ease;
+        }
+        .picked {
+          color: #00ADEA;
+        }
+      }     
+      .middle {
+        background: url('./../../components/helpers/assets/3.png') no-repeat scroll -203px -240px transparent;
+        height: 40px;
+        left: 241.5px;
+        position: absolute;
+        top: 15px;
+        width: 145px;
+  
+        .homePick {
+          display: inline-block;
+          width: 73px;
+          height: 40px;
+          position: absolute;
+          left: 0px;
+          top: 0px;
+          cursor: pointer;
+          z-index: 3;
+        }
+        .awayPick {
+          display: inline-block;
+          width: 73px;
+          height: 40px;
+          position: absolute;
+          right: 0px;
+          top: 0px;
+          cursor: pointer;
+          z-index: 3;
+        }
+        .sliderButtonWrapper {
+          position: relative;
+          height: 40px;
+          width: 145px;
+  
+          .sliderButton {
+            // background: #8b8b8b;
+            background: url('./../../components/helpers/assets/3.png') no-repeat scroll -205px -311px transparent;
+            height: 30px;
+            width: 75px;
+            position: absolute;
+            left: 35px;
+            top: 5px;
+            border-radius: 15px;
+            cursor: pointer;
+            -webkit-transition: left .3s ease;
+            transition: right .3s ease;
+            -webkit-transition: left .3s ease;
+            transition: right .3s ease;
+
+            .homePick, .awayPick {
+              width: 50%;
+              display: inline-block;
+            }
+          }
+          .homeTeamPickButtonState {
+            background: url('./../../components/helpers/assets/3.png') no-repeat scroll -205px -350px transparent;
+            left: 6px;
+            right: auto;
+            cursor: pointer;
+            -webkit-transition: left .3s ease;
+            transition: right .3s ease;
+            -webkit-transition: left .3s ease;
+            transition: right .3s ease;
+          }
+          .awayTeamPickButtonState {
+            background: url('./../../components/helpers/assets/3.png') no-repeat scroll -205px -391px transparent;
+            right: 6px;
+            left: auto;
+            cursor: pointer;
+            -webkit-transition: left .3s ease;
+            transition: right .3s ease;
+            -webkit-transition: left .3s ease;
+            transition: right .3s ease;
+          }
+        }
+      }
+  
+      .gameTime {
+        text-align: center;
+        color: #fff;
+        left: 241.5px;
+        position: absolute;
+        bottom: 5px;
+        width: 145px;
+      }
+      .homeArrow, .awayArrow {
+        color: #CCC;
+      }
+    }
+    .correctPick .cardItem .homeTeamInfoDiv .picked, .correctPick .cardItem .awayTeamInfoDiv .picked{
+      color: #2F7A1E;
+    }
+    .wrongPick .cardItem .homeTeamInfoDiv .picked, .wrongPick .cardItem .awayTeamInfoDiv .picked, .locked .noPick .awayTeamInfoDiv .teamName, .locked .noPick .homeTeamInfoDiv .teamName{
+      color: #9E0000;
+    }
+    .wrongPick .cardItem .homeTeamInfoDiv .notPicked,  .wrongPick .cardItem .awayTeamInfoDiv .notPicked{
+      color: #00ADEA;
+    }
+    .locked .cardItem .middle {
+      .homePick, .awayPick {
+        cursor: auto;
+      }
+    } 
+  }
+
+  // pick logic styling
+  .correctPickButton, .wrongPickButton {
+    display: none;
+  }
+  .correctPick .correctPickButton, .wrongPick .wrongPickButton {
+    display: block;
+    height: 30px;
+    width: 120px;
+    position: absolute;
+    left: 17px;
+    top: 7px;
+  }
+  .correctPick .correctPickButton {
+    background: url('./../../components/helpers/assets/3.png') no-repeat scroll -324px -350px transparent;
+  }
+  .wrongPick .wrongPickButton {
+    background: url('./../../components/helpers/assets/3.png') no-repeat scroll -324px -391px transparent;
+  }
+  .lockedPickButton {
+    background: url('./../../components/helpers/assets/3.png') no-repeat scroll -324px -311px transparent;
+    height: 30px;
+    width: 90px;
+    position: absolute;
+    left: 26px;
+    top: 7px;
+  }
+
+  @media (max-width: 439px){
+    .leagueItem-page {
+      .gameItemOuter {
+        height: 180px;
+      }
+      .cardOuter {
+        width: 100%;
+        margin: 0;
+      }
+        .cardItem {
+        width: 310px;
+        width: inherit;
+        height: 180px;
+
+        .awayScore {
+          right: auto;
+          left: 0;
+          top: 90px;
+      }
+    
+        .homeTeamInfoDiv {
+          width: calc((100% - 150px));
+          left: 100px;
+
+          .cityRec {
+            text-align: left;
+          }
+          .teamName {
+            text-align: center;
+          }
+        }
+        .middle {
+          top: 72.5px;
+          transform: rotate(90deg);
+          -webkit-transform: rotate(90deg);
+          -moz-transform: rotate(90deg);
+          z-index: 3;
+          left: auto;
+          right: -45px;
+        }
+        .gameTime {
+          left: 100px;
+          width: calc((100% - 150px));
+          text-align: center;
+          bottom: 82px;
+          font-weight: 900;
+        }
+        .awayTeamInfoDiv {
+          top: auto;
+          bottom: 15px;
+          width: calc((100% - 150px));
+          left: 100px;
+          text-align: right;
+
+          .cityRec {
+            text-align: left;
+          }
+          .teamName {
+            text-align: center;
+          }
+    
+        }
+        .awayTeamLogoDiv {
+          right: auto;
+          background: -webkit-gradient(linear, right top, left top, from(#141414), color-stop(0.15, #1d1d1d), to(#202020));
+          width: 90px;
+          height: 90px;
+          position: absolute;
+          top: 90px;
+          left: 0;
+        }
+        .awayTeamLogoWrapper {
+          top: 90px;
+          right: auto;
+          left: 0;
+        }
+      }
+    }
+  }
+
+  @media (max-width: 500px) {
+    .leagueItem-page .cardItem .awayTeamInfoDiv .teamName, .leagueItem-page .cardItem .homeTeamInfoDiv .teamName {
+      font-size: 20px;
+    }
+    .leagueItem-page .cardItem .awayTeamInfoDiv .cityRec, .leagueItem-page .cardItem .homeTeamInfoDiv .cityRec {
+      font-size: 10px;
+    }
+    .leagueItem-page .maxHeight90 {
+      max-height: none;
+    }
+  }
+
+  @media (max-width: 663px) and (min-width: 440px){
+    .leagueItem-page {
+      .maxHeight90 {
+        max-height: none;
+      }
+      .gameItemOuter, .userPickItemOuter {
+        height: 140px;
+      }
+      .cardOuter {
+        width: 100%;
+        margin: 0;
+      }
+        .cardItem {
+        width: 310px;
+        width: inherit;
+        height: 140px;
+
+        .awayTeamInfoDiv {
+          left: auto;
+          right: 100px;
+        
+          .cityRec, .teamName {
+            text-align: right;
+          }
+        }
+        .homeTeamInfoDiv {
+          left: 100px;
+        
+          .cityRec, .teamName {
+            text-align: left;
+          }
+        }
+        .score {
+          padding-top: 46px;
+        }
+        .homeTeamLogoWrapper, .awayTeamLogoWrapper {
+          background-position-y: 25px !important;
+        }
+
+        .score, .homeTeamLogoDiv, .homeTeamLogoWrapper, .awayTeamLogoDiv, .awayTeamLogoWrapper  {
+          height: 140px;
+        }
+
+        .middle {
+          top: 72.5px;
+          z-index: 3;
+        }
+        .gameTime {
+          bottom: auto;
+          top: 120px;
+        }
+        .middle, .gameTime {
+          left: calc((50% - 72.5px));
+        }
+        .score, .homeTeamLogoDiv, .homeTeamLogoWrapper, .awayTeamLogoDiv, .awayTeamLogoWrapper  {
+          height: 140px;
+        }
+      }
+    }
+  }
+
+  @media (max-width: 1199px) and (min-width: 992px) {
+    .leagueItem-page .cardItem {
+      width: 584.66px;
+  
+       .homeTeamInfoDiv {
+        width: 115.83px;
+       }
+       .awayTeamInfoDiv {
+        width: 115.83px;
+        left: 378.83px;
+       }
+       .middle, .gameTime {
+        left: 219.83px;
+       }
+       .awayTeamInfoDiv .teamName, .homeTeamInfoDiv .teamName {
+        font-size: 22px;
+       }
+    }
+  }

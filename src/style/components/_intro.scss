@@ -1,0 +1,81 @@
+@import './../lib/vars'; 
+
+.headline {
+  font-family: 'Oswald', sans-serif;
+  font-weight: 700;
+  color: #4A4A4A;
+  font-size: 48px;
+  line-height: 1;
+  padding: 20px 0 0;
+}
+.banner-image {
+  position: relative;
+  margin: auto;
+  max-width: 768px;
+}
+.background {
+  position: relative;
+  overflow: hidden;
+}
+.intro-background {
+  width: 100%;
+  position: absolute;
+  height: 100%;
+  top: 0;
+}
+.intro-curry {
+  position: absolute;
+}
+.intro-lebron {
+  position: relative;
+}
+.intro-images {
+  max-width: 768px;
+  width: 100%;
+  height: auto;
+}
+.narrow-container {
+  max-width: 600px;
+  margin: 25px auto 0;
+  padding-bottom: 40px;
+}
+.description {
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 1.2;
+  color: #4A4A4A;
+  padding: 0 15px;
+  font-family: $font-primary;
+}
+.creator {
+  font-weight: 700;
+  margin-top: 20px;
+  color: #4A4A4A;
+  line-height: 1.2;
+  font-size: 16px;
+  font-family: $font-secondary;
+}
+#start-button {
+  line-height: 1;
+  padding: 13px 0;
+  font-size: 18px;
+  font-family: $font-secondary;
+  letter-spacing: 1px;
+  font-weight: 700;
+  width: 100px;
+  border-radius: 50px;
+  margin-top: 20px;
+  color: #4a4a4a;
+  background: #fff;
+  border: 2px solid #4a4a4a;
+}
+#start-button:hover {
+  color: $color-primary;
+  border-color: $color-primary;
+}
+.intro {
+  background: #FFF !important;
+}
+.introFooter {
+  display: none;
+}

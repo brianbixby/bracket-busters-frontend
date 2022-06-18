@@ -1,0 +1,84 @@
+.bbBannerAd{
+  margin-top: -16px;
+  margin-bottom: 10px;
+  height: 70px;
+  background: -webkit-gradient(linear, left top, right top, from(#f62626), to(#E62222));
+  background: -webkit-linear-gradient(left, #f62626, #E62222);
+  background: -o-linear-gradient(left, #f62626, #E62222);
+  background: linear-gradient(to right, #f62626, #E62222);
+  color: #FFF;
+  cursor: pointer;
+  height: 50px;
+  width: 100%;
+  padding: 10px;
+  text-align: center;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.24);
+  overflow: hidden;
+  border-radius: 3px;
+
+  .company {
+    font-size: 30px;
+    font-weight: 700;
+    font-family: 'Work Sans', sans-serif;
+    margin-right: 5px;
+  }
+  .tagLine {
+    font-size: 15px;
+    font-family: 'Roboto Slab', serif;
+    font-weight: 700;
+  }
+}
+.bbBannerAd:hover {
+  background: -webkit-gradient(linear, left top, right top, from(rgba(246, 38, 38,.9)), to(rgba(230, 34, 34,.9)));
+  background: -webkit-linear-gradient(left, rgba(246, 38, 38,.9), rgba(230, 34, 34,.9));
+  background: -o-linear-gradient(left, rgba(246, 38, 38,.9), rgba(230, 34, 34,.9));
+  background: linear-gradient(to right, rgba(246, 38, 38,.9), rgba(230, 34, 34,.9));
+}
+@media (max-width: 455px) {
+  .bbBannerAd {
+    padding: 5px 0 0 32px;
+    text-align: left;
+
+    .company {
+      font-size: 25px;
+      line-height: 1;
+      margin: 0;
+      display: block;
+    }
+    .tagLine {
+      font-size: 12px;
+      line-height: 1;
+      display: block;
+    }
+  }
+}
+@media (min-width: 768px) {
+  .bbBannerAd {
+    height: 70px;
+    width: 728px;
+    padding: 15px;
+    border-radius: 5px;
+
+    .company {
+      font-size: 40px;
+    }
+  }
+}
+@media (min-width: 992px) {
+  .bbBannerAd {
+    width: 100%;
+    height: 90px;
+    padding: 20px;
+
+    .company {
+      font-size: 50px;
+      margin-right: 10px;
+    }
+  }
+}
+@media (min-width: 1200px) {
+  .bbBannerAd {
+    margin-right: 20px;
+    width: calc((100% - 20px));
+  }
+}

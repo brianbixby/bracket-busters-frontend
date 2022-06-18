@@ -1,0 +1,147 @@
+.create-header, .header {
+  font-weight: 900;
+  text-transform: uppercase;
+  color: #4A4A4A;
+  font-size: 30px;
+  text-align: center;
+  margin-top: 20px;
+}
+@media only screen and (max-width: 750px) {
+  .muscles, .holla {
+    margin: auto;
+    display: block;
+    max-width: 90vw;
+  }
+  .create-text {
+    text-align: center;
+  }
+}
+
+@media only screen and (min-width: 751px) {
+  .muscles {
+    max-width: 90vw;
+  }
+  .create-text {
+    float: right;
+    max-width: 300px;
+    font-size: 30px;
+    color: #4A4A4A;
+    font-weight: 400;
+    margin-top: 100px !important;
+  }
+
+}
+.usersLeagueAndGroupsHeader {
+  margin: 20px 12px 20px 12px;
+  padding-bottom: 12px;
+}
+.join-container {
+  margin: 20px auto 0;
+}
+.usersLeagueAndGroups {
+  margin-top: 24px;
+}
+.usersLeagueAndGroups .container {
+  margin: 20px auto 0;
+}
+
+.container .join-text {
+  font-size: 30px;
+  color: #4A4A4A;
+  font-weight: 400;
+}
+.russ, .kd {
+  text-align: center;
+  margin: auto;
+  display: block;
+  border-radius: 50%;
+  background: #e1e1e1;
+}
+.myleaguesHeader {
+  margin-top: 12px;
+}
+.myL-headers {
+  color: #9B9B9B;
+  font-size: 12px;
+  font-weight: 500;
+  padding: 8px 16px;
+  display: inline-block;
+}
+@media only screen and (min-width: 500px) {
+  .myL-headers {
+    font-size: 15px;
+  }
+  .l-name, .span-row .span-name {
+    width: 30%;
+    text-align: center;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    text-transform: uppercase;
+  }
+  .l-creator, .span-row .span-owner {
+    width: 30%;
+    text-align: center;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    text-transform: uppercase;
+  }
+  .l-players, .span-row .span-size {
+    width: 15%;
+    text-align: center;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    text-transform: uppercase;
+  }
+  .l-scoring, .span-row .span-scoring, .span-row .span-privacy {
+    width: 25%;
+    text-align: center;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    text-transform: uppercase;
+    
+  }
+  .myL-headers {
+    padding: 8px 0;
+  }
+}
+.span-row {
+  border-bottom: 1px solid #D8D8D8;
+}
+.span-row p {
+  color: #4a4a4a;
+  font-weight: 900;
+}
+.spacerRow {
+  height: 26px;
+}
+
+.rowColors:nth-child(odd) {
+  background: #EDEEF0;
+}
+.rowColors2:nth-child(even) {
+  background: #EDEEF0;
+}
+.labelDesc {
+  font-weight: 700;
+  margin-bottom: 10px;
+}
+.landing-page .intro {
+  margin-top: -26px;
+  height: 100vh;
+}
+.league-all-private-form {
+  margin-top: 30px;
+  width: 100%;
+  display: block;
+}
+.league-all-private-form  input {
+  width: 80%;
+  margin-left: 10%;
+}
+.joinPrivate { margin-right: 10%; margin-bottom: 30px;}
+
+@media only screen and (min-width: 481px) {
+  .landing-page .intro {
+    margin-top: -18px;
+  }
+}

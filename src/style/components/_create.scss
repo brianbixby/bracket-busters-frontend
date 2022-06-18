@@ -1,0 +1,235 @@
+// keep
+@import './../lib/vars'; 
+
+.createOuter{
+  box-shadow: 0 1px 4px rgba(0,0,0,0.24);
+  background: #fff;
+  border-radius: 10px;
+  margin-bottom: 16px;
+  position: relative;
+  overflow: hidden;
+}
+.createMainWrapper {
+  cursor: pointer;
+}
+.createHeader {
+  border-top: 0;
+  overflow: hidden;
+  position: relative;
+}
+.eventDetails {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -moz-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+  -moz-box-align: center;
+  -ms-flex-align: center;
+  -webkit-align-items: center;
+  -moz-align-items: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  -moz-box-pack: center;
+  -ms-flex-pack: center;
+  -webkit-justify-content: center;
+  -moz-justify-content: center;
+  justify-content: center;
+  font-size: 11px;
+  height: 20px;
+  letter-spacing: 1px;
+  padding: 0 10px;
+  color: #fff;
+  background: linear-gradient(to right, #000000, $color-primary);
+  text-align: center;
+  overflow: hidden;
+  position: relative;
+  z-index: 1;
+  border-bottom: 1px solid #edeef0;
+  margin: 0;
+}
+.createHeadline {
+  margin-top: 16px;
+  margin-bottom: 16px;
+}
+.eventNote{
+  font-size: 12px;
+  font-weight: 700;
+  color: #FFF;
+  font-family: 'Roboto';
+}
+.createMain {
+  padding-bottom: 16px;
+  position: relative;
+}
+.createMainWrapper {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -moz-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-flex: 1;
+  -webkit-flex: 1 0 auto;
+  -moz-box-flex: 1;
+  -moz-flex: 1 0 auto;
+  -ms-flex: 1 0 auto;
+  flex: 1 0 auto;
+  -webkit-flex-wrap: nowrap;
+  -moz-flex-wrap: nowrap;
+  -ms-flex-wrap: none;
+  flex-wrap: nowrap;
+  -webkit-box-pack: justify;
+  -ms-flex-pack: justify;
+  -webkit-justify-content: space-between;
+  -moz-justify-content: space-between;
+  justify-content: space-between;
+  overflow: hidden;
+  flex-direction: column;
+  border-radius: 10px;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.16);
+  margin: 0 16px;
+  position: relative;
+}
+.createMainContent {
+  -webkit-flex-basis: auto;
+  -moz-flex-basis: auto;
+  -ms-flex-preferred-size: auto;
+  flex-basis: auto;
+  -webkit-box-ordinal-group: 3;
+  -webkit-order: 2;
+  -moz-order: 2;
+  -ms-flex-order: 2;
+  order: 2;
+  -webkit-box-flex: 1;
+  -webkit-flex: 1 1 100%;
+  -moz-box-flex: 1;
+  -moz-flex: 1 1 100%;
+  -ms-flex: 1 1 100%;
+
+  flex: 1 1 100%;
+  padding: 12px;
+  position: relative;
+}
+.createMainBorder{
+  background-color: #cbccce;
+  background-image: linear-gradient(to right, rgba(252,255,200,0) 0%, rgba(252,255,200,0.48) 50%, rgba(252,255,200,0) 100%);
+  height: 3px;
+  left: 0;
+  position: absolute;
+  right: 0;
+  top: 0;
+}
+.createMainTitle{
+  -webkit-box-orient: vertical;
+  display: -webkit-box;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  color: #1d1e1f;
+  font-size: 19px;
+  line-height: 21px;
+  font-weight: 600;
+}
+.createMainSubtitle {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  color: #48494a;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 19px;
+  margin-top: 4px;
+}
+.createImgDiv {
+  -webkit-flex-shrink: 0;
+  -moz-flex-shrink: 0;
+  -ms-flex-negative: 0;
+  flex-shrink: 0;
+  -webkit-box-ordinal-group: 1;
+  -webkit-order: 0;
+  -moz-order: 0;
+  -ms-flex-order: 0;
+  order: 0;
+  margin-top: 0;
+  overflow: hidden;
+  border-radius: 10px 10px 0 0;
+  position: relative;
+}
+.createImg {
+  display: block;
+  height: 100%;
+  object-fit: cover;
+  object-position: 50% 0;
+  width: 100%;
+}
+.landing-page .createOuter{
+  max-width: 660px;
+  margin-right: auto;
+  margin-left: auto;
+}
+.outer{
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -moz-flex;
+  display: -ms-flexbox;
+  display: flex;
+  height: 52px;
+
+  .outerLeft{
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    -webkit-align-items: center;
+    -moz-align-items: center;
+    align-items: center;
+    height: auto;
+    width: 100%;
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -moz-flex;
+    display: -ms-flexbox;
+    display: flex;
+    margin-left: 16px;
+
+    img {
+      margin-right: 10px;
+      width: 40px;
+      height: 40px;
+    }
+    .headerText {
+      color: #1d1e1f;
+      font-size: 13px;
+      font-weight: 900;
+      letter-spacing: 1px;
+    }
+  }
+  .outerRight {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -moz-flex;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    -webkit-align-items: center;
+    -moz-align-items: center;
+    align-items: center;
+    margin-right: 16px;
+    text-align: center;
+    width: 86px;
+
+    .seeAll{
+      color: #06c;
+      font-size: 12px;
+      text-transform: capitalize;
+      cursor: pointer;
+      width: 100%;
+      text-align: right;
+    }
+    .seeAll:hover{
+      color: #004d9a;
+    }
+  }
+}
+@media (min-width: 1200px) {
+  .landing-page .createOuter {
+    margin-left: auto;
+  }
+}

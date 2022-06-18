@@ -1,0 +1,33 @@
+@import './../lib/vars'; 
+
+.comentOuterDiv{
+  margin-top: 12px;
+  min-height: 50px;
+
+  .comment-photo-div {
+    float: left;
+
+    img {
+      width: 48px;
+      height: 48px;
+      margin-right: 8px;
+     }
+  }
+    
+  .comment-text-div {
+    width: calc((100% - 56px));
+    display: inline-block;
+    box-sizing: border-box;
+    
+    .comment-commenter {
+      color: #90949c;
+      font-size: 14px;
+      text-transform: uppercase;
+    }
+    .comment-content {
+      color: #1d1e1f;
+      padding: 4px 0;
+      word-break: break-word;
+    }
+   }
+}

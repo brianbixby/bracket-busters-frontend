@@ -1,0 +1,198 @@
+// keep
+@import './../lib/vars'; 
+
+.tableHeadline {
+  line-height: 1;
+  font-weight: 600;
+  color: #1d1e1f;
+  font-size: 14px;
+  font-weight: 700;
+  padding: 15px 12px 0;
+  letter-spacing: 1px;
+  text-align: center;
+}
+.tableColumnDiv {
+  border-bottom: #edeef0 1px solid;
+  padding: 7.5px 0 0;
+}
+.tableColumn {
+  font-weight: 900;
+  display: inline-block;
+  text-transform: uppercase;
+  text-align: center;
+  padding: 8px 0;
+  font-size: 11px;
+  color: #1d1e1f;
+  letter-spacing: .5px;
+}
+.columnUser, .columnUserData, .columnScore, .columnScoreData {
+  width: 50%;
+}
+.columnName, .columnNameData, .columnCreator, .columnCreatorData {
+  width: 40%;
+}
+.columnSize, .columnSizeData {
+  width: 20%;
+}
+.columnData {
+  color: #1d1e1f;
+  text-align: center;
+  padding-top: 7px;
+  padding-bottom: 7px;
+  text-transform: uppercase;
+  display: inline-block;
+  box-sizing: border-box;
+  font-size: 12px;
+  font-weight: 400;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.cursor {
+  cursor: pointer;
+}
+.cursor:hover .columnData{
+  color: #06c;
+}
+.tableContainer {
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.24);
+  overflow: hidden;
+}
+.hideBig{
+  margin-right: 16px;
+  margin-left: 16px;
+}
+.leaguesContainerHeader{
+  display: none;
+}
+.columnUserData{
+  text-align: left;
+  padding-left: 45px;
+}
+span.columnNameData.columnData {
+  text-align: left;
+  padding-left: 10px;
+}
+span.columnCreatorData.columnData {
+  text-align: left;
+  padding-left: 10px;
+}
+p.tableColumn.columnName, p.tableColumn.columnCreator {
+  text-align: left;
+  padding-left: 10px;
+}
+p.tableColumn.columnUser {
+  text-align: left;
+  padding-left: 45px;
+}
+@media (max-width: 991px) {
+  .hideMed{
+    display: none;
+  }
+}
+@media (min-width: 411px) and (max-width: 581px) {
+  .columnSize, .columnSizeData {
+    padding-right: 10vw;
+  }
+  span.columnNameData.columnData, span.columnNameData.columnData, p.tableColumn.columnName {
+    padding-left: 10vw;
+  }
+  p.tableColumn.columnUser, .columnUserData, .columnScore, .columnScoreData {
+    padding-left: 20vw;
+    text-align: left;
+  }
+}
+@media (min-width: 582px) and (max-width: 659px) {
+  .groupTableColumnDiv {
+    padding: 0 calc((50vw - 291px));
+  }
+}
+@media (min-width: 582px) and (max-width: 991px) {
+  .leagueBoards {
+    width: 290px;
+    display: inline-block;
+  }
+  .tablesContainer{
+    -webkit-justify-content: space-between;
+    -moz-justify-content: space-between;
+    justify-content: space-between;
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -moz-flex;
+    display: -ms-flexbox;
+    display: flex;
+  }
+  .groupsTableContainer p {
+    width: 550px;
+    margin: auto;
+  }
+  .groupsTableContainer .columnNameData, .groupsTableContainer .ColumnCreatorData {
+    text-align: left;
+    padding-left: 50px;
+  }
+}
+@media (min-width: 660px) and (max-width: 991px) {
+  .groupTableColumnDiv {
+    padding: 0 39px;
+  }
+}
+@media (min-width: 582px) and (max-width: 630px) {
+  .leagueBoards {
+    width: 270px;
+  }
+}
+@media (max-width: 991px) {
+  .hideSmall {
+    display: none;
+  }
+  .leagueBoardsContainer{
+    max-width: 660px;
+    margin-right: auto;
+    margin-left: auto;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.24);
+    background: #fff;
+    border-radius: 10px;
+    margin-bottom: 10px;
+    position: relative;
+    overflow: hidden;
+    padding: 16px 16px 0;
+  }
+  .leaguesBoardHeader{
+    color: #1d1e1f;
+    font-size: 13px;
+    font-weight: 900;
+    letter-spacing: 1px;
+  }
+  .leaguesContainerHeader{
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    -webkit-align-items: center;
+    -moz-align-items: center;
+    align-items: center;
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -moz-flex;
+    display: -ms-flexbox;
+    display: flex;
+    margin-bottom: 16px;
+  }
+  .leaguesBoardIcon{
+    margin-right: 10px;
+  }
+}
+@media (min-width: 992px){
+  .hideBig{
+    display: none;
+  }
+}
+@media (min-width: 1200px) {
+  .tableContainer, .maxWidth294Big {
+    width: 294px;
+  }
+  .maxWidth294Big {
+    margin-left: 0 !important;
+  }
+  .group-container .maxWidth294Big {
+    width: auto;
+    margin-left: auto !important;
+  }
+}

@@ -1,0 +1,71 @@
+.groupItem-page, .leagueItem-page {
+  .createOuter {
+    max-width: 660px;
+    margin-right: auto;
+    margin-left: auto;
+
+    .joinOuter, .createMainWrapper, .cardOuter {
+      cursor: auto;
+    }
+    .joinOuter:hover .joinTextTitle, .createMainWrapper:hover .createMainTitle, .cardOuter:hover .joinTextTitle  {
+      color: #1d1e1f;
+    }
+    .joinTextDiv {
+      height: 134px;
+    }
+    .joinTextSubtitle {
+      -webkit-line-clamp: 5;
+      max-height: none;
+    }
+    .joinImgDiv {
+      text-align: center;
+      background: #1d1e1f;
+      background: gradient(linear, left top, right top, from(#141414), color-stop(0.15, #1d1d1d), to(#202020));
+      background: -webkit-gradient(linear, left top, right top, from(#141414), color-stop(0.15, #1d1d1d), to(#202020));
+      height: auto;
+      width: 40%;
+
+      .info {
+        height: 130px;
+        margin-top: 2px;
+      }
+    }
+    .cardImage {
+      height: 130px;
+    }
+    .m16 {
+      margin-right: 16px;
+      margin-left: 16px;
+    }
+    .groupMemberImg {
+      background-size: cover;
+      max-height: 130px;
+      font-size: 90px;
+      object-fit: cover;
+      object-position: 50% 50%;
+      width: 100%;
+      text-align: center;
+      margin: auto;
+    }
+    .groupMemberImgNoPhoto {
+      display: block;
+      height: 100%;
+      object-fit: fill;
+      object-position: 50% 50%;
+      width: 100%;
+      background-size: cover;
+      max-height: 130px;
+    }
+  }
+}
+@media (max-width: 410px) {
+  .groupItem-page .createOuter, .leagueItem-page .createOuter {
+    .joinImgDiv {
+      width: 104px;
+      padding-top: 15px;
+    }
+    .joinImgDiv .info {
+      height: 104px;
+    }
+  }
+}

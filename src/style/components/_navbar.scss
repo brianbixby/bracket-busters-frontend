@@ -1,0 +1,218 @@
+
+@import './../lib/vars'; 
+.github, .linkedin {
+  display: none;
+}
+.introNavbar .github, .introNavbar .linkedin {
+  display: inline-block;
+}
+.navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 44px;
+  width: 100%;
+  z-index: 101;
+  border: none;
+  background: #2b2c2d;
+  box-shadow: 0 4px 2px -2px rgba(0,0,0,0.3);
+
+  .linkedin, .github  {
+    height: 20px;
+    transition: all 0.35s cubic-bezier(0.77, 0, 0.175, 1);
+  }
+  .linkedin:hover, .github:hover {
+    opacity: .8;
+  }
+  .caretDown {
+    height: 15px;
+    margin-bottom: 7px;
+    padding-left: 18px;
+  }
+  .noProfileImageNav {
+    border-radius: 50%;
+    overflow: hidden;
+    height: 28px;
+    margin-left: 10px;
+    transition: all 0.35s cubic-bezier(0.77, 0, 0.175, 1);
+    margin-top: -4px;
+  }
+
+  .avatar{
+    display: inline-block;
+
+    img {
+      margin-left: 15px;
+      transition: all 0.35s cubic-bezier(0.77, 0, 0.175, 1);
+    }
+  }
+  .logo {
+    position: absolute;
+    left: 6px;
+    top: 12px;
+    height: auto;
+    z-index: 103;
+
+    .logo-text {
+      transition: all 0.35s cubic-bezier(0.77, 0, 0.175, 1);
+      font-family: 'Lato', sans-serif;
+      font-size: 20px;
+      cursor: pointer;
+
+      span:nth-child(1) {
+        font-weight: 600;
+        padding-right: 8px;
+      }
+      span:nth-child(2) {
+        font-weight: 300;
+      }
+    }
+  }
+
+  .socials {
+    float: right;
+    z-index: 105;
+    list-style-type: none;
+    margin: 0;
+    padding: 12px 0 0 0;
+    background: #2b2c2d;
+
+    .avatarDiv:hover {
+      .caretDown, .noProfileImageNav {
+        opacity: .8;
+      }
+    }
+
+    .social {
+      float: left;
+      list-style-type: none;
+      margin: 0;
+      padding: 0;
+      transition-delay: 0.5s;
+      transition: all 0.35s cubic-bezier(0.77, 0, 0.175, 1);
+    }
+
+    .dropdown {
+      font-size: 16px;
+      line-height: 20px;
+      font-weight: 900;
+      width: auto;
+
+      .avatarDiv {
+        cursor: pointer;
+        transition-delay: 0.5s;
+        transition: all 0.35s cubic-bezier(0.77, 0, 0.175, 1);
+        position: relative;
+        padding-right: 5px;
+
+        .avatar img {
+          border-radius: 50%;
+          overflow: hidden;
+          height: 36px;
+          margin-top: -8px;
+        }
+        i {
+          font-size: 20px;
+          padding-top: 0;
+        }
+      }
+
+      .dropdownDiv {
+        position: fixed;
+        right: 0;
+        top: 44px;
+        padding: 5px 30px 15px 30px;
+        border-bottom-left-radius: .5vw;
+        border-bottom-right-radius: .5vw;
+        text-transform: uppercase;
+        background: #2b2c2d;
+        z-index: -1;
+        transform: translateY(-100px);
+        transition: transform .4s ease-in;
+
+        .link {
+          display: block;
+          text-decoration: none;
+          cursor: pointer;
+          transition: all 0.35s cubic-bezier(0.77, 0, 0.175, 1); 
+        }
+      }
+      .dropdownDiv.slideIn {
+        transform: translateY(0);
+      }
+      .dropdownDiv.slideOut {
+        transform: translateY(-100%);
+      }
+    }
+    
+    .social:nth-child(2) {
+        margin-right: 8px;
+    }
+    .social:nth-child(3) {
+        margin-right: 16px;
+    }
+  }
+  
+  .logo-text, .social-icons, .colorChangeHover, .dropdownDiv .link {
+    color: #FFF;
+  }
+  .logo-text:hover, .social:hover .social-icons, .avatarDiv:hover .colorChangeHover, .dropdownDiv .link:hover {
+    color: rgba(255,255,255, 0.8);
+  }
+}
+.introNavbar {
+  background: #FFF;
+  box-shadow: none;
+
+  .logo-text, .social-icons {
+    color: #9B9B9B;
+  }
+  .logo-text:hover, .social:hover .social-icons {
+    color: #ECECEC;
+  }
+  .socials{
+    background: #FFF;
+  }
+}
+@media only screen and (min-width: 411px) {
+  .navbar {
+    .noProfileImageNav {
+      height: 30px;
+      margin-top: -2px;
+    }
+    .logo {
+      top: 9px;
+      left: 16px;
+
+      .logo-text {
+        font-size: 26px;
+      }
+    }
+
+    .socials {
+      padding: 9px 0 0 0;
+
+      .dropdown {
+        margin-right: 8px;
+
+        .dropdownDiv {
+          padding: 5px 40px 15px 40px;
+        }
+
+        .avatarDiv {
+          i {
+            font-size: 26px;
+          }
+          .avatar img {
+            margin-top: -5px;
+            margin-left: 12px;
+          }
+        }
+      }
+
+      .linkedin, .github {
+        height: 26px;
+      }
+    }
+  }
+}

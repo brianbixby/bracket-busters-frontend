@@ -1,0 +1,104 @@
+
+@import './../lib/vars'; 
+
+.messageboardHeader{
+  position: relative;
+}
+.messageboardHeader:after {
+  border-bottom: #dcdddf 1px solid;
+  bottom: 0;
+  content: '';
+  left: 16px;
+  position: absolute;
+  right: 16px;
+}
+.messageBoard-container {
+  margin: 12px 16px 16px;
+}
+.messageBoardOuter{
+  .comment-form {
+    margin-bottom: 24px;
+
+    .button {
+      padding: 0 8px;
+      text-align: center;
+      text-transform: capitalize;
+      border: 1px solid #06c;
+      border-radius: 2px;
+      background: #06c;
+      color: #fff;
+      line-height: 22px;
+      font-size: 14px;
+      letter-spacing: .75px;
+    }
+    .button:hover{
+      background: #004d9a;
+      border-color: #004d9a;
+    }
+    .photo-div {
+      float: left;
+  
+      img {
+        width: 48px;
+        height: 48px;
+        margin-right: 8px;
+      }
+    }
+  
+    .commentInput-div {
+      width: calc((100% - 56px));
+      display: inline-block;
+      box-sizing: border-box;
+      cursor: text;
+      font-size: 11px;
+      padding: 3px;
+      border: 1px solid #d3d6db;
+      word-wrap: break-word;
+      line-height: 1.358;
+      word-break: break-word;
+      background: #fff;
+  
+      .commentInputWrapper {
+        .commentInput {
+          border: none;
+          width: 100%;
+          margin: 0;
+          padding: 9px 8px;
+          font-size: 16px;
+          box-sizing: border-box;
+          color: #1d1e1f;
+
+          ::placeholder {
+            color: #a9a9a9;
+          }
+          :-ms-input-placeholder {
+            color: #a9a9a9;
+          }
+          ::-ms-input-placeholder {
+            color: #a9a9a9;
+          }
+        }
+      }
+    }
+  
+    .commentFormButtonDiv {
+      border: 1px solid #d3d6db;
+      border-top: 0;
+      width: calc((100% - 56px));
+      margin-left: 56px;
+      width: calc((100% - 56px));
+      padding: 3px;
+      background: #F9F9F9;
+  
+      .ButtonDiv {
+        background: #f6f7f9;
+        padding: 8px;
+        text-align: right;
+      }
+    }
+  }
+}
+.maxHeight{
+  max-height: 650px;
+  overflow: scroll !important;
+}
