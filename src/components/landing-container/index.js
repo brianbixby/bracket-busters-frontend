@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { withRouter } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 import { tokenSignInRequest } from '../../actions/userAuth-actions.js';
 import { userProfileFetchRequest, userProfileUpdateRequest, groupProfilesFetchRequest } from '../../actions/userProfile-actions.js';
@@ -20,7 +20,7 @@ import CreateSection from '../helpers/createSection';
 import Table from '../helpers/table';
 import BannerAd from '../helpers/bannerAd';
 import { userValidation, logError, renderIf } from './../../lib/util.js';
-import css from './../../style/main.scss';
+import './../../style/main.scss';
 
 class LandingContainer extends React.Component {
   constructor(props){
@@ -28,7 +28,8 @@ class LandingContainer extends React.Component {
     this.state = { profileFormDisplay: true, leagueFormDisplay: false, groupFormDisplay: false }
   }
   componentWillMount() {
-    userValidation(this.props);
+    let navigate = useNavigate();
+    userValidation(this.props, navigate, false);
     console.log('If you have any questions about my code please email me @BrianBixby0@gmail.com and visit https://www.builtbybixby.us to see my latest projects.');
   }
   componentDidMount() {
@@ -109,15 +110,15 @@ class LandingContainer extends React.Component {
   };
   handleRedirect = link => this.props.history.push(link);
   render() {
-    let { params } = this.props.match;
-    let handleComplete = params.userAuth === 'signin' ? this.handleSignin : this.handleSignup;
+    // let { params } = this.props.match;
+    // let handleComplete = params.userAuth === 'signin' ? this.handleSignin : this.handleSignup;
     let formTypeLeague = 'league';
     let formTypeGroup = 'group';
     let topScores = 'scores';
     let profileAction ='create';
     let basketball = require('./../helpers/assets/basketball.png');
     let users = require('./../helpers/assets/icons/users.icon.svg');
-    let slide = require('./../helpers/assets/3.png');
+    // let slide = require('./../helpers/assets/3.png');
     return (
       <section className='landing-page page-outer-div'>
         {renderIf(!this.props.userAuth,
@@ -276,4 +277,4 @@ let mapDispatchToProps = dispatch => ({
   groupProfilesFetch : profileIDs => dispatch(groupProfilesFetchRequest(profileIDs)),
 });
 
-export default withRouter(connect(mapStateToProps, mapDispatchToProps)(LandingContainer));
+export default connect(mapStateToProps, mapDispatchToProps)(LandingContainer);

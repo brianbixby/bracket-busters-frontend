@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { withRouter } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 import { tokenSignInRequest } from '../../actions/userAuth-actions.js';
 import { userProfileFetchRequest, groupProfilesFetchRequest } from '../../actions/userProfile-actions.js';
@@ -22,7 +22,8 @@ class GroupItemContainer extends React.Component {
   }
 
   componentWillMount() {
-    return userValidation(this.props)
+    let navigate = useNavigate();
+    return userValidation(this.props, navigate)
       .then(() => {
         if (Object.entries(this.props.currentGroup).length === 0) {
           let myGroup = {_id: window.location.href.split('/group/')[1]};
@@ -308,4 +309,4 @@ let mapDispatchToProps = dispatch => ({
   userPicksFetch: leagueID => dispatch(userPicksFetchRequest(leagueID)),
 });
 
-export default withRouter(connect(mapStateToProps, mapDispatchToProps)(GroupItemContainer));
+export default connect(mapStateToProps, mapDispatchToProps)(GroupItemContainer);

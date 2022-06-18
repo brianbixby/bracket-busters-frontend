@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { withRouter } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 import { tokenSignInRequest } from '../../actions/userAuth-actions.js';
 import { userProfileFetchRequest } from '../../actions/userProfile-actions.js';
@@ -22,7 +22,8 @@ class LeagueAllContainer extends React.Component {
     this.state = { leaguesShown: 10 };
   }
   componentWillMount() {
-    return userValidation(this.props)
+    let navigate = useNavigate();
+    return userValidation(this.props, navigate)
       .then(() => {
         return this.props.allPublicLeaguesFetch()
           .catch(() => logError);
@@ -199,4 +200,4 @@ let mapDispatchToProps = dispatch => ({
   userPicksFetch: leagueID => dispatch(userPicksFetchRequest(leagueID)),
 });
 
-export default withRouter(connect(mapStateToProps, mapDispatchToProps)(LeagueAllContainer));
+export default connect(mapStateToProps, mapDispatchToProps)(LeagueAllContainer);

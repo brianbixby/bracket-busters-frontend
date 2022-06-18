@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { withRouter } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 import { tokenSignInRequest } from '../../actions/userAuth-actions.js';
 import { userProfileFetchRequest, groupProfilesFetchRequest } from '../../actions/userProfile-actions.js';
@@ -25,7 +25,8 @@ class LeagueContainer extends React.Component {
     this.state = { scoreBoardsShown: 10 };
   }
   componentWillMount() {
-    return userValidation(this.props)
+    let navigate = useNavigate();
+    return userValidation(this.props, navigate)
       .then(() => {
         if (Object.entries(this.props.currentLeague).length === 0) {
           return this.props.leagueFetch(window.location.href.split('/league/')[1])
@@ -328,4 +329,4 @@ let mapDispatchToProps = dispatch => ({
   groupFetchRequest: group => dispatch(groupFetch(group)),
 });
 
-export default withRouter(connect(mapStateToProps, mapDispatchToProps)(LeagueContainer));
+export default connect(mapStateToProps, mapDispatchToProps)(LeagueContainer);

@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { withRouter } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 import ProfileForm from '../profile-form';
 import BannerAd from '../helpers/bannerAd';
@@ -17,7 +17,8 @@ class ProfileContainer extends React.Component {
     super(props);
   }
   componentWillMount() {
-    userValidation(this.props);
+    let navigate = useNavigate();
+    userValidation(this.props, navigate);
   }
   handleProfileUpdate = profile => {
     return this.props.userProfileUpdate(profile)
@@ -107,4 +108,4 @@ let mapDispatchToProps = (dispatch) => ({
   userProfileUpdate: profile => dispatch(userProfileUpdateRequest(profile)),
 })
 
-export default withRouter(connect(mapStateToProps, mapDispatchToProps)(ProfileContainer));
+export default connect(mapStateToProps, mapDispatchToProps)(ProfileContainer);

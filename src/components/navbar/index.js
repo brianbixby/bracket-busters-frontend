@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { withRouter, Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 import Avatar from '../helpers/avatar';
 import { signOut } from '../../actions/userAuth-actions.js';
@@ -83,4 +83,4 @@ let mapDispatchToProps = dispatch => ({
   signOut: () => dispatch(signOut()),
 });
 
-export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Navbar));
+export default connect(mapStateToProps, mapDispatchToProps)(Navbar);

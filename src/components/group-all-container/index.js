@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { withRouter } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 import { tokenSignInRequest } from '../../actions/userAuth-actions.js';
 import { userProfileFetchRequest, groupProfilesFetchRequest } from '../../actions/userProfile-actions.js';
@@ -21,7 +21,8 @@ class GroupAllContainer extends React.Component {
     this.state = { groupsShown: 10 };
   }
   componentWillMount() {
-    userValidation(this.props)
+    let navigate = useNavigate();
+    userValidation(this.props, navigate)
       .then(() => {
         return this.props.allPublicGroupsFetch()
           .catch(() => logError);
@@ -203,4 +204,4 @@ let mapDispatchToProps = dispatch => {
   };
 };
 
-export default withRouter(connect(mapStateToProps, mapDispatchToProps)(GroupAllContainer));
+export default connect(mapStateToProps, mapDispatchToProps)(GroupAllContainer);

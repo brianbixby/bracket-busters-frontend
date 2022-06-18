@@ -4,7 +4,6 @@
     "ecmaVersion": 7
   },
   "plugins": ["babel"],
-  "extends": "airbnb",
   "env": { "browser": true },
   "settings": {
     "polyfills": ["fetch"]

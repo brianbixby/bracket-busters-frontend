@@ -1,6 +1,6 @@
 import React from 'react';
 import superagent from 'superagent';
-import { isAlphanumeric, isAscii } from 'validator';
+import { isAscii } from 'validator';
 
 import Tooltip from '../helpers/tooltip';
 import { classToggler, renderIf } from '../../lib/util';
@@ -66,7 +66,7 @@ class LeagueForm extends React.Component {
     }
   };
   leagueNameCheckAvailable = leagueName => {
-    return superagent.get(`${process.env.API_URL}/api/leagueNames/${leagueName}`)
+    return superagent.get(`${process.env.REACT_APP_API_URL}/api/leagueNames/${leagueName}`)
       .then(() => this.setState({leagueNameAvailable: true }))
       .catch(() => this.setState({ leagueNameAvailable: false }))
   };

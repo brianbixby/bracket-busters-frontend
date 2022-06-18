@@ -64,7 +64,7 @@ class GroupForm extends React.Component {
     }
   };
   groupNameCheckAvailable = groupName => {
-    return superagent.get(`${process.env.API_URL}/api/groupNames/${groupName}`)
+    return superagent.get(`${process.env.REACT_APP_API_URL}/api/groupNames/${groupName}`)
       .then(() => this.setState({groupNameAvailable: true }))
       .catch(() => this.setState({ groupNameAvailable: false }))
   };

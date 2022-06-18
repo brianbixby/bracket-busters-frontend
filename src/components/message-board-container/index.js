@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import CommentForm from '../comment-form';
 import CommentItem from '../comment-item';
-import { messageBoardFetchRequest } from '../../actions/messageBoard-actions.js';
+// import { messageBoardFetchRequest } from '../../actions/messageBoard-actions.js';
 import { commentCreateRequest, commentFetchRequest, commentsFetchRequest } from '../../actions/comment-actions.js';
 import Modal from '../helpers/modal';
 import { logError, renderIf } from './../../lib/util.js';
@@ -94,7 +94,7 @@ let mapStateToProps = state => ({
 });
 
 let mapDispatchToProps = dispatch => ({
-  messageBoardFetch: messageBoardID => dispatch(messageBoardFetchRequest(messageBoardFetchRequest)),
+//   messageBoardFetch: messageBoardID => dispatch(messageBoardFetchRequest(messageBoardID)),
   commentCreate: comment => dispatch(commentCreateRequest(comment)),
   commentFetch: commentID => dispatch(commentFetchRequest(commentID)),
   commentsFetch: comments => dispatch(commentsFetchRequest(comments)),
