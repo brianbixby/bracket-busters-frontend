@@ -1,10 +1,10 @@
-import React from 'react';
+import React, {useEffect, useState } from 'react';
 import { connect } from 'react-redux';
-import { withRouter } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 import { tokenSignInRequest } from '../../actions/userAuth-actions.js';
 import { userProfileFetchRequest, groupProfilesFetchRequest } from '../../actions/userProfile-actions.js';
-import { leaguesFetchRequest, leagueFetchRequest, leagueDeleteRequest, leagueUpdateRequest, topPublicLeaguesFetchRequest, leagueFetch, leagueJoinRequest } from '../../actions/league-actions.js';
+import { leaguesFetchRequest, leagueFetchRequest, leagueUpdateRequest, topPublicLeaguesFetchRequest, leagueFetch, leagueJoinRequest } from '../../actions/league-actions.js';
 import { groupsFetchRequest, topPublicGroupsFetchRequest, groupFetch, groupJoinRequest } from '../../actions/group-actions.js';
 import { scoreBoardsFetchRequest, topScoresFetchRequest } from '../../actions/scoreboard-actions.js';
 import { sportingEventsFetchRequest } from '../../actions/sportingEvent-actions.js';
@@ -19,111 +19,110 @@ import Table from '../helpers/table';
 import BannerAd from '../helpers/bannerAd';
 import { userValidation, logError, renderIf } from '../../lib/util.js';
 
-class LeagueContainer extends React.Component {
-  constructor(props){
-    super(props);
-    this.state = { scoreBoardsShown: 10 };
-  }
-  componentWillMount() {
-    return userValidation(this.props)
-      .then(() => {
-        if (Object.entries(this.props.currentLeague).length === 0) {
-          return this.props.leagueFetch(window.location.href.split('/league/')[1])
-            .then(league => this.props.messageBoardLeagueFetch(league._id))
-            .then(mb => this.props.commentsFetch(mb.comments))
-        }
-        return ;
-      })
-      .then(() => this.props.scoreBoardsFetch(window.location.href.split('/league/')[1]))
-      .then(() => this.props.userPicksFetch(window.location.href.split('/league/')[1]))
-      .then(picks => {
-        let gameIDArr = [];
-        gameIDArr.push(picks.map(userPick => userPick.gameID._id));
-        return this.props.gamesFetch(this.props.currentLeague.sportingEventID, gameIDArr)
-      })
-      .then(() => window.scrollTo(0, 0))
-      .catch(() => logError);
-  }
-  formatDate = date => {
+function LeagueContainer(props) {
+    let navigate = useNavigate();
+    const [scoreBoardsShown, setScoreBoardsShown] = useState(10);
+
+    useEffect(() => {
+        return userValidation(props, navigate)
+        .then(() => {
+          if (Object.entries(props.currentLeague).length === 0) {
+            return props.leagueFetch(window.location.href.split('/league/')[1])
+              .then(league => props.messageBoardLeagueFetch(league._id))
+              .then(mb => props.commentsFetch(mb.comments))
+          }
+          return ;
+        })
+        .then(() => props.scoreBoardsFetch(window.location.href.split('/league/')[1]))
+        .then(() => props.userPicksFetch(window.location.href.split('/league/')[1]))
+        .then(picks => {
+          let gameIDArr = [];
+          gameIDArr.push(picks.map(userPick => userPick.gameID._id));
+          return props.gamesFetch(props.currentLeague.sportingEventID, gameIDArr)
+        })
+        .then(() => window.scrollTo(0, 0))
+        .catch(() => logError);
+    }, [])
+
+  const formatDate = date => {
     let dateArr = new Date(date).toDateString().split(' ');
     return `${dateArr[1]} ${dateArr[2]}, ${dateArr[3]}`;
   };
-  onLeagueClick = (league, e) => {
-    this.props.leagueFetchRequest(league);
-    return this.props.messageBoardLeagueFetch(league._id)
+  const onLeagueClick = (league, e) => {
+    props.leagueFetchRequest(league);
+    return props.messageBoardLeagueFetch(league._id)
       .then(messageBoard => {
-        this.props.commentsFetch(messageBoard.comments);
+        props.commentsFetch(messageBoard.comments);
       })
-      .then(()=> this.props.userPicksFetch(league._id))
-      .then( () =>  this.props.history.push(`/league/${league._id}`))
+      .then(()=> props.userPicksFetch(league._id))
+      .then( () =>  props.history.push(`/league/${league._id}`))
       .catch(logError);
   };
-  onGroupClick = (group, e) => {
-    this.props.groupFetchRequest(group)
-    return this.props.groupProfilesFetch(group.users)
-      .then(() => this.props.messageBoardGroupFetch(group._id))
+  const onGroupClick = (group, e) => {
+    props.groupFetchRequest(group)
+    return props.groupProfilesFetch(group.users)
+      .then(() => props.messageBoardGroupFetch(group._id))
       .then(messageBoard => {
-        this.props.commentsFetch(messageBoard.comments);
+        props.commentsFetch(messageBoard.comments);
       })
-      .then(() =>  this.props.history.push(`/group/${group._id}`))
+      .then(() =>  props.history.push(`/group/${group._id}`))
       .catch(logError);
   };
-  handleBoundTopPublicLeagueClick = (league, e) => {
-    if (this.props.leagues.some(leagues => leagues._id === league._id)) {
-      this.onLeagueClick(league);
+  const handleBoundTopPublicLeagueClick = (league, e) => {
+    if (props.leagues.some(leagues => leagues._id === league._id)) {
+      onLeagueClick(league);
     }
     else {
-      return this.props.leagueJoin(league._id)
-      .then(() => this.props.messageBoardLeagueFetch(league._id))
-      .then(messageBoard => this.props.commentsFetch(messageBoard.comments))
-      .then(() => this.props.history.push(`/league/${league._id}`))
+      return props.leagueJoin(league._id)
+      .then(() => props.messageBoardLeagueFetch(league._id))
+      .then(messageBoard => props.commentsFetch(messageBoard.comments))
+      .then(() => props.history.push(`/league/${league._id}`))
       .catch(logError);
     }
   };
-  handleBoundTopPublicGroupClick = (group, e) => {
-    if (this.props.groups.some(groups => groups._id === group._id)) {
-      this.onGroupClick(group);
+  const handleBoundTopPublicGroupClick = (group, e) => {
+    if (props.groups.some(groups => groups._id === group._id)) {
+      onGroupClick(group);
     }
     else {
-      return this.props.groupProfilesFetch(group.users)
-        .then(() => this.props.groupJoin(group._id))
-        .then(() => this.props.messageBoardGroupFetch(group._id))
-        .then(messageBoard => this.props.commentsFetch(messageBoard.comments))
-        .then(() => this.props.history.push(`/group/${group._id}`))
+      return props.groupProfilesFetch(group.users)
+        .then(() => props.groupJoin(group._id))
+        .then(() => props.messageBoardGroupFetch(group._id))
+        .then(messageBoard => props.commentsFetch(messageBoard.comments))
+        .then(() => props.history.push(`/group/${group._id}`))
         .catch(logError);
     }
   };
-  handleComplete = league => {
-    return this.props.leagueUpdate(league)
-      .then(() => this.props.history.push(`/league/${this.props.league._id}`))
-      .catch(logError);
-  };
-  handleUpdate = userPick => {
-    return this.props.userPickUpdate(userPick)
+//   const handleComplete = league => {
+//     return props.leagueUpdate(league)
+//       .then(() => props.history.push(`/league/${props.league._id}`))
+//       .catch(logError);
+//   };
+  const handleUpdate = userPick => {
+    return props.userPickUpdate(userPick)
       .catch(console.error);
   };
-  handleCreate = userPick => {
-    userPick.leagueID= this.props.currentLeague._id;
-    return this.props.userPickCreate(userPick)
-      .then(userPick => this.props.userPickFetch(userPick._id))
+  const handleCreate = userPick => {
+    userPick.leagueID= props.currentLeague._id;
+    return props.userPickCreate(userPick)
+      .then(userPick => props.userPickFetch(userPick._id))
       .catch(console.error);
   };
-  handleShowAll = () => {
-    this.state.scoreBoardsShown === 10
-      ? this.setState({ scoreBoardsShown: this.props.scoreBoards.length})
-        : this.setState({ scoreBoardsShown: 10});
+  const handleShowAll = () => {
+    scoreBoardsShown === 10
+      ? setScoreBoardsShown(props.scoreBoards.length)
+        : setScoreBoardsShown(10);
   };
-  render(){
-    let currentLeague = this.props.currentLeague;
-    let scoreBoards = 'scores';
+    let currentLeague = props.currentLeague;
+    // let scoreBoards = 'scores';
     let nbalogo = require('./../helpers/assets/nba-logo.png');
     let formTypeLeague = 'league';
     let formTypeGroup = 'group';
     let topScores = 'scores';
     let basketball = require('./../helpers/assets/basketball.png');
     let kd = require('./../helpers/assets/2.png');
-    let leaguePhoto = currentLeague.image ? <img className='createImg' src={currentLeague.image} /> : <img className='createImg' src={kd} />;
-    let scores = this.props.scoreBoards.slice(0, this.state.scoreBoardsShown);
+    let leaguePhoto = currentLeague.image ? <img className='createImg' src={currentLeague.image} alt="current league" /> : <img className='createImg' src={kd} alt="league placeholder" />;
+    let scores = props.scoreBoards.slice(0, scoreBoardsShown);
     let users = require('./../helpers/assets/icons/users.icon.svg');
     let info = require('./../helpers/assets/icons/info.icon.svg');
     return (
@@ -136,7 +135,7 @@ class LeagueContainer extends React.Component {
                 <div className='createOuterInner'>
                   <div className='outer'>
                     <div className='outerLeft'>
-                      <img src={nbalogo} />
+                      <img src={nbalogo} alt="NBA Logo" />
                       <p className='headerText'>NBA</p>
                     </div>
                     <div className='outerRight'>
@@ -166,36 +165,36 @@ class LeagueContainer extends React.Component {
                         </p>
                         <p className='joinTextSubtitle'>
                           Creator: {currentLeague.ownerName} <br></br>
-                          Created: {this.formatDate(currentLeague.createdOn)} <br></br>
+                          Created: {formatDate(currentLeague.createdOn)} <br></br>
                           Privacy: {currentLeague.privacy} <br></br>
                           Size: {currentLeague.size}
                         </p>
                       </div>
                     </div>
                     <div className='joinImgDiv'>
-                      <img className='info' src={info} />
+                      <img className='info' src={info} alt="League info icon" />
                     </div>
                   </div>
                 </div>
-                {renderIf(this.props.games && this.props.games.length > 0,
+                {renderIf(props.games && props.games.length > 0,
                     <div className='mtop8'>
                       <div className='picksGamesHeader'>Games</div>
                       <div className='container overflow boxShadow'>
-                        {this.props.games.map(game =>
+                        {props.games.map(game =>
                           <div key={game._id} className='gameItemOuter'>
-                            <GameItem  game={game} onComplete={this.handleCreate}/>
+                            <GameItem  game={game} onComplete={handleCreate}/>
                           </div>
                         )}
                       </div>
                     </div>
                   )}
-                  {renderIf(this.props.userPicks && this.props.userPicks.length > 0,
+                  {renderIf(props.userPicks && props.userPicks.length > 0,
                     <div className=' mtop8'>
                       <div className='picksGamesHeader'>Picks</div>
                         <div className='container overflow boxShadow'>
-                          {this.props.userPicks.map((userPick, idx) =>
+                          {props.userPicks.map((userPick, idx) =>
                             <div key={idx} className='maxHeight90 userPickItemOuter'>
-                              <UserPickItem  userPick={userPick} onUpdate={this.handleUpdate}/>
+                              <UserPickItem  userPick={userPick} onUpdate={handleUpdate}/>
                             </div>
                           )}
                         </div>
@@ -203,13 +202,13 @@ class LeagueContainer extends React.Component {
                   )}
               </div>
               <div className='m16'>
-                <MessageBoardContainer mBoardId={this.props.currentMessageBoard._id} commentsArray={this.props.currentMessageBoard.comments}/>
+                <MessageBoardContainer mBoardId={props.currentMessageBoard._id} commentsArray={props.currentMessageBoard.comments}/>
               </div>
             </div>
             <div className='col-md-4'>
               <div className='leagueBoardsContainer'>
                 <div className='leaguesContainerHeader'>
-                  <img className='leaguesBoardIcon' src={basketball} />
+                  <img className='leaguesBoardIcon' src={basketball} alt="Basketball icon"/>
                   <p className='leaguesBoardHeader'>LEAGUES</p>
                 </div>
                 <div className='tablesContainer'>
@@ -227,8 +226,8 @@ class LeagueContainer extends React.Component {
                       </div>
                     })}
                     <div className='spacerRow'>
-                      {renderIf( this.props.scoreBoards.length >10,
-                        <p className='seeAll' onClick={this.handleShowAll}> See All</p>
+                      {renderIf( props.scoreBoards.length >10,
+                        <p className='seeAll' onClick={handleShowAll}> See All</p>
                       )}
                     </div>
                   </div>
@@ -242,8 +241,8 @@ class LeagueContainer extends React.Component {
                           <p className='tableColumn columnSize'> SIZE </p>
                         </div>
                       </div>
-                      {this.props.topPublicLeagues.map(topPublicLeague => {
-                        let boundTopPublicLeagueClick = this.handleBoundTopPublicLeagueClick.bind(this, topPublicLeague);
+                      {props.topPublicLeagues.map(topPublicLeague => {
+                        let boundTopPublicLeagueClick = handleBoundTopPublicLeagueClick.bind(this, topPublicLeague);
                         return <div className='rowColors cursor' key={topPublicLeague._id} onClick={boundTopPublicLeagueClick}>
                         <Table item={topPublicLeague} type={formTypeLeague} />
                         </div>
@@ -255,7 +254,7 @@ class LeagueContainer extends React.Component {
               </div>
               <div className='leagueBoardsContainer'>
                 <div className='leaguesContainerHeader'>
-                  <img className='users' src={users} />
+                  <img className='users' src={users} alt="users icon" />
                   <p className='leaguesBoardHeader'>FEATURED GROUPS</p>
                 </div>
                 <div className='container tableContainer'>
@@ -267,8 +266,8 @@ class LeagueContainer extends React.Component {
                       <p className='tableColumn columnSize'> SIZE </p>
                     </div>
                   </div>
-                  {this.props.topPublicGroups.map(topPublicGroup => {
-                    let boundTopPublicGroupClick = this.handleBoundTopPublicGroupClick.bind(this, topPublicGroup);
+                  {props.topPublicGroups.map(topPublicGroup => {
+                    let boundTopPublicGroupClick = handleBoundTopPublicGroupClick.bind(this, topPublicGroup);
                     return <div className='rowColors cursor groupsTableContainer' key={topPublicGroup._id} onClick={boundTopPublicGroupClick}>
                     <Table item={topPublicGroup} type={formTypeGroup} />
                     </div>
@@ -281,7 +280,6 @@ class LeagueContainer extends React.Component {
         </div>
       </div>
     );
-  }
 }
 
 let mapStateToProps = state => ({
@@ -328,4 +326,4 @@ let mapDispatchToProps = dispatch => ({
   groupFetchRequest: group => dispatch(groupFetch(group)),
 });
 
-export default withRouter(connect(mapStateToProps, mapDispatchToProps)(LeagueContainer));
+export default connect(mapStateToProps, mapDispatchToProps)(LeagueContainer);

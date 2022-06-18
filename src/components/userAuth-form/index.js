@@ -71,7 +71,7 @@ class UserAuthForm extends React.Component {
   handleBlur = e => {
     let { name } = e.target;
     this.setState(state => ({
-      focused: state.focused == name ? null : state.focused,
+      focused: state.focused === name ? null : state.focused,
     }))
   };
   handleChange = e => {
@@ -87,7 +87,7 @@ class UserAuthForm extends React.Component {
     }
   };
   usernameCheckAvailable = username => {
-    return superagent.get(`${process.env.API_URL}/api/signup/usernames/${username}`)
+    return superagent.get(`${process.env.REACT_APP_API_URL}/api/signup/usernames/${username}`)
       .then(() => this.setState({usernameAvailable: true }))
       .catch(() => this.setState({ usernameAvailable: false }))
   };
@@ -97,7 +97,7 @@ class UserAuthForm extends React.Component {
       this.props.onComplete(this.state, this.handleError)
         .catch(err => {
           this.setState({ 
-            error,
+            error: true,
             submitted: true,
         });
       });

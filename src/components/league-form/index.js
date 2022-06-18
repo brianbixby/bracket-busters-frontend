@@ -1,6 +1,6 @@
 import React from 'react';
 import superagent from 'superagent';
-import { isAlphanumeric, isAscii } from 'validator';
+import { isAscii } from 'validator';
 
 import Tooltip from '../helpers/tooltip';
 import { classToggler, renderIf } from '../../lib/util';
@@ -34,7 +34,7 @@ class LeagueForm extends React.Component {
     }
 
     if(name === 'password') {
-      if(!value && input[name='privacy'].value === 'private')
+      if(!value && this.state.privacy === 'private')
         setError(name, `${name} can not be empty`)
       else if(!isAscii(value))
         setError(name, 'password may only contain normal charachters')
@@ -50,7 +50,7 @@ class LeagueForm extends React.Component {
   handleBlur = e => {
     let { name } = e.target;
     this.setState(state => ({
-      focused: state.focused == name ? null : state.focused,
+      focused: state.focused === name ? null : state.focused,
     }))
   };
   handleChange = e => {
@@ -66,7 +66,7 @@ class LeagueForm extends React.Component {
     }
   };
   leagueNameCheckAvailable = leagueName => {
-    return superagent.get(`${process.env.API_URL}/api/leagueNames/${leagueName}`)
+    return superagent.get(`${process.env.REACT_APP_API_URL}/api/leagueNames/${leagueName}`)
       .then(() => this.setState({leagueNameAvailable: true }))
       .catch(() => this.setState({ leagueNameAvailable: false }))
   };
@@ -77,7 +77,7 @@ class LeagueForm extends React.Component {
         .catch(err => {
           console.error(err);
           this.setState({ 
-            error,
+            error: true,
             submitted: true,
         });
       });
@@ -89,7 +89,7 @@ class LeagueForm extends React.Component {
     }))
   };
   render(){
-    let { focused, submitted, leagueName, emailError, passwordError, leagueNameError, leagueNameAvailable } = this.state;
+    let { focused, submitted, leagueName, passwordError, leagueNameError, leagueNameAvailable } = this.state;
     let buttonText = this.props.league ? 'update' : 'create';
     return (
       <form onSubmit={this.handleSubmit} className={classToggler({

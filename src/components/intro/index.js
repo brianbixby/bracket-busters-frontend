@@ -1,6 +1,5 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { Link, Redirect } from 'react-router-dom';
 
 import { signUpRequest, signInRequest } from '../../actions/userAuth-actions.js';
 import { userProfileFetchRequest } from '../../actions/userProfile-actions.js';
@@ -126,9 +125,9 @@ class Intro extends React.Component {
           </div>
           <div className="banner-image">
             <div className="background">
-              <img className="intro-background intro-images" src={background} />
-              <img className="intro-curry intro-images" src={curry} />
-              <img className="intro-lebron intro-images" src={lebron} />
+              <img className="intro-background intro-images" src={background} alt="background" />
+              <img className="intro-curry intro-images" src={curry} alt="Steph Curry" />
+              <img className="intro-lebron intro-images" src={lebron} alt="Lebron James" />
             </div>
           </div>
           <div>

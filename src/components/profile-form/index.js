@@ -23,7 +23,6 @@ class ProfileForm extends React.Component {
     })
   };
   render() {
-    let dateClass = !this.state.birthdate ? 'grayDate' : '';
     return (
       <section className='profile-form'>
         <form className='form' onSubmit={this.handleSubmit}>

@@ -1,10 +1,14 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { withRouter, Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 import Avatar from '../helpers/avatar';
 import { signOut } from '../../actions/userAuth-actions.js';
 import { classToggler, renderIf } from '../../lib/util.js';
+import user from './../helpers/assets/icons/user.icon.svg';
+import caretDown from './../helpers/assets/icons/caret-down.icon.svg';
+import github from './../helpers/assets/icons/github.icon.svg';
+import linkedin from './../helpers/assets/icons/linkedin.icon.svg';
 
 
 class Navbar extends React.Component {
@@ -29,11 +33,7 @@ class Navbar extends React.Component {
     this.props.history.push('/');
   };
   render() {
-    let user = require('./../helpers/assets/icons/user.icon.svg');
-    let caretDown = require('./../helpers/assets/icons/caret-down.icon.svg');
-    let github = require('./../helpers/assets/icons/github.icon.svg');
-    let linkedin = require('./../helpers/assets/icons/linkedin.icon.svg');
-    let profileImage = this.props.userProfile && this.props.userProfile.image ? <Avatar url={this.props.userProfile.image} /> : <img className='noProfileImageNav' src={user} />;
+    let profileImage = this.props.userProfile && this.props.userProfile.image ? <Avatar url={this.props.userProfile.image} /> : <img className='noProfileImageNav' src={user} alt="user" />;
     let profileLink = this.props.userProfile && this.props.userProfile._id ? `/user/${this.props.userProfile._id}` : '';
     return (
       <header className={classToggler({
@@ -49,7 +49,7 @@ class Navbar extends React.Component {
               {renderIf(this.props.userAuth,
                 <div>
                   <div className='avatarDiv' onClick={() => this.setState({ visible: !this.state.visible })} >
-                    <img className='caretDown' src={caretDown}/>
+                    <img className='caretDown' src={caretDown} alt="caret down"/>
                     {profileImage}
                   </div>
                   <div className={ this.state.visible ? 'slideIn dropdownDiv' : 'slideOut dropdownDiv' }>
@@ -62,10 +62,10 @@ class Navbar extends React.Component {
               )}
             </li>
             <li className='social'>
-              <a href="https://github.com/brianbixby" rel="noopener noreferrer" target="_blank"><span><img className='github' src={github} /></span> </a>
+              <a href="https://github.com/brianbixby" rel="noopener noreferrer" target="_blank"><span><img className='github' src={github} alt="github icon"/></span> </a>
             </li>
             <li className='social'>
-              <a href="https://www.linkedin.com/in/brianbixby1/" rel="noopener noreferrer" target="_blank"><span><img className='linkedin' src={linkedin} /></span></a>
+              <a href="https://www.linkedin.com/in/brianbixby1/" rel="noopener noreferrer" target="_blank"><span><img className='linkedin' src={linkedin} alt="linkedin icon" /></span></a>
             </li>
           </ul>
         </nav>
@@ -83,4 +83,4 @@ let mapDispatchToProps = dispatch => ({
   signOut: () => dispatch(signOut()),
 });
 
-export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Navbar));
+export default connect(mapStateToProps, mapDispatchToProps)(Navbar);

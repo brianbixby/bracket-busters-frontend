@@ -1,5 +1,3 @@
-import { asyncComponent } from 'react-async-component';
-
 export const log = (...args) => console.log(...args);
 export const logError = (...args) => console.error(...args);
 export const renderIf = (test, component) => test ? component : undefined;
@@ -18,76 +16,40 @@ export const formatDate = date => {
   return `${dateArr[1]} ${dateArr[2]}, ${dateArr[3]}`;
 };
 
-export const userValidation = props => {
-  if(!props.userAuth) {
-    let { history } = props;
-    
-    let token = localStorage.token;  
-    if(token) {
-      return props.tokenSignIn(token)
-        .then(() => {
-          return props.sportingEventsFetch()
-            .catch(() => logError);
-        })
-        .then(sportingEvent => {
-          return props.userProfileFetch()
-            .then(profile => {
-              return {sportingEventID: sportingEvent._id, leagues: profile.body.leagues, groups: profile.body.groups};
-            })
-            .catch(() => logError);
-        })
-        .then(returnObj => {
-          if(returnObj.leagues.length)
-            props.leaguesFetch(returnObj.leagues)
-              .catch(() => logError);
-          return returnObj;
-        })
-        .then(returnObj => {
-          if(returnObj.groups.length)
-            props.groupsFetch(returnObj.groups)
-              .catch(() => logError);
-          return returnObj;
-        })
-        .then(returnObj => {
-          if(!returnObj.leagues) 
-            returnObj.leagues = [];
-          return props.topPublicLeaguesFetch(returnObj.sportingEventID, returnObj.leagues)
-            .then(() => returnObj)
-            .catch(() => logError);
-        })
-        .then(returnObj => {
-          return props.topScoresFetch(returnObj.sportingEventID)
-            .then(() => returnObj)
-            .catch(() => logError);
-        })
-        .then(returnObj => {
-          if(!returnObj.groups) 
-            returnObj.groups = [];
-          return props.topPublicGroupsFetch(returnObj.groups)
-            .catch(() => logError);
-        })
-        .catch(() => {
-          logError;
-          if(props.location.pathname !== '/')
-            return history.replace('/');
-          return;
-        });
-    } else {
-      return props.sportingEventsFetch()
-        .then((event) => {
-          if(props.location.pathname !== '/')
-            history.replace('/');
-          return event;
-        })
-        .catch(() => logError);
+export const userValidation = async (props, navigate, redirect=true) => {
+    try {
+        if (props.userAuth) {
+            await props.sportingEventsFetch()
+        } else {
+            const token = JSON.parse(localStorage.getItem("token"));
+            if (token) {
+                await props.tokenSignIn(token)
+                const sportingEvent = await props.sportingEventsFetch();
+                let profile = await props.userProfileFetch();
+                let returnObj = {sportingEventID: sportingEvent._id, leagues: profile.body.leagues, groups: profile.body.groups};
+                if (returnObj.leagues.length) {
+                    await props.leaguesFetch(returnObj.leagues)
+                }
+                if (returnObj.groups.length) {
+                    await props.groupsFetch(returnObj.groups)
+                }
+                if (!returnObj.leagues) {
+                    returnObj.leagues = [];
+                }
+                await props.topPublicLeaguesFetch(returnObj.sportingEventID, returnObj.leagues)
+                await props.topScoresFetch(returnObj.sportingEventID)
+                if(!returnObj.groups) 
+                    returnObj.groups = [];
+                await props.topPublicGroupsFetch(returnObj.groups)
+            } else {
+                const event = await props.sportingEventsFetch()
+                if (redirect) {
+                    navigate("/");
+                }
+                return event;
+            }
+        }
+    } catch (err) {
+        return redirect ? navigate("/") : true;
     }
-  }
-  return props.sportingEventsFetch()
-    .catch(() => logError);
-};
-
-export const makeAsyncComponent = importStmt => {
-  return asyncComponent({
-    resolve: () => importStmt
-  })
-};
+}

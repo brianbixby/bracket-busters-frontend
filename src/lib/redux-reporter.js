@@ -1,12 +1,15 @@
-import { logError } from './util.js';
+import { logError } from "./util.js";
 
-export default store => next => action => {
+// eslint-disable-next-line
+const reporter = (store) => (next) => (action) => {
   try {
     let result = next(action);
     return result;
   } catch (err) {
     err.action = action;
-    logError('__ERROR__', err);
+    logError("__ERROR__", err);
     return err;
   }
 };
+
+export default reporter;

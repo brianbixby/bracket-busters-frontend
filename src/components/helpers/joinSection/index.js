@@ -2,9 +2,6 @@ import React from 'react';
 import { renderIf } from './../../../lib/util.js';
 
 class JoinSection extends React.Component {
-  constructor(props){
-    super(props);
-  }
   redirect = () => this.props.handleRedirect(`/${this.props.joinType}s`);
   render() {
     let steph = require('./../assets/steph.png');
@@ -27,10 +24,10 @@ class JoinSection extends React.Component {
           </div>
           <div className='joinImgDiv'>
             {renderIf(this.props.joinType === 'league',
-              <img className='joingImg stephJoinImg' src={steph} />
+              <img className='joingImg stephJoinImg' src={steph} alt="Steph Curry" />
             )}
             {renderIf(this.props.joinType === 'group',
-              <img className='joingImg' src={russell} />
+              <img className='joingImg' src={russell} alt="Russell Westbrook" />
             )}
           </div>
         </div>

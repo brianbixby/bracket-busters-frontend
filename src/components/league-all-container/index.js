@@ -1,6 +1,6 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
-import { withRouter } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 import { tokenSignInRequest } from '../../actions/userAuth-actions.js';
 import { userProfileFetchRequest } from '../../actions/userProfile-actions.js';
@@ -16,70 +16,68 @@ import Table from '../helpers/table';
 import BannerAd from '../helpers/bannerAd';
 import { userValidation, logError} from '../../lib/util.js';
 
-class LeagueAllContainer extends React.Component {
-  constructor(props){
-    super(props);
-    this.state = { leaguesShown: 10 };
-  }
-  componentWillMount() {
-    return userValidation(this.props)
-      .then(() => {
-        return this.props.allPublicLeaguesFetch()
-          .catch(() => logError);
-      })
-      .catch(() => logError);
-  };
+function LeagueAllContainer(props) {
+    let navigate = useNavigate();
+    const [leaguesShown, setLeaguesShown] = useState(10);
 
-  onLeagueClick = (league, e) => {
-    this.props.leagueFetchRequest(league);
-    return this.props.messageBoardLeagueFetch(league._id)
+    useEffect(() => {
+        return userValidation(props, navigate)
+        .then(() => props.allPublicLeaguesFetch())
+        .catch(() => logError);
+    }, [])
+
+  const onLeagueClick = (league, e) => {
+    props.leagueFetchRequest(league);
+    return props.messageBoardLeagueFetch(league._id)
       .then(messageBoard => {
-        this.props.commentsFetch(messageBoard.comments);
+        props.commentsFetch(messageBoard.comments);
       })
-      .then(()=> this.props.userPicksFetch(league._id))
-      .then( () =>  this.props.history.push(`/league/${league._id}`))
+      .then(()=> props.userPicksFetch(league._id))
+      .then( () =>  navigate(`/league/${league._id}`))
       .catch(logError);
   };
-  handleLeagueJoin = (league, e) => {
-    if (this.props.leagues.some(leagues => leagues._id === league._id)) {
-      this.onLeagueClick(league);
+  const handleLeagueJoin = (league, e) => {
+    if (props.leagues.some(leagues => leagues._id === league._id)) {
+      onLeagueClick(league);
     }
     else {
-      return this.props.leagueJoin(league._id)
-      .then(() => this.props.messageBoardLeagueFetch(league._id))
-      .then(messageBoard => this.props.commentsFetch(messageBoard.comments))
-      .then(() => this.props.history.push(`/league/${league._id}`))
+      return props.leagueJoin(league._id)
+      .then(() => props.messageBoardLeagueFetch(league._id))
+      .then(messageBoard => props.commentsFetch(messageBoard.comments))
+      .then(() => navigate(`/league/${league._id}`))
       .catch(logError);
     }
   };
-  handlePrivateLeagueJoin = credentials => {
+  const handlePrivateLeagueJoin = credentials => {
     let league;
-    if (this.props.leagues.some(leagues => {
-      if(leagues.leagueName === credentials.leagueName)
+    if (props.leagues.some(leagues => {
+      if(leagues.leagueName === credentials.leagueName) {
         return league = leagues;
+      } else {
+        return ;
+      }
     }
     )) {
-      this.onLeagueClick(league);
+      onLeagueClick(league);
     }
     else {
-      return this.props.privateLeagueJoin(credentials)
-        .then(league => this.props.messageBoardLeagueFetch(league._id))
+      return props.privateLeagueJoin(credentials)
+        .then(league => props.messageBoardLeagueFetch(league._id))
         .then(messageBoard => {
-          this.props.commentsFetch(messageBoard.comments);
+          props.commentsFetch(messageBoard.comments);
           return messageBoard.leagueID
         })
-        .then(leagueID => this.props.history.push(`/league/${leagueID}`))
+        .then(leagueID => navigate(`/league/${leagueID}`))
         .catch(logError);
       }
   };
-  handleShowAll = () => {
-    this.state.leaguesShown === 10
-      ? this.setState({ leaguesShown: this.props.publicLeagues.length})
-        : this.setState({ leaguesShown: 10});
+  const handleShowAll = () => {
+    leaguesShown === 10
+      ? setLeaguesShown(props.publicLeagues.length)
+        : setLeaguesShown(10);
   };
-  render(){
     let tableType = 'league';
-    let leagues = this.props.publicLeagues.slice(0, this.state.leaguesShown);
+    let leagues = props.publicLeagues.slice(0, leaguesShown);
     let users = require('./../helpers/assets/icons/users.icon.svg');
     let lock = require('./../helpers/assets/icons/lock.icon.svg');
     return (
@@ -92,7 +90,7 @@ class LeagueAllContainer extends React.Component {
                 <div className='mainContainer hideLarge'>
                   <div className='mainContainer-header'>
                     <div className='left'>
-                      <img className='lock' src={lock} />
+                      <img className='lock' src={lock} alt="lock icon" />
                       <p className='mainContainerHeader'>
                         PRIVATE LEAGUES
                       </p>
@@ -103,7 +101,7 @@ class LeagueAllContainer extends React.Component {
                       <div className='container'>
                         <div className='inner-wrapper'>
                           <p className='allHeader'>Join A Private League! </p>
-                          <LeagueAllPrivateForm onComplete={this.handlePrivateLeagueJoin}/>
+                          <LeagueAllPrivateForm onComplete={handlePrivateLeagueJoin}/>
                         </div>
                       </div>
                     </div>
@@ -112,13 +110,13 @@ class LeagueAllContainer extends React.Component {
                 <div className='mainContainer'>
                   <div className='mainContainer-header'>
                       <div className='left'>
-                        <img className='users' src={users} />
+                        <img className='users' src={users} alt="users icon" />
                         <p className='mainContainerHeader'>
                           PUBLIC LEAGUES
                         </p>
                       </div>
                       <div className='right'>
-                        <p className='seeAll' onClick={this.handleShowAll}> See All</p>
+                        <p className='seeAll' onClick={handleShowAll}> See All</p>
                       </div>
                   </div>
                   <div className='container tableContainer allTableOuter'>
@@ -131,7 +129,7 @@ class LeagueAllContainer extends React.Component {
                       </div>
                     </div>
                     {leagues.map(league => {
-                      let boundLeagueJoinClick = this.handleLeagueJoin.bind(this, league);
+                      let boundLeagueJoinClick = handleLeagueJoin.bind(this, league);
                       return <div className='rowColors cursor allTableContainer' key={league._id} onClick={boundLeagueJoinClick}>
                         <Table item={league} type={tableType} />
                       </div>
@@ -144,7 +142,7 @@ class LeagueAllContainer extends React.Component {
                 <div className='mainContainer'>
                   <div className='mainContainer-header'>
                     <div className='left'>
-                      <img className='lock' src={lock} />
+                      <img className='lock' src={lock} alt="lock icon" />
                       
                       <p className='mainContainerHeader'>PRIVATE LEAGUES</p>
                     </div>
@@ -154,7 +152,7 @@ class LeagueAllContainer extends React.Component {
                       <div className='container'>
                         <div className='inner-wrapper'>
                           <p className='allHeader'>Join A Private League </p>
-                          <LeagueAllPrivateForm onComplete={this.handlePrivateLeagueJoin}/>
+                          <LeagueAllPrivateForm onComplete={handlePrivateLeagueJoin}/>
                         </div>
                       </div>
                     </div>
@@ -166,7 +164,6 @@ class LeagueAllContainer extends React.Component {
         </div>
       </div>
     );
-  }
 }
 
 let mapStateToProps = state => ({
@@ -199,4 +196,4 @@ let mapDispatchToProps = dispatch => ({
   userPicksFetch: leagueID => dispatch(userPicksFetchRequest(leagueID)),
 });
 
-export default withRouter(connect(mapStateToProps, mapDispatchToProps)(LeagueAllContainer));
+export default connect(mapStateToProps, mapDispatchToProps)(LeagueAllContainer);

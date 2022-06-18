@@ -1,32 +1,32 @@
-import React from 'react';
-import { BrowserRouter, Route } from 'react-router-dom';
+import React, { Suspense, lazy } from "react";
+import { Routes, Route } from "react-router-dom";
 
-import { makeAsyncComponent } from "./../../lib/util.js";
-import Navbar from '../navbar';
-import LandingContainer from '../landing-container';
+const Navbar = lazy(() => import("../navbar"));
+const LandingContainer = lazy(() => import("../landing-container"));
+const LeagueAllContainer = lazy(() => import('../league-all-container'));
+const LeagueItemContainer = lazy(() => import('../league-item-container'));
+const GroupAllContainer = lazy(() => import('../group-all-container'));
+const GroupItemContainer = lazy(() => import('../group-item-container'));
+const ProfileContainer = lazy(() => import('../profile-container'));
 
-const LeagueAllContainer = makeAsyncComponent(import('../league-all-container'));
-const LeagueItemContainer = makeAsyncComponent(import('../league-item-container'));
-const GroupAllContainer = makeAsyncComponent(import('../group-all-container'));
-const GroupItemContainer = makeAsyncComponent(import('../group-item-container'));
-const ProfileContainer = makeAsyncComponent(import('../profile-container'));
-
-class App extends React.Component {
-  render() {
+function App() {
     return (
-      <BrowserRouter>
-        <section>
-          <Route path='*' component={Navbar} />
-          <Route exact path='/' component={LandingContainer} />
-          <Route exact path='/leagues' component={LeagueAllContainer} />
-          <Route exact path='/league/:leagueID' component={LeagueItemContainer} />
-          <Route exact path='/groups' component={GroupAllContainer} />
-          <Route exact path='/group/:groupID' component={GroupItemContainer} />
-          <Route exact path='/user/:profileID' component={ProfileContainer} />
-        </section>
-      </BrowserRouter>
+      <div>
+        <div>
+          <Navbar />
+        </div>
+        <Suspense fallback={<div>Loading...</div>}>
+          <Routes>
+            <Route path="/" element={<LandingContainer />} />
+            <Route path="/leagues" element={<LeagueAllContainer />} />
+            <Route path="/league/:leagueID" element={<LeagueItemContainer />} />
+            <Route path="/groups" element={<GroupAllContainer />} />
+            <Route path="/group/:groupID" element={<GroupItemContainer />} />
+            <Route path="/user/:profileID" element={<ProfileContainer />} />
+          </Routes>
+        </Suspense>
+      </div>
     );
   }
-}
-
-export default App;
+  
+  export default App;

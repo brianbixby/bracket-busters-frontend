@@ -6,7 +6,7 @@ let validateGroup = group => {
   }
 };
 
-export default (state=[], action) => {
+let group = (state=[], action) => {
   let { type, payload } = action;
 
   switch(type) {
@@ -33,3 +33,5 @@ export default (state=[], action) => {
       return state;
   }
 };
+
+export default group;

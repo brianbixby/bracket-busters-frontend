@@ -1,6 +1,6 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
-import { withRouter } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 import { tokenSignInRequest } from '../../actions/userAuth-actions.js';
 import { userProfileFetchRequest, groupProfilesFetchRequest } from '../../actions/userProfile-actions.js';
@@ -15,74 +15,70 @@ import Table from '../helpers/table';
 import BannerAd from '../helpers/bannerAd';
 import { userValidation, logError } from './../../lib/util.js';
 
-class GroupAllContainer extends React.Component {
-  constructor(props){
-    super(props);
-    this.state = { groupsShown: 10 };
-  }
-  componentWillMount() {
-    userValidation(this.props)
-      .then(() => {
-        return this.props.allPublicGroupsFetch()
-          .catch(() => logError);
-      })
-      .catch(() => logError);
-  };
-  onGroupClick = (group, e) => {
-    this.props.groupFetchRequest(group)
-    return this.props.groupProfilesFetch(group.users)
-      .then(() => this.props.messageBoardGroupFetch(group._id))
+function GroupAllContainer(props) {
+    let navigate = useNavigate();
+    const [groupsShown, setGroupsShown] = useState(10);
+
+    useEffect(() => {
+        userValidation(props, navigate)
+            .then(() => props.allPublicGroupsFetch())
+            .catch(() => logError);
+    }, [])
+
+  const onGroupClick = (group, e) => {
+    props.groupFetchRequest(group)
+    return props.groupProfilesFetch(group.users)
+      .then(() => props.messageBoardGroupFetch(group._id))
       .then(messageBoard => {
-        this.props.commentsFetch(messageBoard.comments);
+        props.commentsFetch(messageBoard.comments);
       })
-      .then(() =>  this.props.history.push(`/group/${group._id}`))
+      .then(() =>  props.history.push(`/group/${group._id}`))
       .catch(logError);
   };
-  handleGroupJoin = (group, e) => {
-    if (this.props.groups.some(groups => groups._id === group._id)) {
-      this.onGroupClick(group);
+  const handleGroupJoin = (group, e) => {
+    if (props.groups.some(groups => groups._id === group._id)) {
+      onGroupClick(group);
     }
     else {
-      return this.props.groupProfilesFetch(group.users)
-        .then(() => this.props.groupJoin(group._id))
-        .then(() => this.props.messageBoardGroupFetch(group._id))
-        .then(messageBoard => this.props.commentsFetch(messageBoard.comments))
-        .then(() => this.props.history.push(`/group/${group._id}`))
+      return props.groupProfilesFetch(group.users)
+        .then(() => props.groupJoin(group._id))
+        .then(() => props.messageBoardGroupFetch(group._id))
+        .then(messageBoard => props.commentsFetch(messageBoard.comments))
+        .then(() => props.history.push(`/group/${group._id}`))
         .catch(logError);
     }
   };
-  handlePrivateGroupJoin = credentials => {
+  const handlePrivateGroupJoin = credentials => {
     let group;
-    if (this.props.groups.some(groups => {
+    if (props.groups.some(groups => {
       if(groups.groupName === credentials.groupName)
         return group = groups;
     }
     )) {
-      this.onGroupClick(group);
+      onGroupClick(group);
     }
     else {
-      return this.props.privateGroupJoin(credentials)
+      return props.privateGroupJoin(credentials)
       .then(group => {
-        this.props.groupProfilesFetch(group.users);
+        props.groupProfilesFetch(group.users);
         return group;
       })
-      .then(group => this.props.messageBoardGroupFetch(group._id))
+      .then(group => props.messageBoardGroupFetch(group._id))
       .then(messageBoard => {
-        this.props.commentsFetch(messageBoard.comments);
+        props.commentsFetch(messageBoard.comments);
         return messageBoard.groupID
       })
-      .then(groupID => this.props.history.push(`/group/${groupID}`))
+      .then(groupID => props.history.push(`/group/${groupID}`))
       .catch(logError);
     }
   };
-  handleShowAll = () => {
-    this.state.groupsShown === 10
-      ? this.setState({ groupsShown: this.props.publicGroups.length})
-        : this.setState({ groupsShown: 10});
+  const handleShowAll = () => {
+    groupsShown === 10
+      ? setGroupsShown(props.publicGroups.length)
+        : setGroupsShown(10);
   };
-  render() {
     let tableType = 'group';
-    let groups = this.props.publicGroups.slice(0, this.state.groupsShown);
+    let groups = props.publicGroups.slice(0, groupsShown);
     let users = require('./../helpers/assets/icons/users.icon.svg');
     let lock = require('./../helpers/assets/icons/lock.icon.svg');
     return (
@@ -95,7 +91,7 @@ class GroupAllContainer extends React.Component {
                 <div className='mainContainer hideLarge'>
                   <div className='mainContainer-header'>
                     <div className='left'>
-                      <img className='lock' src={lock} />
+                      <img className='lock' src={lock} alt="Lock icon" />
                       <p className='mainContainerHeader'>
                         PRIVATE GROUPS
                       </p>
@@ -106,7 +102,7 @@ class GroupAllContainer extends React.Component {
                       <div className='container'>
                         <div className='inner-wrapper'>
                           <p className='allHeader'>Join A Private Group </p>
-                          <GroupAllPrivateForm onComplete={this.handlePrivateGroupJoin}/>
+                          <GroupAllPrivateForm onComplete={handlePrivateGroupJoin}/>
                         </div>
                       </div>
                     </div>
@@ -115,13 +111,13 @@ class GroupAllContainer extends React.Component {
                 <div className='mainContainer'>
                   <div className='mainContainer-header'>
                       <div className='left'>
-                        <img className='users' src={users} />
+                        <img className='users' src={users} alt="Users icon" />
                         <p className='mainContainerHeader'>
                           PUBLIC GROUPS
                         </p>
                       </div>
                       <div className='right'>
-                        <p className='seeAll' onClick={this.handleShowAll}> See All</p>
+                        <p className='seeAll' onClick={handleShowAll}> See All</p>
                       </div>
                   </div>
                   <div className='container tableContainer allTableOuter'>
@@ -134,7 +130,7 @@ class GroupAllContainer extends React.Component {
                       </div>
                     </div>
                     {groups.map(group => {
-                      let boundGroupJoinClick = this.handleGroupJoin.bind(this, group);
+                      let boundGroupJoinClick = handleGroupJoin.bind(this, group);
                       return <div className='rowColors cursor allTableContainer' key={group._id} onClick={boundGroupJoinClick}>
                         <Table item={group} type={tableType} />
                       </div>
@@ -147,7 +143,7 @@ class GroupAllContainer extends React.Component {
                 <div className='mainContainer'>
                   <div className='mainContainer-header'>
                     <div className='left'>
-                      <img className='lock' src={lock} />
+                      <img className='lock' src={lock} alt="Lock icon" />
                       <p className='mainContainerHeader'>PRIVATE GROUPS</p>
                     </div>
                   </div>
@@ -156,7 +152,7 @@ class GroupAllContainer extends React.Component {
                       <div className='container'>
                         <div className='inner-wrapper'>
                           <p className='allHeader'>Join A Private Group </p>
-                          <GroupAllPrivateForm onComplete={this.handlePrivateGroupJoin}/>
+                          <GroupAllPrivateForm onComplete={handlePrivateGroupJoin}/>
                         </div>
                       </div>
                     </div>
@@ -168,7 +164,6 @@ class GroupAllContainer extends React.Component {
         </div>
       </div>
     );
-  }
 }
 
 let mapStateToProps = state => ({
@@ -203,4 +198,4 @@ let mapDispatchToProps = dispatch => {
   };
 };
 
-export default withRouter(connect(mapStateToProps, mapDispatchToProps)(GroupAllContainer));
+export default connect(mapStateToProps, mapDispatchToProps)(GroupAllContainer);

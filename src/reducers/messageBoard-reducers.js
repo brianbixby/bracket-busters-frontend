@@ -4,7 +4,7 @@ let validateLeague = league => {
   }
 };
 
-export default (state=[], action) => {
+let messageBoard = (state=[], action) => {
   let { type, payload } = action;
 
   switch(type) {
@@ -20,3 +20,5 @@ export default (state=[], action) => {
       return state;
   }
 };
+
+export default messageBoard;
